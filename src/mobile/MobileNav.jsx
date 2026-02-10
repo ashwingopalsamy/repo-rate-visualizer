@@ -1,4 +1,10 @@
+import { useRef, useState, useEffect, useCallback } from 'react';
+
 export default function MobileNav({ activeTab, onTabChange }) {
+  const navRef = useRef(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({});
+  const [isPressed, setIsPressed] = useState(null);
+
   const tabs = [
     {
       id: 'overview',
@@ -43,21 +49,71 @@ export default function MobileNav({ activeTab, onTabChange }) {
     },
   ];
 
+  const updateIndicator = useCallback(() => {
+    if (!navRef.current) return;
+    const activeIndex = tabs.findIndex(t => t.id === activeTab);
+    if (activeIndex < 0) return;
+
+    const tabElements = navRef.current.querySelectorAll('.mobile-nav__tab');
+    const activeEl = tabElements[activeIndex];
+    if (!activeEl) return;
+
+    const navRect = navRef.current.getBoundingClientRect();
+    const tabRect = activeEl.getBoundingClientRect();
+
+    setIndicatorStyle({
+      width: `${tabRect.width}px`,
+      transform: `translateX(${tabRect.left - navRect.left}px)`,
+    });
+  }, [activeTab]);
+
+  useEffect(() => {
+    updateIndicator();
+    window.addEventListener('resize', updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [updateIndicator]);
+
+  const handleTabPress = (tabId) => {
+    setIsPressed(tabId);
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        onTabChange(tabId);
+        setIsPressed(null);
+      }, 80);
+    });
+  };
+
   return (
-    <nav className="mobile-nav" role="tablist" aria-label="Main navigation">
-      {tabs.map(tab => (
-        <button
-          key={tab.id}
-          role="tab"
-          className={`mobile-nav__tab ${activeTab === tab.id ? 'mobile-nav__tab--active' : ''}`}
-          aria-selected={activeTab === tab.id}
-          aria-label={tab.label}
-          onClick={() => onTabChange(tab.id)}
-        >
-          <span className="mobile-nav__icon">{tab.icon}</span>
-          <span className="mobile-nav__label">{tab.label}</span>
-        </button>
-      ))}
+    <nav className="mobile-nav" ref={navRef} role="tablist" aria-label="Main navigation">
+      {/* Liquid active indicator */}
+      <div
+        className="mobile-nav__indicator"
+        style={indicatorStyle}
+        aria-hidden="true"
+      />
+
+      {tabs.map(tab => {
+        const isActive = activeTab === tab.id;
+        const pressing = isPressed === tab.id;
+
+        return (
+          <button
+            key={tab.id}
+            role="tab"
+            className={[
+              'mobile-nav__tab',
+              isActive ? 'mobile-nav__tab--active' : '',
+              pressing ? 'mobile-nav__tab--pressed' : '',
+            ].filter(Boolean).join(' ')}
+            aria-selected={isActive}
+            aria-label={tab.label}
+            onClick={() => handleTabPress(tab.id)}
+          >
+            <span className="mobile-nav__icon">{tab.icon}</span>
+            <span className="mobile-nav__label">{tab.label}</span>
+          </button>
+        );
+      })}
     </nav>
   );
 }
