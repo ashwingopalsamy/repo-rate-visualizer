@@ -1,0 +1,43 @@
+name: Validate RBI Data
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/validate-data.yml"
+      - ".github/workflows/update-data.yml"
+      - "requirements-hf-dataset.txt"
+      - "scripts/build-hf-dataset.py"
+      - "src/data/snapshot.json"
+      - "src/data/snapshotV2.js"
+      - "hf-dataset/**"
+      - "tests/data/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Hugging Face dataset tooling
+        run: python -m pip install -r requirements-hf-dataset.txt
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Validate source data and dataset artifact
+        run: |
+          npm run test:data
+          npm run test:hf-dataset
+          npm run build
+          git diff --check
