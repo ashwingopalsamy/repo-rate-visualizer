@@ -1,0 +1,6 @@
+{
+  "tightening_threshold_bps": 50,
+  "easing_threshold_bps": -50,
+  "window_months": 6,
+  "rationale": "A period is labeled 'tightening' if consecutive MPC actions raise the rate by a net >50 bps over 6 months. 'Easing' if net cut >50 bps. 'Pause' otherwise. These thresholds are conservative to avoid labeling minor adjustments as regime shifts."
+}
