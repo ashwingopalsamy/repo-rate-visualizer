@@ -91,7 +91,7 @@ export default function ExportBar({ dateRange, activeView }) {
   };
 
   return (
-    <div className="filter-bar" aria-label="Share and Export toolbar" style={{ gap: 'var(--space-2)' }}>
+    <div className="filter-bar" aria-label="Share and Export toolbar" style={{ gap: 'var(--space-2)', flex: 'none' }}>
       {/* Share Section */}
       <div className="filter-bar__group">
         <span className="filter-bar__icon" aria-hidden="true">

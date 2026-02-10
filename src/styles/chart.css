@@ -2,13 +2,14 @@
   display: block;
   width: 100%;
   height: 100%;
+  overflow: visible; /* Allow glow/shadows to spill */
 }
 
 .chart-svg .axis text {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: var(--weight-medium);
-  fill: var(--text-muted);
+  fill: var(--text-tertiary);
 }
 
 .chart-svg .axis line,
@@ -22,31 +23,45 @@
 
 .chart-svg .grid line {
   stroke: var(--color-grid);
-  stroke-dasharray: 2, 4;
+  stroke-dasharray: 4, 4;
 }
 
 .chart-svg .grid path {
   stroke: none;
 }
 
+.chart-svg .rate-area {
+  fill: url(#area-gradient);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .chart-svg .rate-line {
   fill: none;
-  stroke: var(--color-line);
-  stroke-width: 2;
+  stroke: var(--color-line); /* Use specific line color (grey) */
+  stroke-width: 3;
   stroke-linejoin: round;
+  stroke-linecap: round;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); /* Softer shadow for grey line */
+}
+
+/* Specific theme overrides for line color if needed, but primary is good */
+[data-theme="dark"] .chart-svg .rate-line {
+    filter: drop-shadow(0 0 12px rgba(10, 132, 255, 0.5)); /* Stronger glow in dark mode */
 }
 
 .chart-svg .rate-dot {
-  fill: var(--bg-primary);
-  stroke: var(--color-dot);
-  stroke-width: 1.5;
+  fill: var(--bg-card); /* Match card bg */
+  stroke: var(--color-line);
+  stroke-width: 2;
   cursor: pointer;
-  transition: r var(--duration-fast) var(--ease-out);
+  transition: all var(--duration-fast) var(--ease-spring);
 }
 
 .chart-svg .rate-dot:hover {
-  r: 5;
-  stroke-width: 2;
+  r: 6;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 4px var(--color-line));
 }
 
 .chart-svg .regime-band {
@@ -70,29 +85,33 @@
 }
 
 .chart-svg .annotation-line {
-  stroke: var(--color-annotation);
+  stroke: var(--text-tertiary);
   stroke-width: 1;
   stroke-dasharray: 4, 3;
+  opacity: 0.5;
 }
 
 .chart-svg .annotation-label {
   font-family: var(--font-sans);
   font-size: 10px;
-  font-weight: var(--weight-semibold);
-  fill: var(--text-tertiary);
+  font-weight: var(--weight-bold);
+  fill: var(--text-secondary);
   text-anchor: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .chart-svg .annotation-label-bg {
-  fill: var(--bg-primary);
+  fill: var(--bg-card); /* Match card bg */
+  fill-opacity: 0.8;
   rx: 4;
   ry: 4;
 }
 
 .chart-svg .crosshair-line {
   stroke: var(--color-crosshair);
-  stroke-width: 1;
-  stroke-dasharray: 3, 3;
+  stroke-width: 1.5;
+  stroke-dasharray: 4, 4;
   pointer-events: none;
 }
 
@@ -100,17 +119,20 @@
 .chart-tooltip {
   position: absolute;
   pointer-events: none;
-  background: var(--color-tooltip-bg);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-glass);
-  border-radius: var(--radius-md);
-  padding: 14px 18px;
-  min-width: 190px;
-  z-index: 10;
-  backdrop-filter: blur(60px) saturate(200%);
-  -webkit-backdrop-filter: blur(60px) saturate(200%);
-  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  min-width: 200px;
+  z-index: 100;
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  box-shadow: var(--shadow-glass-hover);
   opacity: 0;
   transition: opacity var(--duration-fast) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .chart-tooltip--visible {
@@ -119,42 +141,69 @@
 
 .chart-tooltip__date {
   font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
-  color: var(--text-muted);
-  margin-bottom: 4px;
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .chart-tooltip__rate {
   font-family: var(--font-mono);
-  font-size: var(--text-lg);
+  font-size: 24px;
   font-weight: var(--weight-bold);
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
+  line-height: 1.1;
 }
 
 .chart-tooltip__change {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  width: fit-content;
   margin-top: 2px;
 }
 
-.chart-tooltip__change--cut { color: var(--color-cut); }
-.chart-tooltip__change--hike { color: var(--color-hike); }
-.chart-tooltip__change--unchanged { color: var(--text-muted); }
+.chart-tooltip__change--cut { 
+    background: rgba(52, 199, 89, 0.1); 
+    color: var(--color-cut); 
+}
+.chart-tooltip__change--hike { 
+    background: rgba(255, 59, 48, 0.1); 
+    color: var(--color-hike); 
+}
+.chart-tooltip__change--unchanged { 
+    background: var(--bg-control); 
+    color: var(--text-tertiary); 
+}
 
 .chart-tooltip__regime {
   font-size: var(--text-xs);
-  color: var(--text-tertiary);
-  margin-top: 6px;
-  padding-top: 6px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-tooltip__regime::before {
+    content: "";
+    display: inline-block;
+    width: 6px; 
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
 }
 
 .chart-tooltip__source {
   font-size: 10px;
   color: var(--text-muted);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* Bar chart specific */

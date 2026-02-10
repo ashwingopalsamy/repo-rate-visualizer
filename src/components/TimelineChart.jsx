@@ -100,6 +100,15 @@ export default function TimelineChart({ dateRange }) {
     hatchPause.append('circle').attr('cx', 4).attr('cy', 4).attr('r', 0.8)
       .attr('fill', 'var(--color-pause-border)');
 
+    // Gradient for the area below the line
+    const areaGradient = defs.append('linearGradient')
+      .attr('id', 'area-gradient')
+      .attr('x1', '0%').attr('y1', '0%')
+      .attr('x2', '0%').attr('y2', '100%');
+    
+    areaGradient.append('stop').attr('offset', '0%').attr('stop-color', 'var(--color-line)').attr('stop-opacity', 0.2);
+    areaGradient.append('stop').attr('offset', '100%').attr('stop-color', 'var(--color-line)').attr('stop-opacity', 0);
+
     // Grid lines
     g.append('g').attr('class', 'grid')
       .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(8));
@@ -181,13 +190,32 @@ export default function TimelineChart({ dateRange }) {
         .attr('width', bbox.width + 12).attr('height', bbox.height + 6);
     });
 
+    // Area Path
+    const area = d3.area()
+      .x(d => xScale(d.dateObj))
+      .y0(innerH)
+      .y1(d => yScale(d.rate))
+      .curve(d3.curveStepAfter);
+
+    g.append('path').datum(data).attr('class', 'rate-area').attr('d', area);
+
     // Step-line
     const line = d3.line()
       .x(d => xScale(d.dateObj))
       .y(d => yScale(d.rate))
       .curve(d3.curveStepAfter);
 
-    g.append('path').datum(data).attr('class', 'rate-line').attr('d', line);
+    const path = g.append('path').datum(data).attr('class', 'rate-line').attr('d', line);
+    
+    // Animate line on load
+    const totalLength = path.node().getTotalLength();
+    path
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+      .duration(1500)
+      .ease(d3.easeCubicOut)
+      .attr("stroke-dashoffset", 0);
 
     // Data dots
     g.selectAll('.rate-dot')
@@ -215,7 +243,7 @@ export default function TimelineChart({ dateRange }) {
       .attr('transform', 'rotate(-90)')
       .attr('y', -42).attr('x', -innerH / 2)
       .attr('text-anchor', 'middle')
-      .attr('fill', 'var(--text-muted)')
+      .attr('fill', 'var(--text-tertiary)')
       .attr('font-size', '11px')
       .attr('font-weight', '500')
       .attr('font-family', 'var(--font-sans)')
@@ -228,12 +256,19 @@ export default function TimelineChart({ dateRange }) {
     const crosshairV = g.append('line').attr('class', 'crosshair-line').style('display', 'none');
     const crosshairH = g.append('line').attr('class', 'crosshair-line').style('display', 'none');
     const hoverDot = g.append('circle')
-      .attr('r', 5)
-      .attr('fill', 'var(--color-dot)')
-      .attr('stroke', 'var(--color-dot-stroke)')
+      .attr('r', 6)
+      .attr('fill', 'var(--bg-card)')
+      .attr('stroke', 'var(--color-primary)')
       .attr('stroke-width', 2)
       .style('display', 'none')
       .style('pointer-events', 'none');
+
+    const hoverHalo = g.append('circle')
+        .attr('r', 12)
+        .attr('fill', 'var(--color-line)')
+        .attr('opacity', 0.1)
+        .style('display', 'none')
+        .style('pointer-events', 'none');
 
     g.append('rect')
       .attr('width', innerW).attr('height', innerH)
@@ -253,6 +288,7 @@ export default function TimelineChart({ dateRange }) {
         crosshairV.style('display', null).attr('x1', x).attr('x2', x).attr('y1', 0).attr('y2', innerH);
         crosshairH.style('display', null).attr('x1', 0).attr('x2', innerW).attr('y1', y).attr('y2', y);
         hoverDot.style('display', null).attr('cx', x).attr('cy', y);
+        hoverHalo.style('display', null).attr('cx', x).attr('cy', y);
 
         const regime = filteredRegimes.find(r => d.dateObj >= r.startObj && d.dateObj <= r.endObj);
         const dateStr = d3.timeFormat('%b %d, %Y')(d.dateObj);
@@ -285,6 +321,7 @@ export default function TimelineChart({ dateRange }) {
         crosshairV.style('display', 'none');
         crosshairH.style('display', 'none');
         hoverDot.style('display', 'none');
+        hoverHalo.style('display', 'none');
         tooltip.classed('chart-tooltip--visible', false);
       });
 

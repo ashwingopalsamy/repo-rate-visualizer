@@ -39,7 +39,7 @@ export default function App() {
         <Header />
         <HeroCard />
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+        <div className="controls-row">
           <FilterBar
             activeView={activeView}
             onViewChange={setActiveView}
