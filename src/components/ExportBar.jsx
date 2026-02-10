@@ -68,15 +68,67 @@ export default function ExportBar({ dateRange, activeView }) {
     const svgEl = document.querySelector('.chart-svg');
     if (!svgEl) return;
 
-    // Clone to add styles inline or ensure background
     const clone = svgEl.cloneNode(true);
     clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    clone.style.background = 'white'; // Ensure white bg for export
+
+    // Remove interactive elements not needed in export
+    clone.querySelectorAll('.crosshair-line, .chart-tooltip').forEach(el => el.remove());
+    // Remove the invisible hover overlay rect
+    const rects = clone.querySelectorAll('rect[fill="transparent"]');
+    rects.forEach(r => r.remove());
+
+    // SVG-relevant CSS properties to inline
+    const SVG_STYLE_PROPS = [
+      'fill', 'fill-opacity', 'stroke', 'stroke-width', 'stroke-dasharray',
+      'stroke-linecap', 'stroke-linejoin', 'stroke-opacity', 'opacity',
+      'font-family', 'font-size', 'font-weight', 'font-style',
+      'text-anchor', 'letter-spacing', 'text-transform', 'display',
+      'visibility', 'color', 'filter',
+    ];
+
+    // Walk the original SVG and its clone in parallel, inlining computed styles
+    const origElements = svgEl.querySelectorAll('*');
+    const cloneElements = clone.querySelectorAll('*');
+
+    origElements.forEach((origEl, i) => {
+      const cloneEl = cloneElements[i];
+      if (!cloneEl) return;
+
+      const computed = window.getComputedStyle(origEl);
+      SVG_STYLE_PROPS.forEach(prop => {
+        const val = computed.getPropertyValue(prop);
+        if (val && val !== 'none' && val !== 'normal' && val !== '' && val !== 'auto') {
+          cloneEl.style.setProperty(prop, val);
+        }
+      });
+
+      // Also resolve fill/stroke that reference CSS vars via attributes
+      const fillAttr = origEl.getAttribute('fill');
+      if (fillAttr && fillAttr.startsWith('var(')) {
+        cloneEl.setAttribute('fill', computed.getPropertyValue('fill'));
+      }
+      const strokeAttr = origEl.getAttribute('stroke');
+      if (strokeAttr && strokeAttr.startsWith('var(')) {
+        cloneEl.setAttribute('stroke', computed.getPropertyValue('stroke'));
+      }
+    });
+
+    // Set a white background on the SVG itself
+    clone.style.background = 'white';
+    clone.insertBefore(
+      (() => {
+        const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        bg.setAttribute('width', '100%');
+        bg.setAttribute('height', '100%');
+        bg.setAttribute('fill', '#ffffff');
+        return bg;
+      })(),
+      clone.firstChild
+    );
 
     const serializer = new XMLSerializer();
     let source = serializer.serializeToString(clone);
 
-    // Add XML declaration
     if (!source.match(/^<\?xml/)) {
       source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
     }
