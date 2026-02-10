@@ -1,0 +1,270 @@
+:root {
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-md: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 26px;
+  --text-3xl: 34px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 26px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --shadow-card:
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-card-hover:
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 16px 40px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-float:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-glass:
+    0 0 0 1px var(--border-glass),
+    0 4px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-glass-hover:
+    0 0 0 1px var(--border-glass-hover),
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --shadow-glass-strong:
+    0 0 0 1px var(--border-glass),
+    0 12px 48px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* System-aware defaults */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg-primary: #f0f0f5;
+    --bg-card: rgba(255, 255, 255, 0.72);
+    --bg-event-card: rgba(255, 255, 255, 0.25); /* More transparent */
+    --bg-card-hover: rgba(255, 255, 255, 0.85);
+    --bg-surface: rgba(255, 255, 255, 0.85);
+    --bg-elevated: rgba(255, 255, 255, 0.95);
+    --bg-input: rgba(118, 118, 128, 0.12);
+    --bg-control: rgba(0, 0, 0, 0.05);
+    --bg-control-hover: rgba(0, 0, 0, 0.1);
+    --bg-control-active: rgba(0, 0, 0, 0.15);
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-medium: rgba(0, 0, 0, 0.1);
+    --border-control: rgba(0, 0, 0, 0.08);
+    --border-glass: rgba(255, 255, 255, 0.5);
+    --border-glass-hover: rgba(255, 255, 255, 0.65);
+    --gradient-glass-border: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
+    --text-primary: #1a1a1a;
+    --text-secondary: rgba(0, 0, 0, 0.72);
+    --text-tertiary: rgba(0, 0, 0, 0.5);
+    --text-muted: rgba(0, 0, 0, 0.36);
+    
+    --color-primary: #007aff;
+    --color-primary-fg: #ffffff;
+    
+    --color-primary: #007aff;
+    --color-primary-fg: #ffffff;
+
+    --color-line: rgba(0, 0, 0, 0.8);
+    --color-dot: #1a1a1a;
+    --color-dot-stroke: #ffffff;
+    --color-axis: rgba(0, 0, 0, 0.2);
+    --color-grid: rgba(0, 0, 0, 0.06);
+    --color-annotation: rgba(0, 0, 0, 0.35);
+    --color-crosshair: rgba(0, 0, 0, 0.15);
+    --color-tooltip-bg: rgba(255, 255, 255, 0.95);
+    --color-tooltip-border: rgba(0, 0, 0, 0.1);
+
+    --color-easing: rgba(52, 199, 89, 0.08);
+    --color-easing-border: rgba(52, 199, 89, 0.2);
+    --color-tightening: rgba(255, 59, 48, 0.08);
+    --color-tightening-border: rgba(255, 59, 48, 0.2);
+    --color-pause: rgba(0, 0, 0, 0.03);
+    --color-pause-border: rgba(0, 0, 0, 0.06);
+
+    --color-cut: #28a745;
+    --color-hike: #dc3545;
+
+    --color-hero-bg: rgba(255, 255, 255, 0.92);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-primary: #000000;
+    --bg-card: rgba(28, 28, 30, 0.75);
+    --bg-event-card: rgba(38, 38, 40, 0.3); /* More transparent */
+    --bg-card-hover: rgba(44, 44, 46, 0.85);
+    --bg-surface: rgba(28, 28, 30, 0.85);
+    --bg-elevated: rgba(44, 44, 46, 0.6);
+    --bg-input: rgba(44, 44, 46, 0.6);
+    --bg-control: rgba(255, 255, 255, 0.1);
+    --bg-control-hover: rgba(255, 255, 255, 0.18);
+    --bg-control-active: rgba(255, 255, 255, 0.25);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.12);
+    --border-control: rgba(255, 255, 255, 0.12);
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --border-glass-hover: rgba(255, 255, 255, 0.2);
+    --gradient-glass-border: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --text-tertiary: rgba(255, 255, 255, 0.55);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    
+    --color-primary: #0a84ff;
+    --color-primary-fg: #ffffff;
+    
+    --color-primary: #0a84ff;
+    --color-primary-fg: #ffffff;
+
+    --color-line: rgba(255, 255, 255, 0.9);
+    --color-dot: #ffffff;
+    --color-dot-stroke: #000000;
+    --color-axis: rgba(255, 255, 255, 0.25);
+    --color-grid: rgba(255, 255, 255, 0.06);
+    --color-annotation: rgba(255, 255, 255, 0.5);
+    --color-crosshair: rgba(255, 255, 255, 0.2);
+    --color-tooltip-bg: rgba(28, 28, 30, 0.95);
+    --color-tooltip-border: rgba(255, 255, 255, 0.12);
+
+    --color-easing: rgba(52, 199, 89, 0.05);
+    --color-easing-border: rgba(52, 199, 89, 0.15);
+    --color-tightening: rgba(255, 59, 48, 0.05);
+    --color-tightening-border: rgba(255, 59, 48, 0.15);
+    --color-pause: rgba(255, 255, 255, 0.02);
+    --color-pause-border: rgba(255, 255, 255, 0.05);
+
+    --color-cut: #34c759;
+    --color-hike: #ff3b30;
+
+    --color-hero-bg: rgba(28, 28, 30, 0.85);
+  }
+}
+
+/* Explicit dark (default fallback + manual toggle) */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-card: rgba(28, 28, 30, 0.75);
+  --bg-event-card: rgba(38, 38, 40, 0.3);
+  --bg-card-hover: rgba(44, 44, 46, 0.85);
+  --bg-surface: rgba(28, 28, 30, 0.85);
+  --bg-elevated: rgba(44, 44, 46, 0.6);
+  --bg-input: rgba(44, 44, 46, 0.6);
+  --bg-control: rgba(255, 255, 255, 0.1);
+  --bg-control-hover: rgba(255, 255, 255, 0.18);
+  --bg-control-active: rgba(255, 255, 255, 0.25);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-control: rgba(255, 255, 255, 0.12);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glass-hover: rgba(255, 255, 255, 0.2);
+  --gradient-glass-border: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-tertiary: rgba(255, 255, 255, 0.55);
+  --text-muted: rgba(255, 255, 255, 0.4);
+
+  --color-line: rgba(255, 255, 255, 0.9);
+  --color-dot: #ffffff;
+  --color-dot-stroke: #000000;
+  --color-axis: rgba(255, 255, 255, 0.25);
+  --color-grid: rgba(255, 255, 255, 0.06);
+  --color-annotation: rgba(255, 255, 255, 0.5);
+  --color-crosshair: rgba(255, 255, 255, 0.2);
+  --color-tooltip-bg: rgba(28, 28, 30, 0.95);
+  --color-tooltip-border: rgba(255, 255, 255, 0.12);
+
+  --color-easing: rgba(52, 199, 89, 0.05);
+  --color-easing-border: rgba(52, 199, 89, 0.15);
+  --color-tightening: rgba(255, 59, 48, 0.05);
+  --color-tightening-border: rgba(255, 59, 48, 0.15);
+  --color-pause: rgba(255, 255, 255, 0.02);
+  --color-pause-border: rgba(255, 255, 255, 0.05);
+
+  --color-cut: #34c759;
+  --color-hike: #ff3b30;
+
+  --color-hero-bg: rgba(28, 28, 30, 0.85);
+}
+
+/* Explicit light */
+[data-theme="light"] {
+  --bg-primary: #f0f0f5;
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --bg-event-card: rgba(255, 255, 255, 0.25);
+  --bg-card-hover: rgba(255, 255, 255, 0.85);
+  --bg-surface: rgba(255, 255, 255, 0.85);
+  --bg-elevated: rgba(255, 255, 255, 0.95);
+  --bg-input: rgba(118, 118, 128, 0.12);
+  --bg-control: rgba(0, 0, 0, 0.05);
+  --bg-control-hover: rgba(0, 0, 0, 0.1);
+  --bg-control-active: rgba(0, 0, 0, 0.15);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.1);
+  --border-control: rgba(0, 0, 0, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.5);
+  --border-glass-hover: rgba(255, 255, 255, 0.65);
+  --gradient-glass-border: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
+  --text-primary: #1a1a1a;
+  --text-secondary: rgba(0, 0, 0, 0.72);
+  --text-tertiary: rgba(0, 0, 0, 0.5);
+  --text-muted: rgba(0, 0, 0, 0.36);
+
+  --color-line: rgba(0, 0, 0, 0.8);
+  --color-dot: #1a1a1a;
+  --color-dot-stroke: #ffffff;
+  --color-axis: rgba(0, 0, 0, 0.2);
+  --color-grid: rgba(0, 0, 0, 0.06);
+  --color-annotation: rgba(0, 0, 0, 0.35);
+  --color-crosshair: rgba(0, 0, 0, 0.15);
+  --color-tooltip-bg: rgba(255, 255, 255, 0.95);
+  --color-tooltip-border: rgba(0, 0, 0, 0.1);
+
+  --color-easing: rgba(52, 199, 89, 0.08);
+  --color-easing-border: rgba(52, 199, 89, 0.2);
+  --color-tightening: rgba(255, 59, 48, 0.08);
+  --color-tightening-border: rgba(255, 59, 48, 0.2);
+  --color-pause: rgba(0, 0, 0, 0.03);
+  --color-pause-border: rgba(0, 0, 0, 0.06);
+
+  --color-cut: #28a745;
+  --color-hike: #dc3545;
+
+  --color-hero-bg: rgba(255, 255, 255, 0.92);
+}
+
+/* Force Primary Tokens */
+:root, [data-theme="light"] {
+  --color-primary: #007aff;
+  --color-primary-fg: #ffffff;
+}
+[data-theme="dark"] {
+  --color-primary: #0a84ff;
+  --color-primary-fg: #ffffff;
+}
