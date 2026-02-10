@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ThemeProvider from '../components/ThemeProvider.jsx';
-import MobileDynamicIsland from './MobileDynamicIsland.jsx';
+import MobileHeader from './MobileHeader.jsx';
 import MobileNav from './MobileNav.jsx';
 import MobileOverview from './MobileOverview.jsx';
 import MobileTimeline from './MobileTimeline.jsx';
@@ -53,7 +53,7 @@ export default function MobileApp() {
   return (
     <ThemeProvider>
       <div className="mobile-app">
-        <MobileDynamicIsland />
+        <MobileHeader />
         <div className="mobile-screen">
           {activeTab === 'overview' && <MobileOverview />}
           {activeTab === 'timeline' && (

@@ -31,38 +31,40 @@
   padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
 }
 
-/* ---- Dynamic Island Header ---- */
-.mobile-island {
+/* ---- Mobile Header (Minimalist Capsule) ---- */
+.mobile-header {
   position: sticky;
   top: 0;
   z-index: 210;
   padding: env(safe-area-inset-top, 8px) 16px 0;
   display: flex;
   justify-content: center;
+  pointer-events: none; /* Pass clicks through padding */
 }
 
-.mobile-island__content {
+.mobile-header__content {
+  pointer-events: auto;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
   width: 100%;
-  max-width: 420px;
-  height: 44px;
-  padding: 0 6px 0 16px;
+  max-width: 420px; /* Match max-width of footer/content */
+  height: 64px; /* Exact match to footer */
+  padding: 0 6px 0 20px; /* Padding for title and buttons */
   background: var(--bg-surface);
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-full);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transition: all var(--duration-normal) var(--ease-out);
 }
 
-.mobile-island__content::before {
+.mobile-header__content::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -76,98 +78,77 @@
   pointer-events: none;
 }
 
-.mobile-island__title-group {
-  display: flex;
-  align-items: center;
-  min-width: 0;
-}
-
-.mobile-island__title {
-  font-size: var(--text-sm);
+.mobile-header__title {
+  font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   color: var(--text-primary);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
-.mobile-island__rate-group {
+.mobile-header__actions {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
+  gap: 4px;
 }
 
-.mobile-island__live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-cut);
-  box-shadow: 0 0 6px var(--color-cut);
-  animation: island-pulse 2.5s ease infinite;
-}
-
-@keyframes island-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.mobile-island__rate {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  font-variant-numeric: tabular-nums;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-
-.mobile-island__theme-btn {
+.mobile-header__action {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  background: var(--bg-control);
-  border: 1px solid var(--border-control);
+  width: 44px; /* Large touch target */
+  height: 44px;
   border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
   cursor: pointer;
   color: var(--text-secondary);
   transition: all var(--duration-fast) var(--ease-out);
   -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
 }
 
-.mobile-island__theme-btn:active {
-  transform: scale(0.88);
-  background: var(--bg-control-active);
+.mobile-header__action:active,
+.mobile-header__action--pressed {
+  transform: scale(0.92);
+  background: var(--bg-control);
+  color: var(--text-primary);
 }
 
-.mobile-island__icon-wrap {
+.mobile-header__icon {
   position: relative;
-  width: 18px;
-  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 }
 
-.mobile-island__sun,
-.mobile-island__moon {
+.mobile-header__icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* Theme Icon transitions */
+.mobile-header__sun,
+.mobile-header__moon {
   position: absolute;
   inset: 0;
-  width: 18px;
-  height: 18px;
   transition: opacity var(--duration-normal) var(--ease-out),
               transform var(--duration-normal) var(--ease-out);
 }
 
-.mobile-island__sun {
+.mobile-header__sun {
   opacity: 1;
   transform: rotate(0deg) scale(1);
 }
 
-.mobile-island__moon {
+.mobile-header__moon {
   opacity: 1;
   transform: rotate(0deg) scale(1);
 }
 
-.mobile-island__icon--hidden {
+.mobile-header__icon--hidden {
   opacity: 0;
   transform: rotate(-90deg) scale(0.5);
   pointer-events: none;
@@ -1203,11 +1184,10 @@
   .mobile-nav__indicator,
   .mobile-nav__tab,
   .mobile-nav__label,
-  .mobile-island__sun,
-  .mobile-island__moon,
-  .mobile-island__theme-btn,
-  .mobile-island__content,
-  .mobile-island__live-dot {
+  .mobile-header__sun,
+  .mobile-header__moon,
+  .mobile-header__action,
+  .mobile-header__content {
     transition: none !important;
     animation: none !important;
   }
