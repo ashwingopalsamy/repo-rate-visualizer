@@ -44,7 +44,7 @@ function run() {
   console.log(`Latest rate: ${currentSnapshot.rates.at(-1).rate}% on ${currentSnapshot.rates.at(-1).date}`);
 
   // NOTE: In a production setup, this would fetch from:
-  // https://www.rbi.org.in/Scripts/BS_ViewMonetaryCreditPolicy.aspx
+  // https://www.rbi.org.in/Scripts/Annualpolicy.aspx
   // and parse the HTML table for new rate decisions.
   //
   // For now, manual updates: edit the snapshot JSON directly and re-run.
