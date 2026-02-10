@@ -1,0 +1,46 @@
+name: Update RBI Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 3'  # Every Wednesday at 6 AM UTC (after MPC meetings)
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch latest RBI data
+        run: node scripts/fetch-rbi-data.js
+
+      - name: Install Hugging Face dataset tooling
+        run: python -m pip install -r requirements-hf-dataset.txt
+
+      - name: Build Hugging Face dataset artifact
+        run: python scripts/build-hf-dataset.py
+
+      - name: Validate data, dataset artifact, and production build
+        run: |
+          npm run test:data
+          npm run test:hf-dataset
+          npm run build
+          git diff --check
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/ src/data/snapshot.json hf-dataset/
+          git diff --staged --quiet || git commit -m "chore(data): refresh RBI repo-rate snapshot"
+          git push
