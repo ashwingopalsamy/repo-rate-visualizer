@@ -182,7 +182,8 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
       .text(d => `${d.label} (${d.type})`);
 
     const avoidRects = [];
-    const LABEL_SLOTS = [16, 42, 68];
+    const isMobile = width < 540;
+    const LABEL_SLOTS = isMobile ? [12, 28] : [16, 42, 68];
     const placedLabels = [];
     const sortedEvents = [...filteredEvents].sort((a, b) => a.dateObj - b.dateObj);
     const validEvents = [];
@@ -197,30 +198,55 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
         .attr('y1', 0).attr('y2', innerH);
     });
 
-    validEvents.forEach(event => {
+    validEvents.forEach((event, eventIdx) => {
       const { x, label } = event;
+      // On mobile, use a clean short label or compact marker to avoid cluttering narrow viewports
+      const displayLabel = isMobile
+        ? (label.length > 14 ? `${label.slice(0, 12)}…` : label)
+        : label;
+
       const probe = plot.append('text')
         .attr('class', 'annotation-label')
         .attr('x', -9999).attr('y', -9999)
-        .text(label);
+        .text(displayLabel);
       const probeWidth = probe.node().getBBox().width;
       probe.remove();
-      const halfWidth = probeWidth / 2 + 8;
-      const slotIndex = LABEL_SLOTS.findIndex((_, index) => !placedLabels.some(item => item.slotIndex === index && Math.abs(item.x - x) < item.halfWidth + halfWidth + 8));
-      if (slotIndex === -1) return;
+
+      const halfWidth = probeWidth / 2 + (isMobile ? 4 : 8);
+      // Strictly clamp label X inside the chart canvas so it never clips past the right or left border
+      const clampedX = Math.max(halfWidth + 2, Math.min(innerW - halfWidth - 2, x));
+
+      const slotIndex = LABEL_SLOTS.findIndex((_, index) =>
+        !placedLabels.some(item => item.slotIndex === index && Math.abs(item.x - clampedX) < item.halfWidth + halfWidth + 4)
+      );
+
+      // On mobile if slots are full, render a subtle top pin marker instead of overlapping text
+      if (slotIndex === -1) {
+        if (isMobile) {
+          plot.append('circle')
+            .attr('class', 'annotation-pin')
+            .attr('cx', x)
+            .attr('cy', 6)
+            .attr('r', 3)
+            .attr('fill', 'var(--color-annotation)')
+            .attr('opacity', 0.85);
+        }
+        return;
+      }
+
       const labelY = LABEL_SLOTS[slotIndex];
-      placedLabels.push({ x, halfWidth, slotIndex });
-      avoidRects.push({ left: margin.left + x - halfWidth, top: margin.top + labelY - 12, width: halfWidth * 2, height: 18 });
+      placedLabels.push({ x: clampedX, halfWidth, slotIndex });
+      avoidRects.push({ left: margin.left + clampedX - halfWidth, top: margin.top + labelY - 12, width: halfWidth * 2, height: 18 });
 
       const text = plot.append('text')
-        .attr('class', 'annotation-label')
-        .attr('x', x).attr('y', labelY)
-        .text(label);
+        .attr('class', `annotation-label ${isMobile ? 'annotation-label--mobile' : ''}`)
+        .attr('x', clampedX).attr('y', labelY)
+        .text(displayLabel);
       const box = text.node().getBBox();
       plot.insert('rect', () => text.node())
         .attr('class', 'annotation-label-bg')
-        .attr('x', box.x - 5).attr('y', box.y - 3)
-        .attr('width', box.width + 10).attr('height', box.height + 6);
+        .attr('x', box.x - 4).attr('y', box.y - 2)
+        .attr('width', box.width + 8).attr('height', box.height + 4);
       text.raise();
     });
 
