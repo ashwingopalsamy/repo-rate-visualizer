@@ -1,5 +1,5 @@
 {
-  "latest": "2026-05-27",
+  "latest": "2026-06-03",
   "snapshots": [
     {
       "id": "2026-02-10-v1",
@@ -101,6 +101,12 @@
       "id": "2026-05-27-v1",
       "date": "2026-05-27",
       "file": "snapshots/2026-05-27.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-06-03-v1",
+      "date": "2026-06-03",
+      "file": "snapshots/2026-06-03.json",
       "checksum": "sha256:e89c9d431b9b"
     }
   ]
