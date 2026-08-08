@@ -1,5 +1,5 @@
 {
-  "latest": "2026-04-15",
+  "latest": "2026-08-12",
   "snapshots": [
     {
       "id": "2026-02-10-v1",
@@ -65,6 +65,108 @@
       "id": "2026-04-15-v1",
       "date": "2026-04-15",
       "file": "snapshots/2026-04-15.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-04-22-v1",
+      "date": "2026-04-22",
+      "file": "snapshots/2026-04-22.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-04-29-v1",
+      "date": "2026-04-29",
+      "file": "snapshots/2026-04-29.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-05-06-v1",
+      "date": "2026-05-06",
+      "file": "snapshots/2026-05-06.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-05-13-v1",
+      "date": "2026-05-13",
+      "file": "snapshots/2026-05-13.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-05-20-v1",
+      "date": "2026-05-20",
+      "file": "snapshots/2026-05-20.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-05-27-v1",
+      "date": "2026-05-27",
+      "file": "snapshots/2026-05-27.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-06-03-v1",
+      "date": "2026-06-03",
+      "file": "snapshots/2026-06-03.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-06-10-v1",
+      "date": "2026-06-10",
+      "file": "snapshots/2026-06-10.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-06-17-v1",
+      "date": "2026-06-17",
+      "file": "snapshots/2026-06-17.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-06-24-v1",
+      "date": "2026-06-24",
+      "file": "snapshots/2026-06-24.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-07-01-v1",
+      "date": "2026-07-01",
+      "file": "snapshots/2026-07-01.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-07-08-v1",
+      "date": "2026-07-08",
+      "file": "snapshots/2026-07-08.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-07-15-v1",
+      "date": "2026-07-15",
+      "file": "snapshots/2026-07-15.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-07-22-v1",
+      "date": "2026-07-22",
+      "file": "snapshots/2026-07-22.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-07-29-v1",
+      "date": "2026-07-29",
+      "file": "snapshots/2026-07-29.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-08-05-v1",
+      "date": "2026-08-05",
+      "file": "snapshots/2026-08-05.json",
+      "checksum": "sha256:e89c9d431b9b"
+    },
+    {
+      "id": "2026-08-12-v1",
+      "date": "2026-08-12",
+      "file": "snapshots/2026-08-12.json",
       "checksum": "sha256:e89c9d431b9b"
     }
   ]
