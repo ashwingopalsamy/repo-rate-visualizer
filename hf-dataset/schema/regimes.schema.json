@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset/raw/main/schema/regimes.schema.json",
+  "title": "RBI repo-rate dataset — regimes",
+  "description": "Schema for the regimes configuration of the independent RBI repo-rate dataset.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "regime_id": {
+      "type": "string",
+      "description": "Stable deterministic regime interval identifier.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Inclusive start date of the contextual regime.",
+      "x-arrow-type": "date32[day]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Exclusive end date of the contextual regime.",
+      "x-arrow-type": "date32[day]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Null represents an open-ended interval."
+    },
+    "regime_type": {
+      "type": "string",
+      "description": "Repository-provided contextual regime type.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "label": {
+      "type": "string",
+      "description": "Repository-provided contextual regime label.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    }
+  },
+  "required": [
+    "regime_id",
+    "start_date",
+    "regime_type",
+    "label"
+  ],
+  "x-dataset-schema-version": "1.0.0",
+  "x-config-name": "regimes",
+  "x-row-grain": "one row per repository-provided regime interval"
+}

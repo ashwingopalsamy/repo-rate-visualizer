@@ -32,12 +32,52 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = ROOT / "src" / "data" / "snapshot.json"
 DEFAULT_OUTPUT = ROOT / "hf-dataset"
 DATASET_SCHEMA_VERSION = "1.0.0"
-GENERATOR_VERSION = "1.0.0"
+GENERATOR_VERSION = "1.1.0"
+DATASET_REPO_ID = "ashwingopalsamy/india-repo-rate-dataset"
 CHECKSUM_PATTERN = re.compile(r"^sha256:[0-9a-f]{64}$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+TRUSTED_EVENT_HOSTS = {"rbi.org.in", "cbic-gst.gov.in", "mha.gov.in"}
+
+EXPECTED_TAGS = [
+    "tabular",
+    "timeseries",
+    "finance",
+    "economics",
+    "monetary-policy",
+    "central-banking",
+    "india",
+    "rbi",
+    "interest-rates",
+    "datasets",
+    "pandas",
+    "mlcroissant",
+]
+
+RIGHTS_METADATA = {
+    "dataset_license": None,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "source_material_rights": "remain_with_respective_publishers",
+    "notice_section": "Attribution & Usage",
+    "reference_material_url": "https://rbi.org.in/scripts/PublicationsView.aspx?Id=18086",
+}
 
 CONFIG_NAMES = ("decisions", "annual", "sources", "events", "regimes")
 CONFIG_PATHS = {name: f"data/{name}.parquet" for name in CONFIG_NAMES}
+EXPECTED_ARTIFACT_PATHS = {
+    "README.md",
+    "NOTICE.md",
+    "VERSION",
+    "CHANGELOG.md",
+    "SHA256SUMS",
+    "provenance/build-manifest.json",
+    "schema/data-dictionary.json",
+    *(f"data/{name}.parquet" for name in CONFIG_NAMES),
+    *(f"exports/{name}.csv" for name in CONFIG_NAMES),
+    "exports/decisions.jsonl",
+    "exports/annual.jsonl",
+    *(f"schema/{name}.schema.json" for name in CONFIG_NAMES),
+}
 
 SOURCE_CLASS_BY_TYPE = {
     "policy-resolution": "official_primary",
@@ -53,9 +93,9 @@ SOURCE_PRIORITY = {
     "dbie-key-rates": 90,
     "policy-minutes": 70,
     "current-policy-rates": 60,
+    "policy-archive": 50,
     "historical-rate-series": 30,
     "secondary-historical-reference": 20,
-    "policy-archive": 10,
 }
 
 
@@ -251,9 +291,17 @@ def validate_url(value: Any, context: str) -> str:
     if not isinstance(value, str) or not value.strip():
         fail(f"{context} must be an http(s) URL")
     parsed = urlparse(value)
-    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc or not parsed.hostname:
         fail(f"{context} must be an http(s) URL")
     return value
+
+
+def validate_trusted_event_url(value: Any, context: str) -> str:
+    url = validate_url(value, context)
+    hostname = (urlparse(url).hostname or "").lower().rstrip(".")
+    if not any(hostname == host or hostname.endswith(f".{host}") for host in TRUSTED_EVENT_HOSTS):
+        fail(f"{context} must use an official RBI, RBI Docs, MHA, or CBIC domain")
+    return url
 
 
 def validate_checksum(value: Any, context: str) -> str:
@@ -324,20 +372,61 @@ def stable_regime_id(regime: Mapping[str, Any]) -> str:
     return f"regime-{start}-{end}-{regime['regime_type']}"
 
 
+def snapshot_stable_content(snapshot: Mapping[str, Any]) -> dict[str, Any]:
+    """Mirror fetch-rbi-data.js stableContent for independent checksum validation."""
+    meta = dict(snapshot["meta"])
+    meta["snapshotId"] = None
+    meta["retrievedAt"] = None
+    meta["checksum"] = None
+    return {
+        "schemaVersion": snapshot["schemaVersion"],
+        "meta": meta,
+        "current": snapshot["current"],
+        "sources": [
+            {key: value for key, value in source.items() if key != "retrievedAt"}
+            for source in snapshot["sources"]
+        ],
+        "decisions": snapshot["decisions"],
+        "rateSeries": snapshot["rateSeries"],
+        "events": snapshot["events"],
+        "regimes": snapshot["regimes"],
+    }
+
+
+def snapshot_content_checksum(snapshot: Mapping[str, Any]) -> str:
+    payload = json.dumps(
+        snapshot_stable_content(snapshot),
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return f"sha256:{hashlib.sha256(payload).hexdigest()}"
+
+
 def validate_snapshot(snapshot: Any) -> dict[str, Any]:
     if not isinstance(snapshot, dict):
         fail("SnapshotV2 root must be an object")
     if snapshot.get("schemaVersion") != 2:
         fail("SnapshotV2 schemaVersion must be 2")
+    for key in ("meta", "current", "sources", "decisions", "rateSeries", "events", "regimes"):
+        if key not in snapshot:
+            fail(f"SnapshotV2 root.{key} is required")
     meta = snapshot.get("meta")
     if not isinstance(meta, dict):
         fail("SnapshotV2 meta must be an object")
     for key in ("snapshotId", "retrievedAt", "latestOfficialDate", "checksum"):
         if key not in meta:
             fail(f"SnapshotV2 meta.{key} is required")
+    if not isinstance(meta["snapshotId"], str) or not meta["snapshotId"].strip():
+        fail("SnapshotV2 meta.snapshotId must be a non-empty string")
     parse_timestamp(meta["retrievedAt"], "SnapshotV2 meta.retrievedAt")
     parse_date(meta["latestOfficialDate"], "SnapshotV2 meta.latestOfficialDate")
     validate_checksum(meta["checksum"], "SnapshotV2 meta.checksum")
+    expected_snapshot_checksum = snapshot_content_checksum(snapshot)
+    if meta["checksum"] != expected_snapshot_checksum:
+        fail(
+            "SnapshotV2 meta.checksum does not match the stable snapshot content "
+            f"(expected {expected_snapshot_checksum})"
+        )
     if "latestSourcePublishedAt" in meta and meta["latestSourcePublishedAt"] is not None:
         parse_timestamp(meta["latestSourcePublishedAt"], "SnapshotV2 meta.latestSourcePublishedAt")
     if "sourceUrl" in meta:
@@ -396,6 +485,8 @@ def validate_snapshot(snapshot: Any) -> dict[str, Any]:
         source_ids = decision.get("sourceIds")
         if not isinstance(source_ids, list) or not source_ids:
             fail(f"{context}.sourceIds must be a non-empty array")
+        if any(not isinstance(source_id, str) or not source_id for source_id in source_ids):
+            fail(f"{context}.sourceIds must contain non-empty strings")
         if len(set(source_ids)) != len(source_ids):
             fail(f"{context}.sourceIds contains duplicates")
         for source_id in source_ids:
@@ -412,8 +503,8 @@ def validate_snapshot(snapshot: Any) -> dict[str, Any]:
         if action != expected_action:
             fail(f"{context}.action {action!r} does not match {expected_action!r}")
         stance = decision.get("stance")
-        if stance is not None and not isinstance(stance, str):
-            fail(f"{context}.stance must be a string or null")
+        if stance is not None and (not isinstance(stance, str) or not stance.strip()):
+            fail(f"{context}.stance must be a non-empty string or null")
         normalized_decisions.append(
             {
                 "raw": decision,
@@ -464,7 +555,7 @@ def validate_snapshot(snapshot: Any) -> dict[str, Any]:
             if not isinstance(event.get(key), str) or not event[key].strip():
                 fail(f"{context}.{key} must be a non-empty string")
         citation = event.get("citation")
-        validate_url(citation, f"{context}.citation")
+        validate_trusted_event_url(citation, f"{context}.citation")
         normalized_events.append(
             {
                 "event_id": event_id,
@@ -520,11 +611,17 @@ def validate_snapshot(snapshot: Any) -> dict[str, Any]:
     current_rate, current_bps = rate_bps(current.get("repoRate"), "SnapshotV2 current.repoRate")
     if current_rate != latest["rate"] or current.get("effectiveDate") != latest["raw"].get("date") or current.get("decisionId") != latest["id"]:
         fail("SnapshotV2 current does not match the latest canonical decision")
-    if not isinstance(current.get("sourceIds"), list):
-        fail("SnapshotV2 current.sourceIds must be an array")
+    if not isinstance(current.get("sourceIds"), list) or not current["sourceIds"]:
+        fail("SnapshotV2 current.sourceIds must be a non-empty array")
+    if any(not isinstance(source_id, str) or not source_id for source_id in current["sourceIds"]):
+        fail("SnapshotV2 current.sourceIds must contain non-empty strings")
+    if len(set(current["sourceIds"])) != len(current["sourceIds"]):
+        fail("SnapshotV2 current.sourceIds contains duplicates")
     for source_id in current["sourceIds"]:
         if source_id not in source_by_id:
             fail(f"SnapshotV2 current references unknown source id: {source_id}")
+    if current.get("stance") is not None and (not isinstance(current["stance"], str) or not current["stance"].strip()):
+        fail("SnapshotV2 current.stance must be a non-empty string or null")
 
     return {
         "raw": snapshot,
@@ -595,24 +692,19 @@ def build_record_text(
     is_policy_decision: bool,
 ) -> str:
     date_text = effective_date.isoformat()
-    if previous_bps is None:
-        if is_policy_decision:
-            text = f"On {date_text}, the Reserve Bank of India Monetary Policy Committee recorded the policy repo rate at {rate_text(rate_bps_value)}; no previous canonical rate is available."
-        else:
+    if not is_policy_decision:
+        if previous_bps is None:
             text = f"On {date_text}, the Reserve Bank of India historical policy repo-rate series first records {rate_text(rate_bps_value)}; no previous canonical rate is available."
+        else:
+            text = f"On {date_text}, the Reserve Bank of India historical policy repo-rate series records the policy repo rate at {rate_text(rate_bps_value)}, a change of {signed_bps_text(change_bps)} basis points from the previous canonical record. The canonical action is {action}."
+    elif previous_bps is None:
+        text = f"On {date_text}, the Reserve Bank of India Monetary Policy Committee recorded the policy repo rate at {rate_text(rate_bps_value)}; no previous canonical rate is available."
     elif action == "hold":
         text = f"On {date_text}, the Reserve Bank of India Monetary Policy Committee held the policy repo rate at {rate_text(rate_bps_value)}, a change of {signed_bps_text(change_bps)} basis points."
     elif action == "hike":
         text = f"On {date_text}, the Reserve Bank of India Monetary Policy Committee raised the policy repo rate to {rate_text(rate_bps_value)}, a change of {signed_bps_text(change_bps)} basis points."
     else:
         text = f"On {date_text}, the Reserve Bank of India Monetary Policy Committee lowered the policy repo rate to {rate_text(rate_bps_value)}, a change of {signed_bps_text(change_bps)} basis points."
-    if not is_policy_decision and previous_bps is not None:
-        text = text.replace(
-            "the Reserve Bank of India Monetary Policy Committee",
-            "the Reserve Bank of India historical policy repo-rate series",
-            1,
-        )
-        text += f" This is a historical rate observation with canonical action {action}."
     if stance is not None:
         text += f" The monetary policy stance was {stance}."
     return text
@@ -754,9 +846,13 @@ def build_annual(validated: Mapping[str, Any], decisions: Sequence[Mapping[str, 
         gross_hikes = sum(row["change_bps"] for row in year_rows if row["change_bps"] > 0)
         gross_cuts = sum(abs(row["change_bps"]) for row in year_rows if row["change_bps"] < 0)
         in_year_source_ids = {source_id for row in year_rows for source_id in row["source_ids"]}
+        if start_state is not None:
+            in_year_source_ids.update(start_state["source_ids"])
         if end_state is not None:
             in_year_source_ids.update(end_state["source_ids"])
         classes = {row["provenance_class"] for row in year_rows}
+        if start_state is not None:
+            classes.add(start_state["provenance_class"])
         if end_state is not None:
             classes.add(end_state["provenance_class"])
         year_end_regime = regime_for_date(validated["regimes"], end_of_year(year))
@@ -767,12 +863,20 @@ def build_annual(validated: Mapping[str, Any], decisions: Sequence[Mapping[str, 
         elif not year_rows and end_state is not None:
             record_text = f"In {year}, the Reserve Bank of India policy repo rate remained at {rate_text_value} throughout the year; no canonical ledger records fall in this calendar year."
         else:
-            net_text = "unknown net change" if net_change is None else f"a net change of {signed_bps_text(net_change)} basis points"
-            record_text = (
-                f"In {year}, the Reserve Bank of India policy repo rate ranged from "
-                f"{rate_text(min(known_rates))} to {rate_text(max(known_rates))}; "
-                f"{net_text} was recorded across {len(year_rows)} canonical ledger record{'' if len(year_rows) == 1 else 's'}."
-            )
+            if net_change is None:
+                record_text = (
+                    f"In {year}, the Reserve Bank of India policy repo rate ranged from "
+                    f"{rate_text(min(known_rates))} to {rate_text(max(known_rates))}; "
+                    "the net change is not computable because the start-of-year boundary is unavailable. "
+                    f"The year contains {len(year_rows)} canonical ledger record{'' if len(year_rows) == 1 else 's'}."
+                )
+            else:
+                record_text = (
+                    f"In {year}, the Reserve Bank of India policy repo rate ranged from "
+                    f"{rate_text(min(known_rates))} to {rate_text(max(known_rates))}; "
+                    f"a net change of {signed_bps_text(net_change)} basis points was recorded across "
+                    f"{len(year_rows)} canonical ledger record{'' if len(year_rows) == 1 else 's'}."
+                )
         rows.append(
             {
                 "year": year,
@@ -866,7 +970,7 @@ def schema_json(config_name: str) -> dict[str, Any]:
             required.append(spec.name)
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": f"https://huggingface.co/datasets/rbi-repo-rate/schema/{config_name}.schema.json",
+        "$id": f"https://huggingface.co/datasets/{DATASET_REPO_ID}/raw/main/schema/{config_name}.schema.json",
         "title": f"RBI repo-rate dataset — {config_name}",
         "description": f"Schema for the {config_name} configuration of the independent RBI repo-rate dataset.",
         "type": "object",
@@ -888,8 +992,10 @@ def schema_json(config_name: str) -> dict[str, Any]:
 def data_dictionary(validated: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "dataset_name": "RBI policy repo-rate and monetary-policy decision history",
+        "dataset_repo_id": DATASET_REPO_ID,
         "dataset_schema_version": DATASET_SCHEMA_VERSION,
         "canonical_configuration": "decisions",
+        "rights": RIGHTS_METADATA,
         "source_snapshot": {
             "snapshot_id": validated["meta"]["snapshotId"],
             "snapshot_checksum": validated["meta"]["checksum"],
@@ -1029,6 +1135,64 @@ def relative_files(output_dir: Path, *, exclude: set[str] | None = None) -> list
     )
 
 
+def validate_output_layout(output_dir: Path) -> None:
+    actual_paths = {path.relative_to(output_dir).as_posix() for path in relative_files(output_dir)}
+    missing = sorted(EXPECTED_ARTIFACT_PATHS - actual_paths)
+    unexpected = sorted(actual_paths - EXPECTED_ARTIFACT_PATHS)
+    if missing:
+        fail(f"dataset artifact is missing expected files: {', '.join(missing)}")
+    if unexpected:
+        fail(f"dataset artifact contains unexpected files: {', '.join(unexpected)}")
+
+
+def validate_notice(output_dir: Path) -> None:
+    notice = output_dir / "NOTICE.md"
+    text = notice.read_text(encoding="utf-8")
+    required_fragments = (
+        "# Attribution & Usage",
+        "independent, non-official educational reference",
+        "publicly available records",
+        "does not claim ownership of third-party material",
+        "not created by, affiliated with, authorised by, sponsored by, or endorsed by the Reserve Bank of India",
+        "without representation or warranty",
+        "should not be used as the sole basis for any decision",
+        "Nothing here constitutes financial, investment, legal, tax, accounting, or other professional advice",
+        "This notice is not a dataset license",
+        RIGHTS_METADATA["reference_material_url"],
+    )
+    for fragment in required_fragments:
+        if fragment not in text:
+            fail(f"NOTICE.md is missing required rights language: {fragment}")
+
+
+def update_readme_build_summary(output_dir: Path, validated: Mapping[str, Any], row_sets: Mapping[str, Sequence[Mapping[str, Any]]]) -> None:
+    readme = output_dir / "README.md"
+    text = readme.read_text(encoding="utf-8")
+    start_marker = "<!-- BUILD-SUMMARY:START -->"
+    end_marker = "<!-- BUILD-SUMMARY:END -->"
+    if text.count(start_marker) != 1 or text.count(end_marker) != 1:
+        fail("README.md must contain exactly one build-summary marker pair")
+    start = text.index(start_marker)
+    end = text.index(end_marker, start) + len(end_marker)
+    decisions = row_sets["decisions"]
+    snapshot = validated["meta"]
+    summary = "\n".join(
+        (
+            start_marker,
+            (
+                f"**Current build:** SnapshotV2 `{snapshot['snapshotId']}`, retrieved "
+                f"`{snapshot['retrievedAt']}`; coverage `{decisions[0]['effective_date'].isoformat()}` "
+                f"to `{decisions[-1]['effective_date'].isoformat()}`; "
+                f"{len(decisions)} canonical records, {len(row_sets['annual'])} annual rows, "
+                f"{len(row_sets['sources'])} sources, {len(row_sets['events'])} contextual events, "
+                f"and {len(row_sets['regimes'])} regime intervals."
+            ),
+            end_marker,
+        )
+    )
+    readme.write_text(text[:start] + summary + text[end:], encoding="utf-8", newline="\n")
+
+
 def validate_readme_configs(output_dir: Path) -> None:
     readme = output_dir / "README.md"
     if not readme.exists():
@@ -1045,6 +1209,14 @@ def validate_readme_configs(output_dir: Path) -> None:
         raise ValueError(f"README.md YAML frontmatter is invalid: {exc}") from exc
     if not isinstance(frontmatter, dict):
         fail("README.md frontmatter must be a mapping")
+    if frontmatter.get("language") != "en":
+        fail("README.md frontmatter must declare language: en")
+    if frontmatter.get("pretty_name") != "India RBI Policy Repo Rate and Monetary Policy Decision History":
+        fail("README.md frontmatter has an unexpected pretty_name")
+    if frontmatter.get("tags") != EXPECTED_TAGS:
+        fail("README.md frontmatter tags must match the canonical discoverability list")
+    if frontmatter.get("size_categories") != ["n<1K"]:
+        fail("README.md frontmatter must declare size_categories: [n<1K]")
     configs = frontmatter.get("configs")
     if not isinstance(configs, list) or [item.get("config_name") for item in configs] != list(CONFIG_NAMES):
         fail("README.md must define exactly the five configurations in canonical order")
@@ -1061,6 +1233,10 @@ def validate_readme_configs(output_dir: Path) -> None:
             fail(f"README.md configuration {config_name} must map the full split to {CONFIG_PATHS[config_name]}")
     if "license" in frontmatter or "license_name" in frontmatter or "license_link" in frontmatter:
         fail("README.md must not claim a dataset license without established redistribution rights")
+    if DATASET_REPO_ID not in text or "<user-or-org>" in text:
+        fail("README.md must use the published dataset repository identifier")
+    if "## Attribution & Usage" not in text:
+        fail("README.md must contain the visible Attribution & Usage section")
 
 
 def validate_rows(
@@ -1078,16 +1254,18 @@ def validate_rows(
     for index, row in enumerate(decisions):
         if index and decisions[index - 1]["effective_date"] >= row["effective_date"]:
             fail("decision effective dates must be monotonically ordered")
-        if row["policy_rate_bps"] != round(row["policy_rate_pct"] * 100):
+        if not isinstance(row["policy_rate_pct"], float) or not math.isfinite(row["policy_rate_pct"]) or row["policy_rate_pct"] <= 0:
+            fail(f"policy_rate_pct must be finite and positive for {row['decision_id']}")
+        expected_rate_bps = int(
+            (Decimal(str(row["policy_rate_pct"])) * Decimal("100")).to_integral_value(rounding=ROUND_HALF_UP)
+        )
+        if row["policy_rate_bps"] != expected_rate_bps:
             fail(f"policy_rate_bps mismatch for {row['decision_id']}")
         if row["is_rate_change"] != (row["change_bps"] != 0):
             fail(f"is_rate_change mismatch for {row['decision_id']}")
-        if row["action"] != "initial" and row["change_bps"] == 0 and row["action"] != "hold":
-            fail(f"action mismatch for {row['decision_id']}")
-        if row["action"] == "hike" and row["change_bps"] <= 0:
-            fail(f"hike action has non-positive change for {row['decision_id']}")
-        if row["action"] == "cut" and row["change_bps"] >= 0:
-            fail(f"cut action has non-negative change for {row['decision_id']}")
+        expected_action = action_for_change(row["change_bps"], index == 0)
+        if row["action"] != expected_action:
+            fail(f"action mismatch for {row['decision_id']}: expected {expected_action}")
         if index == 0:
             if row["previous_policy_rate_bps"] is not None or row["change_bps"] != 0 or row["action"] != "initial":
                 fail("initial decision previous-rate/action invariant failed")
@@ -1095,8 +1273,12 @@ def validate_rows(
             previous = decisions[index - 1]
             if row["previous_policy_rate_bps"] != previous["policy_rate_bps"]:
                 fail(f"previous_policy_rate_bps mismatch for {row['decision_id']}")
+            if row["previous_policy_rate_pct"] != previous["policy_rate_pct"]:
+                fail(f"previous_policy_rate_pct mismatch for {row['decision_id']}")
             if row["change_bps"] != row["policy_rate_bps"] - previous["policy_rate_bps"]:
                 fail(f"change_bps mismatch for {row['decision_id']}")
+        if len(row["source_ids"]) != len(set(row["source_ids"])):
+            fail(f"source_ids must be unique for {row['decision_id']}")
         if any(source_id not in validated["source_by_id"] for source_id in row["source_ids"]):
             fail(f"unresolved source reference for {row['decision_id']}")
         if row["primary_source_id"] not in row["source_ids"]:
@@ -1123,12 +1305,35 @@ def validate_rows(
             fail(f"annual gross_hikes_bps does not reconcile for {year}")
         if annual_row["gross_cuts_bps"] != sum(abs(row["change_bps"]) for row in year_rows if row["change_bps"] < 0):
             fail(f"annual gross_cuts_bps does not reconcile for {year}")
+        expected_net_change = None
+        if annual_row["start_policy_rate_pct"] is not None and annual_row["end_policy_rate_pct"] is not None:
+            expected_net_change = int(
+                (
+                    Decimal(str(annual_row["end_policy_rate_pct"]))
+                    - Decimal(str(annual_row["start_policy_rate_pct"]))
+                )
+                * Decimal("100")
+            )
+        if annual_row["net_change_bps"] != expected_net_change:
+            fail(f"annual net_change_bps does not reconcile for {year}")
+        if annual_row["hike_count"] != sum(row["action"] == "hike" for row in year_rows):
+            fail(f"annual hike_count does not reconcile for {year}")
+        if annual_row["cut_count"] != sum(row["action"] == "cut" for row in year_rows):
+            fail(f"annual cut_count does not reconcile for {year}")
+        if annual_row["hold_count"] != sum(row["action"] == "hold" for row in year_rows):
+            fail(f"annual hold_count does not reconcile for {year}")
         if year == 2021 and annual_row["decision_count"] != 0:
             fail("2021 must remain represented as a zero-decision year")
         if annual_row["end_policy_rate_pct"] is not None:
             end_state = next((row for row in reversed(decisions) if row["effective_date"] <= end_of_year(year)), None)
             if end_state is None or annual_row["end_policy_rate_pct"] != end_state["policy_rate_pct"]:
                 fail(f"annual end rate does not match in-force state for {year}")
+            if annual_row["year_end_source_id"] != end_state["primary_source_id"]:
+                fail(f"annual year-end source does not match in-force state for {year}")
+        elif annual_row["year_end_source_id"] is not None:
+            fail(f"annual year-end source must be null without an in-force rate for {year}")
+        if annual_row["year_end_source_id"] is not None and annual_row["year_end_source_id"] not in validated["source_by_id"]:
+            fail(f"annual year-end source does not resolve for {year}")
     source_ids = {row["source_id"] for row in sources}
     if source_ids != set(validated["source_by_id"]):
         fail("sources configuration does not exactly represent SnapshotV2 sources")
@@ -1168,9 +1373,13 @@ def build_dataset(input_path: Path = DEFAULT_INPUT, output_dir: Path = DEFAULT_O
     output_dir.mkdir(parents=True, exist_ok=True)
     for subdirectory in ("data", "exports", "schema", "provenance"):
         (output_dir / subdirectory).mkdir(parents=True, exist_ok=True)
-    if not (output_dir / "VERSION").exists() or not (output_dir / "CHANGELOG.md").exists() or not (output_dir / "README.md").exists():
-        fail("hf-dataset README.md, VERSION, and CHANGELOG.md must exist before building")
+    if not all((output_dir / name).exists() for name in ("README.md", "NOTICE.md", "VERSION", "CHANGELOG.md")):
+        fail("hf-dataset README.md, NOTICE.md, VERSION, and CHANGELOG.md must exist before building")
     validate_readme_configs(output_dir)
+    validate_notice(output_dir)
+    version = (output_dir / "VERSION").read_text(encoding="utf-8").strip()
+    if version != DATASET_SCHEMA_VERSION:
+        fail(f"VERSION must contain dataset schema version {DATASET_SCHEMA_VERSION}")
 
     decisions = build_decisions(validated)
     annual = build_annual(validated, decisions)
@@ -1186,6 +1395,7 @@ def build_dataset(input_path: Path = DEFAULT_INPUT, output_dir: Path = DEFAULT_O
         "events": events,
         "regimes": regimes,
     }
+    update_readme_build_summary(output_dir, validated, row_sets)
     for config_name, rows in row_sets.items():
         write_parquet(output_dir / CONFIG_PATHS[config_name], rows, config_name)
         write_csv(output_dir / "exports" / f"{config_name}.csv", rows, FIELD_SPECS[config_name])
@@ -1209,6 +1419,7 @@ def build_dataset(input_path: Path = DEFAULT_INPUT, output_dir: Path = DEFAULT_O
         "source_snapshot_checksum": validated["meta"]["checksum"],
         "source_retrieved_at": generated_at,
         "record_counts_by_config": {config_name: len(rows) for config_name, rows in row_sets.items()},
+        "rights": RIGHTS_METADATA,
         "coverage": {
             "earliest_effective_date": decisions[0]["effective_date"].isoformat(),
             "latest_effective_date": decisions[-1]["effective_date"].isoformat(),
@@ -1220,6 +1431,7 @@ def build_dataset(input_path: Path = DEFAULT_INPUT, output_dir: Path = DEFAULT_O
     with (output_dir / "SHA256SUMS").open("w", encoding="utf-8", newline="\n") as handle:
         for path in checksum_files:
             handle.write(f"{sha256_file(path)}  {path.relative_to(output_dir).as_posix()}\n")
+    validate_output_layout(output_dir)
     return manifest
 
 

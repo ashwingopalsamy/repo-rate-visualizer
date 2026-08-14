@@ -1,0 +1,437 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset/raw/main/schema/decisions.schema.json",
+  "title": "RBI repo-rate dataset — decisions",
+  "description": "Schema for the decisions configuration of the independent RBI repo-rate dataset.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "decision_id": {
+      "type": "string",
+      "description": "Stable dataset-generated identifier for one canonical ledger row.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "snapshot_decision_id": {
+      "type": "string",
+      "description": "Original decision identifier from SnapshotV2.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "canonical_key": {
+      "type": "string",
+      "description": "Globally readable instrument/date key: IN:RBI:policy_repo_rate:YYYY-MM-DD.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "jurisdiction": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 jurisdiction code: IN.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "country": {
+      "type": "string",
+      "description": "Country name: India.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "central_bank": {
+      "type": "string",
+      "description": "Central bank responsible for the instrument.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "central_bank_code": {
+      "type": "string",
+      "description": "Short central-bank code: RBI.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "decision_authority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Authority identified by the source type, or null when not known.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Null means the value is unavailable in the canonical snapshot."
+    },
+    "instrument": {
+      "type": "string",
+      "description": "Human-readable policy instrument name.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "instrument_code": {
+      "type": "string",
+      "description": "Stable machine-readable instrument code.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "record_type": {
+      "type": "string",
+      "description": "policy_decision for a policy-resolution record; historical_rate_observation for imported history.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "date_semantics": {
+      "type": "string",
+      "description": "Whether the date represents a resolution/effective date or a historical observation date.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "decision_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Date of the identified policy decision; null for imported historical observations.",
+      "x-arrow-type": "date32[day]",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null means no separate policy-decision date is identified by the source record."
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date on which the canonical rate observation is effective or recorded.",
+      "x-arrow-type": "date32[day]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "year": {
+      "type": "integer",
+      "description": "Calendar year derived from effective_date.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "month": {
+      "type": "integer",
+      "description": "Calendar month number derived from effective_date.",
+      "x-arrow-type": "int8",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "policy_rate_pct": {
+      "type": "number",
+      "description": "Policy repo rate in percent, retained as a convenient numeric view.",
+      "x-arrow-type": "double",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "policy_rate_bps": {
+      "type": "integer",
+      "description": "Policy repo rate in basis points; exactly round(policy_rate_pct * 100).",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "previous_policy_rate_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Previous canonical policy rate in percent.",
+      "x-arrow-type": "double",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null for the first canonical observation."
+    },
+    "previous_policy_rate_bps": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Previous canonical policy rate in basis points.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null for the first canonical observation."
+    },
+    "change_bps": {
+      "type": "integer",
+      "description": "Signed change from the previous canonical policy rate in basis points; zero for the initial observation.",
+      "x-arrow-type": "int32",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "action": {
+      "type": "string",
+      "description": "Canonical transition label: initial, hike, cut, or hold.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "stance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Monetary-policy stance when explicitly available.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Null means the canonical source does not provide a structured stance."
+    },
+    "is_rate_change": {
+      "type": "boolean",
+      "description": "True when change_bps is non-zero.",
+      "x-arrow-type": "bool",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "decision_summary": {
+      "type": "string",
+      "description": "Short deterministic factual summary generated from structured fields; source prose is not republished.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "regime_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Stable join key for the repository-provided regime interval containing effective_date.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null means effective_date falls in a gap between regime intervals."
+    },
+    "regime_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Repository-provided contextual regime type.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Null means the value is unavailable in the canonical snapshot."
+    },
+    "regime_label": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Repository-provided contextual regime label.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Null means the value is unavailable in the canonical snapshot."
+    },
+    "primary_source_id": {
+      "type": "string",
+      "description": "Highest-priority source attached to this decision under the deterministic source-priority policy.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "primary_source_type": {
+      "type": "string",
+      "description": "Type of primary_source_id.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "primary_source_title": {
+      "type": "string",
+      "description": "Title of primary_source_id.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "primary_source_url": {
+      "type": "string",
+      "description": "URL of primary_source_id.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "primary_source_published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Publication timestamp of primary_source_id when supplied.",
+      "x-arrow-type": "timestamp[us, tz=UTC]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Null means the source record does not provide a publication timestamp."
+    },
+    "primary_source_retrieved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Retrieval timestamp of primary_source_id.",
+      "x-arrow-type": "timestamp[us, tz=UTC]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "primary_source_checksum": {
+      "type": "string",
+      "description": "SHA-256 checksum recorded for primary_source_id.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "All source identifiers attached to the canonical row, sorted deterministically.",
+      "x-arrow-type": "list<item: string>",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "source_count": {
+      "type": "integer",
+      "description": "Number of distinct attached source identifiers.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    },
+    "provenance_class": {
+      "type": "string",
+      "description": "Strongest attached provenance class: official_primary, official_secondary, or legacy_import.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "verification_status": {
+      "type": "string",
+      "description": "Deterministic verification label exposing primary, legacy, secondary, or mixed support.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "snapshot_id": {
+      "type": "string",
+      "description": "SnapshotV2 identifier used as the build input.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "snapshot_checksum": {
+      "type": "string",
+      "description": "SnapshotV2 content checksum used as the build input.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "snapshot_retrieved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "SnapshotV2 retrieval timestamp.",
+      "x-arrow-type": "timestamp[us, tz=UTC]",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "dataset_schema_version": {
+      "type": "string",
+      "description": "Independent semantic schema version for this dataset.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "record_text": {
+      "type": "string",
+      "description": "Deterministically generated factual sentence intended for search, RAG, and agent use.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    }
+  },
+  "required": [
+    "decision_id",
+    "snapshot_decision_id",
+    "canonical_key",
+    "jurisdiction",
+    "country",
+    "central_bank",
+    "central_bank_code",
+    "instrument",
+    "instrument_code",
+    "record_type",
+    "date_semantics",
+    "effective_date",
+    "year",
+    "month",
+    "policy_rate_pct",
+    "policy_rate_bps",
+    "change_bps",
+    "action",
+    "is_rate_change",
+    "decision_summary",
+    "primary_source_id",
+    "primary_source_type",
+    "primary_source_title",
+    "primary_source_url",
+    "primary_source_retrieved_at",
+    "primary_source_checksum",
+    "source_ids",
+    "source_count",
+    "provenance_class",
+    "verification_status",
+    "snapshot_id",
+    "snapshot_checksum",
+    "snapshot_retrieved_at",
+    "dataset_schema_version",
+    "record_text"
+  ],
+  "x-dataset-schema-version": "1.0.0",
+  "x-config-name": "decisions",
+  "x-row-grain": "one row per canonical monetary-policy/rate observation"
+}

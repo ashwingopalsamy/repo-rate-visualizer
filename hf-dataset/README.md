@@ -1,5 +1,6 @@
 ---
-pretty_name: RBI policy repo-rate and monetary-policy decision history
+language: en
+pretty_name: India RBI Policy Repo Rate and Monetary Policy Decision History
 tags:
   - tabular
   - timeseries
@@ -12,8 +13,6 @@ tags:
   - interest-rates
   - datasets
   - pandas
-  - polars
-  - duckdb
   - mlcroissant
 size_categories:
   - n<1K
@@ -41,7 +40,7 @@ configs:
         path: data/regimes.parquet
 ---
 
-# RBI policy repo-rate and monetary-policy decision history
+# India RBI Policy Repo Rate and Monetary Policy Decision History
 
 An independent, reproducible dataset of the Reserve Bank of India (RBI) policy
 repo rate and its monetary-policy decision history. The canonical table is a
@@ -50,11 +49,22 @@ policy decisions. Annual summaries, source metadata, contextual events, and
 repository-provided regime intervals are separate configurations derived from
 or accompanying that ledger.
 
-The current build is sourced from SnapshotV2 `2026-08-14-v2`. It contains 107
-canonical records covering 2000-06-05 through 2026-08-05, 27 calendar-year
-records, 9 sources, 8 contextual events, and 15 regime intervals. The exact
-snapshot identity, checksums, and counts for every build are recorded in
-[`provenance/build-manifest.json`](provenance/build-manifest.json).
+<!-- BUILD-SUMMARY:START -->
+**Current build:** SnapshotV2 `2026-08-14-v2`, retrieved `2026-08-14T07:35:45.400Z`; coverage `2000-06-05` to `2026-08-05`; 107 canonical records, 27 annual rows, 9 sources, 8 contextual events, and 15 regime intervals.
+<!-- BUILD-SUMMARY:END -->
+
+## At a glance
+
+- `decisions` is the default configuration: one row per canonical policy-rate observation or identified policy decision.
+- `effective_date` orders the rate history; `decision_date` is null when a source does not identify a separate formal decision date.
+- `policy_rate_pct` is convenient numeric percent; `policy_rate_bps` is the exact integer basis-point representation.
+- `change_bps`, `action`, and `is_rate_change` describe the transition from the previous canonical record.
+- `provenance_class` and `verification_status` distinguish directly verified RBI records from legacy imported history.
+- `record_text` is deterministic factual text for search, RAG, and agent context; it is not LLM-written.
+
+This dataset is designed for questions such as: What was India’s repo rate at the
+end of 2019? How much did RBI tighten during 2022? Which years had the most rate
+cuts? Which rows are formal MPC decisions rather than historical observations?
 
 This is not an official RBI product. It is a derived research artifact created
 from repository-maintained source records; users should consult the linked RBI
@@ -150,7 +160,9 @@ The default configuration is the decision ledger:
 ```python
 from datasets import load_dataset
 
-decisions = load_dataset("<user-or-org>/rbi-policy-repo-rate", split="full")
+repo = "ashwingopalsamy/india-repo-rate-dataset"
+decisions = load_dataset(repo, split="full")
+annual = load_dataset(repo, "annual", split="full")
 print(decisions.features)
 print(decisions.filter(lambda row: row["action"] == "cut")[0])
 ```
@@ -235,17 +247,24 @@ The semantic dataset schema version is `1.0.0`; a data refresh that adds a new
 policy decision does not by itself require a schema-version change. The source
 snapshot identity and freshness are separate fields.
 
-## Rights, attribution, and limitations
+## Attribution & Usage
 
-This is an independent derived dataset, not an official RBI publication. No
-blanket dataset redistribution license is asserted here. The repository’s
-transformation code is separate from rights in source material. RBI’s website
-and data are subject to the RBI disclaimer and copyright policy, including its
-requirements around accurate reproduction, prominent acknowledgement, and
-restrictions on unauthorized reproduction, distribution, and commercial use.
-Reuters and Shriram Finance material has separate rights and attribution
-considerations. Please review the source terms before redistributing or using
-the data commercially.
+This is an independent, non-official educational reference compiled from publicly available records published by the Reserve Bank of India and other cited publishers. Source titles, marks, and publisher materials remain with their respective owners; this project does not claim ownership of third-party material. This project is not created by, affiliated with, authorised by, sponsored by, or endorsed by the Reserve Bank of India; no official relationship, approval, or representation should be inferred.
+
+The information is provided for research and general information only, “as is” and without representation or warranty, express or implied, including as to accuracy, completeness, timeliness, availability, or fitness for a particular purpose, to the fullest extent permitted by applicable law. Verify every figure, interpretation, and update against the original publication before relying on it; this project should not be used as the sole basis for any decision.
+
+Nothing here constitutes financial, investment, legal, tax, accounting, or other professional advice, an offer, recommendation, solicitation, or fiduciary relationship. Links and citations are provided for identification and verification only, not as a licence to reproduce protected third-party content. Nothing in this notice limits any right or remedy that cannot lawfully be excluded.
+
+Reference material: [RBI data dissemination material](https://rbi.org.in/scripts/PublicationsView.aspx?Id=18086).
+
+This notice is not a dataset license. No blanket redistribution license is asserted.
+The transformation code is separate from rights in RBI, Reuters, Shriram Finance,
+and other third-party source material. Review source-specific terms before
+redistributing or using the data commercially. The machine-readable rights summary
+is in [`provenance/build-manifest.json`](provenance/build-manifest.json) and
+[`schema/data-dictionary.json`](schema/data-dictionary.json).
+
+## Limitations
 
 The source records provide a strong machine-readable transition history but do
 not make every historical observation an identified RBI policy-resolution event.
@@ -257,14 +276,17 @@ where one exists.
 
 Suggested citation:
 
-> *RBI policy repo-rate and monetary-policy decision history*, independent
+> *India RBI Policy Repo Rate and Monetary Policy Decision History*, independent
 > derived dataset from the `repo-rate-visualizer` SnapshotV2 ledger, schema
 > version 1.0.0. Cite the snapshot ID, checksum, and the relevant source URL from
 > `provenance/build-manifest.json` and the `sources` configuration.
 
 ## Links
 
+- [Dataset page](https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset)
+- [Source repository](https://github.com/ashwingopalsamy/repo-rate-visualizer)
 - [RBI disclaimer and copyright policy](https://www.rbi.org.in/Scripts/Disclaimer.aspx)
+- [RBI data dissemination material](https://rbi.org.in/scripts/PublicationsView.aspx?Id=18086)
 - [RBI historical data](https://www.rbi.org.in/Scripts/bs_viewcontent.aspx?Id=624)
 - [Hugging Face manual dataset configuration](https://huggingface.co/docs/hub/en/datasets-manual-configuration)
 - [Hugging Face dataset file names and custom splits](https://huggingface.co/docs/hub/main/datasets-file-names-and-splits)
