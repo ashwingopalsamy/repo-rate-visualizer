@@ -1,9 +1,11 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { decisions, repoRateData, macroEvents, regimes } from '../data/dataLoader.js';
 import DecisionTimelineList from './DecisionTimelineList.jsx';
+import ChartReadout from './ChartReadout.jsx';
 
-const MARGIN = { top: 36, right: 32, bottom: 48, left: 56 };
+const DESKTOP_MARGIN = { top: 28, right: 20, bottom: 38, left: 50 };
+const MOBILE_MARGIN = { top: 22, right: 10, bottom: 32, left: 38 };
 
 const REGIME_FILLS = {
   easing: 'var(--color-easing)',
@@ -11,15 +13,37 @@ const REGIME_FILLS = {
   pause: 'var(--color-pause)',
 };
 
-export default function TimelineChart({ dateRange }) {
+function actionText(action) {
+  if (action === 'cut') return 'Cut';
+  if (action === 'hike') return 'Hike';
+  if (action === 'hold') return 'Hold';
+  return 'Initial record';
+}
+
+function decisionChange(decision) {
+  return decision.changeBps > 0 ? `+${decision.changeBps}` : `${decision.changeBps}`;
+}
+
+function formatReadoutDatum(datum) {
+  return {
+    date: datum.date,
+    rate: datum.rate ?? datum.repoRate,
+    action: datum.action,
+    changeBps: datum.changeBps,
+    annotation: datum.stance && datum.stance !== 'neutral' ? datum.stance : undefined,
+  };
+}
+
+export default function TimelineChart({ activeDecisionId, dateRange, onDecisionSelect, showEvents = false, showRegimes = false }) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
-  const tooltipRef = useRef(null);
+  const readoutStateRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [readout, setReadout] = useState(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) return undefined;
     const ro = new ResizeObserver(entries => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
@@ -31,18 +55,23 @@ export default function TimelineChart({ dateRange }) {
   }, []);
 
   useEffect(() => {
-    if (!dimensions.width || !dimensions.height) return;
+    readoutStateRef.current = null;
+    setReadout(null);
+  }, [dateRange.start, dateRange.end, showEvents, showRegimes]);
+
+  useEffect(() => {
+    if (!dimensions.width || !dimensions.height) return undefined;
 
     const { width, height } = dimensions;
-    const innerW = width - MARGIN.left - MARGIN.right;
-    const innerH = height - MARGIN.top - MARGIN.bottom;
-    if (innerW <= 0 || innerH <= 0) return;
+    const margin = width < 520 ? MOBILE_MARGIN : DESKTOP_MARGIN;
+    const innerW = width - margin.left - margin.right;
+    const innerH = height - margin.top - margin.bottom;
+    if (innerW <= 0 || innerH <= 0) return undefined;
 
-    // Filter data by date range
     let data = repoRateData;
     let filteredDecisions = decisions;
-    let filteredRegimes = regimes;
-    let filteredEvents = macroEvents;
+    let filteredRegimes = showRegimes ? regimes : [];
+    let filteredEvents = showEvents ? macroEvents : [];
 
     if (dateRange.start) {
       const startDate = new Date(dateRange.start);
@@ -61,322 +90,266 @@ export default function TimelineChart({ dateRange }) {
 
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
-    d3.select(tooltipRef.current).classed('chart-tooltip--visible', false);
+    if (data.length === 0) return undefined;
 
-    if (data.length === 0) return;
-
-    // Scales
     const xExtent = d3.extent(data, d => d.dateObj);
     const yExtent = d3.extent(data, d => d.rate);
     const yPad = (yExtent[1] - yExtent[0]) * 0.15 || 0.5;
-
     const xScale = d3.scaleTime().domain(xExtent).range([0, innerW]);
     const yScale = d3.scaleLinear()
       .domain([Math.max(0, yExtent[0] - yPad), yExtent[1] + yPad])
       .range([innerH, 0])
       .nice();
 
-    const g = svg.append('g').attr('transform', `translate(${MARGIN.left},${MARGIN.top})`);
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const plot = g.append('g').attr('class', 'chart-plot');
 
-    // Grid lines
-    g.append('g').attr('class', 'grid')
-      .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(8));
+    plot.append('g').attr('class', 'grid')
+      .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(7));
 
-    // Regime bands
-    g.selectAll('.regime-band')
+    plot.selectAll('.regime-band')
       .data(filteredRegimes)
       .join('rect')
       .attr('class', 'regime-band')
       .attr('x', d => Math.max(0, xScale(d.startObj)))
       .attr('y', 0)
-      .attr('width', d => {
-        const x0 = Math.max(0, xScale(d.startObj));
-        const x1 = Math.min(innerW, xScale(d.endObj));
-        return Math.max(0, x1 - x0);
-      })
+      .attr('width', d => Math.max(0, Math.min(innerW, xScale(d.endObj)) - Math.max(0, xScale(d.startObj))))
       .attr('height', innerH)
       .attr('fill', d => REGIME_FILLS[d.type] || 'var(--color-pause)')
-      .attr('rx', 0)
       .append('title')
       .text(d => `${d.label} (${d.type})`);
 
-    // Annotation lines and labels - collision-aware placement
-    const LABEL_SLOTS = [-8, 26, 60, 94]; // Significantly wider spacing
-    const placedLabels = []; // track {x, halfW, slotIdx} for collision detection
-
+    const avoidRects = [];
+    const LABEL_SLOTS = [16, 42, 68];
+    const placedLabels = [];
     const sortedEvents = [...filteredEvents].sort((a, b) => a.dateObj - b.dateObj);
-
-    // 1. Draw all lines first (z-index: bottom)
     const validEvents = [];
-    sortedEvents.forEach(evt => {
-      const x = xScale(evt.dateObj);
-      if (x < 0 || x > innerW) return;
-      
-      validEvents.push({ ...evt, x });
 
-      g.append('line')
+    sortedEvents.forEach(event => {
+      const x = xScale(event.dateObj);
+      if (x < 0 || x > innerW) return;
+      validEvents.push({ ...event, x });
+      plot.append('line')
         .attr('class', 'annotation-line')
-        .attr('x1', x).attr('x2', x).attr('y1', 0).attr('y2', innerH);
+        .attr('x1', x).attr('x2', x)
+        .attr('y1', 0).attr('y2', innerH);
     });
 
-    // 2. Draw all labels on top (z-index: top)
-    validEvents.forEach(evt => {
-      const { x, label } = evt;
-
-      // Render off-screen to measure width
-      const probe = g.append('text')
+    validEvents.forEach(event => {
+      const { x, label } = event;
+      const probe = plot.append('text')
         .attr('class', 'annotation-label')
         .attr('x', -9999).attr('y', -9999)
         .text(label);
-      const probeW = probe.node().getBBox().width;
+      const probeWidth = probe.node().getBBox().width;
       probe.remove();
+      const halfWidth = probeWidth / 2 + 8;
+      const slotIndex = LABEL_SLOTS.findIndex((_, index) => !placedLabels.some(item => item.slotIndex === index && Math.abs(item.x - x) < item.halfWidth + halfWidth + 8));
+      if (slotIndex === -1) return;
+      const labelY = LABEL_SLOTS[slotIndex];
+      placedLabels.push({ x, halfWidth, slotIndex });
+      avoidRects.push({ left: margin.left + x - halfWidth, top: margin.top + labelY - 12, width: halfWidth * 2, height: 18 });
 
-      const halfW = probeW / 2 + 12; // More horizontal padding for collision check
-
-      // Find first slot with no horizontal collision
-      let chosenSlot = 0;
-      for (let s = 0; s < LABEL_SLOTS.length; s++) {
-        const collision = placedLabels.some(p =>
-          p.slotIdx === s && Math.abs(p.x - x) < (p.halfW + halfW + 12) // Wider collision buffer
-        );
-        if (!collision) { chosenSlot = s; break; }
-      }
-
-      placedLabels.push({ x, halfW, slotIdx: chosenSlot });
-
-      const labelY = LABEL_SLOTS[chosenSlot];
-      
-      // Draw background rect (behind text, but on top of lines)
-      const text = g.append('text')
+      const text = plot.append('text')
         .attr('class', 'annotation-label')
         .attr('x', x).attr('y', labelY)
         .text(label);
-
-      const bbox = text.node().getBBox();
-      g.insert('rect', `text[x="${x}"][y="${labelY}"]`) // Insert before this specific text node
+      const box = text.node().getBBox();
+      plot.insert('rect', () => text.node())
         .attr('class', 'annotation-label-bg')
-        .attr('x', bbox.x - 6).attr('y', bbox.y - 3)
-        .attr('width', bbox.width + 12).attr('height', bbox.height + 6);
+        .attr('x', box.x - 5).attr('y', box.y - 3)
+        .attr('width', box.width + 10).attr('height', box.height + 6);
+      text.raise();
     });
 
-    // Area Path
-    const area = d3.area()
-      .x(d => xScale(d.dateObj))
-      .y0(innerH)
-      .y1(d => yScale(d.rate))
-      .curve(d3.curveStepAfter);
-
-    g.append('path').datum(data).attr('class', 'rate-area').attr('d', area);
-
-    // Step-line
     const line = d3.line()
       .x(d => xScale(d.dateObj))
       .y(d => yScale(d.rate))
       .curve(d3.curveStepAfter);
+    plot.append('path').datum(data).attr('class', 'rate-line').attr('d', line);
 
-    g.append('path').datum(data).attr('class', 'rate-line').attr('d', line);
-
-    // Data dots
-    g.selectAll('.rate-dot')
+    plot.selectAll('.rate-dot')
       .data(data)
       .join('circle')
       .attr('class', 'rate-dot')
       .attr('cx', d => xScale(d.dateObj))
       .attr('cy', d => yScale(d.rate))
-      .attr('r', 3)
+      .attr('r', 2.5)
       .attr('aria-hidden', 'true');
 
-    // X axis
-    const xTickInterval = innerW > 600 ? d3.timeYear.every(2) : d3.timeYear.every(5);
+    const xTickInterval = innerW > 600 ? d3.timeYear.every(2) : d3.timeYear.every(4);
     g.append('g').attr('class', 'axis axis--x')
       .attr('transform', `translate(0,${innerH})`)
       .call(d3.axisBottom(xScale).ticks(xTickInterval).tickFormat(d3.timeFormat('%Y')).tickSizeOuter(0));
 
-    // Y axis
     g.append('g').attr('class', 'axis axis--y')
-      .call(d3.axisLeft(yScale).ticks(8).tickFormat(d => `${d}%`).tickSizeOuter(0));
+      .call(d3.axisLeft(yScale).ticks(7).tickFormat(d => `${d}%`).tickSizeOuter(0));
 
-    // Y axis label
     g.append('text')
+      .attr('class', 'chart-axis-label')
       .attr('transform', 'rotate(-90)')
-      .attr('y', -42).attr('x', -innerH / 2)
+      .attr('y', -36).attr('x', -innerH / 2)
       .attr('text-anchor', 'middle')
-      .attr('fill', 'var(--text-tertiary)')
-      .attr('font-size', '11px')
-      .attr('font-weight', '500')
-      .attr('font-family', 'var(--font-sans)')
-      .text('Repo Rate (%)');
+      .text('Repo rate (%)');
 
-    // Interactive overlay
-    const tooltip = d3.select(tooltipRef.current);
-    const bisect = d3.bisector(d => d.dateObj).left;
+    const pointCoordinates = data.map(point => ({ x: margin.left + xScale(point.dateObj), y: margin.top + yScale(point.rate) }));
+    const nearestDataPoint = (event) => {
+      const [mx] = d3.pointer(event, plot.node());
+      const dateAtCursor = xScale.invert(mx);
+      const index = d3.bisector(d => d.dateObj).left(data, dateAtCursor, 1);
+      const d0 = data[index - 1];
+      const d1 = data[index];
+      if (!d0) return null;
+      return d1 && dateAtCursor - d0.dateObj > d1.dateObj - dateAtCursor ? d1 : d0;
+    };
 
-    const crosshairV = g.append('line').attr('class', 'crosshair-line').style('display', 'none');
-    const crosshairH = g.append('line').attr('class', 'crosshair-line').style('display', 'none');
-    const hoverDot = g.append('circle')
-      .attr('r', 6)
-      .attr('fill', 'var(--bg-card)')
-      .attr('stroke', 'var(--color-primary)')
-      .attr('stroke-width', 2)
+    const setReadoutFor = (datum, persistent = false) => {
+      if (!datum) return;
+      const rate = datum.rate ?? datum.repoRate;
+      const next = {
+        visible: true,
+        datum: formatReadoutDatum(datum),
+        anchor: { x: margin.left + xScale(datum.dateObj), y: margin.top + yScale(rate) },
+        nearbyPoints: pointCoordinates,
+        avoidRects,
+        persistent,
+      };
+      readoutStateRef.current = next;
+      setReadout(next);
+    };
+
+    const clearReadout = () => {
+      if (readoutStateRef.current?.persistent) return;
+      readoutStateRef.current = null;
+      setReadout(null);
+    };
+
+    const crosshairV = plot.append('line').attr('class', 'crosshair-line').style('display', 'none');
+    const crosshairH = plot.append('line').attr('class', 'crosshair-line').style('display', 'none');
+    const hoverHalo = plot.append('circle')
+      .attr('class', 'chart-hover-halo')
+      .attr('r', 10)
+      .style('display', 'none')
+      .style('pointer-events', 'none');
+    const hoverDot = plot.append('circle')
+      .attr('class', 'chart-hover-dot')
+      .attr('r', 5)
       .style('display', 'none')
       .style('pointer-events', 'none');
 
-    const hoverHalo = g.append('circle')
-        .attr('r', 12)
-        .attr('fill', 'var(--color-line)')
-        .attr('opacity', 0.1)
-        .style('display', 'none')
-        .style('pointer-events', 'none');
-
-    g.append('rect')
+    plot.append('rect')
+      .attr('class', 'chart-interaction-overlay')
       .attr('width', innerW).attr('height', innerH)
       .attr('fill', 'transparent')
-      .on('mousemove', function(event) {
-        const [mx] = d3.pointer(event);
-        const dateAtCursor = xScale.invert(mx);
-        const idx = bisect(data, dateAtCursor, 1);
-        const d0 = data[idx - 1];
-        const d1 = data[idx];
-        if (!d0) return;
-        const d = d1 && (dateAtCursor - d0.dateObj > d1.dateObj - dateAtCursor) ? d1 : d0;
-
-        const x = xScale(d.dateObj);
-        const y = yScale(d.rate);
-
+      .on('pointermove', function(event) {
+        if (event.pointerType === 'touch') return;
+        const datum = nearestDataPoint(event);
+        if (!datum) return;
+        const x = xScale(datum.dateObj);
+        const y = yScale(datum.rate);
         crosshairV.style('display', null).attr('x1', x).attr('x2', x).attr('y1', 0).attr('y2', innerH);
         crosshairH.style('display', null).attr('x1', 0).attr('x2', innerW).attr('y1', y).attr('y2', y);
-        hoverDot.style('display', null).attr('cx', x).attr('cy', y);
         hoverHalo.style('display', null).attr('cx', x).attr('cy', y);
-
-        const regime = filteredRegimes.find(r => d.dateObj >= r.startObj && d.dateObj <= r.endObj);
-        const dateStr = d3.timeFormat('%b %d, %Y')(d.dateObj);
-        const changeStr = d.changeBps > 0 ? `+${d.changeBps} bps` : d.changeBps < 0 ? `${d.changeBps} bps` : 'Unchanged';
-        const changeClass = d.changeBps > 0 ? 'chart-tooltip__change--hike' : d.changeBps < 0 ? 'chart-tooltip__change--cut' : 'chart-tooltip__change--unchanged';
-
-        tooltip.classed('chart-tooltip--visible', true)
-          .html(`
-            <div class="chart-tooltip__date">${dateStr}</div>
-            <div class="chart-tooltip__rate">${d.rate.toFixed(2)}%</div>
-            <div class="chart-tooltip__change ${changeClass}">${changeStr}</div>
-            ${regime ? `<div class="chart-tooltip__regime">${regime.label}</div>` : ''}
-            <div class="chart-tooltip__source">${d.source || 'RBI'}</div>
-          `);
-
-        const containerRect = containerRef.current.getBoundingClientRect();
-        const tooltipNode = tooltipRef.current;
-        const tW = tooltipNode.offsetWidth;
-        const tH = tooltipNode.offsetHeight;
-
-        let tx = x + MARGIN.left + 16;
-        let ty = y + MARGIN.top - tH / 2;
-        if (tx + tW > width - 16) tx = x + MARGIN.left - tW - 16;
-        if (ty < 8) ty = 8;
-        if (ty + tH > height - 8) ty = height - tH - 8;
-
-        tooltip.style('left', `${tx}px`).style('top', `${ty}px`);
+        hoverDot.style('display', null).attr('cx', x).attr('cy', y);
+        setReadoutFor(datum, false);
       })
-      .on('mouseleave', function() {
+      .on('pointerleave', function() {
         crosshairV.style('display', 'none');
         crosshairH.style('display', 'none');
-        hoverDot.style('display', 'none');
         hoverHalo.style('display', 'none');
-        tooltip.classed('chart-tooltip--visible', false);
+        hoverDot.style('display', 'none');
+        clearReadout();
+      })
+      .on('pointerup', function(event) {
+        const datum = nearestDataPoint(event);
+        if (!datum) return;
+        setReadoutFor(datum, true);
+        onDecisionSelect?.(datum.decisionId);
       });
 
-    const showDecisionTooltip = (decision, x, y) => {
-      const dateStr = d3.timeFormat('%b %d, %Y')(decision.dateObj);
-      const actionText = decision.action === 'hold'
-        ? 'Hold'
-        : decision.action === 'cut'
-          ? 'Cut'
-          : decision.action === 'hike'
-            ? 'Hike'
-            : 'Initial record';
-      const changeText = decision.changeBps > 0
-        ? `+${decision.changeBps} bps`
-        : `${decision.changeBps} bps`;
-      const changeClass = decision.changeBps > 0
-        ? 'chart-tooltip__change--hike'
-        : decision.changeBps < 0
-          ? 'chart-tooltip__change--cut'
-          : 'chart-tooltip__change--unchanged';
-
-      tooltip.classed('chart-tooltip--visible', true)
-        .html(`
-          <div class="chart-tooltip__date">${dateStr}</div>
-          <div class="chart-tooltip__rate">${decision.repoRate.toFixed(2)}%</div>
-          <div class="chart-tooltip__change ${changeClass}">${actionText} · ${changeText}</div>
-          ${decision.stance ? `<div class="chart-tooltip__regime">Stance: ${decision.stance}</div>` : ''}
-          <div class="chart-tooltip__source">Official RBI decision</div>
-        `);
-
-      const tooltipNode = tooltipRef.current;
-      const tW = tooltipNode.offsetWidth;
-      const tH = tooltipNode.offsetHeight;
-      let tx = x + MARGIN.left + 16;
-      let ty = y + MARGIN.top - tH / 2;
-      if (tx + tW > width - 16) tx = x + MARGIN.left - tW - 16;
-      if (ty < 8) ty = 8;
-      if (ty + tH > height - 8) ty = height - tH - 8;
-      tooltip.style('left', `${tx}px`).style('top', `${ty}px`);
-    };
-
-    const hideDecisionTooltip = () => {
-      tooltip.classed('chart-tooltip--visible', false);
-    };
-
-    // Every official decision gets a distinct, focusable marker. This is
-    // intentionally separate from regime bands and macro-event annotations.
-    const markerLayer = g.append('g')
+    const markerLayer = plot.append('g')
       .attr('class', 'decision-markers')
       .attr('aria-label', 'Official policy decision markers');
 
     const markerGroups = markerLayer.selectAll('.decision-marker')
       .data(filteredDecisions)
       .join('g')
-      .attr('class', decision => `decision-marker decision-marker--${decision.action}`)
+      .attr('class', decision => `decision-marker decision-marker--${decision.action}${activeDecisionId === decision.id ? ' decision-marker--active' : ''}`)
       .attr('transform', decision => `translate(${xScale(decision.dateObj)},${yScale(decision.repoRate)})`)
       .attr('role', 'button')
       .attr('tabindex', 0)
-      .attr('aria-label', decision => `${actionText(decision.action)} on ${decision.date}, repo rate ${decision.repoRate.toFixed(2)} percent, ${decision.changeBps > 0 ? '+' : ''}${decision.changeBps} basis points`)
+      .attr('data-decision-id', decision => decision.id)
+      .attr('aria-pressed', decision => activeDecisionId === decision.id ? 'true' : 'false')
+      .attr('aria-label', decision => `${actionText(decision.action)} on ${decision.date}, repo rate ${decision.repoRate.toFixed(2)} percent, ${decisionChange(decision)} basis points`)
       .on('mouseenter focus', function(event, decision) {
-        showDecisionTooltip(decision, xScale(decision.dateObj), yScale(decision.repoRate));
+        setReadoutFor(decision, false);
       })
-      .on('mouseleave blur', hideDecisionTooltip);
+      .on('mouseleave blur', clearReadout)
+      .on('pointerup', function(event, decision) {
+        event.preventDefault();
+        setReadoutFor(decision, true);
+        onDecisionSelect?.(decision.id);
+      })
+      .on('keydown', function(event, decision) {
+        if (event.key === 'Escape') {
+          readoutStateRef.current = null;
+          setReadout(null);
+          return;
+        }
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        setReadoutFor(decision, true);
+        onDecisionSelect?.(decision.id);
+      });
 
     markerGroups.append('line')
       .attr('class', 'decision-marker__stem')
       .attr('x1', 0).attr('x2', 0)
-      .attr('y1', -10).attr('y2', 10);
-
+      .attr('y1', -8).attr('y2', 8);
     markerGroups.append('circle')
       .attr('class', 'decision-marker__hit')
       .attr('r', 10)
       .attr('aria-hidden', 'true');
-
     markerGroups.append('circle')
       .attr('class', 'decision-marker__dot')
-      .attr('r', 4.5)
+      .attr('r', 3.8)
       .attr('aria-hidden', 'true')
       .append('title')
       .text(decision => `${actionText(decision.action)} · ${decision.date} · ${decision.repoRate.toFixed(2)}%`);
 
-  }, [dimensions, dateRange]);
+    if (activeDecisionId) {
+      const activeMarker = markerGroups.filter(decision => decision.id === activeDecisionId).node();
+      const activeDecision = filteredDecisions.find(decision => decision.id === activeDecisionId);
+      if (activeMarker && activeDecision) {
+        activeMarker.focus({ preventScroll: true });
+        setReadoutFor(activeDecision, true);
+      }
+    }
+
+    return () => {
+      svg.selectAll('*').on('.pointermove', null).on('.pointerleave', null).on('.pointerup', null);
+    };
+  }, [activeDecisionId, dateRange, dimensions, onDecisionSelect, showEvents, showRegimes]);
 
   return (
     <>
       <div className="chart-container" ref={containerRef} role="group" aria-label="RBI Repo Rate timeline chart with official decision markers">
         <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
-        <div ref={tooltipRef} className="chart-tooltip" role="tooltip" />
+        <ChartReadout
+          visible={Boolean(readout)}
+          datum={readout?.datum}
+          anchor={readout?.anchor}
+          bounds={dimensions}
+          nearbyPoints={readout?.nearbyPoints}
+          avoidRects={readout?.avoidRects}
+          persistent={readout?.persistent}
+          onDismiss={() => {
+            readoutStateRef.current = null;
+            setReadout(null);
+          }}
+        />
       </div>
-      <DecisionTimelineList dateRange={dateRange} />
+      <DecisionTimelineList activeDecisionId={activeDecisionId} dateRange={dateRange} onDecisionSelect={onDecisionSelect} />
     </>
   );
-}
-
-function actionText(action) {
-  if (action === 'cut') return 'Cut';
-  if (action === 'hike') return 'Hike';
-  if (action === 'hold') return 'Hold';
-  return 'Initial record';
 }

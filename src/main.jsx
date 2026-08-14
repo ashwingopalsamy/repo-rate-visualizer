@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
-import './styles/tokens.css';
-import './styles/base.css';
+import { TooltipProvider } from './components/ui/tooltip.jsx';
+import '@fontsource-variable/geist/index.css';
+import '@fontsource-variable/geist-mono/index.css';
+import '@fontsource-variable/inter/index.css';
+import './styles/globals.css';
+import './styles/workspace.css';
 import './styles/chart.css';
 import './styles/mobile.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <TooltipProvider>
+      <App />
+    </TooltipProvider>
   </React.StrictMode>
 );

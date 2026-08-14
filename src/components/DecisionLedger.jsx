@@ -1,4 +1,7 @@
 import { decisions, sources } from '../data/dataLoader.js';
+import { Badge } from './ui/badge.jsx';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
+import Icon from './ui/icon.jsx';
 
 const sourceById = new Map(sources.map(source => [source.id, source]));
 
@@ -8,6 +11,8 @@ const actionLabel = {
   hike: 'Hike',
   hold: 'Hold',
 };
+
+const actionVariant = (action) => action === 'cut' ? 'cut' : action === 'hike' ? 'hike' : 'hold';
 
 const formatDate = (value) => new Date(`${value}T00:00:00.000Z`).toLocaleDateString('en-IN', {
   year: 'numeric',
@@ -20,73 +25,56 @@ const formatChange = (changeBps) => {
   return `${changeBps} bps`;
 };
 
-const decisionDescription = (decision) => {
-  if (decision.action === 'hold') return `Repo rate held at ${decision.repoRate.toFixed(2)}%.`;
-  if (decision.action === 'initial') return `First recorded repo rate: ${decision.repoRate.toFixed(2)}%.`;
-  return `Repo rate moved to ${decision.repoRate.toFixed(2)}%.`;
-};
-
 export default function DecisionLedger({ limit = 8 }) {
   const recentDecisions = [...decisions].reverse().slice(0, limit);
 
   return (
-    <section className="decision-ledger" aria-labelledby="decision-ledger-title">
-      <div className="decision-ledger__header">
-        <div>
-          <h2 className="decision-ledger__title" id="decision-ledger-title">Recent policy decisions</h2>
-          <p className="decision-ledger__description">
-            Official decision records, including unchanged repo-rate decisions.
-          </p>
+    <section className="decision-ledger space-y-5" aria-labelledby="decision-register-title">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="min-w-0">
+          <p className="mb-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Decision spine</p>
+          <h2 id="decision-register-title" className="m-0 text-xl font-semibold tracking-[-0.03em] text-foreground sm:text-2xl">Recent policy decisions</h2>
+          <p className="mt-2 mb-0 max-w-2xl text-sm leading-6 text-muted-foreground">Official RBI records, including unchanged repo-rate decisions.</p>
         </div>
-        <span className="decision-ledger__count">Latest {recentDecisions.length} of {decisions.length}</span>
+        <span className="shrink-0 text-sm tabular-nums text-muted-foreground">{recentDecisions.length} of {decisions.length}</span>
       </div>
 
-      <div className="decision-ledger__list" role="list">
-        {recentDecisions.map(decision => {
-          const decisionSource = decision.sourceIds
-            .map(sourceId => sourceById.get(sourceId))
-            .find(Boolean);
-          const action = actionLabel[decision.action] || decision.action;
-
-          return (
-            <article
-              className={`decision-row decision-row--${decision.action}`}
-              key={decision.id}
-              role="listitem"
-              data-decision-id={decision.id}
-              data-action={decision.action}
-            >
-              <div className="decision-row__date">
-                <time dateTime={decision.date}>{formatDate(decision.date)}</time>
-                <span>Official decision</span>
-              </div>
-              <div className="decision-row__main">
-                <div className="decision-row__headline">
-                  <span className={`decision-row__action decision-row__action--${decision.action}`}>{action}</span>
-                  <span className="decision-row__rate">{decision.repoRate.toFixed(2)}%</span>
-                  <span className="decision-row__change">{formatChange(decision.changeBps)}</span>
-                </div>
-                <p className="decision-row__description">{decisionDescription(decision)}</p>
-              </div>
-              <div className="decision-row__meta">
-                <span className="decision-row__stance">Stance: {decision.stance || 'Not reported'}</span>
-                {decisionSource ? (
-                  <a
-                    className="decision-row__source"
-                    href={decisionSource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open source for ${formatDate(decision.date)}`}
-                  >
-                    {decisionSource.title} ↗
-                  </a>
-                ) : (
-                  <span className="decision-row__source decision-row__source--missing">Source unavailable</span>
-                )}
-              </div>
-            </article>
-          );
-        })}
+      <div className="decision-ledger-table overflow-hidden rounded-xl border border-border/80 bg-card">
+        <Table aria-label="Recent official policy decisions">
+          <TableHeader>
+            <TableRow className="border-border/70 hover:bg-transparent">
+              <TableHead>Date</TableHead>
+              <TableHead>Decision</TableHead>
+              <TableHead>Rate</TableHead>
+              <TableHead>Change</TableHead>
+              <TableHead>Stance</TableHead>
+              <TableHead className="text-right">Source</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {recentDecisions.map(decision => {
+              const source = decision.sourceIds.map(sourceId => sourceById.get(sourceId)).find(Boolean);
+              const variant = actionVariant(decision.action);
+              return (
+                <TableRow className="border-border/70" data-action={decision.action} data-decision-id={decision.id} key={decision.id}>
+                  <TableCell data-label="Date" className="whitespace-nowrap text-muted-foreground">{formatDate(decision.date)}</TableCell>
+                  <TableCell data-label="Decision"><Badge variant={variant}>{actionLabel[decision.action] || decision.action}</Badge></TableCell>
+                  <TableCell data-label="Rate" className="font-semibold tabular-nums">{decision.repoRate.toFixed(2)}%</TableCell>
+                  <TableCell data-label="Change" className={`font-medium tabular-nums ${variant === 'cut' ? 'text-cut' : variant === 'hike' ? 'text-hike' : 'text-hold'}`}>{formatChange(decision.changeBps)}</TableCell>
+                  <TableCell data-label="Stance" className="text-muted-foreground">{decision.stance || 'Not reported'}</TableCell>
+                  <TableCell data-label="Source" className="text-right">
+                    {source ? (
+                      <a className="inline-flex items-center justify-end gap-1.5 text-sm font-medium text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground focus-visible:rounded-sm" href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`}>
+                        <span>Open source</span>
+                        <Icon name="external" size={13} />
+                      </a>
+                    ) : <span className="text-sm text-muted-foreground">Unavailable</span>}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       </div>
     </section>
   );

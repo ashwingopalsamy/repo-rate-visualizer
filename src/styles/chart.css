@@ -1,27 +1,26 @@
 .chart-container {
   position: relative;
   width: 100%;
-  height: clamp(320px, 42vw, 500px);
-  min-height: 320px;
-  overflow: visible;
-  padding: 12px 8px 8px;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  background: var(--bg-card);
+  height: clamp(300px, 36vw, 460px);
+  min-height: 280px;
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
 }
 
 .chart-svg {
   display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .chart-svg .axis text {
   fill: var(--text-tertiary);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 11px;
   font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
 }
 
 .chart-svg .axis line,
@@ -39,67 +38,77 @@
   stroke-dasharray: 2 5;
 }
 
-.chart-svg .rate-area {
-  fill: var(--color-line);
-  opacity: 0.08;
-  pointer-events: none;
-}
-
 .chart-svg .rate-line {
   fill: none;
   stroke: var(--color-line);
   stroke-linecap: square;
   stroke-linejoin: round;
-  stroke-width: 2.5;
+  stroke-width: 2.25;
 }
 
 .chart-svg .rate-dot {
-  fill: var(--bg-card);
+  fill: var(--background);
   stroke: var(--color-line);
-  stroke-width: 1.5;
-  cursor: pointer;
-}
-
-.chart-svg .rate-dot:hover,
-.chart-svg .rate-dot:focus {
-  fill: var(--color-primary);
-  stroke: var(--color-primary);
-  stroke-width: 2;
+  stroke-width: 1.25;
 }
 
 .chart-svg .regime-band {
-  opacity: 1;
+  opacity: 0.18;
 }
 
 .chart-svg .annotation-line {
   stroke: var(--color-annotation);
   stroke-dasharray: 3 4;
   stroke-width: 1;
-  opacity: 0.6;
+  opacity: 0.42;
 }
 
 .chart-svg .annotation-label {
   fill: var(--text-secondary);
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: var(--weight-semibold);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.035em;
   text-anchor: middle;
   text-transform: uppercase;
 }
 
 .chart-svg .annotation-label-bg {
-  fill: var(--bg-card);
-  fill-opacity: 1;
-  rx: 2;
-  ry: 2;
+  fill: var(--background);
+  fill-opacity: 0.92;
+  rx: 3;
+  ry: 3;
 }
 
 .chart-svg .crosshair-line {
   stroke: var(--color-crosshair);
   stroke-dasharray: 3 4;
   stroke-width: 1;
+  opacity: 0.55;
   pointer-events: none;
+}
+
+.chart-svg .chart-hover-halo {
+  fill: var(--color-line);
+  opacity: 0.14;
+}
+
+.chart-svg .chart-hover-dot {
+  fill: var(--background);
+  stroke: var(--color-line);
+  stroke-width: 2;
+}
+
+.chart-interaction-overlay {
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.chart-axis-label {
+  fill: var(--text-tertiary);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: var(--weight-medium);
 }
 
 .decision-marker {
@@ -124,8 +133,8 @@
 
 .decision-marker__stem {
   stroke: currentColor;
-  stroke-width: 1.5;
-  opacity: 0.75;
+  stroke-width: 1.25;
+  opacity: 0.68;
 }
 
 .decision-marker__hit {
@@ -135,97 +144,138 @@
 
 .decision-marker__dot {
   fill: currentColor;
-  stroke: var(--bg-card);
-  stroke-width: 1.5;
+  stroke: var(--background);
+  stroke-width: 1.25;
   pointer-events: none;
 }
 
 .decision-marker:focus .decision-marker__dot,
 .decision-marker:hover .decision-marker__dot {
-  stroke: var(--color-primary);
+  stroke: var(--foreground);
+  stroke-width: 2.25;
+}
+
+.decision-marker--active .decision-marker__dot {
+  stroke: var(--foreground);
   stroke-width: 2.5;
 }
 
-.chart-tooltip {
+.decision-marker--active .decision-marker__hit {
+  fill: currentColor;
+  fill-opacity: 0.12;
+}
+
+.chart-readout {
   position: absolute;
   z-index: 10;
-  min-width: 180px;
+  width: min(180px, calc(100% - 16px));
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 10px 12px;
+  gap: 2px;
+  padding: 8px 10px;
   border: 1px solid var(--color-tooltip-border);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   background: var(--color-tooltip-bg);
-  box-shadow: var(--shadow-card);
-  opacity: 0;
+  box-shadow: var(--shadow-popover);
   pointer-events: none;
 }
 
-.chart-tooltip--visible {
-  opacity: 1;
-}
-
-.chart-tooltip__date {
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
+.chart-readout__date {
+  color: var(--text-tertiary);
+  font-size: 10px;
   font-weight: var(--weight-semibold);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.025em;
   text-transform: uppercase;
 }
 
-.chart-tooltip__rate {
+.chart-readout__value {
   color: var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: 23px;
+  font-family: var(--font-sans);
+  font-size: 19px;
   font-weight: var(--weight-semibold);
   font-variant-numeric: tabular-nums;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
-.chart-tooltip__change {
+.chart-readout__change {
   width: fit-content;
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
+  font-size: 12px;
   font-weight: var(--weight-semibold);
   font-variant-numeric: tabular-nums;
 }
 
-.chart-tooltip__change--cut {
+.chart-readout__change--cut {
   color: var(--color-cut);
 }
 
-.chart-tooltip__change--hike {
+.chart-readout__change--hike {
   color: var(--color-hike);
 }
 
-.chart-tooltip__change--unchanged {
+.chart-readout__change--hold,
+.chart-readout__change--initial {
   color: var(--color-hold);
 }
 
-.chart-tooltip__regime {
-  padding-top: 5px;
+.chart-readout__annotation {
+  margin-top: 3px;
+  padding-top: 4px;
   border-top: 1px solid var(--border-subtle);
   color: var(--text-secondary);
-  font-size: var(--text-xs);
+  font-size: 10px;
+  line-height: 1.35;
 }
 
-.chart-tooltip__source {
-  color: var(--text-muted);
-  font-size: 10px;
+.chart-svg .zero-line {
+  stroke: var(--color-axis);
+  stroke-width: 1;
 }
 
 .chart-svg .bar-positive {
   fill: var(--color-hike);
-  opacity: 0.85;
+  opacity: 0.82;
+  cursor: pointer;
 }
 
 .chart-svg .bar-negative {
   fill: var(--color-cut);
-  opacity: 0.85;
+  opacity: 0.82;
+  cursor: pointer;
+}
+
+.chart-svg .bar-positive:hover,
+.chart-svg .bar-positive:focus,
+.chart-svg .bar-negative:hover,
+.chart-svg .bar-negative:focus {
+  opacity: 1;
+  outline: none;
+  stroke: var(--foreground);
+  stroke-width: 1.5;
 }
 
 .chart-svg .bar-extreme {
-  stroke: var(--text-primary);
-  stroke-width: 1.5;
+  stroke: var(--foreground);
+  stroke-width: 1.25;
+}
+
+@media (max-width: 520px) {
+  .chart-container {
+    height: clamp(260px, 78vw, 340px);
+    min-height: 250px;
+  }
+
+  .chart-svg .axis text {
+    font-size: 10px;
+  }
+
+  .chart-axis-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-readout,
+  .decision-spine-row {
+    transition: none;
+  }
 }

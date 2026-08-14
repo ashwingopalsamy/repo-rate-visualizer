@@ -24,6 +24,7 @@ import {
   deriveRateSeries,
   migrateSnapshot,
 } from '../src/data/snapshotV2.js';
+import { mergeSupplementalHistory } from '../src/data/supplementalHistory.js';
 import {
   RBI_SOURCE_URLS,
   SourceParseError,
@@ -290,7 +291,7 @@ async function fetchDbieIfConfigured() {
 
 export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN } = {}) {
   const baselineRaw = readJson(BUILD_SNAPSHOT);
-  const baseline = migrateSnapshot(baselineRaw);
+  const baseline = mergeSupplementalHistory(migrateSnapshot(baselineRaw));
   const retrievedAt = new Date().toISOString();
   const currentFetched = await fetchText(
     process.env.RBI_CURRENT_RATES_URL || RBI_SOURCE_URLS.currentRates,

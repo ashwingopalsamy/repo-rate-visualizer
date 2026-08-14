@@ -1,6 +1,13 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import * as d3 from 'd3';
 import { decisions, regimes } from '../data/dataLoader.js';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select.jsx';
 
 const MARGIN = { top: 24, right: 32, bottom: 48, left: 56 };
 
@@ -146,54 +153,51 @@ export default function CycleComparison() {
   }, [dimensions, normalizedA, normalizedB]);
 
   return (
-    <div className="cycle-view">
-      {/* Selectors */}
-      <div className="cycle-controls">
-        <label className="cycle-selector">
-          <span className="cycle-swatch cycle-swatch--cut" aria-hidden="true" />
-          <select
-            value={cycleA}
-            onChange={e => setCycleA(Number(e.target.value))}
-            className="cycle-select"
-          >
-            {cycles.map((c, i) => (
-              <option key={i} value={i}>{c.label} ({c.startDate.slice(0,4)}–{c.endDate.slice(0,4)})</option>
-            ))}
-          </select>
-        </label>
-
-        <span className="cycle-versus">vs</span>
-
-        <label className="cycle-selector">
-          <span className="cycle-swatch cycle-swatch--hike" aria-hidden="true" />
-          <select
-            value={cycleB}
-            onChange={e => setCycleB(Number(e.target.value))}
-            className="cycle-select"
-          >
-            {cycles.map((c, i) => (
-              <option key={i} value={i}>{c.label} ({c.startDate.slice(0,4)}–{c.endDate.slice(0,4)})</option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      {/* Stats */}
-      <div className="cycle-stats">
-        <div className="cycle-stat cycle-stat--cut">
-          <div className="cycle-stat__label">{selectedA?.label}</div>
-          <div className="cycle-stat__value">{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</div>
-          <div className="cycle-stat__meta">{selectedA?.durationMonths}mo · {selectedA?.avgBpsPerMonth} bps/mo</div>
+    <div className="space-y-5">
+      <div className="flex flex-col gap-3 border-y border-border/70 py-4 sm:flex-row sm:items-center">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="size-2.5 rounded-full bg-cut" aria-hidden="true" />
+          <Select value={String(cycleA)} onValueChange={value => setCycleA(Number(value))}>
+            <SelectTrigger className="h-9 min-w-0 rounded-md sm:w-[210px]">
+              <SelectValue aria-label="First policy cycle" />
+            </SelectTrigger>
+            <SelectContent>
+              {cycles.map((c, i) => (
+                <SelectItem key={i} value={String(i)}>{c.label} ({c.startDate.slice(0, 4)}–{c.endDate.slice(0, 4)})</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <div className="cycle-stat cycle-stat--hike">
-          <div className="cycle-stat__label">{selectedB?.label}</div>
-          <div className="cycle-stat__value">{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</div>
-          <div className="cycle-stat__meta">{selectedB?.durationMonths}mo · {selectedB?.avgBpsPerMonth} bps/mo</div>
+
+        <span className="px-1 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">vs</span>
+
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="size-2.5 rounded-full bg-hike" aria-hidden="true" />
+          <Select value={String(cycleB)} onValueChange={value => setCycleB(Number(value))}>
+            <SelectTrigger className="h-9 min-w-0 rounded-md sm:w-[210px]">
+              <SelectValue aria-label="Second policy cycle" />
+            </SelectTrigger>
+            <SelectContent>
+              {cycles.map((c, i) => (
+                <SelectItem key={i} value={String(i)}>{c.label} ({c.startDate.slice(0, 4)}–{c.endDate.slice(0, 4)})</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="chart-container cycle-chart" ref={containerRef} role="group" aria-label="Cycle comparison chart">
+      <div id="cycle-comparison-summary" className="grid gap-x-8 gap-y-3 border-b border-border/70 pb-4 text-sm sm:grid-cols-2" role="status" aria-live="polite">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] text-cut"><span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />{selectedA?.label}</div>
+          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</strong><span className="ml-2 text-muted-foreground">{selectedA?.durationMonths}mo · {selectedA?.avgBpsPerMonth} bps/mo</span></p>
+        </div>
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] text-hike"><span className="size-1.5 rounded-full bg-hike" aria-hidden="true" />{selectedB?.label}</div>
+          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</strong><span className="ml-2 text-muted-foreground">{selectedB?.durationMonths}mo · {selectedB?.avgBpsPerMonth} bps/mo</span></p>
+        </div>
+      </div>
+
+      <div className="chart-container" ref={containerRef} role="group" aria-labelledby="cycle-comparison-summary">
         <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
       </div>
     </div>

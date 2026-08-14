@@ -6,7 +6,7 @@
     "latestOfficialDate": "2026-08-05",
     "latestSourcePublishedAt": "2026-08-05T00:00:00.000Z",
     "sourceUrl": "https://www.rbi.org.in/",
-    "checksum": "sha256:b99a55c586f2f32f5c0a8db71e6b72685f7405d49fcdee5697bfbe1e65ce450e",
+    "checksum": "sha256:fcc166f8987ccd63431cf14d29131d4977725018117a48ad9f56d98ddac5ea45",
     "generatedBy": "scripts/fetch-rbi-data.js"
   },
   "current": {
@@ -20,15 +20,6 @@
     ]
   },
   "sources": [
-    {
-      "id": "legacy-snapshot",
-      "type": "historical-rate-series",
-      "title": "RBI repo rate historical snapshot (legacy import)",
-      "url": "https://www.rbi.org.in/Scripts/Annualpolicy.aspx",
-      "publishedAt": null,
-      "retrievedAt": "2026-08-12T07:27:15.395Z",
-      "checksum": "sha256:e89c9d431b9b"
-    },
     {
       "id": "source-8834bb93a0f0",
       "type": "policy-archive",
@@ -91,836 +82,1274 @@
       "publishedAt": "2026-06-19T00:00:00.000Z",
       "retrievedAt": "2026-08-14T07:35:47.223Z",
       "checksum": "sha256:6c53b04db82ca090baf31a976e77aacdcb702e7405bf1d59ae04d0c7744b1c5d"
+    },
+    {
+      "id": "source-reuters-historical-2025",
+      "type": "historical-rate-series",
+      "title": "Reuters — Changes to India's repo rate since June 2000",
+      "url": "https://www.reuters.com/world/india/changes-indias-repo-rate-since-june-2000-2025-12-05/",
+      "publishedAt": "2025-12-05T00:00:00.000Z",
+      "retrievedAt": "2026-08-14T10:24:42Z",
+      "checksum": "sha256:74557e9615be4bfa54c049e2f334bce4c5116a20e651aea2f2598cf57dfd5ae3"
+    },
+    {
+      "id": "source-shriram-historical-2025",
+      "type": "secondary-historical-reference",
+      "title": "Shriram Finance — Detailed Historical Repo Rate Trends (2010–2025)",
+      "url": "https://www.shriramfinance.in/fixed-deposit/articles/detailed-historical-repo-rate-trends-in-india",
+      "publishedAt": "2025-12-10T00:00:00.000Z",
+      "retrievedAt": "2026-08-14T10:24:42Z",
+      "checksum": "sha256:ce997168aa014c7caccc95f5cf50180ba53f6ca805a2a47fbf2b68c747665282"
     }
   ],
   "decisions": [
     {
-      "id": "decision-001-2000-06-05",
+      "id": "decision-2000-06-05-reuters",
       "date": "2000-06-05",
-      "repoRate": 6,
+      "repoRate": 9.05,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
       "action": "initial",
-      "changeBps": 0,
-      "stance": null,
-      "summary": "RBI LAF introduction",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
+      "changeBps": 0
     },
     {
-      "id": "decision-002-2001-03-02",
-      "date": "2001-03-02",
+      "id": "decision-2000-06-07-reuters",
+      "date": "2000-06-07",
+      "repoRate": 9,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -5
+    },
+    {
+      "id": "decision-2000-06-09-reuters",
+      "date": "2000-06-09",
+      "repoRate": 9.05,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 5
+    },
+    {
+      "id": "decision-2000-06-12-reuters",
+      "date": "2000-06-12",
+      "repoRate": 9.25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 20
+    },
+    {
+      "id": "decision-2000-06-13-reuters",
+      "date": "2000-06-13",
+      "repoRate": 9.55,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 30
+    },
+    {
+      "id": "decision-2000-06-14-reuters",
+      "date": "2000-06-14",
+      "repoRate": 10.85,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 130
+    },
+    {
+      "id": "decision-2000-06-19-reuters",
+      "date": "2000-06-19",
+      "repoRate": 13.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 265
+    },
+    {
+      "id": "decision-2000-06-20-reuters",
+      "date": "2000-06-20",
+      "repoRate": 14,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
+    },
+    {
+      "id": "decision-2000-06-21-reuters",
+      "date": "2000-06-21",
+      "repoRate": 13.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
+    },
+    {
+      "id": "decision-2000-06-22-reuters",
+      "date": "2000-06-22",
+      "repoRate": 13,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
+    },
+    {
+      "id": "decision-2000-06-23-reuters",
+      "date": "2000-06-23",
+      "repoRate": 13.05,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 5
+    },
+    {
+      "id": "decision-2000-06-27-reuters",
+      "date": "2000-06-27",
+      "repoRate": 12.6,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -45
+    },
+    {
+      "id": "decision-2000-06-28-reuters",
+      "date": "2000-06-28",
+      "repoRate": 12.25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -35
+    },
+    {
+      "id": "decision-2000-07-13-reuters",
+      "date": "2000-07-13",
+      "repoRate": 9,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -325
+    },
+    {
+      "id": "decision-2000-07-21-reuters",
+      "date": "2000-07-21",
+      "repoRate": 10,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 100
+    },
+    {
+      "id": "decision-2000-08-09-reuters",
+      "date": "2000-08-09",
+      "repoRate": 16,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 600
+    },
+    {
+      "id": "decision-2000-08-30-reuters",
+      "date": "2000-08-30",
+      "repoRate": 15,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -100
+    },
+    {
+      "id": "decision-2000-09-06-reuters",
+      "date": "2000-09-06",
+      "repoRate": 13.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -150
+    },
+    {
+      "id": "decision-2000-10-13-reuters",
+      "date": "2000-10-13",
+      "repoRate": 10.25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -325
+    },
+    {
+      "id": "decision-2000-11-06-reuters",
+      "date": "2000-11-06",
+      "repoRate": 10,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
+    },
+    {
+      "id": "decision-2001-03-09-reuters",
+      "date": "2001-03-09",
+      "repoRate": 9,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -100
+    },
+    {
+      "id": "decision-2001-04-30-reuters",
+      "date": "2001-04-30",
+      "repoRate": 8.75,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
+    },
+    {
+      "id": "decision-2001-06-07-reuters",
+      "date": "2001-06-07",
+      "repoRate": 8.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
+    },
+    {
+      "id": "decision-2002-03-28-reuters",
+      "date": "2002-03-28",
+      "repoRate": 8,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
+    },
+    {
+      "id": "decision-2002-11-12-reuters",
+      "date": "2002-11-12",
+      "repoRate": 7.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
+    },
+    {
+      "id": "decision-2003-03-07-reuters",
+      "date": "2003-03-07",
+      "repoRate": 7.1,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -40
+    },
+    {
+      "id": "decision-2003-03-19-reuters",
+      "date": "2003-03-19",
       "repoRate": 7,
-      "action": "hike",
-      "changeBps": 100,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "id": "decision-003-2001-10-22",
-      "date": "2001-10-22",
-      "repoRate": 6.5,
+        "source-reuters-historical-2025"
+      ],
       "action": "cut",
-      "changeBps": -50,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
+      "changeBps": -10
     },
     {
-      "id": "decision-004-2002-03-01",
-      "date": "2002-03-01",
-      "repoRate": 6.25,
+      "id": "decision-2004-03-31-reuters",
+      "date": "2004-03-31",
+      "repoRate": 6,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
       "action": "cut",
-      "changeBps": -25,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
+      "changeBps": -100
     },
     {
-      "id": "decision-005-2002-10-30",
-      "date": "2002-10-30",
-      "repoRate": 5.75,
-      "action": "cut",
-      "changeBps": -50,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "id": "decision-006-2003-03-03",
-      "date": "2003-03-03",
-      "repoRate": 5,
-      "action": "cut",
-      "changeBps": -75,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "id": "decision-007-2003-08-25",
-      "date": "2003-08-25",
-      "repoRate": 4.5,
-      "action": "cut",
-      "changeBps": -50,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "id": "decision-008-2004-10-27",
-      "date": "2004-10-27",
-      "repoRate": 4.75,
-      "action": "hike",
-      "changeBps": 25,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "id": "decision-009-2005-04-29",
-      "date": "2005-04-29",
-      "repoRate": 5,
-      "action": "hike",
-      "changeBps": 25,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "id": "decision-010-2005-10-26",
+      "id": "decision-2005-10-26-reuters",
       "date": "2005-10-26",
-      "repoRate": 5.25,
-      "action": "hike",
-      "changeBps": 25,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "id": "decision-011-2006-01-24",
-      "date": "2006-01-24",
       "repoRate": 6.25,
-      "action": "hike",
-      "changeBps": 100,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-012-2006-06-09",
-      "date": "2006-06-09",
+      "id": "decision-2006-01-24-reuters",
+      "date": "2006-01-24",
       "repoRate": 6.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-013-2006-07-25",
+      "id": "decision-2006-06-08-reuters",
+      "date": "2006-06-08",
+      "repoRate": 6.75,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
+    },
+    {
+      "id": "decision-2006-07-25-reuters",
       "date": "2006-07-25",
       "repoRate": 7,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-014-2006-10-31",
-      "date": "2006-10-31",
+      "id": "decision-2006-10-30-reuters",
+      "date": "2006-10-30",
       "repoRate": 7.25,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-015-2007-01-31",
+      "id": "decision-2007-01-31-reuters",
       "date": "2007-01-31",
       "repoRate": 7.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-016-2007-03-30",
+      "id": "decision-2007-03-30-reuters",
       "date": "2007-03-30",
       "repoRate": 7.75,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-017-2008-06-12",
-      "date": "2008-06-12",
+      "id": "decision-2008-06-11-reuters",
+      "date": "2008-06-11",
       "repoRate": 8,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-018-2008-06-25",
-      "date": "2008-06-25",
+      "id": "decision-2008-06-24-reuters",
+      "date": "2008-06-24",
       "repoRate": 8.5,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
     },
     {
-      "id": "decision-019-2008-07-29",
+      "id": "decision-2008-07-29-reuters",
       "date": "2008-07-29",
       "repoRate": 9,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
     },
     {
-      "id": "decision-020-2008-10-20",
+      "id": "decision-2008-10-20-reuters",
       "date": "2008-10-20",
       "repoRate": 8,
-      "action": "cut",
-      "changeBps": -100,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -100
     },
     {
-      "id": "decision-021-2008-11-03",
+      "id": "decision-2008-11-03-reuters",
       "date": "2008-11-03",
       "repoRate": 7.5,
-      "action": "cut",
-      "changeBps": -50,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
     },
     {
-      "id": "decision-022-2008-12-08",
+      "id": "decision-2008-12-08-reuters",
       "date": "2008-12-08",
       "repoRate": 6.5,
-      "action": "cut",
-      "changeBps": -100,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -100
     },
     {
-      "id": "decision-023-2009-01-05",
-      "date": "2009-01-05",
+      "id": "decision-2009-01-02-reuters",
+      "date": "2009-01-02",
       "repoRate": 5.5,
-      "action": "cut",
-      "changeBps": -100,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -100
     },
     {
-      "id": "decision-024-2009-03-05",
-      "date": "2009-03-05",
+      "id": "decision-2009-03-04-reuters",
+      "date": "2009-03-04",
       "repoRate": 5,
-      "action": "cut",
-      "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
     },
     {
-      "id": "decision-025-2009-04-21",
+      "id": "decision-2009-04-21-reuters",
       "date": "2009-04-21",
       "repoRate": 4.75,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-026-2010-03-19",
+      "id": "decision-2010-03-19-reuters",
       "date": "2010-03-19",
       "repoRate": 5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-027-2010-04-20",
+      "id": "decision-2010-04-20-reuters",
       "date": "2010-04-20",
       "repoRate": 5.25,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-028-2010-07-02",
+      "id": "decision-2010-07-02-reuters",
       "date": "2010-07-02",
       "repoRate": 5.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-029-2010-07-27",
+      "id": "decision-2010-07-27-reuters",
       "date": "2010-07-27",
       "repoRate": 5.75,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-030-2010-09-16",
+      "id": "decision-2010-09-16-reuters",
       "date": "2010-09-16",
       "repoRate": 6,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-031-2010-11-02",
+      "id": "decision-2010-11-02-reuters",
       "date": "2010-11-02",
       "repoRate": 6.25,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-032-2011-01-25",
+      "id": "decision-2011-01-25-reuters",
       "date": "2011-01-25",
       "repoRate": 6.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-033-2011-03-17",
+      "id": "decision-2011-03-17-reuters",
       "date": "2011-03-17",
       "repoRate": 6.75,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-034-2011-05-03",
+      "id": "decision-2011-05-03-reuters",
       "date": "2011-05-03",
       "repoRate": 7.25,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
     },
     {
-      "id": "decision-035-2011-06-16",
+      "id": "decision-2011-06-16-reuters",
       "date": "2011-06-16",
       "repoRate": 7.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-036-2011-07-26",
+      "id": "decision-2011-07-26-reuters",
       "date": "2011-07-26",
       "repoRate": 8,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
     },
     {
-      "id": "decision-037-2011-09-16",
+      "id": "decision-2011-09-16-reuters",
       "date": "2011-09-16",
       "repoRate": 8.25,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-038-2011-10-25",
+      "id": "decision-2011-10-25-reuters",
       "date": "2011-10-25",
       "repoRate": 8.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-039-2012-04-17",
+      "id": "decision-2012-04-17-reuters",
       "date": "2012-04-17",
       "repoRate": 8,
-      "action": "cut",
-      "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
     },
     {
-      "id": "decision-040-2013-05-03",
+      "id": "decision-2013-01-29-reuters",
+      "date": "2013-01-29",
+      "repoRate": 7.75,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
+    },
+    {
+      "id": "decision-2013-03-19-reuters",
+      "date": "2013-03-19",
+      "repoRate": 7.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
+    },
+    {
+      "id": "decision-2013-05-03-reuters",
       "date": "2013-05-03",
       "repoRate": 7.25,
-      "action": "cut",
-      "changeBps": -75,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-041-2013-09-20",
+      "id": "decision-2013-09-20-reuters",
       "date": "2013-09-20",
       "repoRate": 7.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI taper tantrum response",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-042-2013-10-29",
+      "id": "decision-2013-10-29-reuters",
       "date": "2013-10-29",
       "repoRate": 7.75,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-043-2014-01-28",
+      "id": "decision-2014-01-28-reuters",
       "date": "2014-01-28",
       "repoRate": 8,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-044-2015-01-15",
+      "id": "decision-2015-01-15-reuters",
       "date": "2015-01-15",
       "repoRate": 7.75,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-045-2015-03-04",
+      "id": "decision-2015-03-04-reuters",
       "date": "2015-03-04",
       "repoRate": 7.5,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-046-2015-06-02",
+      "id": "decision-2015-06-02-reuters",
       "date": "2015-06-02",
       "repoRate": 7.25,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-047-2015-09-29",
+      "id": "decision-2015-09-29-reuters",
       "date": "2015-09-29",
       "repoRate": 6.75,
-      "action": "cut",
-      "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
     },
     {
-      "id": "decision-048-2016-04-05",
+      "id": "decision-2016-04-05-reuters",
       "date": "2016-04-05",
       "repoRate": 6.5,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-049-2016-10-04",
+      "id": "decision-2016-10-04-reuters",
       "date": "2016-10-04",
       "repoRate": 6.25,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-050-2017-08-02",
+      "id": "decision-2017-08-02-reuters",
       "date": "2017-08-02",
       "repoRate": 6,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-051-2018-06-06",
+      "id": "decision-2018-06-06-reuters",
       "date": "2018-06-06",
       "repoRate": 6.25,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-052-2018-08-01",
+      "id": "decision-2018-08-01-reuters",
       "date": "2018-08-01",
       "repoRate": 6.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-053-2019-02-07",
+      "id": "decision-2019-02-07-reuters",
       "date": "2019-02-07",
       "repoRate": 6.25,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-054-2019-04-04",
+      "id": "decision-2019-04-04-reuters",
       "date": "2019-04-04",
       "repoRate": 6,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-055-2019-06-06",
+      "id": "decision-2019-06-06-reuters",
       "date": "2019-06-06",
       "repoRate": 5.75,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-056-2019-08-07",
+      "id": "decision-2019-08-07-reuters",
       "date": "2019-08-07",
       "repoRate": 5.4,
-      "action": "cut",
-      "changeBps": -35,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -35
     },
     {
-      "id": "decision-057-2019-10-04",
+      "id": "decision-2019-10-04-reuters",
       "date": "2019-10-04",
       "repoRate": 5.15,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-058-2020-03-27",
+      "id": "decision-2019-12-05-reuters",
+      "date": "2019-12-05",
+      "repoRate": 5.15,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2020-02-06-reuters",
+      "date": "2020-02-06",
+      "repoRate": 5.15,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2020-03-27-reuters",
       "date": "2020-03-27",
       "repoRate": 4.4,
-      "action": "cut",
-      "changeBps": -75,
       "stance": null,
-      "summary": "RBI COVID emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -75
     },
     {
-      "id": "decision-059-2020-05-22",
+      "id": "decision-2020-05-22-reuters",
       "date": "2020-05-22",
       "repoRate": 4,
-      "action": "cut",
-      "changeBps": -40,
       "stance": null,
-      "summary": "RBI COVID emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -40
     },
     {
-      "id": "decision-060-2022-05-04",
+      "id": "decision-2022-05-04-reuters",
       "date": "2022-05-04",
       "repoRate": 4.4,
-      "action": "hike",
-      "changeBps": 40,
       "stance": null,
-      "summary": "RBI off-cycle emergency hike",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 40
     },
     {
-      "id": "decision-061-2022-06-08",
+      "id": "decision-2022-06-08-reuters",
       "date": "2022-06-08",
       "repoRate": 4.9,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
     },
     {
-      "id": "decision-062-2022-08-05",
+      "id": "decision-2022-08-05-reuters",
       "date": "2022-08-05",
       "repoRate": 5.4,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
     },
     {
-      "id": "decision-063-2022-09-30",
+      "id": "decision-2022-09-30-reuters",
       "date": "2022-09-30",
       "repoRate": 5.9,
-      "action": "hike",
-      "changeBps": 50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 50
     },
     {
-      "id": "decision-064-2022-12-07",
+      "id": "decision-2022-12-07-reuters",
       "date": "2022-12-07",
       "repoRate": 6.25,
-      "action": "hike",
-      "changeBps": 35,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 35
     },
     {
-      "id": "decision-065-2023-02-08",
+      "id": "decision-2023-02-08-reuters",
       "date": "2023-02-08",
       "repoRate": 6.5,
-      "action": "hike",
-      "changeBps": 25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "hike",
+      "changeBps": 25
     },
     {
-      "id": "decision-066-2025-02-07",
+      "id": "decision-2023-04-06-reuters",
+      "date": "2023-04-06",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2023-06-08-reuters",
+      "date": "2023-06-08",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2023-10-06-reuters",
+      "date": "2023-10-06",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2023-12-08-reuters",
+      "date": "2023-12-08",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2024-02-08-reuters",
+      "date": "2024-02-08",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2024-04-05-reuters",
+      "date": "2024-04-05",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2024-06-07-reuters",
+      "date": "2024-06-07",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2024-08-08-reuters",
+      "date": "2024-08-08",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2024-10-09-reuters",
+      "date": "2024-10-09",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2024-12-06-reuters",
+      "date": "2024-12-06",
+      "repoRate": 6.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2025-02-07-reuters",
       "date": "2025-02-07",
       "repoRate": 6.25,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement - first cut in 5 years",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-067-2025-04-09",
+      "id": "decision-2025-04-09-reuters",
       "date": "2025-04-09",
       "repoRate": 6,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
-      "id": "decision-068-2025-06-06",
+      "id": "decision-2025-06-06-reuters",
       "date": "2025-06-06",
       "repoRate": 5.5,
-      "action": "cut",
-      "changeBps": -50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -50
     },
     {
-      "id": "decision-069-2025-12-05",
+      "id": "decision-2025-08-06-reuters",
+      "date": "2025-08-06",
+      "repoRate": 5.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2025-10-01-reuters",
+      "date": "2025-10-01",
+      "repoRate": 5.5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ],
+      "action": "hold",
+      "changeBps": 0
+    },
+    {
+      "id": "decision-2025-12-05-reuters",
       "date": "2025-12-05",
       "repoRate": 5.25,
-      "action": "cut",
-      "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
-      ]
+        "source-reuters-historical-2025"
+      ],
+      "action": "cut",
+      "changeBps": -25
     },
     {
       "id": "decision-2026-04-08-380f0b7d",
@@ -962,899 +1391,1354 @@
   "rateSeries": [
     {
       "date": "2000-06-05",
-      "rate": 6,
-      "source": "RBI LAF introduction",
-      "decisionId": "decision-001-2000-06-05",
+      "rate": 9.05,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-05-reuters",
       "action": "initial",
       "changeBps": 0,
       "stance": null,
-      "summary": "RBI LAF introduction",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2001-03-02",
-      "rate": 7,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-002-2001-03-02",
+      "date": "2000-06-07",
+      "rate": 9,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-07-reuters",
+      "action": "cut",
+      "changeBps": -5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-09",
+      "rate": 9.05,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-09-reuters",
+      "action": "hike",
+      "changeBps": 5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-12",
+      "rate": 9.25,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-12-reuters",
+      "action": "hike",
+      "changeBps": 20,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-13",
+      "rate": 9.55,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-13-reuters",
+      "action": "hike",
+      "changeBps": 30,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-14",
+      "rate": 10.85,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-14-reuters",
+      "action": "hike",
+      "changeBps": 130,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-19",
+      "rate": 13.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-19-reuters",
+      "action": "hike",
+      "changeBps": 265,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-20",
+      "rate": 14,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-20-reuters",
+      "action": "hike",
+      "changeBps": 50,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-21",
+      "rate": 13.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-21-reuters",
+      "action": "cut",
+      "changeBps": -50,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-22",
+      "rate": 13,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-22-reuters",
+      "action": "cut",
+      "changeBps": -50,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-23",
+      "rate": 13.05,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-23-reuters",
+      "action": "hike",
+      "changeBps": 5,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-27",
+      "rate": 12.6,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-27-reuters",
+      "action": "cut",
+      "changeBps": -45,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-06-28",
+      "rate": 12.25,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-06-28-reuters",
+      "action": "cut",
+      "changeBps": -35,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-07-13",
+      "rate": 9,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-07-13-reuters",
+      "action": "cut",
+      "changeBps": -325,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-07-21",
+      "rate": 10,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-07-21-reuters",
       "action": "hike",
       "changeBps": 100,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2001-10-22",
-      "rate": 6.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-003-2001-10-22",
-      "action": "cut",
-      "changeBps": -50,
+      "date": "2000-08-09",
+      "rate": 16,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-08-09-reuters",
+      "action": "hike",
+      "changeBps": 600,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2002-03-01",
-      "rate": 6.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-004-2002-03-01",
+      "date": "2000-08-30",
+      "rate": 15,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-08-30-reuters",
+      "action": "cut",
+      "changeBps": -100,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-09-06",
+      "rate": 13.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-09-06-reuters",
+      "action": "cut",
+      "changeBps": -150,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-10-13",
+      "rate": 10.25,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-10-13-reuters",
+      "action": "cut",
+      "changeBps": -325,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2000-11-06",
+      "rate": 10,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2000-11-06-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2002-10-30",
-      "rate": 5.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-005-2002-10-30",
+      "date": "2001-03-09",
+      "rate": 9,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2001-03-09-reuters",
+      "action": "cut",
+      "changeBps": -100,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2001-04-30",
+      "rate": 8.75,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2001-04-30-reuters",
+      "action": "cut",
+      "changeBps": -25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2001-06-07",
+      "rate": 8.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2001-06-07-reuters",
+      "action": "cut",
+      "changeBps": -25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2002-03-28",
+      "rate": 8,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2002-03-28-reuters",
       "action": "cut",
       "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2003-03-03",
-      "rate": 5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-006-2003-03-03",
-      "action": "cut",
-      "changeBps": -75,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "date": "2003-08-25",
-      "rate": 4.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-007-2003-08-25",
+      "date": "2002-11-12",
+      "rate": 7.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2002-11-12-reuters",
       "action": "cut",
       "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2004-10-27",
-      "rate": 4.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-008-2004-10-27",
-      "action": "hike",
-      "changeBps": 25,
+      "date": "2003-03-07",
+      "rate": 7.1,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2003-03-07-reuters",
+      "action": "cut",
+      "changeBps": -40,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2005-04-29",
-      "rate": 5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-009-2005-04-29",
-      "action": "hike",
-      "changeBps": 25,
+      "date": "2003-03-19",
+      "rate": 7,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2003-03-19-reuters",
+      "action": "cut",
+      "changeBps": -10,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2004-03-31",
+      "rate": 6,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2004-03-31-reuters",
+      "action": "cut",
+      "changeBps": -100,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2005-10-26",
-      "rate": 5.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-010-2005-10-26",
+      "rate": 6.25,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2005-10-26-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2006-01-24",
-      "rate": 6.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-011-2006-01-24",
-      "action": "hike",
-      "changeBps": 100,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "date": "2006-06-09",
       "rate": 6.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-012-2006-06-09",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2006-01-24-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2006-06-08",
+      "rate": 6.75,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2006-06-08-reuters",
+      "action": "hike",
+      "changeBps": 25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2006-07-25",
       "rate": 7,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-013-2006-07-25",
-      "action": "hike",
-      "changeBps": 50,
-      "stance": null,
-      "summary": "RBI monetary policy",
-      "sourceIds": [
-        "legacy-snapshot"
-      ]
-    },
-    {
-      "date": "2006-10-31",
-      "rate": 7.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-014-2006-10-31",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2006-07-25-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2006-10-30",
+      "rate": 7.25,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2006-10-30-reuters",
+      "action": "hike",
+      "changeBps": 25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2007-01-31",
       "rate": 7.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-015-2007-01-31",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2007-01-31-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2007-03-30",
       "rate": 7.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-016-2007-03-30",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2007-03-30-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2008-06-12",
+      "date": "2008-06-11",
       "rate": 8,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-017-2008-06-12",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2008-06-11-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2008-06-25",
+      "date": "2008-06-24",
       "rate": 8.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-018-2008-06-25",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2008-06-24-reuters",
       "action": "hike",
       "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2008-07-29",
       "rate": 9,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-019-2008-07-29",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2008-07-29-reuters",
       "action": "hike",
       "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2008-10-20",
       "rate": 8,
-      "source": "RBI GFC emergency cut",
-      "decisionId": "decision-020-2008-10-20",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2008-10-20-reuters",
       "action": "cut",
       "changeBps": -100,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2008-11-03",
       "rate": 7.5,
-      "source": "RBI GFC emergency cut",
-      "decisionId": "decision-021-2008-11-03",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2008-11-03-reuters",
       "action": "cut",
       "changeBps": -50,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2008-12-08",
       "rate": 6.5,
-      "source": "RBI GFC emergency cut",
-      "decisionId": "decision-022-2008-12-08",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2008-12-08-reuters",
       "action": "cut",
       "changeBps": -100,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2009-01-05",
+      "date": "2009-01-02",
       "rate": 5.5,
-      "source": "RBI GFC emergency cut",
-      "decisionId": "decision-023-2009-01-05",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2009-01-02-reuters",
       "action": "cut",
       "changeBps": -100,
       "stance": null,
-      "summary": "RBI GFC emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
-      "date": "2009-03-05",
+      "date": "2009-03-04",
       "rate": 5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-024-2009-03-05",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2009-03-04-reuters",
       "action": "cut",
       "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2009-04-21",
       "rate": 4.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-025-2009-04-21",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2009-04-21-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2010-03-19",
       "rate": 5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-026-2010-03-19",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2010-03-19-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2010-04-20",
       "rate": 5.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-027-2010-04-20",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2010-04-20-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2010-07-02",
       "rate": 5.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-028-2010-07-02",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2010-07-02-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2010-07-27",
       "rate": 5.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-029-2010-07-27",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2010-07-27-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2010-09-16",
       "rate": 6,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-030-2010-09-16",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2010-09-16-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2010-11-02",
       "rate": 6.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-031-2010-11-02",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2010-11-02-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2011-01-25",
       "rate": 6.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-032-2011-01-25",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2011-01-25-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2011-03-17",
       "rate": 6.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-033-2011-03-17",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2011-03-17-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2011-05-03",
       "rate": 7.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-034-2011-05-03",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2011-05-03-reuters",
       "action": "hike",
       "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2011-06-16",
       "rate": 7.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-035-2011-06-16",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2011-06-16-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2011-07-26",
       "rate": 8,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-036-2011-07-26",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2011-07-26-reuters",
       "action": "hike",
       "changeBps": 50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2011-09-16",
       "rate": 8.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-037-2011-09-16",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2011-09-16-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2011-10-25",
       "rate": 8.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-038-2011-10-25",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2011-10-25-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2012-04-17",
       "rate": 8,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-039-2012-04-17",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2012-04-17-reuters",
       "action": "cut",
       "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2013-01-29",
+      "rate": 7.75,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2013-01-29-reuters",
+      "action": "cut",
+      "changeBps": -25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2013-03-19",
+      "rate": 7.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2013-03-19-reuters",
+      "action": "cut",
+      "changeBps": -25,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2013-05-03",
       "rate": 7.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-040-2013-05-03",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2013-05-03-reuters",
       "action": "cut",
-      "changeBps": -75,
+      "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2013-09-20",
       "rate": 7.5,
-      "source": "RBI taper tantrum response",
-      "decisionId": "decision-041-2013-09-20",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2013-09-20-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI taper tantrum response",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2013-10-29",
       "rate": 7.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-042-2013-10-29",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2013-10-29-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2014-01-28",
       "rate": 8,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-043-2014-01-28",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2014-01-28-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2015-01-15",
       "rate": 7.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-044-2015-01-15",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2015-01-15-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2015-03-04",
       "rate": 7.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-045-2015-03-04",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2015-03-04-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2015-06-02",
       "rate": 7.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-046-2015-06-02",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2015-06-02-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2015-09-29",
       "rate": 6.75,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-047-2015-09-29",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2015-09-29-reuters",
       "action": "cut",
       "changeBps": -50,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2016-04-05",
       "rate": 6.5,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-048-2016-04-05",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2016-04-05-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2016-10-04",
       "rate": 6.25,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-049-2016-10-04",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2016-10-04-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2017-08-02",
       "rate": 6,
-      "source": "RBI monetary policy",
-      "decisionId": "decision-050-2017-08-02",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2017-08-02-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI monetary policy",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2018-06-06",
       "rate": 6.25,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-051-2018-06-06",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2018-06-06-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2018-08-01",
       "rate": 6.5,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-052-2018-08-01",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2018-08-01-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2019-02-07",
       "rate": 6.25,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-053-2019-02-07",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2019-02-07-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2019-04-04",
       "rate": 6,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-054-2019-04-04",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2019-04-04-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2019-06-06",
       "rate": 5.75,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-055-2019-06-06",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2019-06-06-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2019-08-07",
       "rate": 5.4,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-056-2019-08-07",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2019-08-07-reuters",
       "action": "cut",
       "changeBps": -35,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2019-10-04",
       "rate": 5.15,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-057-2019-10-04",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2019-10-04-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2019-12-05",
+      "rate": 5.15,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2019-12-05-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2020-02-06",
+      "rate": 5.15,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2020-02-06-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2020-03-27",
       "rate": 4.4,
-      "source": "RBI COVID emergency cut",
-      "decisionId": "decision-058-2020-03-27",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2020-03-27-reuters",
       "action": "cut",
       "changeBps": -75,
       "stance": null,
-      "summary": "RBI COVID emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2020-05-22",
       "rate": 4,
-      "source": "RBI COVID emergency cut",
-      "decisionId": "decision-059-2020-05-22",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2020-05-22-reuters",
       "action": "cut",
       "changeBps": -40,
       "stance": null,
-      "summary": "RBI COVID emergency cut",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2022-05-04",
       "rate": 4.4,
-      "source": "RBI off-cycle emergency hike",
-      "decisionId": "decision-060-2022-05-04",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2022-05-04-reuters",
       "action": "hike",
       "changeBps": 40,
       "stance": null,
-      "summary": "RBI off-cycle emergency hike",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2022-06-08",
       "rate": 4.9,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-061-2022-06-08",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2022-06-08-reuters",
       "action": "hike",
       "changeBps": 50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2022-08-05",
       "rate": 5.4,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-062-2022-08-05",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2022-08-05-reuters",
       "action": "hike",
       "changeBps": 50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2022-09-30",
       "rate": 5.9,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-063-2022-09-30",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2022-09-30-reuters",
       "action": "hike",
       "changeBps": 50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2022-12-07",
       "rate": 6.25,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-064-2022-12-07",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2022-12-07-reuters",
       "action": "hike",
       "changeBps": 35,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2023-02-08",
       "rate": 6.5,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-065-2023-02-08",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2023-02-08-reuters",
       "action": "hike",
       "changeBps": 25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2023-04-06",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2023-04-06-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2023-06-08",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2023-06-08-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2023-10-06",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2023-10-06-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2023-12-08",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2023-12-08-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2024-02-08",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2024-02-08-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2024-04-05",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2024-04-05-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2024-06-07",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2024-06-07-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2024-08-08",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2024-08-08-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2024-10-09",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2024-10-09-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2024-12-06",
+      "rate": 6.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2024-12-06-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2025-02-07",
       "rate": 6.25,
-      "source": "RBI MPC statement - first cut in 5 years",
-      "decisionId": "decision-066-2025-02-07",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2025-02-07-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement - first cut in 5 years",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2025-04-09",
       "rate": 6,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-067-2025-04-09",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2025-04-09-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2025-06-06",
       "rate": 5.5,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-068-2025-06-06",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2025-06-06-reuters",
       "action": "cut",
       "changeBps": -50,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2025-08-06",
+      "rate": 5.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2025-08-06-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
+      ]
+    },
+    {
+      "date": "2025-10-01",
+      "rate": 5.5,
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2025-10-01-reuters",
+      "action": "hold",
+      "changeBps": 0,
+      "stance": null,
+      "summary": "Reuters historical rate series",
+      "sourceIds": [
+        "source-reuters-historical-2025"
       ]
     },
     {
       "date": "2025-12-05",
       "rate": 5.25,
-      "source": "RBI MPC statement",
-      "decisionId": "decision-069-2025-12-05",
+      "source": "Reuters historical rate series",
+      "decisionId": "decision-2025-12-05-reuters",
       "action": "cut",
       "changeBps": -25,
       "stance": null,
-      "summary": "RBI MPC statement",
+      "summary": "Reuters historical rate series",
       "sourceIds": [
-        "legacy-snapshot"
+        "source-reuters-historical-2025"
       ]
     },
     {

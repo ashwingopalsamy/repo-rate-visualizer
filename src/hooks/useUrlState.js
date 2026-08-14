@@ -1,4 +1,15 @@
 import { useEffect, useCallback, useRef } from 'react';
+import { currentRate, snapshotMeta } from '../data/dataLoader.js';
+
+function rangeForYears(years) {
+  const end = new Date(`${snapshotMeta.latestOfficialDate || currentRate.date}T00:00:00.000Z`);
+  const start = new Date(end);
+  start.setFullYear(start.getFullYear() - years);
+  return {
+    start: start.toISOString().split('T')[0],
+    end: end.toISOString().split('T')[0],
+  };
+}
 
 // Syncs app state to/from URL search params for deep-linking
 export default function useUrlState({ activeView, dateRange, activePreset, onViewChange, onDateRangeChange, onPresetChange }) {
@@ -24,14 +35,7 @@ export default function useUrlState({ activeView, dateRange, activePreset, onVie
       } else if (preset === 'ALL') {
         onDateRangeChange({ start: null, end: null });
       } else if (preset !== 'ALL') {
-        const years = { '1Y': 1, '5Y': 5, '10Y': 10 }[preset];
-        const end = new Date();
-        const start = new Date();
-        start.setFullYear(start.getFullYear() - years);
-        onDateRangeChange({
-          start: start.toISOString().split('T')[0],
-          end: end.toISOString().split('T')[0],
-        });
+        onDateRangeChange(rangeForYears({ '1Y': 1, '5Y': 5, '10Y': 10 }[preset]));
       }
     }
   }, []);
