@@ -42,10 +42,10 @@ export default function RateChangeBar({ dateRange }) {
       data = data.filter(d => d.dateObj <= end);
     }
 
-    if (data.length === 0) return;
-
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
+
+    if (data.length === 0) return;
 
     const xScale = d3.scaleBand()
       .domain(data.map(d => d.date))
@@ -131,9 +131,11 @@ export default function RateChangeBar({ dateRange }) {
   }, [dimensions, dateRange]);
 
   return (
-    <div className="chart-container" ref={containerRef} role="img" aria-label="RBI Repo Rate changes in basis points">
-      <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
-      <div ref={tooltipRef} className="chart-tooltip" role="tooltip" />
+    <div className="derived-chart-view">
+      <div className="chart-container" ref={containerRef} role="group" aria-label="RBI Repo Rate changes in basis points">
+        <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
+        <div ref={tooltipRef} className="chart-tooltip" role="tooltip" />
+      </div>
     </div>
   );
 }

@@ -1,12 +1,16 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import * as d3 from 'd3';
-import { repoRateData, regimes } from '../data/dataLoader.js';
+import { decisions, regimes } from '../data/dataLoader.js';
 
 const MARGIN = { top: 24, right: 32, bottom: 48, left: 56 };
 
-// Extract only easing and tightening cycles for comparison
+// Extract only easing and tightening cycles for comparison. The rate points
+// come directly from canonical decisions, never from a second hand-maintained
+// cycle dataset.
 const cycles = regimes.filter(r => r.type !== 'pause').map(r => {
-  const rateData = repoRateData.filter(d => d.dateObj >= r.startObj && d.dateObj <= r.endObj);
+  const rateData = decisions
+    .filter(d => d.dateObj >= r.startObj && d.dateObj <= r.endObj)
+    .map(d => ({ ...d, rate: d.repoRate }));
   const totalBps = rateData.length > 1
     ? Math.round((rateData.at(-1).rate - rateData[0].rate) * 100)
     : 0;
@@ -142,20 +146,15 @@ export default function CycleComparison() {
   }, [dimensions, normalizedA, normalizedB]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', flex: 1 }}>
+    <div className="cycle-view">
       {/* Selectors */}
-      <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', alignItems: 'center' }}>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-          <span style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--color-cut)', display: 'inline-block' }} />
+      <div className="cycle-controls">
+        <label className="cycle-selector">
+          <span className="cycle-swatch cycle-swatch--cut" aria-hidden="true" />
           <select
             value={cycleA}
             onChange={e => setCycleA(Number(e.target.value))}
-            style={{
-              fontFamily: 'var(--font-sans)', fontSize: 'var(--text-sm)', fontWeight: 600,
-              background: 'var(--bg-control)', color: 'var(--text-primary)',
-              border: '1px solid var(--border-control)', borderRadius: 'var(--radius-full)',
-              padding: '6px 12px', cursor: 'pointer', outline: 'none',
-            }}
+            className="cycle-select"
           >
             {cycles.map((c, i) => (
               <option key={i} value={i}>{c.label} ({c.startDate.slice(0,4)}–{c.endDate.slice(0,4)})</option>
@@ -163,19 +162,14 @@ export default function CycleComparison() {
           </select>
         </label>
 
-        <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>vs</span>
+        <span className="cycle-versus">vs</span>
 
-        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-          <span style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--color-hike)', display: 'inline-block' }} />
+        <label className="cycle-selector">
+          <span className="cycle-swatch cycle-swatch--hike" aria-hidden="true" />
           <select
             value={cycleB}
             onChange={e => setCycleB(Number(e.target.value))}
-            style={{
-              fontFamily: 'var(--font-sans)', fontSize: 'var(--text-sm)', fontWeight: 600,
-              background: 'var(--bg-control)', color: 'var(--text-primary)',
-              border: '1px solid var(--border-control)', borderRadius: 'var(--radius-full)',
-              padding: '6px 12px', cursor: 'pointer', outline: 'none',
-            }}
+            className="cycle-select"
           >
             {cycles.map((c, i) => (
               <option key={i} value={i}>{c.label} ({c.startDate.slice(0,4)}–{c.endDate.slice(0,4)})</option>
@@ -185,21 +179,21 @@ export default function CycleComparison() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
-        <div style={{ padding: '12px 16px', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', flex: 1, minWidth: 200 }}>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>{selectedA?.label}</div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-lg)', fontWeight: 700, color: 'var(--color-cut)' }}>{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', marginTop: 2 }}>{selectedA?.durationMonths}mo · {selectedA?.avgBpsPerMonth} bps/mo</div>
+      <div className="cycle-stats">
+        <div className="cycle-stat cycle-stat--cut">
+          <div className="cycle-stat__label">{selectedA?.label}</div>
+          <div className="cycle-stat__value">{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</div>
+          <div className="cycle-stat__meta">{selectedA?.durationMonths}mo · {selectedA?.avgBpsPerMonth} bps/mo</div>
         </div>
-        <div style={{ padding: '12px 16px', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', flex: 1, minWidth: 200 }}>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>{selectedB?.label}</div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-lg)', fontWeight: 700, color: 'var(--color-hike)' }}>{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', marginTop: 2 }}>{selectedB?.durationMonths}mo · {selectedB?.avgBpsPerMonth} bps/mo</div>
+        <div className="cycle-stat cycle-stat--hike">
+          <div className="cycle-stat__label">{selectedB?.label}</div>
+          <div className="cycle-stat__value">{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</div>
+          <div className="cycle-stat__meta">{selectedB?.durationMonths}mo · {selectedB?.avgBpsPerMonth} bps/mo</div>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="chart-container" ref={containerRef} role="img" aria-label="Cycle comparison chart" style={{ minHeight: 380 }}>
+      <div className="chart-container cycle-chart" ref={containerRef} role="group" aria-label="Cycle comparison chart">
         <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
       </div>
     </div>

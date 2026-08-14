@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:data": "node --test tests/data/snapshotV2.test.js tests/data/rbiSources.test.js tests/data/csvExport.test.js"
   },
   "dependencies": {
     "d3": "^7.9.0",

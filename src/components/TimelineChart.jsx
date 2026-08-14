@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
-import { repoRateData, macroEvents, regimes } from '../data/dataLoader.js';
+import { decisions, repoRateData, macroEvents, regimes } from '../data/dataLoader.js';
+import DecisionTimelineList from './DecisionTimelineList.jsx';
 
 const MARGIN = { top: 36, right: 32, bottom: 48, left: 56 };
 
@@ -39,26 +40,30 @@ export default function TimelineChart({ dateRange }) {
 
     // Filter data by date range
     let data = repoRateData;
+    let filteredDecisions = decisions;
     let filteredRegimes = regimes;
     let filteredEvents = macroEvents;
 
     if (dateRange.start) {
       const startDate = new Date(dateRange.start);
       data = data.filter(d => d.dateObj >= startDate);
+      filteredDecisions = filteredDecisions.filter(d => d.dateObj >= startDate);
       filteredRegimes = filteredRegimes.filter(r => r.endObj >= startDate);
       filteredEvents = filteredEvents.filter(e => e.dateObj >= startDate);
     }
     if (dateRange.end) {
       const endDate = new Date(dateRange.end);
       data = data.filter(d => d.dateObj <= endDate);
+      filteredDecisions = filteredDecisions.filter(d => d.dateObj <= endDate);
       filteredRegimes = filteredRegimes.filter(r => r.startObj <= endDate);
       filteredEvents = filteredEvents.filter(e => e.dateObj <= endDate);
     }
 
-    if (data.length < 2) return;
-
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
+    d3.select(tooltipRef.current).classed('chart-tooltip--visible', false);
+
+    if (data.length === 0) return;
 
     // Scales
     const xExtent = d3.extent(data, d => d.dateObj);
@@ -72,42 +77,6 @@ export default function TimelineChart({ dateRange }) {
       .nice();
 
     const g = svg.append('g').attr('transform', `translate(${MARGIN.left},${MARGIN.top})`);
-
-    // Accessibility: SVG hatching patterns for regime bands
-    const defs = svg.append('defs');
-
-    // Easing hatching: diagonal lines going one direction
-    const hatchEasing = defs.append('pattern')
-      .attr('id', 'hatch-easing').attr('patternUnits', 'userSpaceOnUse')
-      .attr('width', 8).attr('height', 8);
-    hatchEasing.append('rect').attr('width', 8).attr('height', 8).attr('fill', 'var(--color-easing)');
-    hatchEasing.append('line').attr('x1', 0).attr('y1', 8).attr('x2', 8).attr('y2', 0)
-      .attr('stroke', 'var(--color-easing-border)').attr('stroke-width', 0.5);
-
-    // Tightening hatching: opposite diagonal
-    const hatchTight = defs.append('pattern')
-      .attr('id', 'hatch-tightening').attr('patternUnits', 'userSpaceOnUse')
-      .attr('width', 8).attr('height', 8);
-    hatchTight.append('rect').attr('width', 8).attr('height', 8).attr('fill', 'var(--color-tightening)');
-    hatchTight.append('line').attr('x1', 0).attr('y1', 0).attr('x2', 8).attr('y2', 8)
-      .attr('stroke', 'var(--color-tightening-border)').attr('stroke-width', 0.5);
-
-    // Pause: dots
-    const hatchPause = defs.append('pattern')
-      .attr('id', 'hatch-pause').attr('patternUnits', 'userSpaceOnUse')
-      .attr('width', 8).attr('height', 8);
-    hatchPause.append('rect').attr('width', 8).attr('height', 8).attr('fill', 'var(--color-pause)');
-    hatchPause.append('circle').attr('cx', 4).attr('cy', 4).attr('r', 0.8)
-      .attr('fill', 'var(--color-pause-border)');
-
-    // Gradient for the area below the line
-    const areaGradient = defs.append('linearGradient')
-      .attr('id', 'area-gradient')
-      .attr('x1', '0%').attr('y1', '0%')
-      .attr('x2', '0%').attr('y2', '100%');
-    
-    areaGradient.append('stop').attr('offset', '0%').attr('stop-color', 'var(--color-line)').attr('stop-opacity', 0.2);
-    areaGradient.append('stop').attr('offset', '100%').attr('stop-color', 'var(--color-line)').attr('stop-opacity', 0);
 
     // Grid lines
     g.append('g').attr('class', 'grid')
@@ -126,8 +95,8 @@ export default function TimelineChart({ dateRange }) {
         return Math.max(0, x1 - x0);
       })
       .attr('height', innerH)
-      .attr('fill', d => `url(#hatch-${d.type})`)
-      .attr('rx', 2)
+      .attr('fill', d => REGIME_FILLS[d.type] || 'var(--color-pause)')
+      .attr('rx', 0)
       .append('title')
       .text(d => `${d.label} (${d.type})`);
 
@@ -205,17 +174,7 @@ export default function TimelineChart({ dateRange }) {
       .y(d => yScale(d.rate))
       .curve(d3.curveStepAfter);
 
-    const path = g.append('path').datum(data).attr('class', 'rate-line').attr('d', line);
-    
-    // Animate line on load
-    const totalLength = path.node().getTotalLength();
-    path
-      .attr("stroke-dasharray", totalLength + " " + totalLength)
-      .attr("stroke-dashoffset", totalLength)
-      .transition()
-      .duration(1500)
-      .ease(d3.easeCubicOut)
-      .attr("stroke-dashoffset", 0);
+    g.append('path').datum(data).attr('class', 'rate-line').attr('d', line);
 
     // Data dots
     g.selectAll('.rate-dot')
@@ -225,8 +184,7 @@ export default function TimelineChart({ dateRange }) {
       .attr('cx', d => xScale(d.dateObj))
       .attr('cy', d => yScale(d.rate))
       .attr('r', 3)
-      .attr('role', 'img')
-      .attr('aria-label', d => `${d.date}: ${d.rate}%`);
+      .attr('aria-hidden', 'true');
 
     // X axis
     const xTickInterval = innerW > 600 ? d3.timeYear.every(2) : d3.timeYear.every(5);
@@ -325,12 +283,100 @@ export default function TimelineChart({ dateRange }) {
         tooltip.classed('chart-tooltip--visible', false);
       });
 
+    const showDecisionTooltip = (decision, x, y) => {
+      const dateStr = d3.timeFormat('%b %d, %Y')(decision.dateObj);
+      const actionText = decision.action === 'hold'
+        ? 'Hold'
+        : decision.action === 'cut'
+          ? 'Cut'
+          : decision.action === 'hike'
+            ? 'Hike'
+            : 'Initial record';
+      const changeText = decision.changeBps > 0
+        ? `+${decision.changeBps} bps`
+        : `${decision.changeBps} bps`;
+      const changeClass = decision.changeBps > 0
+        ? 'chart-tooltip__change--hike'
+        : decision.changeBps < 0
+          ? 'chart-tooltip__change--cut'
+          : 'chart-tooltip__change--unchanged';
+
+      tooltip.classed('chart-tooltip--visible', true)
+        .html(`
+          <div class="chart-tooltip__date">${dateStr}</div>
+          <div class="chart-tooltip__rate">${decision.repoRate.toFixed(2)}%</div>
+          <div class="chart-tooltip__change ${changeClass}">${actionText} · ${changeText}</div>
+          ${decision.stance ? `<div class="chart-tooltip__regime">Stance: ${decision.stance}</div>` : ''}
+          <div class="chart-tooltip__source">Official RBI decision</div>
+        `);
+
+      const tooltipNode = tooltipRef.current;
+      const tW = tooltipNode.offsetWidth;
+      const tH = tooltipNode.offsetHeight;
+      let tx = x + MARGIN.left + 16;
+      let ty = y + MARGIN.top - tH / 2;
+      if (tx + tW > width - 16) tx = x + MARGIN.left - tW - 16;
+      if (ty < 8) ty = 8;
+      if (ty + tH > height - 8) ty = height - tH - 8;
+      tooltip.style('left', `${tx}px`).style('top', `${ty}px`);
+    };
+
+    const hideDecisionTooltip = () => {
+      tooltip.classed('chart-tooltip--visible', false);
+    };
+
+    // Every official decision gets a distinct, focusable marker. This is
+    // intentionally separate from regime bands and macro-event annotations.
+    const markerLayer = g.append('g')
+      .attr('class', 'decision-markers')
+      .attr('aria-label', 'Official policy decision markers');
+
+    const markerGroups = markerLayer.selectAll('.decision-marker')
+      .data(filteredDecisions)
+      .join('g')
+      .attr('class', decision => `decision-marker decision-marker--${decision.action}`)
+      .attr('transform', decision => `translate(${xScale(decision.dateObj)},${yScale(decision.repoRate)})`)
+      .attr('role', 'button')
+      .attr('tabindex', 0)
+      .attr('aria-label', decision => `${actionText(decision.action)} on ${decision.date}, repo rate ${decision.repoRate.toFixed(2)} percent, ${decision.changeBps > 0 ? '+' : ''}${decision.changeBps} basis points`)
+      .on('mouseenter focus', function(event, decision) {
+        showDecisionTooltip(decision, xScale(decision.dateObj), yScale(decision.repoRate));
+      })
+      .on('mouseleave blur', hideDecisionTooltip);
+
+    markerGroups.append('line')
+      .attr('class', 'decision-marker__stem')
+      .attr('x1', 0).attr('x2', 0)
+      .attr('y1', -10).attr('y2', 10);
+
+    markerGroups.append('circle')
+      .attr('class', 'decision-marker__hit')
+      .attr('r', 10)
+      .attr('aria-hidden', 'true');
+
+    markerGroups.append('circle')
+      .attr('class', 'decision-marker__dot')
+      .attr('r', 4.5)
+      .attr('aria-hidden', 'true')
+      .append('title')
+      .text(decision => `${actionText(decision.action)} · ${decision.date} · ${decision.repoRate.toFixed(2)}%`);
+
   }, [dimensions, dateRange]);
 
   return (
-    <div className="chart-container" ref={containerRef} role="img" aria-label="RBI Repo Rate timeline chart">
-      <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
-      <div ref={tooltipRef} className="chart-tooltip" role="tooltip" />
-    </div>
+    <>
+      <div className="chart-container" ref={containerRef} role="group" aria-label="RBI Repo Rate timeline chart with official decision markers">
+        <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
+        <div ref={tooltipRef} className="chart-tooltip" role="tooltip" />
+      </div>
+      <DecisionTimelineList dateRange={dateRange} />
+    </>
   );
+}
+
+function actionText(action) {
+  if (action === 'cut') return 'Cut';
+  if (action === 'hike') return 'Hike';
+  if (action === 'hold') return 'Hold';
+  return 'Initial record';
 }

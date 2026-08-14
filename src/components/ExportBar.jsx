@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { repoRateData, macroEvents, regimes } from '../data/dataLoader.js';
+import { decisions, macroEvents, regimes, sources } from '../data/dataLoader.js';
+import { buildDecisionCsv } from '../data/csvExport.js';
 
 // Icons
 const ShareIcon = () => (
@@ -31,29 +32,7 @@ export default function ExportBar({ dateRange, activeView }) {
   };
 
   const downloadCSV = () => {
-    // Filter data based on range
-    let data = repoRateData;
-    if (dateRange.start) {
-      data = data.filter(d => d.dateObj >= new Date(dateRange.start));
-    }
-    if (dateRange.end) {
-      data = data.filter(d => d.dateObj <= new Date(dateRange.end));
-    }
-
-    const headers = ['Date', 'Rate (%)', 'Change (bps)', 'Event', 'Regime'];
-    const rows = data.map(d => {
-      const event = macroEvents.find(e => e.date === d.date)?.label || '';
-      const regime = regimes.find(r => d.dateObj >= r.startObj && d.dateObj <= r.endObj)?.label || '';
-      return [
-        d.date,
-        d.rate,
-        d.changeBps,
-        `"${event}"`, // quote to handle commas
-        regime
-      ].join(',');
-    });
-
-    const csvContent = [headers.join(','), ...rows].join('\n');
+    const csvContent = buildDecisionCsv({ decisions, sources, macroEvents, regimes, dateRange });
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');

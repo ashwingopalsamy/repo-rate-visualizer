@@ -1,7 +1,9 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
 // Syncs app state to/from URL search params for deep-linking
 export default function useUrlState({ activeView, dateRange, activePreset, onViewChange, onDateRangeChange, onPresetChange }) {
+  const hasMounted = useRef(false);
+
   // Read URL on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -19,6 +21,8 @@ export default function useUrlState({ activeView, dateRange, activePreset, onVie
         const start = params.get('start');
         const end = params.get('end');
         onDateRangeChange({ start: start || null, end: end || null });
+      } else if (preset === 'ALL') {
+        onDateRangeChange({ start: null, end: null });
       } else if (preset !== 'ALL') {
         const years = { '1Y': 1, '5Y': 5, '10Y': 10 }[preset];
         const end = new Date();
@@ -48,6 +52,12 @@ export default function useUrlState({ activeView, dateRange, activePreset, onVie
   }, [activeView, dateRange, activePreset]);
 
   useEffect(() => {
+    // Let the mount-time URL read establish state before writing anything
+    // back. Otherwise the initial defaults can replace a valid deep link.
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
+    }
     syncToUrl();
   }, [syncToUrl]);
 }

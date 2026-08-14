@@ -20,6 +20,12 @@ jobs:
       - name: Fetch latest RBI data
         run: node scripts/fetch-rbi-data.js
 
+      - name: Validate data and production build
+        run: |
+          npm run test:data
+          npm run build
+          git diff --check
+
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
