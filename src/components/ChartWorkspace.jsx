@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Layers3 } from 'lucide-react';
+import { decisions, macroEvents } from '../data/dataLoader.js';
 import FilterBar from './FilterBar.jsx';
 import ExportBar from './ExportBar.jsx';
 import TimelineChart from './TimelineChart.jsx';
@@ -7,7 +8,7 @@ import RateChangeBar from './RateChangeBar.jsx';
 import CycleComparison from './CycleComparison.jsx';
 import EventsList from './EventsList.jsx';
 import { Button } from './ui/button.jsx';
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card.jsx';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card.jsx';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs.jsx';
 import {
   DropdownMenu,
@@ -39,6 +40,11 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
   const copy = VIEW_COPY[activeView] || VIEW_COPY.timeline;
   const [layersOpen, setLayersOpen] = useState(false);
   const activeLayerCount = useMemo(() => [layers?.regimes, layers?.events].filter(Boolean).length, [layers]);
+  const selectedDecisionCount = useMemo(() => decisions.filter(decision => {
+    if (dateRange.start && decision.date < dateRange.start) return false;
+    if (dateRange.end && decision.date > dateRange.end) return false;
+    return true;
+  }).length, [dateRange.end, dateRange.start]);
 
   return (
     <section className="chart-workspace scroll-mt-24" aria-labelledby="chart-workspace-title">
@@ -49,12 +55,6 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
             <CardTitle id="chart-workspace-title" className="text-2xl tracking-[-0.055em] sm:text-3xl">{copy.label}</CardTitle>
             <CardDescription className="mt-2 max-w-2xl text-sm leading-6">{copy.description}</CardDescription>
           </div>
-          <CardAction className="hidden sm:block">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />
-              <span>Static snapshot · D3 chart</span>
-            </div>
-          </CardAction>
         </CardHeader>
 
         <CardContent className="p-0">
@@ -145,7 +145,11 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
                       <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground" id="chart-context-title">Context</p>
                       <h3 className="m-0 text-sm font-semibold tracking-[-0.02em] text-foreground">Macro events</h3>
                     </div>
-                    <span className="text-xs text-muted-foreground">Source-linked context</span>
+                    <div className="flex max-w-full flex-wrap justify-end gap-x-3 gap-y-1 text-right text-xs text-muted-foreground">
+                      <span>{macroEvents.length} source-linked events</span>
+                      <span aria-hidden="true">·</span>
+                      <span><strong className="font-medium text-foreground">{selectedDecisionCount} in range</strong> · <strong className="font-medium text-foreground">{decisions.length} decisions</strong> · 5 Jun 2000 – 5 Aug 2026</span>
+                    </div>
                   </div>
                   <div className="mt-4">
                     <EventsList dateRange={dateRange} />

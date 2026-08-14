@@ -51,6 +51,9 @@
 :root {
   color-scheme: light;
   --radius: 0.75rem;
+  --control-height: 2.25rem;
+  --control-radius: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Cool neutral paper and graphite keep the chartbook exact. Chroma is reserved
      for policy action: green cuts, red hikes, and sky-blue holds. */

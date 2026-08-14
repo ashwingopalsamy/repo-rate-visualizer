@@ -30,6 +30,7 @@ Journalists, researchers, students, analysts, developers, and members of the pub
 - Each decision links to usable official source provenance. The generated source record includes title, URL, publication date, retrieval time, and checksum.
 - React, Vite, and D3 remain the implementation stack.
 - Existing themes, routes/deep links, share actions, SVG/CSV exports, and accessible responsive behavior are product contracts to preserve while the interface is improved.
+- The interface is an independent, non-official educational reference: it is not created by, affiliated with, authorised by, sponsored by, or endorsed by the Reserve Bank of India. Its persistent Attribution & Usage notice disclaims warranties and professional advice, identifies third-party ownership, and directs users to verify figures and context against original sources.
 
 ## Source policy
 
@@ -40,6 +41,7 @@ The primary RBI references are:
 - [RBI policy archive](https://www.rbi.org.in/scripts/Annualpolicy.aspx), used for policy statements, resolutions, and related official records.
 - [Reuters historical series](https://www.reuters.com/world/india/changes-indias-repo-rate-since-june-2000-2025-12-05/), imported for the dated 2000–2025 benchmark observations in the current snapshot.
 - [Shriram Finance historical reference](https://www.shriramfinance.in/fixed-deposit/articles/detailed-historical-repo-rate-trends-in-india), surfaced as a secondary cross-reference; its month-only or conflicting entries are not used to infer additional decisions.
+- Macro-event context is curated only from official RBI/RBI Docs, MHA, and CBIC records; the review and citation rationale live in [`MACRO_EVENTS_RESEARCH.md`](MACRO_EVENTS_RESEARCH.md).
 
 ## Freshness language
 

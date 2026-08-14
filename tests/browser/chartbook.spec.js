@@ -12,6 +12,11 @@ test('desktop overview, source trail, and decision spine are visible', async ({ 
   await expect(page.getByText('Current trend', { exact: true })).toBeVisible();
   await expect(page.getByText(/Latest official decision:/)).toBeVisible();
   await expect(page.getByText('Official decision record', { exact: true })).toBeVisible();
+  const attribution = page.locator('[role="note"][aria-labelledby="attribution-title"]');
+  await expect(attribution).toBeVisible();
+  await expect(attribution.getByRole('heading', { name: 'Attribution & Usage' })).toBeVisible();
+  await expect(attribution).toContainText('not created by, affiliated with, authorised by, sponsored by, or endorsed by the Reserve Bank of India');
+  await expect(attribution.getByRole('link', { name: 'RBI data dissemination material' })).toBeVisible();
 
   const counts = await page.evaluate(() => ({
     markers: document.querySelectorAll('.decision-marker').length,
@@ -28,10 +33,80 @@ test('desktop overview, source trail, and decision spine are visible', async ({ 
   expect(counts.overflow).toBe(false);
   await expect(page.locator('.mobile-dock')).toHaveCount(0);
 
-  await page.locator('.data-evidence__trigger').click();
+  const projectSource = page.getByRole('contentinfo', { name: 'Project source' });
+  const authorLink = projectSource.getByRole('link', { name: 'Ashwin Gopalsamy', exact: true });
+  await expect(authorLink).toHaveAttribute('href', 'https://ashwingopalsamy.in');
+  const githubLink = projectSource.getByRole('link', { name: 'Open the Repo Rate Visualizer source code on GitHub' });
+  await expect(githubLink).toHaveAttribute(
+    'href',
+    'https://github.com/ashwingopalsamy/repo-rate-visualizer',
+  );
+  const huggingFaceLink = projectSource.getByRole('link', { name: 'Open the RBI repo-rate dataset on Hugging Face' });
+  await expect(huggingFaceLink).toHaveAttribute(
+    'href',
+    'https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset',
+  );
+  await expect(huggingFaceLink.locator('img')).toHaveAttribute('src', '/hf-logo.svg');
+  const footerLinkGeometry = await projectSource.locator('p:first-child a').evaluateAll((links) => links.map((link) => {
+    const rect = link.getBoundingClientRect();
+    return {
+      top: Math.round(rect.top),
+      bottom: Math.round(rect.bottom),
+      verticalAlign: getComputedStyle(link).verticalAlign,
+    };
+  }));
+  expect(footerLinkGeometry).toHaveLength(3);
+  expect(new Set(footerLinkGeometry.map(({ top }) => top)).size).toBe(1);
+  expect(new Set(footerLinkGeometry.map(({ bottom }) => bottom)).size).toBe(1);
+  expect(footerLinkGeometry.every(({ verticalAlign }) => verticalAlign === 'middle')).toBe(true);
+  await expect(projectSource).toContainText('Independent educational reference. Not affiliated with or endorsed by the Reserve Bank of India. Not financial advice.');
+  await expect(projectSource.locator('[data-slot="separator"] + div')).toHaveCSS('align-items', 'center');
+  await expect(projectSource.locator('[data-slot="separator"] + div')).toHaveCSS('text-align', 'center');
+  await expect(page.getByRole('tab', { name: 'All history' })).toBeVisible();
+  await expect(page.locator('.rate-summary')).toHaveAttribute('data-trend', 'hold');
+  await expect(page.locator('.rate-summary h2')).toHaveText('Hold');
+  await expect(page.locator('.decision-marker--hold').last()).toBeVisible();
+  await expect(page.getByText('Steady', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Source-backed snapshot', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('MPC resolution', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Static snapshot · D3 chart', { exact: true })).toHaveCount(0);
+
+  await page.getByRole('button', { name: 'View all sources' }).click();
   const sourceCount = await page.locator('[data-source-id]').count();
   expect(sourceCount).toBeGreaterThan(0);
   await expect(page.locator('[data-source-id] a[href^="http"]')).toHaveCount(sourceCount);
+  await page.getByRole('button', { name: 'Hide sources' }).click();
+  await expect(attribution).toBeVisible();
+});
+
+test('shared controls and source columns keep stable geometry', async ({ page }) => {
+  await page.goto('/?view=timeline&range=ALL');
+  await waitForChart(page);
+
+  const controlHeights = await page.evaluate(() => [...document.querySelectorAll('.header-control, .theme-toggle, [data-layer-control], .workspace-export-actions > button, .data-evidence__trigger, .data-evidence__download')]
+    .filter(element => getComputedStyle(element).display !== 'none')
+    .map(element => Math.round(element.getBoundingClientRect().height)));
+  expect(controlHeights.length).toBeGreaterThan(5);
+  expect(new Set(controlHeights)).toEqual(new Set([36]));
+
+  await page.getByRole('button', { name: 'View all sources' }).click();
+  const sourceLayout = await page.evaluate(() => [...document.querySelectorAll('[data-source-id]')].map(row => {
+    const cells = row.querySelectorAll('td');
+    const source = row.querySelector('.source-record__title')?.getBoundingClientRect();
+    const published = cells[2]?.getBoundingClientRect();
+    const linked = cells[3]?.getBoundingClientRect();
+    const integrity = cells[4]?.getBoundingClientRect();
+    return {
+      sourceEndsBeforePublished: source && published ? source.right <= published.left + 1 : false,
+      publishedEndsBeforeLinked: published && linked ? published.right <= linked.left + 1 : false,
+      linkedEndsBeforeIntegrity: linked && integrity ? linked.right <= integrity.left + 1 : false,
+    };
+  }));
+  expect(sourceLayout.length).toBeGreaterThan(0);
+  expect(sourceLayout.every(row => row.sourceEndsBeforePublished && row.publishedEndsBeforeLinked && row.linkedEndsBeforeIntegrity)).toBe(true);
+  await expect(page.getByRole('button', { name: 'Hide sources' })).toBeVisible();
+  await page.getByRole('button', { name: 'Hide sources' }).click();
+  await expect(page.getByRole('button', { name: 'View all sources' })).toBeVisible();
 });
 
 test('range state, views, and exports remain functional', async ({ page }) => {

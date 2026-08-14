@@ -50,7 +50,10 @@ the reference code or turning this into a generic SaaS dashboard.
 - Headings: weight and color create hierarchy before size does.
 - Rates, dates, basis points, checksums, and IDs use tabular numerals without making
   the hero rate look like code.
-- Interactive targets are at least 40px, with 44px touch targets where needed.
+- The visible control contract is a shared 36px shadcn geometry: search, theme,
+  mobile menu, layers, evidence actions, and exports share height, radius, border,
+  focus, hover, and press behavior. Larger drawer rows retain comfortable touch
+  padding.
 
 ## Component contracts
 
@@ -64,8 +67,9 @@ the reference code or turning this into a generic SaaS dashboard.
 - `Card`: header, content, and footer slots own padding and surface rhythm.
 - `Drawer`: the mobile command surface owns view, range, layer, theme, share, and
   export actions; opening it replaces the fixed four-tab dock.
-- `Table`, `Input`, `Select`, `ToggleGroup`, `DropdownMenu`, `Tooltip`, and
-  `Separator` are generated shadcn primitives rather than bespoke control shells.
+- `Table`, `Input`, `Select`, `DropdownMenu`, `Tooltip`, `Popover`, `Collapsible`,
+  `Drawer`, `Kbd`, and `Separator` are generated shadcn primitives rather than
+  bespoke control shells. D3 is the only chart-specific exception.
 
 ## Responsive contract
 
@@ -90,8 +94,8 @@ register rather than a stack of dashboard cards.
 - The snapshot is the first-viewport focal point: `5.25` is a calm Geist display
   value with a separately optically sized `%`, comfortable tracking, and no mono
   styling. The label is sentence case: `Repo rate`.
-- The latest official decision defines the current trend: cut/easing is saturated
-  green, hold/steady is sky blue, and hike/tightening is saturated red. Semantic
+- The latest official decision defines the current trend: cut is saturated green,
+  hold is sky blue, and hike is saturated red. Semantic
   backgrounds stay faint; text, dots, markers, and focus states carry the signal.
 - Controls and semantic badges are fully rounded; grouped control rails and the
   snapshot, workspace, evidence disclosure, and decision spine use concentric
@@ -113,6 +117,9 @@ rows remain ruled, and control groups use quiet line-style Tabs rather than pill
 - The current-rate summary answers rate, effective date, latest decision, source,
   and verification status once; the evidence disclosure owns the detailed source
   register and dataset metadata.
+- The hero uses one canonical action label — `Cut`, `Hold`, or `Hike` — with an
+  icon-only external-source action beside it. It does not repeat a visible source
+  title or a second trend badge.
 - Timeline, rate changes, and cycles are local analytical views inside one workspace;
   the URL remains the shareable source of truth for the active view and range.
 - The default timeline is the effective repo-rate line plus every official decision
@@ -141,6 +148,14 @@ rows remain ruled, and control groups use quiet line-style Tabs rather than pill
 - Layers is always discoverable, starts with regime bands and macro events enabled,
   and uses checkbox menu rows on desktop and mobile rather than pill toggles.
 - Data & evidence is one dataset masthead with counts, coverage, latest publication,
-  and CSV access. Source records use explicit category, source, publication, linked,
-  and integrity columns; long source names wrap inside the source track. Checksum
-  and retrieval details live in anchored integrity popovers.
+  and paired `View all sources` / `Download CSV` actions. Source records use
+  explicit category, source, publication, linked, and integrity columns; long source
+  names wrap inside the source track and category labels stay compact. Checksum and
+  retrieval details live in anchored integrity popovers. Expanded evidence includes
+  the detailed independent-use attribution notice, which remains visible when
+  the source list is collapsed.
+- The decision spine and macro-event context expose the full archive as
+  `107 decisions · 5 Jun 2000 – 5 Aug 2026` alongside the currently selected range.
+- Motion is limited to fast state transitions: explicit height/opacity disclosure,
+  color changes, and a small press scale. No `transition: all`, gradients, blur,
+  staggered loading, or motion when reduced-motion is requested.

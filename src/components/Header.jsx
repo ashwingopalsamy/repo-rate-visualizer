@@ -3,6 +3,7 @@ import { Command, Search } from 'lucide-react';
 import ThemeToggle from './ThemeToggle.jsx';
 import CommandDialog from './ui/command-dialog.jsx';
 import { Button } from './ui/button.jsx';
+import { Kbd, KbdGroup } from './ui/kbd.jsx';
 import MobileNav from '../mobile/MobileNav.jsx';
 import { VIEWS } from './viewConfig.js';
 
@@ -45,11 +46,12 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
   return (
     <header className="site-header sticky top-0 z-30 -mx-4 border-b border-border/80 bg-background sm:-mx-6 lg:-mx-8">
       <div className="mx-auto flex min-h-16 w-full max-w-[1180px] items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <Button asChild className="brand-link h-10 gap-2 px-1.5 hover:bg-transparent" variant="ghost">
+        <Button asChild className="brand-link min-w-0 h-10 gap-2 px-1.5 hover:bg-transparent" variant="ghost">
           <a href="/" aria-label="RBI Repo Rate home">
             <span className="brand-mark flex size-7 items-center justify-center rounded-full bg-foreground text-[10px] font-semibold tracking-[0.08em] text-background">RBI</span>
             <span className="hidden text-muted-foreground sm:inline" aria-hidden="true">/</span>
-            <span className="truncate font-semibold tracking-[-0.02em]">Repo Rate</span>
+            <span className="truncate font-semibold tracking-[-0.02em] sm:hidden">Repo Rate</span>
+            <span className="hidden truncate font-semibold tracking-[-0.02em] sm:inline">India's Federal Repo Rate Data</span>
           </a>
         </Button>
 
@@ -59,12 +61,13 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
         </div>
 
         <div className="site-header__actions ml-auto flex shrink-0 items-center gap-1.5">
-          <Button aria-label="Open command menu" className="hidden gap-2 text-muted-foreground sm:inline-flex" size="sm" variant="outline" onClick={() => setCommandOpen(true)}>
+          <Button aria-label="Open command menu" className="header-control hidden min-w-[10.5rem] justify-between gap-2 text-muted-foreground sm:inline-flex" size="default" variant="outline" onClick={() => setCommandOpen(true)}>
             <Search className="size-4" aria-hidden="true" />
             <span>Search</span>
-            <kbd className="ml-1 inline-flex h-5 items-center gap-0.5 rounded border border-border bg-muted px-1.5 font-mono text-[10px] text-muted-foreground">
-              <Command className="size-3" aria-hidden="true" />K
-            </kbd>
+            <KbdGroup className="ml-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px]">
+              <Kbd className="bg-transparent px-0 font-mono text-[10px]"><Command className="size-3" aria-hidden="true" /></Kbd>
+              <Kbd className="bg-transparent px-0 font-mono text-[10px]">K</Kbd>
+            </KbdGroup>
           </Button>
           <MobileNav
             activeView={activeView}

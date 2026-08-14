@@ -11,7 +11,7 @@ export const RANGE_PRESETS = [
   { id: '1Y', label: '1Y', years: 1 },
   { id: '5Y', label: '5Y', years: 5 },
   { id: '10Y', label: '10Y', years: 10 },
-  { id: 'ALL', label: 'All', years: null },
+  { id: 'ALL', label: 'All history', years: null },
 ];
 
 const coverageStart = decisions[0]?.date || '';

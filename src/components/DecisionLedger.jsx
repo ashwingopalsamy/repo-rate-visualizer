@@ -1,6 +1,7 @@
 import { decisions, sources } from '../data/dataLoader.js';
 import { ExternalLink } from 'lucide-react';
 import { Badge } from './ui/badge.jsx';
+import { Button } from './ui/button.jsx';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
 
 const sourceById = new Map(sources.map(source => [source.id, source]));
@@ -64,10 +65,12 @@ export default function DecisionLedger({ limit = 8 }) {
                   <TableCell data-label="Stance" className="text-muted-foreground">{decision.stance || 'Not reported'}</TableCell>
                   <TableCell data-label="Source" className="text-right">
                     {source ? (
-                      <a className="inline-flex items-center justify-end gap-1.5 text-sm font-medium text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground focus-visible:rounded-full" href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`}>
-                        <span>Open source</span>
-                        <ExternalLink className="size-3.5" aria-hidden="true" />
-                      </a>
+                      <Button asChild className="h-8 px-2 text-xs" size="sm" variant="ghost">
+                        <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`}>
+                          <span>Open source</span>
+                          <ExternalLink className="size-3.5" aria-hidden="true" />
+                        </a>
+                      </Button>
                     ) : <span className="text-sm text-muted-foreground">Unavailable</span>}
                   </TableCell>
                 </TableRow>

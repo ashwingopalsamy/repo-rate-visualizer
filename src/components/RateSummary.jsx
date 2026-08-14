@@ -1,21 +1,16 @@
-import { ExternalLink, ShieldCheck } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { currentRate, decisions, sources, snapshotMeta } from '../data/dataLoader.js';
 import { formatBps, getTrend } from '../lib/trend.js';
 import { Badge } from './ui/badge.jsx';
 import { Button } from './ui/button.jsx';
 import { Card, CardContent } from './ui/card.jsx';
-import { Separator } from './ui/separator.jsx';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
 
 const sourceById = new Map(sources.map(source => [source.id, source]));
 const latestDecision = decisions.at(-1);
 const latestDecisionSource = latestDecision?.sourceIds
   ?.map(sourceId => sourceById.get(sourceId))
   .find(Boolean);
-const latestPublishedSource = [...sources]
-  .filter(source => source.publishedAt)
-  .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))[0]
-  || latestDecisionSource;
-
 function toDate(value) {
   return value ? new Date(`${value}${value.length === 10 ? 'T00:00:00.000Z' : ''}`) : null;
 }
@@ -34,14 +29,6 @@ function formatTimestamp(value) {
     minute: '2-digit',
     timeZoneName: 'short',
   }) : 'Not reported';
-}
-
-function sourceTypeLabel(type = '') {
-  if (type === 'policy-resolution') return 'MPC resolution';
-  if (type === 'policy-minutes') return 'MPC minutes';
-  if (type === 'current-policy-rates') return 'RBI policy rates';
-  if (type === 'historical-rate-series') return 'Historical rate series';
-  return 'Official source';
 }
 
 export default function RateSummary() {
@@ -72,9 +59,20 @@ export default function RateSummary() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Current trend</p>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <h2 className={`m-0 text-3xl font-semibold tracking-[-0.055em] ${trend.textClass}`}>{trend.label}</h2>
-                    <Badge variant={trend.badgeVariant}>{trend.actionLabel}</Badge>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className={`m-0 text-3xl font-semibold tracking-[-0.055em] ${trend.textClass}`}>{trend.actionLabel}</h2>
+                    {latestDecisionSource?.url ? (
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button asChild className="size-9" size="icon" variant="outline" aria-label={`Open official source for the latest ${trend.actionLabel.toLowerCase()} decision`} title="Open official source">
+                            <a href={latestDecisionSource.url} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="size-4" aria-hidden="true" />
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Open official source</TooltipContent>
+                      </Tooltip>
+                    ) : null}
                   </div>
                 </div>
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted" aria-hidden="true">
@@ -91,32 +89,14 @@ export default function RateSummary() {
                   <span aria-hidden="true" className="text-border-strong">·</span>
                   <span className={`font-mono font-semibold tabular-nums ${trend.textClass}`}>{formatBps(latestDecision?.changeBps || 0)}</span>
                 </div>
+                <p className="mt-3 mb-0 text-xs text-muted-foreground">
+                  Last checked <strong className="font-medium text-foreground">{formatTimestamp(snapshotMeta.retrievedAt)}</strong>
+                </p>
               </div>
-
-              {latestDecisionSource?.url ? (
-                <Button asChild className="mt-8 w-fit px-0 text-sm" size="sm" variant="link">
-                  <a href={latestDecisionSource.url} target="_blank" rel="noopener noreferrer" aria-label={`Open latest official decision source: ${latestDecisionSource.title}`}>
-                    {sourceTypeLabel(latestDecisionSource.type)}
-                    <ExternalLink className="size-3.5" aria-hidden="true" />
-                  </a>
-                </Button>
-              ) : null}
             </div>
-          </div>
-
-          <Separator />
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 px-5 py-4 text-xs sm:px-8 lg:px-10">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <ShieldCheck className="size-3.5 text-hold" aria-hidden="true" />
-              <span>Source-backed snapshot</span>
-            </div>
-            <p className="m-0 text-muted-foreground">
-              Last checked <strong className="font-medium text-foreground">{formatTimestamp(snapshotMeta.retrievedAt)}</strong>
-            </p>
           </div>
         </CardContent>
       </Card>
-      {latestPublishedSource?.title ? <span className="sr-only">Latest published source: {latestPublishedSource.title}</span> : null}
     </section>
   );
 }

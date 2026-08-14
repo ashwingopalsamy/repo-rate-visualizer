@@ -46,9 +46,10 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
         <div>
           <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Decision spine</p>
           <h2 id="timeline-decisions-title" className="m-0 text-lg font-semibold tracking-[-0.035em] text-foreground sm:text-xl">Official decision record</h2>
-          <p className="mt-1.5 mb-0 text-sm leading-6 text-muted-foreground">Every source-backed decision in the selected range, including holds.</p>
+          <p className="mt-1.5 mb-0 max-w-2xl text-sm leading-6 text-muted-foreground">Every source-backed decision in the selected range, including holds.</p>
+          <p className="mt-2 mb-0 text-xs leading-5 text-muted-foreground"><strong className="font-medium text-foreground">{decisions.length} decisions</strong> · {formatDate(decisions[0]?.date)} – {formatDate(decisions.at(-1)?.date)}</p>
         </div>
-        <Badge className="font-mono tabular-nums" variant="outline">{filteredDecisions.length} decisions</Badge>
+        <Badge className="font-mono tabular-nums" variant="outline">{filteredDecisions.length} in range</Badge>
       </div>
 
       {selectedDecision ? (
@@ -98,9 +99,10 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
               return (
                 <TableRow className={`decision-spine-row focus-visible:outline-none ${isActive ? 'decision-spine-row--active' : ''}`} data-action={decision.action} data-decision-id={decision.id} key={decision.id} role="listitem" tabIndex="-1">
                   <TableCell data-label="Date" className="whitespace-nowrap">
-                    <button
-                      type="button"
-                      className="decision-spine-select text-left text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-none"
+                    <Button
+                      className="decision-spine-select h-8 justify-start px-0 text-left text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                      size="sm"
+                      variant="link"
                       aria-pressed={isActive}
                       aria-label={`Select ${trend.actionLabel} on ${formatDate(decision.date)}, repo rate ${decision.repoRate.toFixed(2)} percent, ${formatBps(decision.changeBps)}`}
                       onClick={event => {
@@ -109,7 +111,7 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
                       }}
                     >
                       <time dateTime={decision.date}>{formatDate(decision.date)}</time>
-                    </button>
+                    </Button>
                   </TableCell>
                   <TableCell data-label="Decision">
                     <Badge variant={trend.badgeVariant}>

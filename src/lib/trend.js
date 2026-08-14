@@ -1,7 +1,7 @@
 const TREND_BY_ACTION = Object.freeze({
   cut: {
     key: 'cut',
-    label: 'Easing',
+    label: 'Cut',
     actionLabel: 'Cut',
     textClass: 'text-cut',
     dotClass: 'bg-cut',
@@ -9,7 +9,7 @@ const TREND_BY_ACTION = Object.freeze({
   },
   hike: {
     key: 'hike',
-    label: 'Tightening',
+    label: 'Hike',
     actionLabel: 'Hike',
     textClass: 'text-hike',
     dotClass: 'bg-hike',
@@ -17,7 +17,7 @@ const TREND_BY_ACTION = Object.freeze({
   },
   hold: {
     key: 'hold',
-    label: 'Steady',
+    label: 'Hold',
     actionLabel: 'Hold',
     textClass: 'text-hold',
     dotClass: 'bg-hold',
