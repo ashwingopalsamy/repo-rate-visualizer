@@ -4,7 +4,6 @@ import App from './App.jsx';
 import { TooltipProvider } from './components/ui/tooltip.jsx';
 import '@fontsource-variable/geist/index.css';
 import '@fontsource-variable/geist-mono/index.css';
-import '@fontsource-variable/inter/index.css';
 import './styles/globals.css';
 import './styles/workspace.css';
 import './styles/chart.css';

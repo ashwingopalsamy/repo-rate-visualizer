@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="chartbook-app mx-auto flex min-h-screen w-full max-w-[1120px] flex-col gap-6 px-5 pb-12 sm:px-8 lg:gap-8 lg:px-10 lg:pb-16">
+      <div className="chartbook-app mx-auto flex min-h-screen w-full max-w-[1180px] flex-col px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
         <Header
           activePreset={activePreset}
           activeView={activeView}
@@ -53,7 +53,7 @@ export default function App() {
           onPresetChange={setActivePreset}
           onViewChange={handleViewChange}
         />
-        <main className="flex flex-col gap-8 lg:gap-10">
+        <main className="flex flex-col gap-10 py-8 sm:py-10 lg:gap-12 lg:py-12">
           <RateSummary />
 
           <ChartWorkspace

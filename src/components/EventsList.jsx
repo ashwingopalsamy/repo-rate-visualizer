@@ -1,5 +1,6 @@
+import { ExternalLink } from 'lucide-react';
 import { macroEvents } from '../data/dataLoader.js';
-import Icon from './ui/icon.jsx';
+import { Badge } from './ui/badge.jsx';
 
 const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString('en-IN', {
   year: 'numeric',
@@ -23,24 +24,24 @@ export default function EventsList({ dateRange }) {
   }
 
   return (
-    <div className="grid gap-x-8 md:grid-cols-2" role="list">
+    <div className="event-records grid gap-x-8 md:grid-cols-2" role="list">
       {events.map((event, index) => (
         <a
           key={`${event.date}-${index}`}
-          className="event-record group grid min-w-0 grid-cols-[72px_minmax(0,1fr)] gap-x-3 gap-y-1 border-b border-border/60 py-3 transition-colors hover:bg-muted/40 focus-visible:bg-muted/40"
+          className="event-record group grid min-w-0 grid-cols-[64px_minmax(0,1fr)] gap-x-4 gap-y-2 border-b border-border/70 py-4 transition-[background-color,border-color] duration-150 ease-out hover:bg-muted/45 focus-visible:bg-muted/45 focus-visible:outline-none"
           href={event.citation}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${event.label}: ${event.description}`}
           role="listitem"
         >
-          <time className="row-span-4 pt-0.5 text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground" dateTime={event.date}>{formatDate(event.date)}</time>
-          <span className="flex min-w-0 items-start gap-2 text-sm font-medium text-foreground">
+          <time className="row-span-3 pt-0.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground" dateTime={event.date}>{formatDate(event.date)}</time>
+          <span className="flex min-w-0 items-start gap-2 text-sm font-semibold tracking-[-0.015em] text-foreground">
             <span className="min-w-0">{event.label}</span>
-            <Icon name="external" size={12} className="mt-0.5 shrink-0 text-muted-foreground transition-colors group-hover:text-source" />
+            <ExternalLink className="mt-0.5 size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
           </span>
           <span className="min-w-0 max-w-[34rem] text-xs leading-5 text-muted-foreground">{event.description}</span>
-          <span className="text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground">{event.type}</span>
+          <Badge className="w-fit px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em]" variant="outline">{event.type}</Badge>
         </a>
       ))}
     </div>

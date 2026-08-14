@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
+import { ExternalLink } from 'lucide-react';
 import { decisions, sources } from '../data/dataLoader.js';
 import { getTrend, formatBps } from '../lib/trend.js';
-import Icon from './ui/icon.jsx';
+import { Badge } from './ui/badge.jsx';
+import { Button } from './ui/button.jsx';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
 
 const sourceById = new Map(sources.map(source => [source.id, source]));
 
@@ -38,73 +41,100 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
   }, [activeDecisionId]);
 
   return (
-    <section className="decision-record pt-7" aria-labelledby="timeline-decisions-title" data-decision-count={filteredDecisions.length}>
-      <div className="decision-record__header grid max-w-[820px] gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+    <section className="decision-record pt-8" aria-labelledby="timeline-decisions-title" data-decision-count={filteredDecisions.length}>
+      <div className="decision-record__header flex w-full flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="mb-1.5 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Decision spine</p>
-          <h2 id="timeline-decisions-title" className="m-0 text-base font-semibold tracking-[-0.02em] text-foreground">Official decision record</h2>
-          <p className="mt-1 mb-0 text-sm leading-6 text-muted-foreground">Every source-backed decision in the selected range, including holds.</p>
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Decision spine</p>
+          <h2 id="timeline-decisions-title" className="m-0 text-lg font-semibold tracking-[-0.035em] text-foreground sm:text-xl">Official decision record</h2>
+          <p className="mt-1.5 mb-0 text-sm leading-6 text-muted-foreground">Every source-backed decision in the selected range, including holds.</p>
         </div>
-        <span className="text-sm tabular-nums text-muted-foreground sm:pb-0.5">{filteredDecisions.length} decisions</span>
+        <Badge className="font-mono tabular-nums" variant="outline">{filteredDecisions.length} decisions</Badge>
       </div>
 
       {selectedDecision ? (
-        <div className="decision-selection mt-4 flex max-w-[820px] flex-wrap items-center gap-x-3 gap-y-1 border-y border-border/70 py-3 text-sm" role="status" aria-live="polite">
-          <span className={`inline-flex items-center gap-2 font-medium ${getTrend(selectedDecision.action).textClass}`}>
-            <span aria-hidden="true" className={`size-2 rounded-full ${getTrend(selectedDecision.action).dotClass}`} />
+        <div className="decision-selection mt-5 flex w-full flex-wrap items-center gap-x-3 gap-y-2 border-y border-border/80 py-3 text-sm" role="status" aria-live="polite">
+          <Badge variant={getTrend(selectedDecision.action).badgeVariant}>
+            <span className={`size-1.5 rounded-full ${getTrend(selectedDecision.action).dotClass}`} aria-hidden="true" />
             Selected {getTrend(selectedDecision.action).actionLabel}
-          </span>
+          </Badge>
           <span className="text-muted-foreground">{formatDate(selectedDecision.date)} · <strong className="font-medium text-foreground tabular-nums">{selectedDecision.repoRate.toFixed(2)}%</strong> · {formatBps(selectedDecision.changeBps)}</span>
           {selectedSource ? (
-            <a className="inline-flex min-h-10 items-center gap-1.5 px-1 font-medium text-foreground transition-colors hover:text-source focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={selectedSource.url} target="_blank" rel="noopener noreferrer" aria-label={`Open selected source for ${formatDate(selectedDecision.date)}`}>
-              Open source
-              <Icon name="external" size={13} />
-            </a>
+            <Button asChild className="h-8 px-2 text-xs" size="sm" variant="ghost">
+              <a href={selectedSource.url} target="_blank" rel="noopener noreferrer" aria-label={`Open selected source for ${formatDate(selectedDecision.date)}`}>
+                Open source
+                <ExternalLink className="size-3.5" aria-hidden="true" />
+              </a>
+            </Button>
           ) : null}
         </div>
       ) : null}
 
-      <div className={`${selectedDecision ? 'mt-3' : 'mt-5'} decision-spine-list max-w-[860px]`} role="list" aria-label="Official RBI decisions">
-        <div className="decision-spine-columns hidden grid-cols-[112px_86px_76px_82px_minmax(130px,1fr)_40px] gap-4 px-2 pb-2 text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground sm:grid" aria-hidden="true">
-          <span>Date</span>
-          <span>Decision</span>
-          <span>Rate</span>
-          <span>Change</span>
-          <span>Stance</span>
-          <span className="text-right">Source</span>
-        </div>
-        {filteredDecisions.slice().reverse().map(decision => {
-          const source = decision.sourceIds.map(sourceId => sourceById.get(sourceId)).find(Boolean);
-          const trend = getTrend(decision.action);
-          const isActive = activeDecisionId === decision.id;
+      <div className={`${selectedDecision ? 'mt-4' : 'mt-6'} decision-spine-list decision-table-wrap w-full overflow-hidden rounded-2xl border border-border/80`} role="list" aria-label="Official RBI decisions">
+        <Table className="decision-table" aria-label="Official RBI decisions">
+          <colgroup>
+            <col style={{ width: '17%' }} />
+            <col style={{ width: '16%' }} />
+            <col style={{ width: '12%' }} />
+            <col style={{ width: '14%' }} />
+            <col style={{ width: '31%' }} />
+            <col style={{ width: '10%' }} />
+          </colgroup>
+          <TableHeader>
+            <TableRow className="border-border/80 bg-muted/35 hover:bg-muted/35">
+              <TableHead>Date</TableHead>
+              <TableHead>Decision</TableHead>
+              <TableHead>Rate</TableHead>
+              <TableHead>Change</TableHead>
+              <TableHead>Stance</TableHead>
+              <TableHead className="text-right">Source</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredDecisions.slice().reverse().map(decision => {
+              const source = decision.sourceIds.map(sourceId => sourceById.get(sourceId)).find(Boolean);
+              const trend = getTrend(decision.action);
+              const isActive = activeDecisionId === decision.id;
 
-          return (
-            <div className={`decision-spine-row grid min-w-0 grid-cols-[minmax(0,1fr)_40px] items-center gap-2 border-b border-border/60 py-2.5 last:border-b-0 ${isActive ? 'decision-spine-row--active' : ''}`} data-action={decision.action} data-decision-id={decision.id} key={decision.id} role="listitem">
-              <button
-                type="button"
-                className="decision-spine-select grid min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-1 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-control-hover focus-visible:bg-control-active sm:grid-cols-[112px_86px_76px_82px_minmax(130px,1fr)] sm:items-center sm:gap-4"
-                aria-pressed={isActive}
-                aria-label={`Select ${trend.actionLabel} on ${formatDate(decision.date)}, repo rate ${decision.repoRate.toFixed(2)} percent, ${formatBps(decision.changeBps)}`}
-                onClick={() => onDecisionSelect?.(decision.id)}
-              >
-                <time className="text-sm text-muted-foreground" dateTime={decision.date}>{formatDate(decision.date)}</time>
-                <span className={`inline-flex items-center gap-2 text-sm font-medium sm:justify-self-start ${trend.textClass}`}>
-                  <span aria-hidden="true" className={`size-2 rounded-full ${trend.dotClass}`} />
-                  {trend.actionLabel}
-                </span>
-                <strong className="font-semibold tabular-nums text-foreground">{decision.repoRate.toFixed(2)}%</strong>
-                <span className={`font-medium tabular-nums ${trend.textClass}`}>{formatBps(decision.changeBps)}</span>
-                <span className="col-span-2 min-w-0 truncate text-sm text-muted-foreground sm:col-span-1">{decision.stance || 'Stance not reported'}</span>
-              </button>
-              {source ? (
-                <a className="inline-flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-control-hover hover:text-source focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`} title="Open source">
-                  <Icon name="external" size={15} />
-                  <span className="sr-only">Source</span>
-                </a>
-              ) : <span className="text-sm text-muted-foreground">Unavailable</span>}
-            </div>
-          );
-        })}
+              return (
+                <TableRow className={`decision-spine-row focus-visible:outline-none ${isActive ? 'decision-spine-row--active' : ''}`} data-action={decision.action} data-decision-id={decision.id} key={decision.id} role="listitem" tabIndex="-1">
+                  <TableCell data-label="Date" className="whitespace-nowrap">
+                    <button
+                      type="button"
+                      className="decision-spine-select text-left text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-none"
+                      aria-pressed={isActive}
+                      aria-label={`Select ${trend.actionLabel} on ${formatDate(decision.date)}, repo rate ${decision.repoRate.toFixed(2)} percent, ${formatBps(decision.changeBps)}`}
+                      onClick={event => {
+                        onDecisionSelect?.(decision.id);
+                        event.currentTarget.closest('.decision-spine-row')?.focus({ preventScroll: true });
+                      }}
+                    >
+                      <time dateTime={decision.date}>{formatDate(decision.date)}</time>
+                    </button>
+                  </TableCell>
+                  <TableCell data-label="Decision">
+                    <Badge variant={trend.badgeVariant}>
+                      <span className={`size-1.5 rounded-full ${trend.dotClass}`} aria-hidden="true" />
+                      {trend.actionLabel}
+                    </Badge>
+                  </TableCell>
+                  <TableCell data-label="Rate" className="font-semibold tabular-nums text-foreground">{decision.repoRate.toFixed(2)}%</TableCell>
+                  <TableCell data-label="Change" className={`font-mono text-sm font-semibold tabular-nums ${trend.textClass}`}>{formatBps(decision.changeBps)}</TableCell>
+                  <TableCell data-label="Stance" className="whitespace-normal break-words text-muted-foreground">{decision.stance || 'Stance not reported'}</TableCell>
+                  <TableCell data-label="Source" className="text-right">
+                    {source ? (
+                      <Button asChild className="size-8" size="icon-sm" variant="ghost">
+                        <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`} title="Open source">
+                          <ExternalLink className="size-3.5" aria-hidden="true" />
+                          <span className="sr-only">Source</span>
+                        </a>
+                      </Button>
+                    ) : <span className="text-sm text-muted-foreground">Unavailable</span>}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       </div>
     </section>
   );

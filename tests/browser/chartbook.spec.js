@@ -50,13 +50,14 @@ test('range state, views, and exports remain functional', async ({ page }) => {
   await page.getByRole('menuitem', { name: 'Download CSV' }).click();
   expect((await csvDownload).suggestedFilename()).toMatch(/\.csv$/);
 
-  await page.getByRole('button', { name: 'More export options' }).click();
+  await page.getByRole('button', { name: 'Download chart' }).click();
   const svgDownload = page.waitForEvent('download');
   await page.getByRole('menuitem', { name: 'Download SVG' }).click();
   expect((await svgDownload).suggestedFilename()).toMatch(/\.svg$/);
 
+  await page.getByRole('button', { name: 'Download chart' }).click();
   const pngDownload = page.waitForEvent('download');
-  await page.getByRole('button', { name: 'Download PNG' }).click();
+  await page.getByRole('menuitem', { name: 'Download PNG' }).click();
   expect((await pngDownload).suggestedFilename()).toMatch(/\.png$/);
 });
 
@@ -68,7 +69,7 @@ test('workspace controls are grouped and Layers exposes a selected state', async
   await expect(controls).toBeVisible();
   await expect(controls.locator('[data-control-group="view"]')).toBeVisible();
   await expect(controls.getByText('Range', { exact: true })).toBeVisible();
-  await expect(controls.getByRole('button', { name: 'Download PNG' })).toBeVisible();
+  await expect(controls.getByRole('button', { name: 'Download chart' })).toBeVisible();
   await expect(page.getByText('Timeline · URL-linked view', { exact: true })).toHaveCount(0);
   await expect(page.locator('.workspace-view-switcher__trigger[data-state="active"]')).toHaveText('Timeline');
 

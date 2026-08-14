@@ -14,6 +14,7 @@ const badgeVariants = cva(
         hike: "border-hike/25 bg-hike/12 text-hike [a&]:hover:bg-hike/20",
         hold: "border-hold/25 bg-hold/12 text-hold [a&]:hover:bg-hold/20",
         source: "border-source/25 bg-source/12 text-source [a&]:hover:bg-source/20",
+        neutral: "border-border bg-muted text-muted-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
         destructive:

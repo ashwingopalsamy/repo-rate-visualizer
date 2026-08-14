@@ -145,7 +145,7 @@ export default function CycleComparison() {
       .attr('transform', 'rotate(-90)')
       .attr('y', -42).attr('x', -innerH / 2)
       .attr('text-anchor', 'middle')
-      .attr('fill', 'var(--text-muted)')
+      .attr('fill', 'var(--muted-foreground)')
       .attr('font-size', '11px').attr('font-weight', '500')
       .attr('font-family', 'var(--font-sans)')
       .text('Cumulative change (bps from t=0)');
@@ -158,7 +158,7 @@ export default function CycleComparison() {
         <div className="flex min-w-0 items-center gap-2">
           <span className="size-2.5 rounded-full bg-cut" aria-hidden="true" />
           <Select value={String(cycleA)} onValueChange={value => setCycleA(Number(value))}>
-            <SelectTrigger className="h-9 min-w-0 rounded-md sm:w-[210px]">
+            <SelectTrigger className="h-9 min-w-0 sm:w-[210px]">
               <SelectValue aria-label="First policy cycle" />
             </SelectTrigger>
             <SelectContent>
@@ -174,7 +174,7 @@ export default function CycleComparison() {
         <div className="flex min-w-0 items-center gap-2">
           <span className="size-2.5 rounded-full bg-hike" aria-hidden="true" />
           <Select value={String(cycleB)} onValueChange={value => setCycleB(Number(value))}>
-            <SelectTrigger className="h-9 min-w-0 rounded-md sm:w-[210px]">
+            <SelectTrigger className="h-9 min-w-0 sm:w-[210px]">
               <SelectValue aria-label="Second policy cycle" />
             </SelectTrigger>
             <SelectContent>

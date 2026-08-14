@@ -1,15 +1,15 @@
 import { useState } from 'react';
+import { Check, Download, FileCode2, MoreHorizontal, Share2 } from 'lucide-react';
 import { decisions, macroEvents, regimes, sources } from '../data/dataLoader.js';
 import { buildDecisionCsv } from '../data/csvExport.js';
 import { downloadPng, downloadSvg } from '../lib/chartExport.js';
-import Icon from './ui/icon.jsx';
 import { Button } from './ui/button.jsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuLabel,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu.jsx';
 
@@ -70,41 +70,43 @@ export default function ExportBar({ dateRange, activeView, className = '' }) {
 
   return (
     <div className={`flex min-w-0 flex-wrap items-center justify-end gap-1.5 ${className}`} aria-label="Share and export actions">
-      <Button
-        className="h-9 rounded-md px-3"
-        size="sm"
-        variant="outline"
-        onClick={handlePng}
-        disabled={busy}
-        aria-label={busy ? 'Rendering PNG' : 'Download PNG'}
-        title={busy ? 'Rendering PNG' : 'Download PNG'}
-      >
-        <Icon name="download" size={14} />
-        <span className="workspace-export-actions__png-label">{busy ? 'Rendering…' : 'Download PNG'}</span>
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button className="size-9" size="icon" variant={busy ? 'secondary' : 'ghost'} disabled={busy} aria-label="Download chart" title={busy ? 'Rendering PNG' : 'Download chart'} aria-busy={busy}>
+            <Download className="size-4" aria-hidden="true" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" sideOffset={8} collisionPadding={12} className="w-48">
+          <DropdownMenuLabel>Chart export</DropdownMenuLabel>
+          <DropdownMenuItem onSelect={handleSvg}>
+            <FileCode2 className="size-4" aria-hidden="true" />
+            Download SVG
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => void handlePng()}>
+            <Download className="size-4" aria-hidden="true" />
+            Download PNG
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button className="size-9 rounded-md" size="icon" variant="ghost" aria-label={copied ? 'Link copied' : 'Share current view'} onClick={handleCopyLink}>
-            <Icon name={copied ? 'link' : 'share'} size={14} />
+          <Button className="size-9" size="icon" variant="ghost" aria-label={copied ? 'Link copied' : 'Share current view'} onClick={handleCopyLink}>
+            {copied ? <Check className="size-4" aria-hidden="true" /> : <Share2 className="size-4" aria-hidden="true" />}
           </Button>
         </TooltipTrigger>
         <TooltipContent>{copied ? 'Link copied' : 'Copy link with current filters'}</TooltipContent>
       </Tooltip>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="size-9 rounded-md" size="icon" variant="ghost" aria-label="More export options" title="More export options">
-            <Icon name="more" size={16} />
+          <Button className="size-9" size="icon" variant="ghost" aria-label="More export options" title="More export options">
+            <MoreHorizontal className="size-4" aria-hidden="true" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" sideOffset={8} collisionPadding={12} className="w-48 rounded-xl">
+        <DropdownMenuContent align="end" sideOffset={8} collisionPadding={12} className="w-48">
+          <DropdownMenuLabel>More actions</DropdownMenuLabel>
           <DropdownMenuItem onSelect={downloadCSV}>
-            <Icon name="download" size={14} />
+            <Download className="size-4" aria-hidden="true" />
             Download CSV
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={handleSvg}>
-            <Icon name="download" size={14} />
-            Download SVG
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

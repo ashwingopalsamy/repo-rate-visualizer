@@ -16,10 +16,10 @@
 }
 
 .chart-svg .axis text {
-  fill: var(--text-tertiary);
+  fill: var(--muted-foreground);
   font-family: var(--font-sans);
   font-size: 11px;
-  font-weight: var(--weight-medium);
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 
@@ -64,10 +64,10 @@
 }
 
 .chart-svg .annotation-label {
-  fill: var(--text-secondary);
+  fill: var(--foreground);
   font-family: var(--font-sans);
   font-size: 9px;
-  font-weight: var(--weight-semibold);
+  font-weight: 600;
   letter-spacing: 0.035em;
   text-anchor: middle;
   text-transform: uppercase;
@@ -105,10 +105,10 @@
 }
 
 .chart-axis-label {
-  fill: var(--text-tertiary);
+  fill: var(--muted-foreground);
   font-family: var(--font-sans);
   font-size: 10px;
-  font-weight: var(--weight-medium);
+  font-weight: 500;
 }
 
 .decision-marker {
@@ -181,18 +181,18 @@
 }
 
 .chart-readout__date {
-  color: var(--text-tertiary);
+  color: var(--muted-foreground);
   font-size: 10px;
-  font-weight: var(--weight-semibold);
+  font-weight: 600;
   letter-spacing: 0.025em;
   text-transform: uppercase;
 }
 
 .chart-readout__value {
-  color: var(--text-primary);
+  color: var(--foreground);
   font-family: var(--font-sans);
   font-size: 19px;
-  font-weight: var(--weight-semibold);
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1.15;
 }
@@ -200,7 +200,7 @@
 .chart-readout__change {
   width: fit-content;
   font-size: 12px;
-  font-weight: var(--weight-semibold);
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
@@ -220,8 +220,8 @@
 .chart-readout__annotation {
   margin-top: 3px;
   padding-top: 4px;
-  border-top: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
   font-size: 10px;
   line-height: 1.35;
 }

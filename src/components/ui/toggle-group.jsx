@@ -29,7 +29,7 @@ function ToggleGroup({
         "--gap": spacing
       }}
       className={cn(
-        "group/toggle-group flex w-fit items-center gap-[--spacing(var(--gap))] rounded-md data-[spacing=default]:data-[variant=outline]:shadow-xs",
+        "group/toggle-group flex w-fit items-center gap-[--spacing(var(--gap))] rounded-full data-[spacing=default]:data-[variant=outline]:shadow-xs",
         className
       )}
       {...props}>

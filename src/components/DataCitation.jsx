@@ -1,10 +1,22 @@
+import { Button } from './ui/button.jsx';
+import { Separator } from './ui/separator.jsx';
+
 export default function DataCitation() {
   return (
-    <footer className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border/70 pt-4 text-xs text-muted-foreground" role="contentinfo" aria-label="RBI reference links">
-      <span>Reference links</span>
-      <a className="underline decoration-border-strong underline-offset-4 transition-colors hover:text-foreground" href="https://www.rbi.org.in/Scripts/bs_viewcontent.aspx?Id=624" target="_blank" rel="noopener noreferrer">RBI historical data</a>
-      <a className="underline decoration-border-strong underline-offset-4 transition-colors hover:text-foreground" href="https://bulletin.rbi.org.in/" target="_blank" rel="noopener noreferrer">RBI Bulletin</a>
-      <span className="basis-full leading-5">Historical naming follows the source note: before 29 Oct 2004, “repo rate” referred to the reverse repo rate.</span>
+    <footer className="mt-auto pt-2 text-sm text-muted-foreground" role="contentinfo" aria-label="Project source">
+      <Separator />
+      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 py-6 leading-6">
+        <span>Built by Ashwin Gopalsamy. The source code is available on</span>
+        <Button asChild className="h-7 gap-1 px-1 text-sm text-foreground" size="sm" variant="link">
+          <a href="https://github.com/ashwingopalsamy/repo-rate-visualizer" target="_blank" rel="noopener noreferrer" aria-label="Open the Repo Rate Visualizer source code on GitHub">
+            <svg className="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.74.08-.74 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.94 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57A12 12 0 0 0 12 .5Z" />
+            </svg>
+            GitHub
+          </a>
+        </Button>
+        <span aria-hidden="true">.</span>
+      </div>
     </footer>
   );
 }

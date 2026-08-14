@@ -1,5 +1,5 @@
 import { useTheme } from './ThemeProvider.jsx';
-import Icon from './ui/icon.jsx';
+import { Moon, Sun } from 'lucide-react';
 import { Button } from './ui/button.jsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
 
@@ -17,7 +17,7 @@ export default function ThemeToggle() {
           variant="outline"
           onClick={toggleTheme}
         >
-          <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={16} />
+          {theme === 'dark' ? <Sun className="size-4" aria-hidden="true" /> : <Moon className="size-4" aria-hidden="true" />}
         </Button>
       </TooltipTrigger>
       <TooltipContent>Switch to {nextTheme} mode</TooltipContent>

@@ -1,7 +1,7 @@
 import { decisions, sources } from '../data/dataLoader.js';
+import { ExternalLink } from 'lucide-react';
 import { Badge } from './ui/badge.jsx';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
-import Icon from './ui/icon.jsx';
 
 const sourceById = new Map(sources.map(source => [source.id, source]));
 
@@ -39,7 +39,7 @@ export default function DecisionLedger({ limit = 8 }) {
         <span className="shrink-0 text-sm tabular-nums text-muted-foreground">{recentDecisions.length} of {decisions.length}</span>
       </div>
 
-      <div className="decision-ledger-table overflow-hidden rounded-xl border border-border/80 bg-card">
+      <div className="decision-ledger-table overflow-hidden rounded-2xl border border-border/80 bg-card">
         <Table aria-label="Recent official policy decisions">
           <TableHeader>
             <TableRow className="border-border/70 hover:bg-transparent">
@@ -64,9 +64,9 @@ export default function DecisionLedger({ limit = 8 }) {
                   <TableCell data-label="Stance" className="text-muted-foreground">{decision.stance || 'Not reported'}</TableCell>
                   <TableCell data-label="Source" className="text-right">
                     {source ? (
-                      <a className="inline-flex items-center justify-end gap-1.5 text-sm font-medium text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground focus-visible:rounded-sm" href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`}>
+                      <a className="inline-flex items-center justify-end gap-1.5 text-sm font-medium text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground focus-visible:rounded-full" href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`}>
                         <span>Open source</span>
-                        <Icon name="external" size={13} />
+                        <ExternalLink className="size-3.5" aria-hidden="true" />
                       </a>
                     ) : <span className="text-sm text-muted-foreground">Unavailable</span>}
                   </TableCell>

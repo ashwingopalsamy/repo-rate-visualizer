@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
+import { CalendarDays } from 'lucide-react';
 import { currentRate, decisions, snapshotMeta } from '../data/dataLoader.js';
-import Icon from './ui/icon.jsx';
 import { Button } from './ui/button.jsx';
 import { Input } from './ui/input.jsx';
 import { Label } from './ui/label.jsx';
@@ -48,15 +48,7 @@ function validDate(value) {
   return Boolean(value && /^\d{4}-\d{2}-\d{2}$/.test(value));
 }
 
-export default function FilterBar({
-  dateRange,
-  onDateRangeChange,
-  activePreset,
-  onPresetChange,
-  onApplyRange,
-  onReset,
-  className = '',
-}) {
+export default function FilterBar({ dateRange, onDateRangeChange, activePreset, onPresetChange, onApplyRange, onReset, className = '' }) {
   const [customDatesOpen, setCustomDatesOpen] = useState(false);
   const [draftRange, setDraftRange] = useState(() => ({
     start: dateRange.start || coverageStart,
@@ -96,8 +88,7 @@ export default function FilterBar({
   };
 
   const handleReset = () => {
-    const preset = RANGE_PRESETS.find(item => item.id === '10Y');
-    const nextRange = rangeForPreset(preset.years);
+    const nextRange = rangeForPreset(10);
     onReset?.(nextRange);
     if (!onReset) {
       onPresetChange?.('10Y');
@@ -108,11 +99,11 @@ export default function FilterBar({
 
   return (
     <div className={`range-control flex min-w-0 items-center gap-2.5 ${className}`} role="toolbar" aria-label="Timeline range controls">
-      <span className="mr-0.5 text-sm font-medium text-muted-foreground">Range</span>
+      <span className="range-control__label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Range</span>
       <Tabs value={activePreset === 'CUSTOM' ? undefined : activePreset} onValueChange={handlePreset}>
         <TabsList variant="line" aria-label="Time range presets" className="range-control__presets h-9">
           {RANGE_PRESETS.map(preset => (
-            <TabsTrigger className="h-8 rounded-md px-2.5 text-xs sm:px-3" key={preset.id} value={preset.id}>
+            <TabsTrigger className="h-8 px-2.5 text-xs sm:px-3" key={preset.id} value={preset.id}>
               {preset.label}
             </TabsTrigger>
           ))}
@@ -122,17 +113,17 @@ export default function FilterBar({
       <Popover open={customDatesOpen} onOpenChange={handleOpenChange}>
         <PopoverTrigger asChild>
           <Button
-            className="range-control__custom-trigger h-9 rounded-md px-3 text-xs"
+            className="range-control__custom-trigger h-9 px-3 text-xs"
             variant={activePreset === 'CUSTOM' ? 'secondary' : 'outline'}
             aria-expanded={customDatesOpen}
             aria-label={activePreset === 'CUSTOM' ? `Custom dates, ${formatShortDate(dateRange.start)} through ${formatShortDate(dateRange.end)}` : 'Choose custom date range'}
             data-custom-range-trigger
           >
-            <Icon name="calendar" size={14} />
+            <CalendarDays className="size-4" aria-hidden="true" />
             <span className="truncate">{activePreset === 'CUSTOM' ? formatCompactRange(dateRange.start, dateRange.end) : 'Custom dates'}</span>
           </Button>
         </PopoverTrigger>
-        <PopoverContent align="start" sideOffset={8} collisionPadding={12} className="w-[min(360px,calc(100vw-2rem))] rounded-xl p-4">
+        <PopoverContent align="start" sideOffset={8} collisionPadding={12} className="w-[min(360px,calc(100vw-2rem))]">
           <PopoverHeader>
             <PopoverTitle>Custom date range</PopoverTitle>
             <PopoverDescription>Apply a precise window from the dataset coverage.</PopoverDescription>
@@ -141,7 +132,7 @@ export default function FilterBar({
             <div className="grid gap-2">
               <Label htmlFor="range-start">Start date</Label>
               <Input
-                className="h-9 rounded-md text-sm tabular-nums"
+                className="h-9 text-sm tabular-nums"
                 id="range-start"
                 type="date"
                 min={coverageStart}
@@ -154,7 +145,7 @@ export default function FilterBar({
             <div className="grid gap-2">
               <Label htmlFor="range-end">End date</Label>
               <Input
-                className="h-9 rounded-md text-sm tabular-nums"
+                className="h-9 text-sm tabular-nums"
                 id="range-end"
                 type="date"
                 min={coverageStart}
@@ -165,9 +156,9 @@ export default function FilterBar({
               />
             </div>
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">Available {formatShortDate(coverageStart)} – {formatShortDate(coverageEnd)}</p>
-          <p id="range-error" className={`mt-2 text-xs text-destructive ${validationMessage ? '' : 'sr-only'}`} aria-live="polite">{validationMessage || 'No date range error.'}</p>
-          <div className="mt-4 flex items-center justify-between gap-2 border-t border-border/70 pt-3">
+          <p className="mt-3 mb-0 text-xs text-muted-foreground">Available {formatShortDate(coverageStart)} – {formatShortDate(coverageEnd)}</p>
+          <p id="range-error" className={`mt-2 mb-0 text-xs text-destructive ${validationMessage ? '' : 'sr-only'}`} aria-live="polite">{validationMessage || 'No date range error.'}</p>
+          <div className="mt-4 flex items-center justify-between gap-2 border-t border-border/80 pt-3">
             <Button className="px-0" size="sm" variant="ghost" onClick={handleReset}>Reset to 10Y</Button>
             <div className="flex items-center gap-2">
               <Button size="sm" variant="ghost" onClick={() => setCustomDatesOpen(false)}>Cancel</Button>

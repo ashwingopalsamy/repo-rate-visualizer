@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { Check, ChevronDown, Copy, Download, ExternalLink, ShieldCheck } from 'lucide-react';
 import { decisions, macroEvents, regimes, sources } from '../data/dataLoader.js';
 import { buildDecisionCsv } from '../data/csvExport.js';
-import Icon from './ui/icon.jsx';
+import { Badge } from './ui/badge.jsx';
 import { Button } from './ui/button.jsx';
+import { Card, CardContent, CardHeader } from './ui/card.jsx';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible.jsx';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover.jsx';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
 
 function formatDate(value) {
   if (!value) return 'Not reported';
@@ -35,22 +38,7 @@ function downloadCsv() {
   link.href = url;
   link.download = 'rbi_repo_rate_decisions_all.csv';
   link.click();
-  URL.revokeObjectURL(url);
-}
-
-function SourceAction({ source }) {
-  return (
-    <a
-      className="source-record__title group inline-flex min-w-0 items-start gap-2 text-sm font-medium text-foreground transition-colors hover:text-source focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      href={source.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Open source: ${source.title}`}
-    >
-      <span className="min-w-0 text-pretty">{source.title}</span>
-      <Icon name="external" size={14} className="mt-0.5 shrink-0 text-muted-foreground transition-colors group-hover:text-source" />
-    </a>
-  );
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 function IntegrityPopover({ source, linkedCount }) {
@@ -70,24 +58,19 @@ function IntegrityPopover({ source, linkedCount }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          className="source-integrity-trigger min-h-10 justify-start px-2 text-xs text-muted-foreground hover:text-foreground"
-          size="sm"
-          variant="ghost"
-          aria-label={`Open integrity details for ${source.title}`}
-        >
-          <Icon name="shield" size={13} />
+        <Button className="source-integrity-trigger min-h-9 justify-start px-2 text-xs text-muted-foreground" size="sm" variant="ghost" aria-label={`Open integrity details for ${source.title}`}>
+          <ShieldCheck className="size-3.5" aria-hidden="true" />
           <span>Integrity</span>
-          <Icon name="chevronDown" size={13} className="text-muted-foreground" />
+          <ChevronDown className="size-3.5" aria-hidden="true" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="end" sideOffset={8} collisionPadding={12} className="source-integrity-popover w-[min(360px,calc(100vw-2rem))] rounded-xl p-4">
+      <PopoverContent align="end" sideOffset={8} collisionPadding={12} className="source-integrity-popover w-[min(360px,calc(100vw-2rem))]">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="m-0 text-sm font-medium text-foreground">Integrity &amp; retrieval</p>
+            <p className="m-0 text-sm font-semibold text-foreground">Integrity &amp; retrieval</p>
             <p className="mt-1 mb-0 text-xs leading-5 text-muted-foreground">Technical provenance for this source record.</p>
           </div>
-          <Icon name="shield" size={16} className="shrink-0 text-muted-foreground" aria-hidden="true" />
+          <ShieldCheck className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         </div>
         <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-xs">
           <div>
@@ -99,12 +82,12 @@ function IntegrityPopover({ source, linkedCount }) {
             <dd className="mt-1 tabular-nums text-foreground">{linkedCount} {linkedCount === 1 ? 'decision' : 'decisions'}</dd>
           </div>
         </dl>
-        <div className="mt-4 border-t border-border/70 pt-3">
+        <div className="mt-4 border-t border-border/80 pt-3">
           <div className="flex items-start gap-2">
             <code className="min-w-0 flex-1 break-all font-mono text-[11px] leading-5 text-foreground">{source.checksum || 'Checksum not reported'}</code>
             {source.checksum ? (
               <Button className="min-h-9 shrink-0 px-2 text-xs" size="sm" variant="outline" onClick={copyChecksum} aria-label={copied ? 'Checksum copied' : 'Copy checksum'}>
-                <Icon name={copied ? 'check' : 'copy'} size={13} />
+                {copied ? <Check className="size-3.5" aria-hidden="true" /> : <Copy className="size-3.5" aria-hidden="true" />}
                 <span>{copied ? 'Copied' : 'Copy'}</span>
               </Button>
             ) : null}
@@ -125,70 +108,81 @@ export default function SourceTransparency() {
   return (
     <section className="data-evidence" aria-labelledby="source-panel-title">
       <Collapsible className="data-evidence__collapsible">
-        <div className="data-evidence__masthead">
-          <CollapsibleTrigger asChild>
-            <button type="button" className="data-evidence__trigger group flex min-w-0 items-start gap-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background">
-              <span className="min-w-0 flex-1">
-                <span className="mb-2 block text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Data &amp; evidence</span>
-                <strong id="source-panel-title" className="block text-lg font-semibold tracking-[-0.03em] text-foreground">Historical repo-rate series</strong>
-                <span className="mt-1 block max-w-2xl text-sm leading-6 text-muted-foreground">Official decisions and source records used to build the explorer.</span>
-                <span className="mt-3 block text-xs leading-5 text-muted-foreground">
-                  <span className="tabular-nums text-foreground">{decisions.length} decisions</span>
-                  <span aria-hidden="true"> · </span>
-                  <span className="tabular-nums text-foreground">{sources.length} sources</span>
-                  <span className="mx-2 text-border-strong" aria-hidden="true">|</span>
-                  Coverage <span className="text-foreground">{formatDate(coverageStart)} – {formatDate(coverageEnd)}</span>
-                  <span className="mx-2 text-border-strong" aria-hidden="true">|</span>
-                  Latest publication <span className="text-foreground">{formatDate(latestPublishedSource?.publishedAt)}</span>
+        <Card className="overflow-hidden rounded-2xl border-border/80 bg-card shadow-none">
+          <CardHeader className="data-evidence__masthead flex flex-col gap-4 border-b-0 px-5 py-5 sm:flex-row sm:items-start sm:justify-between sm:px-7">
+            <CollapsibleTrigger asChild>
+              <button type="button" className="data-evidence__trigger group flex min-w-0 flex-1 items-start gap-4 text-left focus-visible:outline-none" aria-controls="source-records">
+                <span className="min-w-0 flex-1">
+                  <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Data &amp; evidence</span>
+                  <strong id="source-panel-title" className="block text-lg font-semibold tracking-[-0.04em] text-foreground">Historical repo-rate series</strong>
+                  <span className="mt-1.5 block max-w-2xl text-sm leading-6 text-muted-foreground">Official decisions and source records used to build the explorer.</span>
+                  <span className="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-xs leading-5 text-muted-foreground">
+                    <span><strong className="font-medium text-foreground">{decisions.length}</strong> decisions</span>
+                    <span aria-hidden="true">·</span>
+                    <span><strong className="font-medium text-foreground">{sources.length}</strong> sources</span>
+                    <span aria-hidden="true">·</span>
+                    <span>Coverage <strong className="font-medium text-foreground">{formatDate(coverageStart)} – {formatDate(coverageEnd)}</strong></span>
+                    <span aria-hidden="true">·</span>
+                    <span>Latest publication <strong className="font-medium text-foreground">{formatDate(latestPublishedSource?.publishedAt)}</strong></span>
+                  </span>
                 </span>
-              </span>
-              <Icon name="chevronDown" size={17} className="data-evidence__chevron mt-1 shrink-0 text-muted-foreground transition-transform duration-150 group-hover:text-foreground" aria-hidden="true" />
-            </button>
-          </CollapsibleTrigger>
-          <Button className="data-evidence__download w-fit shrink-0" size="sm" variant="outline" onClick={downloadCsv} aria-label="Download the complete repo-rate decision CSV">
-            <Icon name="download" size={14} />
-            Download CSV
-          </Button>
-        </div>
+                <ChevronDown className="data-evidence__chevron mt-1 size-4 shrink-0 text-muted-foreground transition-transform duration-150 ease-out group-hover:text-foreground" aria-hidden="true" />
+              </button>
+            </CollapsibleTrigger>
+            <Button className="data-evidence__download w-fit shrink-0" size="sm" variant="outline" onClick={downloadCsv} aria-label="Download the complete repo-rate decision CSV">
+              <Download className="size-4" aria-hidden="true" />
+              Download CSV
+            </Button>
+          </CardHeader>
 
-        <CollapsibleContent className="data-evidence__content">
-          <div className="source-list" role="list">
-            <div className="source-list__header hidden text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground lg:grid" aria-hidden="true">
-              <span>Source</span>
-              <span>Published</span>
-              <span>Linked</span>
-              <span>Integrity</span>
-            </div>
-            {sources.map(source => {
-              const linkedDecisions = decisions.filter(decision => decision.sourceIds.includes(source.id));
-              const recentLinked = linkedDecisions.slice(-3).reverse();
-              return (
-                <article className="source-record" data-source-id={source.id} key={source.id} role="listitem">
-                  <div className="source-record__identity min-w-0">
-                    <span className="block text-xs font-medium text-source">{formatType(source.type)}</span>
-                    <div className="mt-1.5"><SourceAction source={source} /></div>
-                    <p className="mt-2 mb-0 max-w-2xl text-xs leading-5 text-muted-foreground">
-                      {recentLinked.length > 0
-                        ? `${linkedDecisions.length} linked ${linkedDecisions.length === 1 ? 'decision' : 'decisions'} · ${recentLinked.map(decision => `${decision.date} ${decision.action}`).join(' · ')}`
-                        : 'No decision links in the canonical record.'}
-                    </p>
-                  </div>
-                  <div className="source-record__published">
-                    <span className="block text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground">Published</span>
-                    <span className="mt-1 block text-sm tabular-nums text-foreground">{formatDate(source.publishedAt)}</span>
-                  </div>
-                  <div className="source-record__linked">
-                    <span className="block text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground">Linked</span>
-                    <span className="mt-1 block text-sm tabular-nums text-foreground">{linkedDecisions.length}</span>
-                  </div>
-                  <div className="source-record__integrity">
-                    <IntegrityPopover source={source} linkedCount={linkedDecisions.length} />
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </CollapsibleContent>
+          <CollapsibleContent id="source-records" className="data-evidence__content">
+            <CardContent className="border-t border-border/80 px-5 py-0 sm:px-7">
+              <div className="source-list" role="list">
+                <Table className="source-table" aria-label="Source records">
+                  <colgroup>
+                    <col style={{ width: '16%' }} />
+                    <col style={{ width: '48%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '8%' }} />
+                    <col style={{ width: '13%' }} />
+                  </colgroup>
+                  <TableHeader>
+                    <TableRow className="border-border/80 bg-muted/35 hover:bg-muted/35">
+                      <TableHead>Category</TableHead>
+                      <TableHead>Source</TableHead>
+                      <TableHead>Published</TableHead>
+                      <TableHead>Linked</TableHead>
+                      <TableHead className="text-right">Integrity</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {sources.map(source => {
+                      const linkedDecisions = decisions.filter(decision => decision.sourceIds.includes(source.id));
+                      return (
+                        <TableRow className="source-record border-border/70" data-source-id={source.id} key={source.id} role="listitem">
+                          <TableCell data-label="Category" className="source-record__category min-w-0 align-top">
+                            <Badge className="max-w-full whitespace-normal text-left leading-4" variant="outline">{formatType(source.type)}</Badge>
+                          </TableCell>
+                          <TableCell data-label="Source" className="source-record__identity min-w-0 align-top">
+                            <Button asChild className="source-record__title h-auto min-h-8 max-w-full justify-start whitespace-normal px-0 text-left text-sm font-semibold" variant="link">
+                              <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source: ${source.title}`}>
+                                <span className="source-record__title-text">{source.title}</span>
+                                <ExternalLink className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
+                              </a>
+                            </Button>
+                          </TableCell>
+                          <TableCell data-label="Published" className="source-record__published align-top text-sm tabular-nums text-foreground">{formatDate(source.publishedAt)}</TableCell>
+                          <TableCell data-label="Linked" className="source-record__linked align-top text-sm tabular-nums text-muted-foreground">{linkedDecisions.length}</TableCell>
+                          <TableCell data-label="Integrity" className="source-record__integrity align-top text-right"><IntegrityPopover source={source} linkedCount={linkedDecisions.length} /></TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </CollapsibleContent>
+        </Card>
       </Collapsible>
     </section>
   );

@@ -40,12 +40,11 @@ the reference code or turning this into a generic SaaS dashboard.
 
 - Base spacing unit: 4px.
 - Component rhythm: 8px, 12px, 16px, 24px, 32px.
-- shadcn base radius: `0.625rem`, with derived `sm`, `md`, `lg`, and `xl` scales.
-- Controls use rounded-md; grouped controls use rounded-lg; cards and drawers use
-  rounded-xl. Full pills are reserved for compact semantic badges and dots.
+- shadcn base radius: `0.75rem`, with derived `sm`, `md`, `lg`, and `xl` scales.
+- Interactive controls use full pills; grouped rails and large surfaces use generous
+  concentric radii. Tables remain rectangular inside a fully-rounded outer frame.
 - Geist is the interface and current-rate face. Geist Mono is restricted to
-  checksums, snapshot IDs, and data labels where alignment earns its use. Inter is
-  available for reference-compatible reading content.
+  checksums, snapshot IDs, and data labels where alignment earns its use.
 - Body text: 14–15px with a restrained 1.5 line-height.
 - Labels/meta: 11–12px, medium weight, tracked when uppercase.
 - Headings: weight and color create hierarchy before size does.
@@ -81,23 +80,22 @@ The latest official decision, latest source publication, and last successful che
 are separate facts. Every decision marker and ledger row must be source-backed,
 including holds. The interface never invents calendar-month decisions.
 
-## V4 visual reset — rounded shadcn policy register
+## Current shadcn policy register
 
-The page uses an open policy-register canvas with two focal bounded surfaces:
-`SnapshotBand` and `ChartWorkspace`. Ledger rows and evidence rows remain open,
-ruled by hairlines rather than wrapped in cards. No content surface may contain a
-second card surface.
+The page uses a cool-neutral paper/graphite canvas with three deliberate shadcn surfaces:
+the current snapshot, the analytical workspace, and the evidence disclosure. The
+decision spine stays a ruled table inside the workspace so the data reads as a
+register rather than a stack of dashboard cards.
 
 - The snapshot is the first-viewport focal point: `5.25` is a calm Geist display
   value with a separately optically sized `%`, comfortable tracking, and no mono
   styling. The label is sentence case: `Repo rate`.
-- The latest official decision defines the current trend: cut/easing is green,
-  hold/steady is blue, hike/tightening is red, and initial records are blue.
-  Semantic backgrounds stay faint; text, dots, markers, and focus states carry the
-  signal.
-- Rounded controls use full or large radii; the snapshot and workspace use a
-  large consistent radius; rows stay open. Only overlays, drawers, dialogs, and
-  popovers receive elevation.
+- The latest official decision defines the current trend: cut/easing is saturated
+  green, hold/steady is sky blue, and hike/tightening is saturated red. Semantic
+  backgrounds stay faint; text, dots, markers, and focus states carry the signal.
+- Controls and semantic badges are fully rounded; grouped control rails and the
+  snapshot, workspace, evidence disclosure, and decision spine use concentric
+  large radii. Only overlays, drawers, dialogs, and popovers receive elevation.
 - The workspace owns the one canonical decision spine. Selecting a chart marker
   highlights the matching row; selecting a row focuses the matching marker. The
   selected record exposes its official source without relying on hover.
@@ -107,14 +105,14 @@ second card surface.
 
 ## Calm analytical workspace — current redesign
 
-The rounded V4 surface model is superseded by a flatter analytical workspace. The
-page is a single policy register: an open current-rate summary, one hairline-bounded
-repo-rate explorer, one canonical decision spine, and a compact evidence disclosure.
-Large rounded page cards, repeated source metadata, and pill-shaped control groups
-are not part of this direction.
+The current system is a restrained shadcn application shell: a high-signal current
+snapshot, one bounded repo-rate explorer, one canonical decision spine, and a
+compact evidence disclosure. Rounded surfaces are used once per meaningful region;
+rows remain ruled, and control groups use quiet line-style Tabs rather than pills.
 
 - The current-rate summary answers rate, effective date, latest decision, source,
-  and verification status without repeating the same source facts in the footer.
+  and verification status once; the evidence disclosure owns the detailed source
+  register and dataset metadata.
 - Timeline, rate changes, and cycles are local analytical views inside one workspace;
   the URL remains the shareable source of truth for the active view and range.
 - The default timeline is the effective repo-rate line plus every official decision
@@ -143,5 +141,6 @@ are not part of this direction.
 - Layers is always discoverable, starts with regime bands and macro events enabled,
   and uses checkbox menu rows on desktop and mobile rather than pill toggles.
 - Data & evidence is one dataset masthead with counts, coverage, latest publication,
-  and CSV access. Source records use a bounded identity/publication/linked/integrity
-  grid; checksum and retrieval details live in anchored integrity popovers.
+  and CSV access. Source records use explicit category, source, publication, linked,
+  and integrity columns; long source names wrap inside the source track. Checksum
+  and retrieval details live in anchored integrity popovers.

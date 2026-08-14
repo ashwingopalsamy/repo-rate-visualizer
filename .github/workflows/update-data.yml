@@ -17,12 +17,23 @@ jobs:
         with:
           node-version: '20'
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Fetch latest RBI data
         run: node scripts/fetch-rbi-data.js
 
-      - name: Validate data and production build
+      - name: Install Hugging Face dataset tooling
+        run: python -m pip install -r requirements-hf-dataset.txt
+
+      - name: Build Hugging Face dataset artifact
+        run: python scripts/build-hf-dataset.py
+
+      - name: Validate data, dataset artifact, and production build
         run: |
           npm run test:data
+          npm run test:hf-dataset
           npm run build
           git diff --check
 
@@ -30,6 +41,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/data/ src/data/snapshot.json
+          git add public/data/ src/data/snapshot.json hf-dataset/
           git diff --staged --quiet || git commit -m "data: update RBI repo rate snapshot"
           git push
