@@ -1,5 +1,6 @@
 const DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const ACTIONS = new Set(['initial', 'cut', 'hike', 'hold']);
+const TRUSTED_EVENT_HOSTS = new Set(['rbi.org.in', 'cbic-gst.gov.in', 'mha.gov.in']);
 
 /**
  * SnapshotV2 is the build-time contract for the visualizer.
@@ -40,6 +41,12 @@ function isValidUrl(value) {
   } catch {
     return false;
   }
+}
+
+function isTrustedEventCitation(value) {
+  if (!isValidUrl(value)) return false;
+  const hostname = new URL(value).hostname.toLowerCase();
+  return [...TRUSTED_EVENT_HOSTS].some(host => hostname === host || hostname.endsWith(`.${host}`));
 }
 
 function decisionId(index, date) {
@@ -213,7 +220,28 @@ export function validateSnapshotV2(snapshot) {
     });
   }
 
-  if (!Array.isArray(snapshot.events)) errors.push('events must be an array');
+  if (!Array.isArray(snapshot.events)) {
+    errors.push('events must be an array');
+  } else {
+    const eventIds = new Set();
+    snapshot.events.forEach((event, index) => {
+      const prefix = `events[${index}]`;
+      if (!isObject(event)) {
+        errors.push(`${prefix} must be an object`);
+        return;
+      }
+      if (typeof event.id !== 'string' || event.id.trim() === '') errors.push(`${prefix}.id is required`);
+      if (eventIds.has(event.id)) errors.push(`duplicate event id: ${event.id}`);
+      eventIds.add(event.id);
+      if (!isValidDateOnly(event.date)) errors.push(`${prefix}.date must be a valid YYYY-MM-DD date`);
+      if (typeof event.label !== 'string' || event.label.trim() === '') errors.push(`${prefix}.label is required`);
+      if (typeof event.description !== 'string' || event.description.trim() === '') errors.push(`${prefix}.description is required`);
+      if (typeof event.type !== 'string' || event.type.trim() === '') errors.push(`${prefix}.type is required`);
+      if (!isTrustedEventCitation(event.citation)) {
+        errors.push(`${prefix}.citation must use an official RBI, RBI Docs, MHA, or CBIC domain`);
+      }
+    });
+  }
   if (!Array.isArray(snapshot.regimes)) errors.push('regimes must be an array');
 
   if (Array.isArray(snapshot.decisions) && snapshot.decisions.length > 0 && isObject(snapshot.current)) {

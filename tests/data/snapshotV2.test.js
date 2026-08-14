@@ -85,3 +85,10 @@ test('rejects unsorted decisions', () => {
 
   assert.throws(() => assertValidSnapshotV2(invalid), /strictly sorted by date/);
 });
+
+test('requires macro-event citations to use trusted official domains', () => {
+  const invalid = clone(migrateSnapshot(legacySnapshot));
+  invalid.events[0].citation = 'https://example.com/macro-event';
+
+  assert.throws(() => assertValidSnapshotV2(invalid), /official RBI, RBI Docs, MHA, or CBIC domain/);
+});
