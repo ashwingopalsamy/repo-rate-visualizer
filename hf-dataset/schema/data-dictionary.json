@@ -1,0 +1,927 @@
+{
+  "dataset_name": "RBI policy repo-rate and monetary-policy decision history",
+  "dataset_repo_id": "ashwingopalsamy/india-repo-rate-dataset",
+  "dataset_schema_version": "1.0.0",
+  "canonical_configuration": "decisions",
+  "rights": {
+    "dataset_license": null,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "source_material_rights": "remain_with_respective_publishers",
+    "notice_section": "Attribution & Usage",
+    "reference_material_url": "https://rbi.org.in/scripts/PublicationsView.aspx?Id=18086"
+  },
+  "source_snapshot": {
+    "snapshot_id": "2026-08-14-v2",
+    "snapshot_checksum": "sha256:7c54caa01180d3018077a174f2239df9e221e520c61a31d952d6b152a16d3c26",
+    "retrieved_at": "2026-08-14T07:35:45.400Z"
+  },
+  "configurations": {
+    "decisions": {
+      "row_grain": "one row per canonical monetary-policy/rate observation",
+      "parquet_path": "data/decisions.parquet",
+      "fields": [
+        {
+          "name": "decision_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Stable dataset-generated identifier for one canonical ledger row.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "snapshot_decision_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Original decision identifier from SnapshotV2.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "canonical_key",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Globally readable instrument/date key: IN:RBI:policy_repo_rate:YYYY-MM-DD.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "jurisdiction",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 jurisdiction code: IN.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "country",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Country name: India.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "central_bank",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Central bank responsible for the instrument.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "central_bank_code",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Short central-bank code: RBI.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "decision_authority",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Authority identified by the source type, or null when not known.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Null means the value is unavailable in the canonical snapshot."
+        },
+        {
+          "name": "instrument",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Human-readable policy instrument name.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "instrument_code",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Stable machine-readable instrument code.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "record_type",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "policy_decision for a policy-resolution record; historical_rate_observation for imported history.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "date_semantics",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Whether the date represents a resolution/effective date or a historical observation date.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "decision_date",
+          "arrow_type": "date32[day]",
+          "nullable": true,
+          "description": "Date of the identified policy decision; null for imported historical observations.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null means no separate policy-decision date is identified by the source record."
+        },
+        {
+          "name": "effective_date",
+          "arrow_type": "date32[day]",
+          "nullable": false,
+          "description": "Date on which the canonical rate observation is effective or recorded.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "year",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Calendar year derived from effective_date.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "month",
+          "arrow_type": "int8",
+          "nullable": false,
+          "description": "Calendar month number derived from effective_date.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "policy_rate_pct",
+          "arrow_type": "double",
+          "nullable": false,
+          "description": "Policy repo rate in percent, retained as a convenient numeric view.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "policy_rate_bps",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Policy repo rate in basis points; exactly round(policy_rate_pct * 100).",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "previous_policy_rate_pct",
+          "arrow_type": "double",
+          "nullable": true,
+          "description": "Previous canonical policy rate in percent.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null for the first canonical observation."
+        },
+        {
+          "name": "previous_policy_rate_bps",
+          "arrow_type": "int32",
+          "nullable": true,
+          "description": "Previous canonical policy rate in basis points.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null for the first canonical observation."
+        },
+        {
+          "name": "change_bps",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Signed change from the previous canonical policy rate in basis points; zero for the initial observation.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "action",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Canonical transition label: initial, hike, cut, or hold.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "stance",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Monetary-policy stance when explicitly available.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Null means the canonical source does not provide a structured stance."
+        },
+        {
+          "name": "is_rate_change",
+          "arrow_type": "bool",
+          "nullable": false,
+          "description": "True when change_bps is non-zero.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "decision_summary",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Short deterministic factual summary generated from structured fields; source prose is not republished.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "regime_id",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Stable join key for the repository-provided regime interval containing effective_date.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null means effective_date falls in a gap between regime intervals."
+        },
+        {
+          "name": "regime_type",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Repository-provided contextual regime type.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Null means the value is unavailable in the canonical snapshot."
+        },
+        {
+          "name": "regime_label",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Repository-provided contextual regime label.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Null means the value is unavailable in the canonical snapshot."
+        },
+        {
+          "name": "primary_source_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Highest-priority source attached to this decision under the deterministic source-priority policy.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "primary_source_type",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Type of primary_source_id.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "primary_source_title",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Title of primary_source_id.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "primary_source_url",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "URL of primary_source_id.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "primary_source_published_at",
+          "arrow_type": "timestamp[us, tz=UTC]",
+          "nullable": true,
+          "description": "Publication timestamp of primary_source_id when supplied.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Null means the source record does not provide a publication timestamp."
+        },
+        {
+          "name": "primary_source_retrieved_at",
+          "arrow_type": "timestamp[us, tz=UTC]",
+          "nullable": false,
+          "description": "Retrieval timestamp of primary_source_id.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "primary_source_checksum",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "SHA-256 checksum recorded for primary_source_id.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "source_ids",
+          "arrow_type": "list<item: string>",
+          "nullable": false,
+          "description": "All source identifiers attached to the canonical row, sorted deterministically.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "source_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Number of distinct attached source identifiers.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "provenance_class",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Strongest attached provenance class: official_primary, official_secondary, or legacy_import.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "verification_status",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Deterministic verification label exposing primary, legacy, secondary, or mixed support.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "snapshot_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "SnapshotV2 identifier used as the build input.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "snapshot_checksum",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "SnapshotV2 content checksum used as the build input.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "snapshot_retrieved_at",
+          "arrow_type": "timestamp[us, tz=UTC]",
+          "nullable": false,
+          "description": "SnapshotV2 retrieval timestamp.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "dataset_schema_version",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Independent semantic schema version for this dataset.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "record_text",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Deterministically generated factual sentence intended for search, RAG, and agent use.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        }
+      ]
+    },
+    "annual": {
+      "row_grain": "one row per calendar year from the earliest through latest snapshot year",
+      "parquet_path": "data/annual.parquet",
+      "fields": [
+        {
+          "name": "year",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Calendar year, including years with no canonical ledger records.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "start_policy_rate_pct",
+          "arrow_type": "double",
+          "nullable": true,
+          "description": "Rate in force immediately before January 1 of the year.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when no earlier canonical rate is available."
+        },
+        {
+          "name": "end_policy_rate_pct",
+          "arrow_type": "double",
+          "nullable": true,
+          "description": "Rate in force on December 31 of the year.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when no canonical rate is in force by year end."
+        },
+        {
+          "name": "min_policy_rate_pct",
+          "arrow_type": "double",
+          "nullable": true,
+          "description": "Minimum known in-force rate during the year, including a carry-in rate.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when no canonical rate is known during the year."
+        },
+        {
+          "name": "max_policy_rate_pct",
+          "arrow_type": "double",
+          "nullable": true,
+          "description": "Maximum known in-force rate during the year, including a carry-in rate.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when no canonical rate is known during the year."
+        },
+        {
+          "name": "net_change_bps",
+          "arrow_type": "int32",
+          "nullable": true,
+          "description": "End rate minus start rate in basis points; null if either boundary is unknown.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when start_policy_rate_pct or end_policy_rate_pct is null."
+        },
+        {
+          "name": "gross_hikes_bps",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Sum of positive canonical transitions within the calendar year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "gross_cuts_bps",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Absolute sum of negative canonical transitions within the calendar year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "decision_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Count of all canonical ledger rows whose effective_date falls in the year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "policy_decision_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Count of policy_decision rows in the year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "historical_observation_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Count of historical_rate_observation rows in the year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "hike_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Count of canonical rows labeled hike in the year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "cut_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Count of canonical rows labeled cut in the year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "hold_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Count of canonical rows labeled hold in the year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "first_decision_date",
+          "arrow_type": "date32[day]",
+          "nullable": true,
+          "description": "Effective date of the first canonical row in the year.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when the year has no canonical ledger rows."
+        },
+        {
+          "name": "last_decision_date",
+          "arrow_type": "date32[day]",
+          "nullable": true,
+          "description": "Effective date of the last canonical row in the year.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when the year has no canonical ledger rows."
+        },
+        {
+          "name": "year_end_action",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Action of the final in-year canonical row; null when the year-end rate is carried in from an earlier year.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when no canonical row in the year establishes the year-end state."
+        },
+        {
+          "name": "year_end_stance",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Stance of the final in-year canonical row.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when no in-year stance is available."
+        },
+        {
+          "name": "year_end_regime_id",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Regime containing December 31 under start-inclusive/end-exclusive matching.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when December 31 falls in a regime gap."
+        },
+        {
+          "name": "year_end_regime_type",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Repository-provided regime type at December 31.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null means the value is unavailable in the canonical snapshot."
+        },
+        {
+          "name": "year_end_regime_label",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Repository-provided regime label at December 31.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null means the value is unavailable in the canonical snapshot."
+        },
+        {
+          "name": "year_end_source_id",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "Primary source supporting the rate in force at year end.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null when no year-end rate is known."
+        },
+        {
+          "name": "year_end_source_url",
+          "arrow_type": "string",
+          "nullable": true,
+          "description": "URL of year_end_source_id.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Null means the value is unavailable in the canonical snapshot."
+        },
+        {
+          "name": "source_count",
+          "arrow_type": "int32",
+          "nullable": false,
+          "description": "Distinct sources used by in-year canonical rows and the year-end carry-in state.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "provenance_summary",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Sorted pipe-delimited provenance classes represented in the year.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "snapshot_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "SnapshotV2 identifier used as the build input.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "snapshot_checksum",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "SnapshotV2 content checksum used as the build input.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "snapshot_retrieved_at",
+          "arrow_type": "timestamp[us, tz=UTC]",
+          "nullable": false,
+          "description": "SnapshotV2 retrieval timestamp.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "dataset_schema_version",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Independent semantic schema version for this dataset.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "record_text",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Deterministically generated factual annual summary for search, RAG, and agent use.",
+          "source_native": false,
+          "derived": true,
+          "null_semantics": "Not nullable."
+        }
+      ]
+    },
+    "sources": {
+      "row_grain": "one row per source document/resource",
+      "parquet_path": "data/sources.parquet",
+      "fields": [
+        {
+          "name": "source_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Stable source identifier from SnapshotV2.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "publisher",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Publisher derived from the source URL/domain.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "source_type",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Source adapter/type from SnapshotV2.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "title",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Source title from SnapshotV2.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "url",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Authoritative source URL from SnapshotV2.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "published_at",
+          "arrow_type": "timestamp[us, tz=UTC]",
+          "nullable": true,
+          "description": "Source publication timestamp when supplied.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Null means the source record has no publication timestamp."
+        },
+        {
+          "name": "retrieved_at",
+          "arrow_type": "timestamp[us, tz=UTC]",
+          "nullable": false,
+          "description": "Source retrieval timestamp.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "checksum",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "SHA-256 checksum recorded for the source.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "is_primary_source",
+          "arrow_type": "bool",
+          "nullable": false,
+          "description": "Whether the source is classified as a direct primary RBI rate source.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "provenance_class",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "official_primary, official_secondary, or legacy_import.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        }
+      ]
+    },
+    "events": {
+      "row_grain": "one row per contextual macro/policy event",
+      "parquet_path": "data/events.parquet",
+      "fields": [
+        {
+          "name": "event_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Stable contextual event identifier from SnapshotV2.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "date",
+          "arrow_type": "date32[day]",
+          "nullable": false,
+          "description": "Calendar date of the contextual event.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "label",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Short event label.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "description",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Contextual event description from the repository snapshot.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "event_type",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Repository event type.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "citation_url",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Citation URL for the contextual event.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        }
+      ]
+    },
+    "regimes": {
+      "row_grain": "one row per repository-provided regime interval",
+      "parquet_path": "data/regimes.parquet",
+      "fields": [
+        {
+          "name": "regime_id",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Stable deterministic regime interval identifier.",
+          "source_native": false,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "start_date",
+          "arrow_type": "date32[day]",
+          "nullable": false,
+          "description": "Inclusive start date of the contextual regime.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "end_date",
+          "arrow_type": "date32[day]",
+          "nullable": true,
+          "description": "Exclusive end date of the contextual regime.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Null represents an open-ended interval."
+        },
+        {
+          "name": "regime_type",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Repository-provided contextual regime type.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        },
+        {
+          "name": "label",
+          "arrow_type": "string",
+          "nullable": false,
+          "description": "Repository-provided contextual regime label.",
+          "source_native": true,
+          "derived": false,
+          "null_semantics": "Not nullable."
+        }
+      ]
+    }
+  },
+  "relationships": [
+    "decisions.source_ids resolves to sources.source_id.",
+    "decisions.primary_source_id and annual.year_end_source_id resolve to sources.source_id.",
+    "decisions.regime_id and annual.year_end_regime_id resolve to regimes.regime_id when non-null.",
+    "events are contextual and are not joined to decisions or interpreted as causal explanations."
+  ],
+  "semantic_rules": [
+    "Parquet is canonical; CSV and JSONL are interoperability exports and are not additional Hugging Face configurations.",
+    "decision_date is null for imported historical observations because the source does not identify a separate policy decision date.",
+    "effective_date is the canonical ledger ordering/effective date for every decision row.",
+    "annual start rate is the latest known rate strictly before January 1; end rate is the latest known rate on or before December 31.",
+    "annual gross hikes and gross cuts use only canonical transitions within that year; a first observation is not a hike or cut.",
+    "regime intervals use start-inclusive/end-exclusive matching; gaps remain null.",
+    "unknown values are typed nulls, never empty strings or sentinel labels."
+  ],
+  "csv_conventions": {
+    "null": "empty cell",
+    "lists": "compact JSON arrays, for example [\"source-a\",\"source-b\"]",
+    "booleans": "true or false",
+    "timestamps": "UTC ISO-8601 text ending in Z"
+  }
+}

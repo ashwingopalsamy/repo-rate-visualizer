@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset/raw/main/schema/sources.schema.json",
+  "title": "RBI repo-rate dataset — sources",
+  "description": "Schema for the sources configuration of the independent RBI repo-rate dataset.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "Stable source identifier from SnapshotV2.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Publisher derived from the source URL/domain.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Source adapter/type from SnapshotV2.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "title": {
+      "type": "string",
+      "description": "Source title from SnapshotV2.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "url": {
+      "type": "string",
+      "description": "Authoritative source URL from SnapshotV2.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Source publication timestamp when supplied.",
+      "x-arrow-type": "timestamp[us, tz=UTC]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Null means the source record has no publication timestamp."
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Source retrieval timestamp.",
+      "x-arrow-type": "timestamp[us, tz=UTC]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "checksum": {
+      "type": "string",
+      "description": "SHA-256 checksum recorded for the source.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "is_primary_source": {
+      "type": "boolean",
+      "description": "Whether the source is classified as a direct primary RBI rate source.",
+      "x-arrow-type": "bool",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "provenance_class": {
+      "type": "string",
+      "description": "official_primary, official_secondary, or legacy_import.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    }
+  },
+  "required": [
+    "source_id",
+    "publisher",
+    "source_type",
+    "title",
+    "url",
+    "retrieved_at",
+    "checksum",
+    "is_primary_source",
+    "provenance_class"
+  ],
+  "x-dataset-schema-version": "1.0.0",
+  "x-config-name": "sources",
+  "x-row-grain": "one row per source document/resource"
+}

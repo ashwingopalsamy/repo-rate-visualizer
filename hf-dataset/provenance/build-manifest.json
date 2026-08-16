@@ -1,0 +1,51 @@
+{
+  "dataset_schema_version": "1.0.0",
+  "generator_version": "1.1.0",
+  "generated_at": "2026-08-14T07:35:45.400Z",
+  "source_snapshot_id": "2026-08-14-v2",
+  "source_snapshot_checksum": "sha256:7c54caa01180d3018077a174f2239df9e221e520c61a31d952d6b152a16d3c26",
+  "source_retrieved_at": "2026-08-14T07:35:45.400Z",
+  "record_counts_by_config": {
+    "decisions": 107,
+    "annual": 27,
+    "sources": 9,
+    "events": 8,
+    "regimes": 15
+  },
+  "rights": {
+    "dataset_license": null,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "source_material_rights": "remain_with_respective_publishers",
+    "notice_section": "Attribution & Usage",
+    "reference_material_url": "https://rbi.org.in/scripts/PublicationsView.aspx?Id=18086"
+  },
+  "coverage": {
+    "earliest_effective_date": "2000-06-05",
+    "latest_effective_date": "2026-08-05"
+  },
+  "output_checksums": {
+    "CHANGELOG.md": "e34653a068058163ad79fbafd35a581eade86c3bba8e3b485cb1202280bf46fe",
+    "NOTICE.md": "9a30ab8cf8980bfc0d8a217cd58bceb5d03b7a82fc9f68ee0f658cda9513ef46",
+    "README.md": "b2df4d34ff42eabe1f7490461da0147b17d435fcea7e42f4c2030c177821e762",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+    "data/annual.parquet": "95547d4ade5b77d51b39ad4165724422a9de2a5a40aee06b552a5356b600ea28",
+    "data/decisions.parquet": "8cf49e290e0ed75901598e2d5f2c1570d43f601e9269b53946b4b187d0f7f60d",
+    "data/events.parquet": "6dcb5da5446228712aff2e4f2a53a00123357ebc6301ea963e395851dc50ce37",
+    "data/regimes.parquet": "919c736bec30bb07738c06c71c1f61f81fc83da2aedeeacb5ab801f6e3a24fc6",
+    "data/sources.parquet": "d689d3eff3805dcdf569b33fc52d55dcf56af8988a9263c026662b1e3f02410c",
+    "exports/annual.csv": "4596d0beb9f566b7613f79cf7b909766bc03d32512b3cf480500ad6673a3efa0",
+    "exports/annual.jsonl": "fe8436fafcdfcf6efeb06d44779e664c665630600a7a8d389c079116526fd351",
+    "exports/decisions.csv": "f8ee555dfd239d9a35b8707471aef86e4498470bbd7413600ce52053fcdb3804",
+    "exports/decisions.jsonl": "2bf983632cc5a90913d73ec74b36e36ecd83e377cc97a275542f765e8a3a34b9",
+    "exports/events.csv": "0df5b24681ca67d407da453342415421d2eae3379889a48f16cca6e04ddcb8c2",
+    "exports/regimes.csv": "a22343cfba4dff998cf3abdf68bec6620597391a5d9f0add33b54b6db55e9441",
+    "exports/sources.csv": "263975efc7cdb0f6656ea922896e46617d2011b7724a54f59a250f9586d273c9",
+    "schema/annual.schema.json": "04bd7faac59d3b855da4377d0e1e1ec8bd5319063ad20344fb806f84bd50870f",
+    "schema/data-dictionary.json": "3d25fbfd032f4306183ca49225cb2e9b40572a04476051dc1c6964eb24e4fb12",
+    "schema/decisions.schema.json": "71a7b6f333e9e5fc1b796ab41260fc5296c93ff44e2eec557d228877826fdaff",
+    "schema/events.schema.json": "38b1c97b1801ec12644bb73878b3fea161bedbfb2f207bd20bc313f1079bef15",
+    "schema/regimes.schema.json": "38a12912c16bbb5d09035455edcd132ccd587c8c4a2171c8c9f51f05634129c4",
+    "schema/sources.schema.json": "e25ce035c4a21189eadfb7d1c645c91c56fd7a4f81fd04a44273ced81f635e89"
+  }
+}

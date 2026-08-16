@@ -1,0 +1,16 @@
+regime_id,start_date,end_date,regime_type,label
+regime-2000-06-05-2003-08-25-easing,2000-06-05,2003-08-25,easing,Post-dot-com easing
+regime-2003-08-25-2008-07-29-tightening,2003-08-25,2008-07-29,tightening,Pre-GFC tightening
+regime-2008-10-20-2009-04-21-easing,2008-10-20,2009-04-21,easing,GFC response
+regime-2009-04-21-2011-10-25-tightening,2009-04-21,2011-10-25,tightening,Post-GFC normalization
+regime-2011-10-25-2013-05-03-pause,2011-10-25,2013-05-03,pause,Inflation plateau
+regime-2013-05-03-2013-09-20-easing,2013-05-03,2013-09-20,easing,Brief easing
+regime-2013-09-20-2014-01-28-tightening,2013-09-20,2014-01-28,tightening,Taper tantrum response
+regime-2014-01-28-2016-10-04-easing,2014-01-28,2016-10-04,easing,Rajan easing cycle
+regime-2016-10-04-2017-08-02-pause,2016-10-04,2017-08-02,pause,Demonetization pause
+regime-2017-08-02-2018-08-01-tightening,2017-08-02,2018-08-01,tightening,Pre-election tightening
+regime-2018-08-01-2020-05-22-easing,2018-08-01,2020-05-22,easing,Das easing + COVID
+regime-2020-05-22-2022-05-04-pause,2020-05-22,2022-05-04,pause,COVID hold at record low
+regime-2022-05-04-2023-02-08-tightening,2022-05-04,2023-02-08,tightening,Inflation tightening
+regime-2023-02-08-2025-02-07-pause,2023-02-08,2025-02-07,pause,Extended pause at 6.50%
+regime-2025-02-07-2025-12-05-easing,2025-02-07,2025-12-05,easing,New easing cycle
