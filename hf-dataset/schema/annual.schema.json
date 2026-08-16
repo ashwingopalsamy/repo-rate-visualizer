@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset/raw/main/schema/annual.schema.json",
+  "title": "RBI repo-rate dataset — annual",
+  "description": "Schema for the annual configuration of the independent RBI repo-rate dataset.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "year": {
+      "type": "integer",
+      "description": "Calendar year, including years with no canonical ledger records.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "start_policy_rate_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Rate in force immediately before January 1 of the year.",
+      "x-arrow-type": "double",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when no earlier canonical rate is available."
+    },
+    "end_policy_rate_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Rate in force on December 31 of the year.",
+      "x-arrow-type": "double",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when no canonical rate is in force by year end."
+    },
+    "min_policy_rate_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Minimum known in-force rate during the year, including a carry-in rate.",
+      "x-arrow-type": "double",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when no canonical rate is known during the year."
+    },
+    "max_policy_rate_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Maximum known in-force rate during the year, including a carry-in rate.",
+      "x-arrow-type": "double",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when no canonical rate is known during the year."
+    },
+    "net_change_bps": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "End rate minus start rate in basis points; null if either boundary is unknown.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when start_policy_rate_pct or end_policy_rate_pct is null."
+    },
+    "gross_hikes_bps": {
+      "type": "integer",
+      "description": "Sum of positive canonical transitions within the calendar year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "gross_cuts_bps": {
+      "type": "integer",
+      "description": "Absolute sum of negative canonical transitions within the calendar year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "decision_count": {
+      "type": "integer",
+      "description": "Count of all canonical ledger rows whose effective_date falls in the year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "policy_decision_count": {
+      "type": "integer",
+      "description": "Count of policy_decision rows in the year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "historical_observation_count": {
+      "type": "integer",
+      "description": "Count of historical_rate_observation rows in the year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "hike_count": {
+      "type": "integer",
+      "description": "Count of canonical rows labeled hike in the year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "cut_count": {
+      "type": "integer",
+      "description": "Count of canonical rows labeled cut in the year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "hold_count": {
+      "type": "integer",
+      "description": "Count of canonical rows labeled hold in the year.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "first_decision_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Effective date of the first canonical row in the year.",
+      "x-arrow-type": "date32[day]",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when the year has no canonical ledger rows."
+    },
+    "last_decision_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Effective date of the last canonical row in the year.",
+      "x-arrow-type": "date32[day]",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when the year has no canonical ledger rows."
+    },
+    "year_end_action": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Action of the final in-year canonical row; null when the year-end rate is carried in from an earlier year.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when no canonical row in the year establishes the year-end state."
+    },
+    "year_end_stance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Stance of the final in-year canonical row.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when no in-year stance is available."
+    },
+    "year_end_regime_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Regime containing December 31 under start-inclusive/end-exclusive matching.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when December 31 falls in a regime gap."
+    },
+    "year_end_regime_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Repository-provided regime type at December 31.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null means the value is unavailable in the canonical snapshot."
+    },
+    "year_end_regime_label": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Repository-provided regime label at December 31.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null means the value is unavailable in the canonical snapshot."
+    },
+    "year_end_source_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Primary source supporting the rate in force at year end.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null when no year-end rate is known."
+    },
+    "year_end_source_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "URL of year_end_source_id.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Null means the value is unavailable in the canonical snapshot."
+    },
+    "source_count": {
+      "type": "integer",
+      "description": "Distinct sources used by in-year canonical rows and the year-end carry-in state.",
+      "x-arrow-type": "int32",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "provenance_summary": {
+      "type": "string",
+      "description": "Sorted pipe-delimited provenance classes represented in the year.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "snapshot_id": {
+      "type": "string",
+      "description": "SnapshotV2 identifier used as the build input.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "snapshot_checksum": {
+      "type": "string",
+      "description": "SnapshotV2 content checksum used as the build input.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "snapshot_retrieved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "SnapshotV2 retrieval timestamp.",
+      "x-arrow-type": "timestamp[us, tz=UTC]",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "dataset_schema_version": {
+      "type": "string",
+      "description": "Independent semantic schema version for this dataset.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "record_text": {
+      "type": "string",
+      "description": "Deterministically generated factual annual summary for search, RAG, and agent use.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": true,
+      "x-null-semantics": "Not nullable."
+    }
+  },
+  "required": [
+    "year",
+    "gross_hikes_bps",
+    "gross_cuts_bps",
+    "decision_count",
+    "policy_decision_count",
+    "historical_observation_count",
+    "hike_count",
+    "cut_count",
+    "hold_count",
+    "source_count",
+    "provenance_summary",
+    "snapshot_id",
+    "snapshot_checksum",
+    "snapshot_retrieved_at",
+    "dataset_schema_version",
+    "record_text"
+  ],
+  "x-dataset-schema-version": "1.0.0",
+  "x-config-name": "annual",
+  "x-row-grain": "one row per calendar year from the earliest through latest snapshot year"
+}

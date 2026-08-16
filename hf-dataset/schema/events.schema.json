@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset/raw/main/schema/events.schema.json",
+  "title": "RBI repo-rate dataset — events",
+  "description": "Schema for the events configuration of the independent RBI repo-rate dataset.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Stable contextual event identifier from SnapshotV2.",
+      "x-arrow-type": "string",
+      "x-source-native": false,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Calendar date of the contextual event.",
+      "x-arrow-type": "date32[day]",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "label": {
+      "type": "string",
+      "description": "Short event label.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "description": {
+      "type": "string",
+      "description": "Contextual event description from the repository snapshot.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Repository event type.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    },
+    "citation_url": {
+      "type": "string",
+      "description": "Citation URL for the contextual event.",
+      "x-arrow-type": "string",
+      "x-source-native": true,
+      "x-derived": false,
+      "x-null-semantics": "Not nullable."
+    }
+  },
+  "required": [
+    "event_id",
+    "date",
+    "label",
+    "description",
+    "event_type",
+    "citation_url"
+  ],
+  "x-dataset-schema-version": "1.0.0",
+  "x-config-name": "events",
+  "x-row-grain": "one row per contextual macro/policy event"
+}
