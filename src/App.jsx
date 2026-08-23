@@ -5,10 +5,30 @@ import RateSummary from './components/RateSummary.jsx';
 import ChartWorkspace from './components/ChartWorkspace.jsx';
 import SourceTransparency from './components/SourceTransparency.jsx';
 import DataCitation from './components/DataCitation.jsx';
+import DesignPage from './components/DesignPage.jsx';
+import ColophonPage from './components/ColophonPage.jsx';
 import useUrlState from './hooks/useUrlState.js';
 import { currentRate, snapshotMeta } from './data/dataLoader.js';
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return '/';
+  });
+
+  const isDesignPage = currentPath === '/design' || currentPath === '/design/';
+  const isColophonPage = currentPath === '/colophon' || currentPath === '/colophon/';
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const [activeView, setActiveView] = useState(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -72,6 +92,22 @@ export default function App() {
     onDateRangeChange: setDateRange,
     onPresetChange: setActivePreset,
   });
+
+  if (isDesignPage) {
+    return (
+      <ThemeProvider>
+        <DesignPage />
+      </ThemeProvider>
+    );
+  }
+
+  if (isColophonPage) {
+    return (
+      <ThemeProvider>
+        <ColophonPage />
+      </ThemeProvider>
+    );
+  }
 
   return (
     <ThemeProvider>

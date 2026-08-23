@@ -56,7 +56,7 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Clean, soft canvas with ultra-subtle hairline borders */
-  --background: oklch(0.978 0.002 240);
+  --background: oklch(0.985 0.001 240);
   --foreground: oklch(0.18 0.004 240);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.004 240);
@@ -72,9 +72,9 @@
   --accent-foreground: oklch(0.18 0.004 240);
   --destructive: oklch(0.58 0.20 25);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.942 0.001 240);
-  --border-strong: oklch(0.87 0.003 240);
-  --input: oklch(0.89 0.002 240);
+  --border: oklch(0.962 0.001 240);
+  --border-strong: oklch(0.90 0.002 240);
+  --input: oklch(0.92 0.002 240);
   --ring: oklch(0.50 0.14 240);
 
   --chart-1: oklch(0.20 0.003 240);
@@ -110,12 +110,12 @@
   --color-tightening: var(--color-hike-muted);
   --color-pause: var(--color-hold-muted);
   --header-height: 4rem;
-  --shadow-popover: 0 10px 30px color-mix(in oklch, var(--foreground) 10%, transparent);
+  --shadow-popover: 0 6px 20px color-mix(in oklch, var(--foreground) 5%, transparent);
 }
 
 .dark {
   color-scheme: dark;
-  --background: oklch(0.15 0.004 240);
+  --background: oklch(0.165 0.004 240);
   --foreground: oklch(0.99 0.002 240);
   --card: oklch(0.18 0.004 240);
   --card-foreground: oklch(0.99 0.002 240);
@@ -131,9 +131,9 @@
   --accent-foreground: oklch(0.99 0.002 240);
   --destructive: oklch(0.70 0.18 25);
   --destructive-foreground: oklch(0.15 0.005 240);
-  --border: oklch(1 0 0 / 8%);
-  --border-strong: oklch(1 0 0 / 16%);
-  --input: oklch(1 0 0 / 12%);
+  --border: oklch(1 0 0 / 5.5%);
+  --border-strong: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 9%);
   --ring: oklch(0.72 0.12 240);
 
   --chart-1: oklch(0.92 0.003 240);
@@ -168,7 +168,7 @@
   --color-easing: var(--color-cut-muted);
   --color-tightening: var(--color-hike-muted);
   --color-pause: var(--color-hold-muted);
-  --shadow-popover: 0 16px 40px rgb(0 0 0 / 0.40);
+  --shadow-popover: 0 10px 24px rgb(0 0 0 / 0.20);
 }
 
 @layer base {

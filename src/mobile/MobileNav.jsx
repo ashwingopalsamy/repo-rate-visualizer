@@ -131,6 +131,18 @@ export default function MobileNav({ activeView, activePreset, dateRange, layers,
               <span className="text-sm font-medium text-foreground">Theme</span>
               <ThemeToggle />
             </div>
+            <div className="grid grid-cols-2 gap-2">
+              <Button asChild className="w-full justify-center rounded-xl px-3 py-2 text-center border border-border/80 bg-card/60 hover:bg-muted/80 text-foreground text-xs" variant="ghost">
+                <a href="/design">
+                  <span className="font-medium">Design System</span>
+                </a>
+              </Button>
+              <Button asChild className="w-full justify-center rounded-xl px-3 py-2 text-center border border-border/80 bg-card/60 hover:bg-muted/80 text-foreground text-xs" variant="ghost">
+                <a href="/colophon">
+                  <span className="font-medium">Colophon</span>
+                </a>
+              </Button>
+            </div>
             <div className="rounded-xl border border-border/80 bg-card/60 p-3">
               <span className="text-xs font-semibold text-muted-foreground mb-2 block">Share &amp; Export</span>
               <ExportBar activeView={activeView} dateRange={dateRange} />

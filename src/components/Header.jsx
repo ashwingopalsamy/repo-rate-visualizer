@@ -51,6 +51,18 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
       label: 'Jump to policy workspace',
       execute: () => document.querySelector('.chart-workspace')?.scrollIntoView({ behavior: 'auto', block: 'start' }),
     },
+    {
+      id: 'navigate-design',
+      group: 'Reference',
+      label: 'Design System & Tokens (/design)',
+      execute: () => { window.location.href = '/design'; },
+    },
+    {
+      id: 'navigate-colophon',
+      group: 'Reference',
+      label: 'Colophon & Architecture (/colophon)',
+      execute: () => { window.location.href = '/colophon'; },
+    },
   ], [activeView, onViewChange]);
 
   return (

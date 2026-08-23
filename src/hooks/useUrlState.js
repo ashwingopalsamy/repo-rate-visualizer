@@ -43,6 +43,13 @@ export default function useUrlState({ activeView, dateRange, activePreset, onVie
 
   // Write state to URL on change
   const syncToUrl = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      const p = window.location.pathname;
+      if (p === '/design' || p === '/design/' || p === '/colophon' || p === '/colophon/') {
+        return;
+      }
+    }
+
     const params = new URLSearchParams();
     params.set('view', activeView);
     params.set('range', activePreset);

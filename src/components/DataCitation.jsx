@@ -22,6 +22,23 @@ export default function DataCitation() {
             </a>
           </Button>.</span>
         </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-0.5 mb-1">
+          <Button asChild variant="outline" size="sm" className="h-7 rounded-full border-border/70 bg-card/60 hover:bg-muted/60 px-3 text-xs text-muted-foreground hover:text-foreground transition-all shadow-2xs gap-1.5">
+            <a href="/design" aria-label="Explore the Design System & Tokens">
+              <span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />
+              <span>Design System &amp; Tokens</span>
+              <span className="text-[10px] text-muted-foreground font-mono">/design</span>
+            </a>
+          </Button>
+          <Button asChild variant="outline" size="sm" className="h-7 rounded-full border-border/70 bg-card/60 hover:bg-muted/60 px-3 text-xs text-muted-foreground hover:text-foreground transition-all shadow-2xs gap-1.5">
+            <a href="/colophon" aria-label="Read the Project Colophon">
+              <span>Colophon</span>
+              <span className="text-[10px] text-muted-foreground font-mono">/colophon</span>
+            </a>
+          </Button>
+        </div>
+
         <p className="m-0 max-w-2xl text-xs leading-5 text-muted-foreground">Independent educational reference. Not affiliated with or endorsed by the Reserve Bank of India. Not financial advice.</p>
       </div>
     </footer>
