@@ -68,4 +68,37 @@ export const snapshotMeta = {
   checksum: snapshot.meta.checksum || snapshot.sources[0]?.checksum || '',
   latestOfficialDate: snapshot.meta.latestOfficialDate,
   latestSourcePublishedAt: snapshot.meta.latestSourcePublishedAt,
+  generatedBy: snapshot.meta.generatedBy || 'scripts/fetch-rbi-data.js',
 };
+
+/**
+ * Fetch the latest manifest to check for newer snapshots.
+ * Returns null if the manifest is unreachable (offline/CDN miss) so the
+ * baked-in snapshot remains authoritative without a runtime failure.
+ */
+export async function fetchManifest() {
+  try {
+    const response = await fetch('/data/manifest.json');
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Check whether a newer snapshot is available relative to the baked-in build.
+ * Compares the manifest's `latest` field against the bundled snapshot date.
+ */
+export async function checkForUpdate() {
+  const manifest = await fetchManifest();
+  if (!manifest) return { available: false, manifest: null };
+  const bundledDate = snapshotMeta.id?.replace(/-v\d+$/, '') || '';
+  const latestDate = manifest.latest || '';
+  return {
+    available: latestDate > bundledDate,
+    manifest,
+    bundledDate,
+    latestDate,
+  };
+}

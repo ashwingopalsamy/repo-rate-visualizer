@@ -115,7 +115,13 @@ export default function RateSummary() {
           <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-border/50 pt-3 -mt-1">
             <div className="flex flex-col gap-0.5">
               <span><span className="font-semibold text-foreground/75">MPC decision</span> · {formatDate(latestDecision?.date)}</span>
-              <span>Updated {formatDate(snapshotMeta.retrievedAt)}</span>
+              <span className="flex items-center gap-1.5">
+                Updated {formatDate(snapshotMeta.retrievedAt)}
+                <span className="inline-flex items-center gap-1 rounded-full bg-muted/60 px-1.5 py-px text-[10px] font-medium text-muted-foreground border border-border/50">
+                  <span className="size-1.5 rounded-full bg-cut animate-pulse" aria-hidden="true" />
+                  Auto-synced
+                </span>
+              </span>
             </div>
             {latestDecisionSource?.url ? (
               <a
@@ -228,9 +234,13 @@ export default function RateSummary() {
                   {formatMonthYear(latestDecision?.date)}
                 </span>
               </div>
-              <div className="flex items-center justify-center">
+              <div className="flex flex-col items-center justify-center gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground" title={formatTimestamp(snapshotMeta.retrievedAt)}>
                   Updated {formatDate(snapshotMeta.retrievedAt)}
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-muted/60 px-1.5 py-px text-[10px] font-medium text-muted-foreground border border-border/50">
+                  <span className="size-1.5 rounded-full bg-cut animate-pulse" aria-hidden="true" />
+                  Auto-synced
                 </span>
               </div>
             </div>

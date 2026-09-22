@@ -95,6 +95,16 @@ export default function ColophonPage() {
       copyValue: 'import snapshot from "./src/data/snapshot.json";',
     },
     {
+      id: 'manifest-json',
+      name: 'Dynamic Snapshots Manifest',
+      path: '/data/manifest.json',
+      format: 'JSON',
+      formatVariant: 'cut',
+      description: 'Weekly automated snapshot archive registry refreshed by GitHub Actions cron pipeline.',
+      actionType: 'link',
+      url: '/data/manifest.json',
+    },
+    {
       id: 'design-spec',
       name: 'Design Specification',
       path: '/DESIGN.md',
@@ -292,12 +302,13 @@ export default function ColophonPage() {
                 <div className="flex flex-col gap-2">
                   <h3 className="m-0 text-sm font-bold text-foreground">Automated Ingestion Streams</h3>
                   <p className="m-0 text-xs leading-relaxed text-muted-foreground">
-                    Historical series are scraped and cross-validated against the RBI Database on Indian Economy (DBIE). From 2016 onward, official Monetary Policy Committee resolution PDFs and voting statements are parsed directly from <code className="font-mono text-[11px]">rbi.org.in</code>.
+                    Historical series are scraped and cross-validated against the RBI Database on Indian Economy (DBIE). An automated GitHub Actions pipeline runs weekly (every Wednesday after MPC releases) to scrape current rates, parse MPC resolutions from <code className="font-mono text-[11px]">rbi.org.in</code>, refresh the Hugging Face Parquet dataset, and validate data integrity.
                   </p>
                 </div>
                 <ul className="m-0 p-0 pl-4 text-xs text-muted-foreground flex flex-col gap-1 list-disc">
                   <li><strong className="text-foreground">DBIE Archives (2000–2016)</strong>: Validated historical rate series.</li>
                   <li><strong className="text-foreground">MPC Resolutions (2016–Present)</strong>: Resolution PDFs, statements, voting.</li>
+                  <li><strong className="text-foreground">GitHub Actions Automation</strong>: Scheduled cron &amp; on-demand ingestion.</li>
                 </ul>
               </Card>
 

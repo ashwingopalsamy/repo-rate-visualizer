@@ -105,7 +105,7 @@ export async function fetchText(url, { fetchImpl = globalThis.fetch, timeoutMs =
       signal: controller.signal,
       headers: {
         accept: 'text/html, text/csv, application/json;q=0.9, */*;q=0.8',
-        'user-agent': 'RBI-Repo-Rate-Visualizer/1.0 (+https://github.com/ashwingopalsamy/repo-rate-visualizer)',
+        'user-agent': 'Mozilla/5.0 (compatible; RBI-Repo-Rate-Visualizer/1.0; +https://github.com/ashwingopalsamy/repo-rate-visualizer)',
       },
     });
     if (!response.ok) throw new SourceFetchError(`RBI source returned HTTP ${response.status}: ${url}`);
@@ -146,11 +146,15 @@ function firstMatch(text, patterns) {
 
 export function parseCurrentPolicyRates(html, { url = RBI_SOURCE_URLS.currentRates } = {}) {
   const sectionMatch = html.match(/CURRENT\s+RATES\s+START([\s\S]*?)CURRENT\s+RATES\s+END/i);
-  if (!sectionMatch) throw new SourceParseError('RBI current-rates section was not found');
-  const text = stripHtml(sectionMatch[1]);
+  // Fall back to scanning the full page when RBI removes or changes the comment markers.
+  const sectionHtml = sectionMatch
+    ? sectionMatch[1]
+    : html;
+  const text = stripHtml(sectionHtml);
   const repoMatch = firstMatch(text, [
     /Policy\s+Repo\s+Rate\s*:?\s*([0-9]+(?:\.[0-9]+)?)\s*%/i,
     /Policy\s+Repo\s+Rate[\s\S]{0,80}?([0-9]+(?:\.[0-9]+)?)\s*per\s*cent/i,
+    /Repo\s+Rate\s*:?\s*([0-9]+(?:\.[0-9]+)?)\s*%/i,
   ]);
   if (!repoMatch) throw new SourceParseError('RBI current-rates page has no Policy Repo Rate value');
 
@@ -229,14 +233,16 @@ function parsePolicyRate(text) {
   return firstMatch(text, [
     /policy\s+repo\s+rate[\s\S]{0,260}?\b(?:to|at)\s+([0-9]+(?:\.[0-9]+)?)\s*per\s*cent/i,
     /repo\s+rate[\s\S]{0,180}?\b(?:to|at)\s+([0-9]+(?:\.[0-9]+)?)\s*per\s*cent/i,
+    /policy\s+repo\s+rate[\s\S]{0,260}?\b(?:stands?|remains?|is)\s+(?:at\s+)?([0-9]+(?:\.[0-9]+)?)\s*per\s*cent/i,
     /policy\s+repo\s+rate[\s\S]{0,260}?([0-9]+(?:\.[0-9]+)?)\s*%/i,
+    /repo\s+rate[\s\S]{0,180}?([0-9]+(?:\.[0-9]+)?)\s*%/i,
   ]);
-  
 }
 
 function parseStance(text) {
   const match = firstMatch(text, [
     /(?:continue|retain|maintain)\s+(?:with\s+)?the\s+([a-z][a-z -]{2,40}?)\s+stance/i,
+    /(?:change|changed)\s+(?:the\s+)?stance\s+(?:of\s+monetary\s+policy\s+)?(?:to|from\s+\S+\s+to)\s+([a-z][a-z -]{2,40}?)(?:\.|,|\s+to\s+respond)/i,
     /stance\s+(?:of|remains?)\s+([a-z][a-z -]{2,40}?)(?:\.|,|\s+to\s+respond)/i,
   ]);
   return match ? match[1].trim().replace(/\s+/g, ' ') : null;
