@@ -10,7 +10,6 @@ const latestDecision = latestDirectDecision(decisions, sources);
 const latestDecisionSource = latestDecision?.sourceIds
   ?.map(sourceId => sourceById.get(sourceId))
   .find(Boolean);
-const directDecisionLabel = latestDecision ? 'Direct RBI decision' : 'Direct RBI decision not reported';
 
 function toDate(value) {
   return value ? new Date(`${value}${value.length === 10 ? 'T00:00:00.000Z' : ''}`) : null;
@@ -88,8 +87,8 @@ export default function RateSummary() {
             </div>
           </div>
 
-          {/* 2. 2-col grid: Last recorded action + sourced stance */}
-          <div className="grid grid-cols-2 divide-x divide-border/50 rounded-xl border border-border/60 bg-muted/20">
+          {/* 2. Recorded change */}
+          <div className="grid grid-cols-1 rounded-xl border border-border/60 bg-muted/20">
             <div className="px-3.5 py-3">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block">Latest Recorded Action</span>
               <div className={`mt-1.5 text-2xl font-bold tracking-tight leading-none tabular-nums ${
@@ -98,18 +97,11 @@ export default function RateSummary() {
                 {formatBpsChange(changeBps, latestRecord?.action)}
               </div>
             </div>
-            <div className="px-3.5 py-3">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block">Recorded Stance</span>
-              <div className="mt-1.5 text-sm font-semibold text-foreground leading-tight">{stance || 'Not reported'}</div>
-            </div>
           </div>
 
-          {/* 3. Decision evidence strip */}
-          <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-border/50 pt-3 -mt-1">
-            <div className="flex flex-col gap-0.5">
-              <span><span className="font-semibold text-foreground/75">{directDecisionLabel}</span> · {formatDate(latestDecision?.date)}</span>
-            </div>
-            {latestDecisionSource?.url ? (
+          {/* 3. Source link */}
+          {latestDecisionSource?.url ? (
+            <div className="flex items-center justify-end text-xs text-muted-foreground border-t border-border/50 pt-3 -mt-1">
               <a
                 href={latestDecisionSource.url}
                 target="_blank"
@@ -117,11 +109,11 @@ export default function RateSummary() {
                 className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors shrink-0 ml-3"
                 aria-label="Open latest RBI policy source"
               >
-                <span>Resolution</span>
+                <span>Open resolution</span>
                 <ExternalLink className="size-3" aria-hidden="true" />
               </a>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </div>
 
         {/* DESKTOP LAYOUT (md+) */}
@@ -185,9 +177,6 @@ export default function RateSummary() {
                   <span className={`size-2 rounded-full ${trend.dotClass} shrink-0`} />
                   <span>{cycleLabel}</span>
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  <span className="font-semibold text-foreground/75">Recorded stance</span>: {stance || 'not reported'}
-                </div>
               </div>
             </div>
 
@@ -219,9 +208,6 @@ export default function RateSummary() {
                 <span className="text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3rem] font-semibold tracking-tight leading-none text-foreground tabular-nums rate-gradient-text">
                   {formatMonthYear(latestDecision?.date || latestRecord?.date)}
                 </span>
-              </div>
-              <div className="flex items-center justify-center">
-                <span className="text-xs font-medium text-muted-foreground">{directDecisionLabel}</span>
               </div>
             </div>
 
