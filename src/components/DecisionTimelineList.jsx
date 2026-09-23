@@ -317,7 +317,7 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
               </TableRow>
             </TableHeader>
             <TableBody>
-              {allFilteredDecisions.slice().reverse().map(decision => {
+              {displayedDecisions.slice().reverse().map(decision => {
                 const source = decision.sourceIds.map(sourceId => sourceById.get(sourceId)).find(Boolean);
                 const trend = getTrend(decision.action);
                 const isActive = activeDecisionId === decision.id;

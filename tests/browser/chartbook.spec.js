@@ -163,6 +163,28 @@ test('range state, views, and exports remain functional', async ({ page }) => {
   expect(await readFile(await (await citationDownload).path(), 'utf8')).toContain('Snapshot snapshot-');
 });
 
+test('rate record action tabs filter the rendered records', async ({ page }) => {
+  await page.goto('/?view=timeline&range=ALL');
+  await waitForChart(page);
+
+  const tableRows = page.locator('.decision-table tbody [data-decision-id]');
+  await expect(page.getByRole('tab', { name: 'All (107)' })).toHaveAttribute('aria-selected', 'true');
+  await expect(tableRows).toHaveCount(107);
+
+  await page.getByRole('tab', { name: 'Cuts (46)' }).click();
+  await expect(page.getByRole('tab', { name: 'Cuts (46)' })).toHaveAttribute('aria-selected', 'true');
+  await expect(tableRows).toHaveCount(46);
+  await expect.poll(async () => tableRows.evaluateAll(rows => rows.every(row => row.dataset.action === 'cut'))).toBe(true);
+
+  await page.getByRole('tab', { name: 'Hikes (43)' }).click();
+  await expect(tableRows).toHaveCount(43);
+  await expect.poll(async () => tableRows.evaluateAll(rows => rows.every(row => row.dataset.action === 'hike'))).toBe(true);
+
+  await page.getByRole('tab', { name: 'Holds (17)' }).click();
+  await expect(tableRows).toHaveCount(17);
+  await expect.poll(async () => tableRows.evaluateAll(rows => rows.every(row => row.dataset.action === 'hold'))).toBe(true);
+});
+
 test('workspace controls are grouped and Layers exposes a selected state', async ({ page }) => {
   await page.goto('/?view=timeline&range=10Y');
   await waitForChart(page);
