@@ -47,6 +47,35 @@ test('parses a source-backed hold and stance from an RBI resolution', () => {
   assert.equal(result.source.publishedAt, '2026-08-05T00:00:00.000Z');
 });
 
+test('ignores volatile fetch markup when fingerprinting parsed RBI evidence', async () => {
+  const currentRates = readFixture('current-rates.html');
+  const policyArchive = readFixture('policy-archive.html');
+  const policyDocument = readFixture('policy-resolution.html');
+  const makeFetch = token => async url => {
+    const body = url === 'https://www.rbi.org.in/'
+      ? currentRates
+      : url.includes('/scripts/Annualpolicy.aspx')
+        ? policyArchive
+        : policyDocument;
+    return {
+      ok: true,
+      status: 200,
+      text: async () => `${body}\n<script id="f5_cspm">${token}</script>`,
+      headers: new Map([['content-type', 'text/html']]),
+    };
+  };
+
+  const first = await runUpdate({ fetchImpl: makeFetch('volatile-a'), dryRun: true });
+  const second = await runUpdate({ fetchImpl: makeFetch('volatile-b'), dryRun: true });
+
+  assert.equal(first.contentChanged, second.contentChanged);
+  assert.equal(first.snapshot.meta.checksum, second.snapshot.meta.checksum);
+  assert.deepEqual(
+    first.snapshot.sources.map(source => [source.id, source.checksum]),
+    second.snapshot.sources.map(source => [source.id, source.checksum]),
+  );
+});
+
 test('parses DBIE CSV exports and sorts the observations', () => {
   const result = parseDbieKeyRates(readFixture('dbie-key-rates.csv'), { contentType: 'text/csv' });
 

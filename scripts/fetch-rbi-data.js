@@ -63,7 +63,23 @@ function sourceIdFor(source) {
   return `source-${sha256(`${source.type}|${source.url}`).slice(7, 19)}`;
 }
 
-function enrichSource(source, fetched, fallbackTitle = source.title) {
+function canonicalize(value) {
+  if (Array.isArray(value)) return value.map(canonicalize);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.keys(value)
+        .sort()
+        .map(key => [key, canonicalize(value[key])]),
+    );
+  }
+  return value;
+}
+
+function stableEvidenceChecksum(value) {
+  return sha256(JSON.stringify(canonicalize(value)));
+}
+
+function enrichSource(source, fetched, fallbackTitle = source.title, evidence = undefined) {
   return {
     id: sourceIdFor(source),
     type: source.type,
@@ -71,7 +87,10 @@ function enrichSource(source, fetched, fallbackTitle = source.title) {
     url: fetched.url,
     publishedAt: source.publishedAt ?? null,
     retrievedAt: fetched.retrievedAt,
-    checksum: fetched.checksum,
+    // The raw RBI HTML includes volatile anti-bot markup. Source digests are
+    // therefore based on the parsed evidence, while the published snapshot
+    // still gets an exact artifact SHA-256 below.
+    checksum: evidence === undefined ? fetched.checksum : stableEvidenceChecksum(evidence),
   };
 }
 
@@ -312,7 +331,11 @@ async function fetchPolicyDocuments(entries) {
   return mapWithConcurrency(entries, async entry => {
     const fetched = await fetchText(entry.url);
     const parsed = parsePolicyDocument(fetched.body, entry, { url: fetched.url });
-    const sourceRecord = enrichSource(parsed.source, fetched, entry.title);
+    const sourceRecord = enrichSource(parsed.source, fetched, entry.title, {
+      decision: parsed.decision,
+      source: parsed.source,
+      text: parsed.text,
+    });
     return {
       ...parsed,
       sourceRecord,
@@ -334,7 +357,7 @@ async function fetchDbieIfConfigured() {
   });
   return {
     ...parsed,
-    sourceRecord: enrichSource(parsed.source, fetched),
+    sourceRecord: enrichSource(parsed.source, fetched, parsed.source.title, parsed.rows),
   };
 }
 
@@ -347,7 +370,7 @@ export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN
     { fetchImpl },
   );
   const currentParsed = parseCurrentPolicyRates(currentFetched.body, { url: currentFetched.url });
-  const currentSourceRecord = enrichSource(currentParsed.source, currentFetched);
+  const currentSourceRecord = enrichSource(currentParsed.source, currentFetched, currentParsed.source.title, currentParsed);
   const currentRates = { ...currentParsed, sourceRecord: currentSourceRecord };
 
   const archiveFetched = await fetchText(
@@ -360,7 +383,7 @@ export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN
     title: 'RBI Monetary Policy archive',
     url: archiveFetched.url,
     publishedAt: null,
-  }, archiveFetched);
+  }, archiveFetched, undefined, archiveEntries);
 
   const resolutionEntries = archiveEntries.filter(entry => entry.type === 'policy-resolution');
   const minutesEntries = archiveEntries.filter(entry => entry.type === 'policy-minutes');
