@@ -199,10 +199,29 @@ export function mergeSupplementalHistory(snapshot) {
       };
     });
 
-  const sources = [
-    ...snapshot.sources.filter(source => source.id !== LEGACY_SOURCE_ID && !sourceIds.has(source.id)),
-    ...SUPPLEMENTAL_HISTORY_SOURCES,
-  ];
+  // Preserve the existing order so adding a newly discovered official source
+  // after the supplemental records does not make this merge non-idempotent.
+  // Legacy snapshots may not contain one or both supplemental records, so
+  // append only the records that are still missing.
+  const supplementalById = new Map(
+    SUPPLEMENTAL_HISTORY_SOURCES.map(source => [source.id, source]),
+  );
+  const seenSupplementalIds = new Set();
+  const sources = [];
+  for (const source of snapshot.sources) {
+    if (source.id === LEGACY_SOURCE_ID) continue;
+    const supplemental = supplementalById.get(source.id);
+    if (supplemental) {
+      if (seenSupplementalIds.has(source.id)) continue;
+      sources.push(supplemental);
+      seenSupplementalIds.add(source.id);
+      continue;
+    }
+    sources.push(source);
+  }
+  for (const supplemental of SUPPLEMENTAL_HISTORY_SOURCES) {
+    if (!seenSupplementalIds.has(supplemental.id)) sources.push(supplemental);
+  }
   const latestDecision = decisions.at(-1);
   const currentRateSourceIds = snapshot.sources
     .filter(source => source.type === 'current-policy-rates')

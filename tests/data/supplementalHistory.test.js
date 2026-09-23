@@ -33,8 +33,23 @@ test('keeps the supplied historical source records attached to the snapshot', ()
 });
 
 test('merging the supplemental series is idempotent', () => {
-  const merged = mergeSupplementalHistory(snapshot);
-  assert.deepEqual(merged.decisions, snapshot.decisions);
-  assert.deepEqual(merged.sources, snapshot.sources);
-  assert.deepEqual(merged.rateSeries, snapshot.rateSeries);
+  const candidate = {
+    ...snapshot,
+    sources: [
+      ...snapshot.sources,
+      {
+        id: 'source-newly-discovered-minutes',
+        type: 'policy-minutes',
+        title: 'Newly discovered RBI minutes',
+        url: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63403',
+        publishedAt: '2026-08-19T00:00:00.000Z',
+        retrievedAt: '2026-09-23T11:00:59.915Z',
+        checksum: `sha256:${'d'.repeat(64)}`,
+      },
+    ],
+  };
+  const merged = mergeSupplementalHistory(candidate);
+  assert.deepEqual(merged.decisions, candidate.decisions);
+  assert.deepEqual(merged.sources, candidate.sources);
+  assert.deepEqual(merged.rateSeries, candidate.rateSeries);
 });
