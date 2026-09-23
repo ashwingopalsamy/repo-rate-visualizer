@@ -389,6 +389,12 @@ test('data and evidence keeps dataset metadata and source integrity together', a
   await expect(page.getByText(/107 records/).first()).toBeVisible();
   await expect(page.getByText(/Coverage/).first()).toBeVisible();
   await expect(page.getByRole('button', { name: 'Download the complete repo-rate decision CSV' })).toBeVisible();
+  const copyRelease = page.getByRole('button', { name: 'Copy release ID' });
+  const copyArtifact = page.getByRole('button', { name: 'Copy SHA-256' });
+  await expect(copyRelease).toBeVisible();
+  await expect(copyArtifact).toBeVisible();
+  await copyRelease.hover();
+  await expect(page.locator('[data-slot="tooltip-content"]')).toContainText('snapshot-');
   await expect(page.locator('[data-source-id]').first()).toBeVisible();
   const integrity = page.locator('[data-source-id]').first().getByRole('button', { name: /Open integrity details/ });
   await integrity.click();

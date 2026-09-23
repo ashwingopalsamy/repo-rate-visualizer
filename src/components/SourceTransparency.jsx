@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader } from './ui/card.jsx';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible.jsx';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover.jsx';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
 
 function formatDate(value) {
   if (!value) return 'Not reported';
@@ -42,6 +43,44 @@ function formatType(type = '') {
 
 function compactType(type = '') {
   return CATEGORY_LABELS[type] || formatType(type);
+}
+
+function CopyableMetadata({ label, value }) {
+  const [copied, setCopied] = useState(false);
+
+  const copyValue = async () => {
+    if (!value) return;
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  if (!value) return <span className="text-muted-foreground">Not reported</span>;
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="h-8 gap-1.5 px-2 text-xs text-muted-foreground hover:text-foreground"
+          aria-label={copied ? `${label} copied` : `Copy ${label}`}
+          onClick={() => void copyValue()}
+        >
+          {copied ? <Check className="size-3.5" aria-hidden="true" /> : <Copy className="size-3.5" aria-hidden="true" />}
+          <span>{copied ? 'Copied' : `Copy ${label}`}</span>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom" sideOffset={6} collisionPadding={12} className="max-w-[min(520px,calc(100vw-2rem))] text-left">
+        <code className="break-all font-mono text-[11px] leading-4">{value}</code>
+      </TooltipContent>
+    </Tooltip>
+  );
 }
 
 function downloadCsv() {
@@ -154,7 +193,7 @@ export default function SourceTransparency() {
           <dl className="grid grid-cols-1 gap-3 border-t border-border/70 bg-muted/10 px-4 py-3 text-xs text-muted-foreground sm:grid-cols-2 sm:px-7 xl:grid-cols-4">
             <div className="min-w-0">
               <dt className="font-semibold text-foreground">Release</dt>
-              <dd className="mt-1 mb-0 break-all font-mono text-[11px] leading-4">{snapshotMeta.releaseId || 'Not reported'}</dd>
+              <dd className="mt-1 mb-0"><CopyableMetadata label="release ID" value={snapshotMeta.releaseId} /></dd>
             </div>
             <div className="min-w-0">
               <dt className="font-semibold text-foreground">Snapshot retrieved</dt>
@@ -166,7 +205,7 @@ export default function SourceTransparency() {
             </div>
             <div className="min-w-0">
               <dt className="font-semibold text-foreground">Artifact SHA-256</dt>
-              <dd className="mt-1 mb-0 break-all font-mono text-[11px] leading-4">{snapshotMeta.artifactSha256 || 'Not reported'}</dd>
+              <dd className="mt-1 mb-0"><CopyableMetadata label="SHA-256" value={snapshotMeta.artifactSha256} /></dd>
             </div>
           </dl>
 
