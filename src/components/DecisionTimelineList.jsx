@@ -299,12 +299,11 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
         <div className={`decision-table-wrap w-full rounded-xl border border-border/60 bg-card shadow-2xs ${desktopExpanded ? 'overflow-hidden' : 'max-h-[460px] overflow-y-auto overscroll-contain relative'}`} role="list" aria-label="Repo rate records">
           <Table className="decision-table" aria-label="Repo rate records">
             <colgroup>
+              <col style={{ width: '18%' }} />
+              <col style={{ width: '18%' }} />
+              <col style={{ width: '15%' }} />
               <col style={{ width: '17%' }} />
-              <col style={{ width: '16%' }} />
-              <col style={{ width: '12%' }} />
-              <col style={{ width: '14%' }} />
-              <col style={{ width: '31%' }} />
-              <col style={{ width: '10%' }} />
+              <col style={{ width: '32%' }} />
             </colgroup>
             <TableHeader className="sticky top-0 z-10 bg-muted/95 backdrop-blur border-b border-border/60 shadow-2xs">
               <TableRow className="border-border/60 bg-transparent hover:bg-transparent">
@@ -312,7 +311,6 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
                 <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Record</TableHead>
                 <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Rate</TableHead>
                 <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Change</TableHead>
-                <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Stance</TableHead>
                 <TableHead className="text-right text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Source</TableHead>
               </TableRow>
             </TableHeader>
@@ -347,7 +345,6 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
                     </TableCell>
                     <TableCell data-label="Rate" className="font-bold tabular-nums text-foreground">{decision.repoRate.toFixed(2)}%</TableCell>
                     <TableCell data-label="Change" className={`text-xs font-semibold tabular-nums ${trend.textClass}`}>{changeLabel(decision)}</TableCell>
-                    <TableCell data-label="Stance" className="whitespace-normal break-words text-xs text-muted-foreground">{decision.stance || 'Stance not reported'}</TableCell>
                     <TableCell data-label="Source" className="text-right">
                       {source ? (
                         <Button asChild className="size-7" size="icon-sm" variant="ghost">

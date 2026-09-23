@@ -14,6 +14,7 @@ test('desktop overview, source trail, and decision spine are visible', async ({ 
   await expect(page.getByText('Current trend', { exact: true })).toHaveCount(0);
   await expect(page.getByText('Latest decision', { exact: true })).toBeVisible();
   await expect(page.getByText('Rate record', { exact: true })).toBeVisible();
+  await expect(page.locator('.decision-table thead')).not.toContainText('Stance');
   const attribution = page.locator('[role="note"][aria-labelledby="attribution-title"]');
   await expect(attribution).toBeVisible();
   await expect(attribution.getByRole('heading', { name: 'Attribution & Usage' })).toBeVisible();
