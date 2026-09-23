@@ -68,7 +68,7 @@ function CopyableMetadata({ label, value }) {
           type="button"
           variant="ghost"
           size="sm"
-          className="h-8 gap-1.5 px-2 text-xs text-muted-foreground hover:text-foreground"
+          className="h-auto gap-1.5 px-0 py-0 text-xs text-muted-foreground hover:text-foreground"
           aria-label={copied ? `${label} copied` : `Copy ${label}`}
           onClick={() => void copyValue()}
         >
@@ -190,22 +190,22 @@ export default function SourceTransparency() {
             </div>
           </CardHeader>
 
-          <dl className="grid grid-cols-1 gap-3 border-t border-border/70 bg-muted/10 px-4 py-3 text-xs text-muted-foreground sm:grid-cols-2 sm:px-7 xl:grid-cols-4">
+          <dl className="grid grid-cols-1 items-start gap-x-6 gap-y-3 border-t border-border/70 bg-muted/10 px-4 py-3 text-xs text-muted-foreground sm:grid-cols-2 sm:px-7 xl:grid-cols-4">
             <div className="min-w-0">
               <dt className="font-semibold text-foreground">Release</dt>
-              <dd className="mt-1 mb-0"><CopyableMetadata label="release ID" value={snapshotMeta.releaseId} /></dd>
+              <dd className="mt-1 mb-0 flex h-8 items-center"><CopyableMetadata label="release ID" value={snapshotMeta.releaseId} /></dd>
             </div>
             <div className="min-w-0">
               <dt className="font-semibold text-foreground">Snapshot retrieved</dt>
-              <dd className="mt-1 mb-0">{formatTimestamp(snapshotMeta.retrievedAt)}</dd>
+              <dd className="mt-1 mb-0 flex h-8 items-center">{formatTimestamp(snapshotMeta.retrievedAt)}</dd>
             </div>
             <div className="min-w-0">
               <dt className="font-semibold text-foreground">Latest direct decision</dt>
-              <dd className="mt-1 mb-0">{formatDate(snapshotMeta.latestOfficialDate)}</dd>
+              <dd className="mt-1 mb-0 flex h-8 items-center">{formatDate(snapshotMeta.latestOfficialDate)}</dd>
             </div>
             <div className="min-w-0">
               <dt className="font-semibold text-foreground">Artifact SHA-256</dt>
-              <dd className="mt-1 mb-0"><CopyableMetadata label="SHA-256" value={snapshotMeta.artifactSha256} /></dd>
+              <dd className="mt-1 mb-0 flex h-8 items-center"><CopyableMetadata label="SHA-256" value={snapshotMeta.artifactSha256} /></dd>
             </div>
           </dl>
 
