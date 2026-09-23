@@ -151,12 +151,24 @@ export default function SourceTransparency() {
             </div>
           </CardHeader>
 
-          <div className="grid grid-cols-1 gap-2 border-t border-border/70 bg-muted/10 px-4 py-3 text-xs text-muted-foreground sm:grid-cols-4 sm:px-7">
-            <span><strong className="font-semibold text-foreground">Release</strong> <code className="break-all font-mono text-[10px]">{snapshotMeta.releaseId}</code></span>
-            <span><strong className="font-semibold text-foreground">Retrieved</strong> {formatTimestamp(snapshotMeta.retrievedAt)}</span>
-            <span><strong className="font-semibold text-foreground">Latest direct decision</strong> {formatDate(snapshotMeta.latestOfficialDate)}</span>
-            <span><strong className="font-semibold text-foreground">Artifact SHA-256</strong> <code className="break-all font-mono text-[10px]">{snapshotMeta.artifactSha256}</code></span>
-          </div>
+          <dl className="grid grid-cols-1 gap-3 border-t border-border/70 bg-muted/10 px-4 py-3 text-xs text-muted-foreground sm:grid-cols-2 sm:px-7 xl:grid-cols-4">
+            <div className="min-w-0">
+              <dt className="font-semibold text-foreground">Release</dt>
+              <dd className="mt-1 mb-0 break-all font-mono text-[11px] leading-4">{snapshotMeta.releaseId || 'Not reported'}</dd>
+            </div>
+            <div className="min-w-0">
+              <dt className="font-semibold text-foreground">Snapshot retrieved</dt>
+              <dd className="mt-1 mb-0">{formatTimestamp(snapshotMeta.retrievedAt)}</dd>
+            </div>
+            <div className="min-w-0">
+              <dt className="font-semibold text-foreground">Latest direct decision</dt>
+              <dd className="mt-1 mb-0">{formatDate(snapshotMeta.latestOfficialDate)}</dd>
+            </div>
+            <div className="min-w-0">
+              <dt className="font-semibold text-foreground">Artifact SHA-256</dt>
+              <dd className="mt-1 mb-0 break-all font-mono text-[11px] leading-4">{snapshotMeta.artifactSha256 || 'Not reported'}</dd>
+            </div>
+          </dl>
 
           <CollapsibleContent id="source-records" className="data-evidence__content">
             <CardContent className="border-t border-border/70 px-0 py-0 sm:px-0">
@@ -210,16 +222,13 @@ export default function SourceTransparency() {
         </Collapsible>
         <aside className="data-evidence__attribution border-t border-border/70 bg-muted/15 px-4 py-4 sm:px-7 sm:py-5" role="note" aria-labelledby="attribution-title">
           <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap items-center justify-between gap-2.5">
+            <div className="flex flex-wrap items-center gap-2.5">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="size-4 shrink-0 text-foreground" aria-hidden="true" />
                 <h3 id="attribution-title" className="m-0 text-sm font-bold tracking-tight text-foreground">
                   Attribution &amp; Usage
                 </h3>
               </div>
-              <Badge variant="outline" className="border-border/80 bg-background/70 px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
-                Independent Educational Reference
-              </Badge>
             </div>
 
             <div className="grid grid-cols-1 divide-y divide-border/50 rounded-xl border border-border/60 bg-background/60 md:grid-cols-3 md:divide-y-0 md:divide-x dark:bg-card/40">
@@ -229,7 +238,7 @@ export default function SourceTransparency() {
                   <span>Statutory Non-Affiliation</span>
                 </div>
                 <p className="mt-2 mb-0 text-xs leading-relaxed text-muted-foreground">
-                  Independent educational reference. This project is not created by, affiliated with, authorised by, sponsored by, or endorsed by the Reserve Bank of India (RBI) or any government agency. No official relationship or representation should be inferred.
+                  This project is not created by, affiliated with, authorised by, sponsored by, or endorsed by the Reserve Bank of India (RBI) or any government agency. No official relationship or representation should be inferred.
                 </p>
               </div>
 

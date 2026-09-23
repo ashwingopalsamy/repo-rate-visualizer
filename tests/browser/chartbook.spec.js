@@ -10,7 +10,8 @@ test('desktop overview, source trail, and decision spine are visible', async ({ 
   await waitForChart(page);
 
   await expect(page.locator('.rate-summary').getByText(/RBI Policy Rate|Repo rate/i).first()).toBeVisible();
-  await expect(page.getByText('Current trend', { exact: true })).toBeVisible();
+  await expect(page.getByText('Recorded stance', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('Current trend', { exact: true })).toHaveCount(0);
   await expect(page.getByText('Latest decision', { exact: true })).toBeVisible();
   await expect(page.getByText('Rate record', { exact: true })).toBeVisible();
   const attribution = page.locator('[role="note"][aria-labelledby="attribution-title"]');
@@ -67,6 +68,9 @@ test('desktop overview, source trail, and decision spine are visible', async ({ 
   await expect(page.locator('.rate-summary')).toHaveAttribute('data-trend', 'hold');
   await expect(page.locator('.rate-summary h1')).toContainText('%');
   await expect(page.locator('.decision-marker--hold').last()).toBeVisible();
+  await expect(page.getByText('Verified snapshot', { exact: true })).toHaveCount(0);
+  await expect(page.locator('.rate-summary').getByText('Snapshot retrieved', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Independent Educational Reference', { exact: true })).toHaveCount(0);
   await expect(page.getByText('Steady', { exact: true })).toHaveCount(0);
   await expect(page.getByText('Source-backed snapshot', { exact: true })).toHaveCount(0);
   await expect(page.getByText('MPC resolution', { exact: true })).toHaveCount(0);

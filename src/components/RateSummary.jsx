@@ -1,5 +1,5 @@
 import { ExternalLink } from 'lucide-react';
-import { currentRate, decisions, sources, snapshotMeta } from '../data/dataLoader.js';
+import { currentRate, decisions, sources } from '../data/dataLoader.js';
 import { getTrend } from '../lib/trend.js';
 import { latestDirectDecision } from '../lib/evidence.js';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
@@ -10,6 +10,7 @@ const latestDecision = latestDirectDecision(decisions, sources);
 const latestDecisionSource = latestDecision?.sourceIds
   ?.map(sourceId => sourceById.get(sourceId))
   .find(Boolean);
+const directDecisionLabel = latestDecision ? 'Direct RBI decision' : 'Direct RBI decision not reported';
 
 function toDate(value) {
   return value ? new Date(`${value}${value.length === 10 ? 'T00:00:00.000Z' : ''}`) : null;
@@ -26,17 +27,6 @@ function formatMonthYear(value) {
   const month = date.toLocaleDateString('en-IN', { month: 'short' });
   const year2 = date.toLocaleDateString('en-IN', { year: '2-digit' });
   return `${month} '${year2}`;
-}
-
-function formatTimestamp(value) {
-  return value ? new Date(value).toLocaleString('en-IN', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZoneName: 'short',
-  }) : 'Not reported';
 }
 
 function formatBpsChange(changeBps, action) {
@@ -98,7 +88,7 @@ export default function RateSummary() {
             </div>
           </div>
 
-          {/* 2. 2-col grid: Last MPC action + Current trend */}
+          {/* 2. 2-col grid: Last recorded action + sourced stance */}
           <div className="grid grid-cols-2 divide-x divide-border/50 rounded-xl border border-border/60 bg-muted/20">
             <div className="px-3.5 py-3">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block">Latest Recorded Action</span>
@@ -109,22 +99,15 @@ export default function RateSummary() {
               </div>
             </div>
             <div className="px-3.5 py-3">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block">Current Trend</span>
-              <div className="mt-1.5 text-sm font-semibold text-foreground leading-tight">{trend.actionLabel}</div>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block">Recorded Stance</span>
+              <div className="mt-1.5 text-sm font-semibold text-foreground leading-tight">{stance || 'Not reported'}</div>
             </div>
           </div>
 
-          {/* 3. Provenance strip */}
+          {/* 3. Decision evidence strip */}
           <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-border/50 pt-3 -mt-1">
             <div className="flex flex-col gap-0.5">
-              <span><span className="font-semibold text-foreground/75">Latest RBI decision</span> · {formatDate(latestDecision?.date)}</span>
-              <span className="flex items-center gap-1.5">
-                Snapshot retrieved {formatDate(snapshotMeta.retrievedAt)}
-                <span className="inline-flex items-center gap-1 rounded-full bg-muted/60 px-1.5 py-px text-[10px] font-medium text-muted-foreground border border-border/50">
-                  <span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />
-                  Verified snapshot
-                </span>
-              </span>
+              <span><span className="font-semibold text-foreground/75">{directDecisionLabel}</span> · {formatDate(latestDecision?.date)}</span>
             </div>
             {latestDecisionSource?.url ? (
               <a
@@ -203,7 +186,7 @@ export default function RateSummary() {
                   <span>{cycleLabel}</span>
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  <span className="font-semibold text-foreground/75">Current trend</span>: {trend.actionLabel}
+                  <span className="font-semibold text-foreground/75">Recorded stance</span>: {stance || 'not reported'}
                 </div>
               </div>
             </div>
@@ -237,14 +220,8 @@ export default function RateSummary() {
                   {formatMonthYear(latestDecision?.date || latestRecord?.date)}
                 </span>
               </div>
-              <div className="flex flex-col items-center justify-center gap-1.5">
-                <span className="text-xs font-medium text-muted-foreground" title={formatTimestamp(snapshotMeta.retrievedAt)}>
-                  Snapshot retrieved {formatDate(snapshotMeta.retrievedAt)}
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-muted/60 px-1.5 py-px text-[10px] font-medium text-muted-foreground border border-border/50">
-                  <span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />
-                  Verified snapshot
-                </span>
+              <div className="flex items-center justify-center">
+                <span className="text-xs font-medium text-muted-foreground">{directDecisionLabel}</span>
               </div>
             </div>
 
