@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ThemeProvider from './components/ThemeProvider.jsx';
 import Header from './components/Header.jsx';
 import RateSummary from './components/RateSummary.jsx';
@@ -7,8 +7,15 @@ import SourceTransparency from './components/SourceTransparency.jsx';
 import DataCitation from './components/DataCitation.jsx';
 import DesignPage from './components/DesignPage.jsx';
 import ColophonPage from './components/ColophonPage.jsx';
-import useUrlState from './hooks/useUrlState.js';
-import { currentRate, snapshotMeta } from './data/dataLoader.js';
+import DecisionDossier from './components/DecisionDossier.jsx';
+import useUrlState, { parseUrlState } from './hooks/useUrlState.js';
+
+function initialUrlState() {
+  if (typeof window === 'undefined') {
+    return parseUrlState('');
+  }
+  return parseUrlState(window.location.search);
+}
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => {
@@ -20,6 +27,8 @@ export default function App() {
 
   const isDesignPage = currentPath === '/design' || currentPath === '/design/';
   const isColophonPage = currentPath === '/colophon' || currentPath === '/colophon/';
+  const dossierMatch = currentPath.match(/^\/decision\/([^/]+)\/?$/);
+  const initialState = initialUrlState();
 
   useEffect(() => {
     const handlePopState = () => {
@@ -29,69 +38,78 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const [activeView, setActiveView] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const view = params.get('view');
-      if (['timeline', 'breakdown', 'rate-change', 'cycles'].includes(view)) return view;
-    }
-    return 'timeline';
-  });
-  const [activeDecisionId, setActiveDecisionId] = useState(null);
-  const [layers, setLayers] = useState({ regimes: true, events: true });
-  const [dateRange, setDateRange] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const range = params.get('range');
-      if (range === 'CUSTOM') {
-        return {
-          start: params.get('start') || null,
-          end: params.get('end') || null,
-        };
-      }
-      if (range && ['1Y', '5Y', '10Y'].includes(range)) {
-        const years = { '1Y': 1, '5Y': 5, '10Y': 10 }[range];
-        const end = new Date(`${snapshotMeta.latestOfficialDate || currentRate.date}T00:00:00.000Z`);
-        const start = new Date(end);
-        start.setFullYear(start.getFullYear() - years);
-        return {
-          start: start.toISOString().split('T')[0],
-          end: end.toISOString().split('T')[0],
-        };
-      }
-    }
-    return {
-      start: null,
-      end: null,
-    };
-  });
+  const [activeView, setActiveView] = useState(initialState.activeView);
+  const [activeDecisionId, setActiveDecisionId] = useState(initialState.activeDecisionId);
+  const [layers, setLayers] = useState(initialState.layers);
+  const [cycleSelection, setCycleSelection] = useState({ a: initialState.cycleA, b: initialState.cycleB });
+  const [dateRange, setDateRange] = useState(initialState.dateRange);
 
-  const handleViewChange = (view) => {
+  const handleViewChange = useCallback((view) => {
     setActiveView(view);
-  };
-  const [activePreset, setActivePreset] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const range = params.get('range');
-      if (['1Y', '5Y', '10Y', 'ALL', 'MAX', 'CUSTOM'].includes(range)) {
-        return range === 'MAX' ? 'ALL' : range;
-      }
-    }
-    return 'ALL';
-  });
+  }, []);
+  const [activePreset, setActivePreset] = useState(initialState.activePreset);
 
   useEffect(() => {
-    setActiveDecisionId(null);
-  }, [activeView, dateRange.start, dateRange.end]);
+    if (dossierMatch || typeof window === 'undefined') return undefined;
+    let recordId = null;
+    try {
+      recordId = window.sessionStorage.getItem('rbi-return-focus');
+    } catch {
+      return undefined;
+    }
+    if (!recordId) return undefined;
+
+    let frame = null;
+    let attempts = 0;
+    const restoreFocus = () => {
+      const focusTarget = [...document.querySelectorAll('.decision-record [data-decision-id]')]
+        .filter(element => element.getAttribute('data-decision-id') === recordId)
+        .flatMap(element => [...element.querySelectorAll('button[aria-pressed]')])
+        .find(button => button.getClientRects().length > 0);
+      if (focusTarget) {
+        focusTarget.focus({ preventScroll: true });
+        try {
+          window.sessionStorage.removeItem('rbi-return-focus');
+        } catch {
+          // Ignore storage cleanup failures.
+        }
+        return;
+      }
+      attempts += 1;
+      if (attempts < 60) frame = window.requestAnimationFrame(restoreFocus);
+    };
+    frame = window.requestAnimationFrame(restoreFocus);
+    return () => {
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
+  }, [dossierMatch, activeDecisionId, activeView, dateRange.end, dateRange.start]);
 
   useUrlState({
     activeView,
     dateRange,
     activePreset,
+    layers,
+    activeDecisionId,
+    cycleSelection,
     onViewChange: handleViewChange,
     onDateRangeChange: setDateRange,
     onPresetChange: setActivePreset,
+    onLayersChange: setLayers,
+    onDecisionSelect: setActiveDecisionId,
+    onCycleSelectionChange: setCycleSelection,
   });
+
+  if (dossierMatch) {
+    const recordId = decodeURIComponent(dossierMatch[1]);
+    const requestedReleaseId = typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('snapshot')
+      : null;
+    return (
+      <ThemeProvider>
+        <DecisionDossier recordId={recordId} requestedReleaseId={requestedReleaseId} />
+      </ThemeProvider>
+    );
+  }
 
   if (isDesignPage) {
     return (
@@ -136,6 +154,8 @@ export default function App() {
               onLayersChange={setLayers}
               onPresetChange={setActivePreset}
               onDecisionSelect={setActiveDecisionId}
+              cycleSelection={cycleSelection}
+              onCycleSelectionChange={setCycleSelection}
               onViewChange={handleViewChange}
             />
 

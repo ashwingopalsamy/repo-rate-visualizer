@@ -25,8 +25,8 @@ const TREND_BY_ACTION = Object.freeze({
   },
   initial: {
     key: 'initial',
-    label: 'Initial',
-    actionLabel: 'Initial',
+    label: 'Initial observation',
+    actionLabel: 'Initial observation',
     textClass: 'text-hold',
     dotClass: 'bg-hold',
     badgeVariant: 'hold',

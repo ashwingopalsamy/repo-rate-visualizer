@@ -25,7 +25,7 @@ import { VIEWS } from './viewConfig.js';
 const VIEW_COPY = {
   timeline: {
     label: 'Timeline',
-    description: 'The effective repo rate, every source-backed MPC decision, and optional policy context.',
+    description: 'The effective repo rate, source-backed rate records, directly evidenced RBI decisions, and optional policy context.',
   },
   breakdown: {
     label: 'Breakdown',
@@ -41,7 +41,7 @@ const VIEW_COPY = {
   },
 };
 
-export default function ChartWorkspace({ activeView, activeDecisionId, dateRange, onDateRangeChange, activePreset, onPresetChange, layers, onLayersChange, onDecisionSelect, onViewChange }) {
+export default function ChartWorkspace({ activeView, activeDecisionId, dateRange, onDateRangeChange, activePreset, onPresetChange, layers, onLayersChange, onDecisionSelect, cycleSelection, onCycleSelectionChange, onViewChange }) {
   const copy = VIEW_COPY[activeView] || VIEW_COPY.timeline;
   const [layersOpen, setLayersOpen] = useState(false);
   const activeLayerCount = useMemo(() => [layers?.regimes, layers?.events].filter(Boolean).length, [layers]);
@@ -135,7 +135,7 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
                       </p>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  <ExportBar className="workspace-export-actions" activeView={activeView} dateRange={dateRange} />
+                  <ExportBar className="workspace-export-actions" activeView={activeView} dateRange={dateRange} layers={layers} selectedDecisionId={activeDecisionId} cycleSelection={cycleSelection} />
                 </div>
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
               {activeView === 'timeline' ? <TimelineChart activeDecisionId={activeDecisionId} dateRange={dateRange} onDecisionSelect={onDecisionSelect} showEvents={layers?.events} showRegimes={layers?.regimes} /> : null}
               {activeView === 'breakdown' ? <RegimeBreakdown dateRange={dateRange} /> : null}
               {activeView === 'rate-change' ? <RateChangeBar dateRange={dateRange} /> : null}
-              {activeView === 'cycles' ? <CycleComparison /> : null}
+              {activeView === 'cycles' ? <CycleComparison cycleSelection={cycleSelection} onCycleSelectionChange={onCycleSelectionChange} /> : null}
             </div>
 
             {activeView === 'timeline' && layers?.events ? (

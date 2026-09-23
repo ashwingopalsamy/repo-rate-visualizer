@@ -28,7 +28,8 @@ test('migrates the legacy snapshot without losing historical rate values', () =>
     legacySnapshot.rates.map(point => [point.date, point.rate]),
   );
   assert.equal(migrated.decisions.at(-1).repoRate, legacySnapshot.rates.at(-1).rate);
-  assert.equal(migrated.meta.latestOfficialDate, legacySnapshot.rates.at(-1).date);
+  assert.equal(migrated.meta.latestOfficialDate, null);
+  assert.equal(migrated.meta.latestRecordedDate, legacySnapshot.rates.at(-1).date);
   assert.equal(validateSnapshotV2(migrated).valid, true);
 });
 

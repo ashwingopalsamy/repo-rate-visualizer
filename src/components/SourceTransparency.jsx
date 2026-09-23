@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Check, ChevronDown, Copy, Download, ExternalLink, FileText, Landmark, Scale, ShieldCheck } from 'lucide-react';
-import { decisions, macroEvents, regimes, sources } from '../data/dataLoader.js';
+import { coverage, decisions, macroEvents, regimes, snapshotMeta, sources } from '../data/dataLoader.js';
 import { buildDecisionCsv } from '../data/csvExport.js';
+import { citationFilename } from '../data/citationBundle.js';
 import { Badge } from './ui/badge.jsx';
 import { Button } from './ui/button.jsx';
 import { Card, CardContent, CardHeader } from './ui/card.jsx';
@@ -44,12 +45,12 @@ function compactType(type = '') {
 }
 
 function downloadCsv() {
-  const csvContent = buildDecisionCsv({ decisions, sources, macroEvents, regimes, dateRange: {} });
+  const csvContent = buildDecisionCsv({ decisions, sources, macroEvents, regimes, dateRange: {}, snapshotMeta });
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'rbi_repo_rate_decisions_all.csv';
+  link.download = citationFilename({ format: 'csv', view: 'records', releaseId: snapshotMeta.releaseId });
   link.click();
   window.setTimeout(() => URL.revokeObjectURL(url), 0);
 }
@@ -92,7 +93,7 @@ function IntegrityPopover({ source, linkedCount }) {
           </div>
           <div>
             <dt className="text-muted-foreground">Linked</dt>
-            <dd className="mt-1 tabular-nums text-foreground">{linkedCount} {linkedCount === 1 ? 'decision' : 'decisions'}</dd>
+            <dd className="mt-1 tabular-nums text-foreground">{linkedCount} {linkedCount === 1 ? 'record' : 'records'}</dd>
           </div>
         </dl>
         <div className="mt-4 border-t border-border/80 pt-3">
@@ -122,10 +123,14 @@ export default function SourceTransparency() {
         <Collapsible className="data-evidence__collapsible" open={sourcesOpen} onOpenChange={setSourcesOpen}>
           <CardHeader className="data-evidence__masthead flex flex-col gap-4 border-b-0 px-4 py-4 sm:flex-row sm:items-start sm:justify-between sm:px-7 sm:py-5">
             <div className="min-w-0 flex-1">
-              <h2 id="source-panel-title" className="m-0 block text-base font-bold tracking-tight text-foreground sm:text-lg">Historical repo-rate series</h2>
-              <p className="mt-1 mb-0 text-xs text-muted-foreground sm:text-sm">Official decisions and source records used to build the explorer.</p>
+              <h2 id="source-panel-title" className="m-0 block text-base font-bold tracking-tight text-foreground sm:text-lg">Historical repo-rate evidence</h2>
+              <p className="mt-1 mb-0 text-xs text-muted-foreground sm:text-sm">Direct RBI decision evidence and historical rate observations used to build the explorer.</p>
               <div className="mt-2.5 flex flex-wrap gap-x-2.5 gap-y-1 text-xs text-muted-foreground">
-                <span>{decisions.length} decisions</span>
+                <span>{coverage.totalRecords} records</span>
+                <span aria-hidden="true">·</span>
+                <span>{coverage.directDecisionRecords} direct RBI decisions</span>
+                <span aria-hidden="true">·</span>
+                <span>{coverage.historicalObservationRecords} historical observations</span>
                 <span aria-hidden="true">·</span>
                 <span>{sources.length} sources</span>
                 <span aria-hidden="true">·</span>
@@ -145,6 +150,13 @@ export default function SourceTransparency() {
               </Button>
             </div>
           </CardHeader>
+
+          <div className="grid grid-cols-1 gap-2 border-t border-border/70 bg-muted/10 px-4 py-3 text-xs text-muted-foreground sm:grid-cols-4 sm:px-7">
+            <span><strong className="font-semibold text-foreground">Release</strong> <code className="break-all font-mono text-[10px]">{snapshotMeta.releaseId}</code></span>
+            <span><strong className="font-semibold text-foreground">Retrieved</strong> {formatTimestamp(snapshotMeta.retrievedAt)}</span>
+            <span><strong className="font-semibold text-foreground">Latest direct decision</strong> {formatDate(snapshotMeta.latestOfficialDate)}</span>
+            <span><strong className="font-semibold text-foreground">Artifact SHA-256</strong> <code className="break-all font-mono text-[10px]">{snapshotMeta.artifactSha256}</code></span>
+          </div>
 
           <CollapsibleContent id="source-records" className="data-evidence__content">
             <CardContent className="border-t border-border/70 px-0 py-0 sm:px-0">

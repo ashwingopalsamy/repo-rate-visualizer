@@ -111,8 +111,11 @@ export function validateSnapshotV2(snapshot) {
     if (!isValidTimestamp(snapshot.meta.retrievedAt)) {
       errors.push('meta.retrievedAt must be a valid timestamp');
     }
-    if (!isValidDateOnly(snapshot.meta.latestOfficialDate)) {
-      errors.push('meta.latestOfficialDate must be a valid YYYY-MM-DD date');
+    if (snapshot.meta.latestOfficialDate !== null && !isValidDateOnly(snapshot.meta.latestOfficialDate)) {
+      errors.push('meta.latestOfficialDate must be a valid YYYY-MM-DD date or null');
+    }
+    if (snapshot.meta.latestRecordedDate !== undefined && !isValidDateOnly(snapshot.meta.latestRecordedDate)) {
+      errors.push('meta.latestRecordedDate must be a valid YYYY-MM-DD date when provided');
     }
     if (snapshot.meta.latestSourcePublishedAt !== null &&
         !isValidTimestamp(snapshot.meta.latestSourcePublishedAt)) {
@@ -246,8 +249,16 @@ export function validateSnapshotV2(snapshot) {
 
   if (Array.isArray(snapshot.decisions) && snapshot.decisions.length > 0 && isObject(snapshot.current)) {
     const latestDecision = snapshot.decisions.at(-1);
-    if (snapshot.meta?.latestOfficialDate !== latestDecision.date) {
-      errors.push('meta.latestOfficialDate must match the latest decision date');
+    if (snapshot.meta?.latestRecordedDate !== undefined && snapshot.meta.latestRecordedDate !== latestDecision.date) {
+      errors.push('meta.latestRecordedDate must match the latest recorded decision date');
+    }
+    if (snapshot.meta?.latestOfficialDate !== null && snapshot.meta?.latestOfficialDate !== undefined) {
+      const directDecisionDates = new Set(snapshot.decisions
+        .filter(decision => decision.sourceIds?.some(sourceId => snapshot.sources?.find(source => source.id === sourceId)?.type === 'policy-resolution'))
+        .map(decision => decision.date));
+      if (!directDecisionDates.has(snapshot.meta.latestOfficialDate)) {
+        errors.push('meta.latestOfficialDate must match a directly evidenced policy decision date');
+      }
     }
     if (snapshot.current.decisionId !== latestDecision.id) errors.push('current.decisionId must match the latest decision');
     if (snapshot.current.effectiveDate !== latestDecision.date) errors.push('current.effectiveDate must match the latest decision date');
@@ -314,7 +325,8 @@ export function migrateLegacySnapshot(legacy) {
     meta: {
       snapshotId: legacy.snapshot_id,
       retrievedAt,
-      latestOfficialDate: latestDecision?.date,
+      latestOfficialDate: null,
+      latestRecordedDate: latestDecision?.date,
       latestSourcePublishedAt: null,
       sourceUrl: legacy.source_url,
       checksum: legacy.checksum,

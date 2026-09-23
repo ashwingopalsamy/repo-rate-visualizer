@@ -1,10 +1,12 @@
 import { ExternalLink } from 'lucide-react';
 import { currentRate, decisions, sources, snapshotMeta } from '../data/dataLoader.js';
 import { getTrend } from '../lib/trend.js';
+import { latestDirectDecision } from '../lib/evidence.js';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
 
 const sourceById = new Map(sources.map(source => [source.id, source]));
-const latestDecision = decisions.at(-1);
+const latestRecord = decisions.at(-1);
+const latestDecision = latestDirectDecision(decisions, sources);
 const latestDecisionSource = latestDecision?.sourceIds
   ?.map(sourceId => sourceById.get(sourceId))
   .find(Boolean);
@@ -38,20 +40,21 @@ function formatTimestamp(value) {
 }
 
 function formatBpsChange(changeBps, action) {
+  if (action === 'initial') return 'Baseline';
   if (action === 'cut') return `${changeBps < 0 ? changeBps : `-${changeBps}`} bps`;
   if (action === 'hike') return `+${changeBps} bps`;
   return '0 bps';
 }
 
 export default function RateSummary() {
-  const trend = getTrend(latestDecision?.action);
-  const stance = latestDecision?.stance || 'neutral';
-  const changeBps = latestDecision?.changeBps || 0;
-  const isCut = latestDecision?.action === 'cut';
-  const isHike = latestDecision?.action === 'hike';
+  const trend = getTrend(latestRecord?.action);
+  const stance = latestRecord?.stance || null;
+  const stanceCopy = stance ? `${stance} stance` : 'no stance reported';
+  const changeBps = latestRecord?.changeBps || 0;
+  const isCut = latestRecord?.action === 'cut';
+  const isHike = latestRecord?.action === 'hike';
 
-  const stanceLabel = stance ? `${stance.charAt(0).toUpperCase() + stance.slice(1)} stance` : 'Neutral stance';
-  const cycleLabel = isCut ? 'New easing cycle' : isHike ? 'Tightening cycle' : stanceLabel;
+  const cycleLabel = isCut ? 'Latest action: cut' : isHike ? 'Latest action: hike' : latestRecord?.action === 'hold' ? 'Latest action: hold' : 'Initial observation';
 
   return (
     <section className="rate-summary" aria-labelledby="rate-summary-title" data-trend={trend.key}>
@@ -63,7 +66,7 @@ export default function RateSummary() {
             Overview
           </h2>
           <p className="m-0 mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-            Effective benchmark repo rate announced by the Reserve Bank of India, maintained under a {stance} stance by the Monetary Policy Committee.
+            Latest recorded repo rate from the RBI policy-rate series; the current record has {stanceCopy}.
           </p>
         </div>
 
@@ -72,7 +75,7 @@ export default function RateSummary() {
           {/* 1. Current Repo Rate */}
           <div className="flex flex-col gap-2">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-              Current Repo Rate
+              Latest Recorded Repo Rate
             </span>
             <div className="flex items-center gap-3">
               <div className="m-0 text-5xl font-bold tracking-tight leading-none rate-gradient-text tabular-nums" role="heading" aria-level="1">
@@ -80,8 +83,8 @@ export default function RateSummary() {
               </div>
               <span
                 className={`size-3 rounded-full ${trend.dotClass} shrink-0 ring-4 ring-background animate-pulse`}
-                title={`${trend.actionLabel} (${stance} stance)`}
-                aria-label={`${trend.actionLabel} (${stance} stance)`}
+                title={`${trend.actionLabel} (${stanceCopy})`}
+                aria-label={`${trend.actionLabel} (${stanceCopy})`}
               />
             </div>
             <div className="flex flex-wrap items-center gap-2 mt-0.5">
@@ -90,7 +93,7 @@ export default function RateSummary() {
                 <span>{cycleLabel}</span>
               </div>
               <span className="text-xs text-muted-foreground">
-                Effective since {formatDate(latestDecision?.date)}
+                Recorded on {formatDate(latestRecord?.date)}
               </span>
             </div>
           </div>
@@ -98,11 +101,11 @@ export default function RateSummary() {
           {/* 2. 2-col grid: Last MPC action + Current trend */}
           <div className="grid grid-cols-2 divide-x divide-border/50 rounded-xl border border-border/60 bg-muted/20">
             <div className="px-3.5 py-3">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block">Last MPC Action</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block">Latest Recorded Action</span>
               <div className={`mt-1.5 text-2xl font-bold tracking-tight leading-none tabular-nums ${
                 isCut ? 'text-cut' : isHike ? 'text-hike' : 'rate-gradient-text'
               }`}>
-                {formatBpsChange(changeBps, latestDecision?.action)}
+                {formatBpsChange(changeBps, latestRecord?.action)}
               </div>
             </div>
             <div className="px-3.5 py-3">
@@ -114,12 +117,12 @@ export default function RateSummary() {
           {/* 3. Provenance strip */}
           <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-border/50 pt-3 -mt-1">
             <div className="flex flex-col gap-0.5">
-              <span><span className="font-semibold text-foreground/75">MPC decision</span> · {formatDate(latestDecision?.date)}</span>
+              <span><span className="font-semibold text-foreground/75">Latest RBI decision</span> · {formatDate(latestDecision?.date)}</span>
               <span className="flex items-center gap-1.5">
-                Updated {formatDate(snapshotMeta.retrievedAt)}
+                Snapshot retrieved {formatDate(snapshotMeta.retrievedAt)}
                 <span className="inline-flex items-center gap-1 rounded-full bg-muted/60 px-1.5 py-px text-[10px] font-medium text-muted-foreground border border-border/50">
-                  <span className="size-1.5 rounded-full bg-cut animate-pulse" aria-hidden="true" />
-                  Auto-synced
+                  <span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />
+                  Verified snapshot
                 </span>
               </span>
             </div>
@@ -129,7 +132,7 @@ export default function RateSummary() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors shrink-0 ml-3"
-                aria-label="Open official RBI policy resolution"
+                aria-label="Open latest RBI policy source"
               >
                 <span>Resolution</span>
                 <ExternalLink className="size-3" aria-hidden="true" />
@@ -146,7 +149,7 @@ export default function RateSummary() {
             <div className="px-6 text-center">
               <div className="flex h-6 items-center justify-center">
                 <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Last MPC Action
+                  Latest Recorded Action
                 </span>
               </div>
             </div>
@@ -170,7 +173,7 @@ export default function RateSummary() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-                        aria-label="Open official RBI policy resolution"
+                        aria-label="Open latest RBI policy source"
                       >
                         <ExternalLink className="size-3" aria-hidden="true" />
                       </a>
@@ -191,7 +194,7 @@ export default function RateSummary() {
                 <span className={`text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3rem] font-semibold tracking-tight leading-none tabular-nums ${
                   isCut ? 'text-cut' : isHike ? 'text-hike' : 'rate-gradient-text'
                 }`}>
-                  {formatBpsChange(changeBps, latestDecision?.action)}
+                  {formatBpsChange(changeBps, latestRecord?.action)}
                 </span>
               </div>
               <div className="flex items-center justify-center gap-2 flex-wrap">
@@ -216,13 +219,13 @@ export default function RateSummary() {
                 </h1>
                 <span
                   className={`size-3 sm:size-3.5 rounded-full ${trend.dotClass} shrink-0 ring-4 ring-background animate-pulse`}
-                  title={`${trend.actionLabel} (${stance} stance)`}
-                  aria-label={`${trend.actionLabel} (${stance} stance)`}
+                  title={`${trend.actionLabel} (${stanceCopy})`}
+                  aria-label={`${trend.actionLabel} (${stanceCopy})`}
                 />
               </div>
               <div className="flex items-center justify-center">
                 <span className="text-xs font-medium text-muted-foreground">
-                  Effective since {formatDate(latestDecision?.date)}
+                  Recorded on {formatDate(latestRecord?.date)}
                 </span>
               </div>
             </div>
@@ -231,16 +234,16 @@ export default function RateSummary() {
             <div className="flex flex-col justify-between gap-4 px-6 text-center">
               <div className="flex flex-1 items-center justify-center min-h-[4.25rem] lg:min-h-[4.75rem]">
                 <span className="text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3rem] font-semibold tracking-tight leading-none text-foreground tabular-nums rate-gradient-text">
-                  {formatMonthYear(latestDecision?.date)}
+                  {formatMonthYear(latestDecision?.date || latestRecord?.date)}
                 </span>
               </div>
               <div className="flex flex-col items-center justify-center gap-1.5">
                 <span className="text-xs font-medium text-muted-foreground" title={formatTimestamp(snapshotMeta.retrievedAt)}>
-                  Updated {formatDate(snapshotMeta.retrievedAt)}
+                  Snapshot retrieved {formatDate(snapshotMeta.retrievedAt)}
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-muted/60 px-1.5 py-px text-[10px] font-medium text-muted-foreground border border-border/50">
-                  <span className="size-1.5 rounded-full bg-cut animate-pulse" aria-hidden="true" />
-                  Auto-synced
+                  <span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />
+                  Verified snapshot
                 </span>
               </div>
             </div>

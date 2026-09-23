@@ -419,7 +419,9 @@ def validate_snapshot(snapshot: Any) -> dict[str, Any]:
     if not isinstance(meta["snapshotId"], str) or not meta["snapshotId"].strip():
         fail("SnapshotV2 meta.snapshotId must be a non-empty string")
     parse_timestamp(meta["retrievedAt"], "SnapshotV2 meta.retrievedAt")
-    parse_date(meta["latestOfficialDate"], "SnapshotV2 meta.latestOfficialDate")
+    parse_optional_date(meta["latestOfficialDate"], "SnapshotV2 meta.latestOfficialDate")
+    if "latestRecordedDate" in meta:
+        parse_date(meta["latestRecordedDate"], "SnapshotV2 meta.latestRecordedDate")
     validate_checksum(meta["checksum"], "SnapshotV2 meta.checksum")
     expected_snapshot_checksum = snapshot_content_checksum(snapshot)
     if meta["checksum"] != expected_snapshot_checksum:
@@ -1406,6 +1408,9 @@ def build_dataset(input_path: Path = DEFAULT_INPUT, output_dir: Path = DEFAULT_O
     validate_parquet_outputs(output_dir, row_sets)
 
     generated_at = validated["meta"]["retrievedAt"]
+    source_snapshot_checksum = validated["meta"]["checksum"]
+    source_release_id = f"snapshot-{source_snapshot_checksum.removeprefix('sha256:')}"
+    source_artifact_sha256 = hashlib.sha256(input_path.read_bytes()).hexdigest()
     artifact_files = relative_files(output_dir, exclude={"provenance/build-manifest.json", "SHA256SUMS"})
     output_checksums = {
         path.relative_to(output_dir).as_posix(): sha256_file(path)
@@ -1416,7 +1421,9 @@ def build_dataset(input_path: Path = DEFAULT_INPUT, output_dir: Path = DEFAULT_O
         "generator_version": GENERATOR_VERSION,
         "generated_at": generated_at,
         "source_snapshot_id": validated["meta"]["snapshotId"],
-        "source_snapshot_checksum": validated["meta"]["checksum"],
+        "source_snapshot_checksum": source_snapshot_checksum,
+        "source_release_id": source_release_id,
+        "source_artifact_sha256": source_artifact_sha256,
         "source_retrieved_at": generated_at,
         "record_counts_by_config": {config_name: len(rows) for config_name, rows in row_sets.items()},
         "rights": RIGHTS_METADATA,

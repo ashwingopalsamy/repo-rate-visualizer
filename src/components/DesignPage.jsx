@@ -634,7 +634,7 @@ export default function DesignPage() {
                 <div className="flex flex-col gap-2">
                   <h3 className="m-0 text-sm font-bold text-foreground">2. Provenance &amp; Verification</h3>
                   <p className="m-0 text-xs leading-relaxed text-muted-foreground">
-                    Data is never anonymous. Every observation links to an official RBI resolution PDF, publication timestamp, and SHA-256 integrity checksum.
+                    Data is never anonymous. Each record exposes its evidence class and source metadata; direct RBI resolution links, publication timestamps, and SHA-256 checksums are shown where available.
                   </p>
                 </div>
                 <Badge variant="source" className="w-fit text-[10px]">Cryptographic checksums</Badge>
@@ -687,7 +687,7 @@ export default function DesignPage() {
                     </TableRow>
                     <TableRow className="border-border/60">
                       <TableCell className="font-semibold text-xs text-muted-foreground">Section Heading</TableCell>
-                      <TableCell><span className="text-base font-bold text-foreground tracking-tight">Official Decision Record</span></TableCell>
+                      <TableCell><span className="text-base font-bold text-foreground tracking-tight">Citable Rate Record</span></TableCell>
                       <TableCell className="text-xs font-mono text-muted-foreground">Inter Bold · 16–18px</TableCell>
                       <TableCell className="text-xs font-mono text-muted-foreground">-0.02em</TableCell>
                     </TableRow>
@@ -987,10 +987,10 @@ export default function DesignPage() {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Projection 4</span>
                   <h4 className="m-0 text-sm font-bold text-foreground mt-0.5">Cycles Comparison</h4>
                   <p className="m-0 mt-1 text-xs text-muted-foreground">
-                    Normalized overlay aligning historical tightening and easing cycles to t=0 to analyze monetary transmission velocity.
+                    Normalized overlay aligning historical tightening and easing cycles to t=0 to compare recorded rate changes and adjustment pace.
                   </p>
                 </div>
-                <Badge variant="outline" className="w-fit text-[10px]">Transmission Velocity</Badge>
+                <Badge variant="outline" className="w-fit text-[10px]">Recorded Change Pace</Badge>
               </Card>
             </div>
           </section>
@@ -1064,7 +1064,7 @@ export default function DesignPage() {
                   <li><strong>Apply `tabular-nums`</strong> to every number, rate, bps delta, date, and tick.</li>
                   <li><strong>Preserve semantic monetary colors</strong>: Cut = Emerald, Hike = Crimson, Hold = Cobalt.</li>
                   <li><strong>Strict 36px control height (`h-9`)</strong> on desktop toolbars and inputs.</li>
-                  <li><strong>Maintain provenance links</strong>: Every data point must tie to official RBI records.</li>
+                  <li><strong>Maintain provenance links</strong>: Every data point must expose its source and evidence class.</li>
                   <li><strong>Use 1px hairline borders</strong> and single-tier cards without nested boxes.</li>
                 </ul>
               </Card>

@@ -12,7 +12,7 @@ on:
       - "src/data/snapshotV2.js"
       - "src/data/supplementalHistory.js"
       - "hf-dataset/**"
-      - "tests/**"
+      - "tests/data/**"
       - "package.json"
       - "package-lock.json"
   pull_request:
@@ -25,7 +25,7 @@ on:
       - "src/data/snapshotV2.js"
       - "src/data/supplementalHistory.js"
       - "hf-dataset/**"
-      - "tests/**"
+      - "tests/data/**"
       - "package.json"
       - "package-lock.json"
 

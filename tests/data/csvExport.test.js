@@ -30,6 +30,12 @@ test('exports canonical holds with source provenance', () => {
     macroEvents: [],
     regimes: [],
     dateRange: { start: null, end: null },
+    snapshotMeta: {
+      releaseId: 'snapshot-test',
+      artifactSha256: 'artifact-test',
+      retrievedAt: '2026-08-14T00:00:00.000Z',
+      checksum: 'sha256:test',
+    },
   });
 
   const lines = csv.split('\n');
@@ -38,10 +44,14 @@ test('exports canonical holds with source provenance', () => {
   assert.match(lines[0], /Stance/);
   assert.match(lines[0], /Source Title\(s\)/);
   assert.match(lines[0], /Source URL\(s\)/);
+  assert.match(lines[0], /Evidence Status/);
+  assert.match(lines[0], /Snapshot Release ID/);
   assert.match(lines[1], /"decision-hold"/);
   assert.match(lines[1], /"hold"/);
   assert.match(lines[1], /"neutral"/);
   assert.match(lines[1], /"RBI MPC Resolution"/);
   assert.match(lines[1], /https:\/\/www\.rbi\.org\.in\/Scripts\/BS_PressReleaseDisplay\.aspx\?prid=1/);
   assert.match(lines[1], /"Rate held, source text includes a comma, safely quoted\."/);
+  assert.match(lines[1], /"primary-decision"/);
+  assert.match(lines[1], /"snapshot-test"/);
 });

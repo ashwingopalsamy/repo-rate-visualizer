@@ -8,36 +8,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select.jsx';
+import { isWithinRegime } from '../lib/dateBoundaries.js';
 
 const DESKTOP_MARGIN = { top: 24, right: 32, bottom: 48, left: 56 };
 const MOBILE_MARGIN = { top: 20, right: 16, bottom: 44, left: 44 };
 
+function safeCycleIndex(value, fallback, length) {
+  const index = Number(value);
+  if (!Number.isInteger(index) || index < 0 || index >= length) return fallback;
+  return index;
+}
+
 // Extract only easing and tightening cycles for comparison. The rate points
 // come directly from canonical decisions, never from a second hand-maintained
 // cycle dataset.
-const cycles = regimes.filter(r => r.type !== 'pause').map(r => {
+const cycles = regimes
+  .map((regime, index) => ({ regime, index }))
+  .filter(({ regime }) => regime.type !== 'pause')
+  .map(({ regime: r, index }) => {
   const rateData = decisions
-    .filter(d => d.dateObj >= r.startObj && d.dateObj <= r.endObj)
+    .filter(d => isWithinRegime(d.dateObj, r, index === regimes.length - 1))
     .map(d => ({ ...d, rate: d.repoRate }));
-  const totalBps = rateData.length > 1
-    ? Math.round((rateData.at(-1).rate - rateData[0].rate) * 100)
+  const baseline = decisions.filter(d => d.dateObj < r.startObj).at(-1);
+  const baselineRate = baseline?.repoRate ?? rateData[0]?.rate ?? null;
+  const totalBps = rateData.length > 0 && baselineRate !== null
+    ? Math.round((rateData.at(-1).rate - baselineRate) * 100)
     : 0;
   const durationMonths = Math.round((r.endObj - r.startObj) / (1000 * 60 * 60 * 24 * 30.44));
   return {
     ...r,
     rateData,
+    baselineRate,
     totalBps,
     durationMonths,
     avgBpsPerMonth: durationMonths > 0 ? (totalBps / durationMonths).toFixed(1) : 0,
   };
-});
+  });
 
-export default function CycleComparison() {
-  const [cycleA, setCycleA] = useState(0);
-  const [cycleB, setCycleB] = useState(cycles.length - 1);
+export default function CycleComparison({ cycleSelection, onCycleSelectionChange }) {
+  const defaultA = safeCycleIndex(cycleSelection?.a, 0, cycles.length);
+  const defaultB = safeCycleIndex(cycleSelection?.b, cycles.length - 1, cycles.length);
+  const [cycleA, setCycleA] = useState(defaultA);
+  const [cycleB, setCycleB] = useState(defaultB);
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    setCycleA(safeCycleIndex(cycleSelection?.a, 0, cycles.length));
+    setCycleB(safeCycleIndex(cycleSelection?.b, cycles.length - 1, cycles.length));
+  }, [cycleSelection?.a, cycleSelection?.b]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -65,7 +85,7 @@ export default function CycleComparison() {
   const normalizedA = useMemo(() => {
     if (!selectedA?.rateData.length) return [];
     const baseDate = selectedA.rateData[0].dateObj.getTime();
-    const baseRate = selectedA.rateData[0].rate;
+    const baseRate = selectedA.baselineRate ?? selectedA.rateData[0].rate;
     return selectedA.rateData.map(d => ({
       dayOffset: (d.dateObj.getTime() - baseDate) / (1000 * 60 * 60 * 24),
       rateDelta: Math.round((d.rate - baseRate) * 100),
@@ -77,7 +97,7 @@ export default function CycleComparison() {
   const normalizedB = useMemo(() => {
     if (!selectedB?.rateData.length) return [];
     const baseDate = selectedB.rateData[0].dateObj.getTime();
-    const baseRate = selectedB.rateData[0].rate;
+    const baseRate = selectedB.baselineRate ?? selectedB.rateData[0].rate;
     return selectedB.rateData.map(d => ({
       dayOffset: (d.dateObj.getTime() - baseDate) / (1000 * 60 * 60 * 24),
       rateDelta: Math.round((d.rate - baseRate) * 100),
@@ -174,7 +194,7 @@ export default function CycleComparison() {
           {cycles.length} policy cycles.
         </h2>
         <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-          Normalizing easing and tightening phases to t=0 highlights central bank transmission velocity, terminal rate deltas, and adjustment slopes across historical monetary regimes.
+          Normalizing easing and tightening phases to t=0 shows recorded rate changes, elapsed time, and adjustment pace across historical regimes.
         </p>
       </div>
 
@@ -182,7 +202,11 @@ export default function CycleComparison() {
       <div className="flex flex-col gap-2.5 border-y border-border/70 py-3 sm:flex-row sm:items-center">
         <div className="flex min-w-0 items-center gap-2 flex-1">
           <span className="size-2.5 rounded-full bg-cut shrink-0" aria-hidden="true" />
-          <Select value={String(cycleA)} onValueChange={value => setCycleA(Number(value))}>
+            <Select value={String(cycleA)} onValueChange={value => {
+              const next = safeCycleIndex(value, 0, cycles.length);
+              setCycleA(next);
+              onCycleSelectionChange?.({ a: String(next), b: String(cycleB) });
+            }}>
             <SelectTrigger className="h-9 min-w-0 flex-1 sm:flex-none sm:w-[210px]">
               <SelectValue aria-label="First policy cycle" />
             </SelectTrigger>
@@ -199,7 +223,11 @@ export default function CycleComparison() {
 
         <div className="flex min-w-0 items-center gap-2 flex-1">
           <span className="size-2.5 rounded-full bg-hike shrink-0" aria-hidden="true" />
-          <Select value={String(cycleB)} onValueChange={value => setCycleB(Number(value))}>
+            <Select value={String(cycleB)} onValueChange={value => {
+              const next = safeCycleIndex(value, cycles.length - 1, cycles.length);
+              setCycleB(next);
+              onCycleSelectionChange?.({ a: String(cycleA), b: String(next) });
+            }}>
             <SelectTrigger className="h-9 min-w-0 flex-1 sm:flex-none sm:w-[210px]">
               <SelectValue aria-label="Second policy cycle" />
             </SelectTrigger>
@@ -216,11 +244,11 @@ export default function CycleComparison() {
       <div id="cycle-comparison-summary" className="grid gap-2.5 border-b border-border/70 pb-3 text-sm grid-cols-1 sm:grid-cols-2 sm:gap-x-6" role="status" aria-live="polite">
         <div className="min-w-0 rounded-xl border border-border/60 bg-muted/20 px-3.5 py-3 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:rounded-none">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-cut"><span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />{selectedA?.label}</div>
-          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedA?.durationMonths}mo · {selectedA?.avgBpsPerMonth} bps/mo</span></p>
+          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedA?.durationMonths}mo · {selectedA?.avgBpsPerMonth} bps/mo from baseline</span></p>
         </div>
         <div className="min-w-0 rounded-xl border border-border/60 bg-muted/20 px-3.5 py-3 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:rounded-none">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-hike"><span className="size-1.5 rounded-full bg-hike" aria-hidden="true" />{selectedB?.label}</div>
-          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedB?.durationMonths}mo · {selectedB?.avgBpsPerMonth} bps/mo</span></p>
+          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedB?.durationMonths}mo · {selectedB?.avgBpsPerMonth} bps/mo from baseline</span></p>
         </div>
       </div>
 

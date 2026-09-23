@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import { decisions, repoRateData, macroEvents, regimes } from '../data/dataLoader.js';
 import DecisionTimelineList from './DecisionTimelineList.jsx';
 import ChartReadout from './ChartReadout.jsx';
+import { isCountableHold } from '../lib/evidence.js';
 
 const DESKTOP_MARGIN = { top: 28, right: 20, bottom: 38, left: 50 };
 const MOBILE_MARGIN = { top: 22, right: 10, bottom: 32, left: 38 };
@@ -17,7 +18,7 @@ function actionText(action) {
   if (action === 'cut') return 'Cut';
   if (action === 'hike') return 'Hike';
   if (action === 'hold') return 'Hold';
-  return 'Initial record';
+  return 'Initial observation';
 }
 
 function decisionChange(decision) {
@@ -63,7 +64,8 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
     const netBps = Math.round((latestRate - startRate) * 100);
     const cuts = filteredDecisions.filter(d => d.action === 'cut');
     const hikes = filteredDecisions.filter(d => d.action === 'hike');
-    const holds = filteredDecisions.filter(d => d.action === 'hold' || d.action === 'initial');
+    const holds = filteredDecisions.filter(isCountableHold);
+    const initialRecords = filteredDecisions.filter(d => d.action === 'initial');
 
     return {
       startRate,
@@ -74,6 +76,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
       maxDate: maxPoint?.date ?? '',
       netBps,
       totalDecisions: filteredDecisions.length,
+      initialRecordsCount: initialRecords.length,
       cutsCount: cuts.length,
       hikesCount: hikes.length,
       holdsCount: holds.length,
@@ -381,7 +384,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
 
     const markerLayer = plot.append('g')
       .attr('class', 'decision-markers')
-      .attr('aria-label', 'Official policy decision markers');
+      .attr('aria-label', 'Rate record markers');
 
     const markerGroups = markerLayer.selectAll('.decision-marker')
       .data(filteredDecisions)
@@ -429,15 +432,6 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
       .append('title')
       .text(decision => `${actionText(decision.action)} · ${decision.date} · ${decision.repoRate.toFixed(2)}%`);
 
-    if (activeDecisionId) {
-      const activeMarker = markerGroups.filter(decision => decision.id === activeDecisionId).node();
-      const activeDecision = filteredDecisions.find(decision => decision.id === activeDecisionId);
-      if (activeMarker && activeDecision) {
-        activeMarker.focus({ preventScroll: true });
-        setReadoutFor(activeDecision, true);
-      }
-    }
-
     return () => {
       svg.selectAll('*').on('.pointermove', null).on('.pointerleave', null).on('.pointerup', null);
     };
@@ -477,7 +471,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
                 ? `Repo rate has eased by ${Math.abs(stats.netBps)} bps across this period from the ${stats.maxRate?.toFixed(2)}% peak, with ${stats.cutsCount} cuts totaling ${Math.abs(stats.netBps)} bps.`
                 : stats.netBps > 0
                 ? `Repo rate has tightened by +${stats.netBps} bps across this period, peaking at ${stats.maxRate?.toFixed(2)}% with ${stats.hikesCount} rate hikes.`
-                : `Repo rate has held steady at ${stats.latestRate.toFixed(2)}% across ${stats.holdsCount} decisions in this window.`}
+                : `Repo rate recorded no net change at ${stats.latestRate.toFixed(2)}% in this window, including ${stats.holdsCount} explicit holds${stats.initialRecordsCount ? ` and ${stats.initialRecordsCount} initial observation` : ''}.`}
             </p>
 
             <div className="grid grid-cols-2 divide-y divide-border/60 rounded-xl border border-border/70 bg-muted/20 shadow-2xs sm:grid-cols-4 sm:divide-y-0 sm:divide-x">
@@ -503,7 +497,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
               </div>
 
               <div className="p-3 sm:p-3.5">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Decisions</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Records</span>
                 <div className="mt-1 text-sm sm:text-base font-semibold tabular-nums text-foreground">
                   {stats.totalDecisions} <span className="text-xs font-normal text-muted-foreground">({stats.holdsCount} holds)</span>
                 </div>
@@ -513,7 +507,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
         ) : null}
       </div>
 
-      <div className="chart-container" ref={containerRef} role="group" aria-label="RBI Repo Rate timeline chart with official decision markers">
+      <div className="chart-container" ref={containerRef} role="group" aria-label="RBI repo rate timeline chart with rate record markers">
         <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />
         <ChartReadout
           visible={Boolean(readout)}

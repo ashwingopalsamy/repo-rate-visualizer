@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getRegimeBreakdowns, getYearlyBreakdowns, getAggregateStats } from '../../src/lib/regimeBreakdownData.js';
+import { decisionsForRegime, isWithinRegime } from '../../src/lib/dateBoundaries.js';
 
 const TEST_DIR = resolve(fileURLToPath(new URL('.', import.meta.url)));
 const snapshot = JSON.parse(readFileSync(resolve(TEST_DIR, '../../src/data/snapshot.json'), 'utf8'));
@@ -51,8 +52,17 @@ test('yearly breakdown groups decisions by calendar year', () => {
 test('aggregate stats correctly summarize whole policy series', () => {
   const stats = getAggregateStats(decisions);
   assert.equal(stats.totalDecisions, decisions.length);
-  assert.equal(stats.holdsCount + stats.cutsCount + stats.hikesCount, decisions.length);
+  assert.equal(stats.holdsCount + stats.cutsCount + stats.hikesCount + stats.initialRecordsCount, decisions.length);
   assert.ok(stats.holdPct > 0);
   assert.ok(stats.totalCutBps > 0);
   assert.ok(stats.totalHikeBps > 0);
+});
+
+test('regime boundaries assign shared boundary dates once', () => {
+  const boundaryDecision = decisions.find(decision => decision.date === '2009-04-21');
+  assert.ok(boundaryDecision);
+  assert.equal(isWithinRegime(boundaryDecision.dateObj, regimes[2], false), false);
+  assert.equal(isWithinRegime(boundaryDecision.dateObj, regimes[3], false), true);
+  assert.equal(decisionsForRegime(decisions, regimes, 2).some(decision => decision.id === boundaryDecision.id), false);
+  assert.equal(decisionsForRegime(decisions, regimes, 3).some(decision => decision.id === boundaryDecision.id), true);
 });

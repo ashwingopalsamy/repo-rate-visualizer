@@ -22,10 +22,12 @@ function svgSize(svgEl) {
   return { width: Math.max(1, Math.round(width)), height: Math.max(1, Math.round(height)) };
 }
 
-export function cloneSvgForExport(svgEl, { backgroundColor } = {}) {
+export function cloneSvgForExport(svgEl, { backgroundColor, provenance } = {}) {
   if (!svgEl) throw new Error('Chart SVG is not available.');
   const clone = svgEl.cloneNode(true);
-  const { width, height } = svgSize(svgEl);
+  const { width, height: chartHeight } = svgSize(svgEl);
+  const footerHeight = provenance ? 34 : 0;
+  const height = chartHeight + footerHeight;
 
   clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
   clone.setAttribute('width', String(width));
@@ -57,6 +59,37 @@ export function cloneSvgForExport(svgEl, { backgroundColor } = {}) {
     clone.insertBefore(background, clone.firstChild);
   }
 
+  if (provenance) {
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = provenance.title || 'RBI repo rate chart';
+    clone.insertBefore(title, clone.firstChild);
+
+    const description = document.createElementNS('http://www.w3.org/2000/svg', 'desc');
+    description.textContent = provenance.description || '';
+    clone.insertBefore(description, title.nextSibling);
+
+    const footer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    footer.setAttribute('aria-label', 'Chart provenance');
+    const footerBackground = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    footerBackground.setAttribute('x', '0');
+    footerBackground.setAttribute('y', String(chartHeight));
+    footerBackground.setAttribute('width', String(width));
+    footerBackground.setAttribute('height', String(footerHeight));
+    footerBackground.setAttribute('fill', backgroundColor || '#ffffff');
+    footerBackground.setAttribute('opacity', '0.96');
+    footer.appendChild(footerBackground);
+
+    const footerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    footerText.setAttribute('x', '12');
+    footerText.setAttribute('y', String(chartHeight + 21));
+    footerText.setAttribute('fill', '#5f6368');
+    footerText.setAttribute('font-family', 'Inter, Arial, sans-serif');
+    footerText.setAttribute('font-size', '10');
+    footerText.textContent = provenance.footer || '';
+    footer.appendChild(footerText);
+    clone.appendChild(footer);
+  }
+
   return { clone, width, height };
 }
 
@@ -80,9 +113,9 @@ export function downloadSvg(svgEl, filename, options) {
   downloadBlob(blobFromClone(clone), filename);
 }
 
-export async function renderPngBlob(svgEl, { backgroundColor, scale = 2 } = {}) {
+export async function renderPngBlob(svgEl, { backgroundColor, scale = 2, provenance } = {}) {
   await document.fonts?.ready;
-  const { clone, width, height } = cloneSvgForExport(svgEl, { backgroundColor });
+  const { clone, width, height } = cloneSvgForExport(svgEl, { backgroundColor, provenance });
   const blob = blobFromClone(clone);
   const url = URL.createObjectURL(blob);
 

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Check, Download, FileCode2, MoreHorizontal, Share2 } from 'lucide-react';
-import { decisions, macroEvents, regimes, sources } from '../data/dataLoader.js';
+import { decisions, macroEvents, regimes, snapshotMeta, snapshotRelease, sources } from '../data/dataLoader.js';
 import { buildDecisionCsv } from '../data/csvExport.js';
+import { buildCitationBundle, citationFilename } from '../data/citationBundle.js';
 import { downloadPng, downloadSvg } from '../lib/chartExport.js';
 import { Button } from './ui/button.jsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
@@ -13,10 +14,21 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu.jsx';
 
-export default function ExportBar({ dateRange, activeView, className = '' }) {
+export default function ExportBar({ dateRange, activeView, layers, selectedDecisionId, cycleSelection, className = '' }) {
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState(false);
   const [exportError, setExportError] = useState('');
+
+  const buildBundle = () => buildCitationBundle({
+    decisions,
+    sources,
+    macroEvents,
+    regimes,
+    dateRange,
+    release: snapshotRelease,
+    selectedDecisionId,
+    scope: { view: activeView, layers: layers || null, cycleSelection: cycleSelection || null },
+  });
 
   const handleCopyLink = async () => {
     try {
@@ -29,12 +41,12 @@ export default function ExportBar({ dateRange, activeView, className = '' }) {
   };
 
   const downloadCSV = () => {
-    const csvContent = buildDecisionCsv({ decisions, sources, macroEvents, regimes, dateRange });
+    const csvContent = buildDecisionCsv({ decisions, sources, macroEvents, regimes, dateRange, snapshotMeta });
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `rbi_repo_rate_${dateRange.start || 'all'}_${dateRange.end || 'all'}.csv`;
+    link.download = citationFilename({ format: 'csv', view: activeView || 'records', dateRange, releaseId: snapshotMeta.releaseId });
     link.click();
     window.setTimeout(() => URL.revokeObjectURL(url), 0);
   };
@@ -51,7 +63,11 @@ export default function ExportBar({ dateRange, activeView, className = '' }) {
     setBusy(true);
     setExportError('');
     try {
-      await downloadPng(getChartSvg(), `rbi_repo_rate_${activeView || 'chart'}.png`, { backgroundColor: chartBackground(), scale: 2 });
+      await downloadPng(getChartSvg(), citationFilename({ format: 'png', view: activeView || 'chart', dateRange, releaseId: snapshotMeta.releaseId }), {
+        backgroundColor: chartBackground(),
+        scale: 2,
+        provenance: exportProvenance(),
+      });
     } catch (error) {
       setExportError(error instanceof Error ? error.message : 'PNG export failed.');
     } finally {
@@ -62,10 +78,63 @@ export default function ExportBar({ dateRange, activeView, className = '' }) {
   const handleSvg = () => {
     setExportError('');
     try {
-      downloadSvg(getChartSvg(), `rbi_repo_rate_${activeView || 'chart'}.svg`, { backgroundColor: chartBackground() });
+      downloadSvg(getChartSvg(), citationFilename({ format: 'svg', view: activeView || 'chart', dateRange, releaseId: snapshotMeta.releaseId }), {
+        backgroundColor: chartBackground(),
+        provenance: exportProvenance(),
+      });
     } catch (error) {
       setExportError(error instanceof Error ? error.message : 'SVG export failed.');
     }
+  };
+
+  const exportProvenance = () => {
+    const bundle = buildBundle();
+    return {
+      title: `RBI repo rate — ${activeView || 'chart'}`,
+      description: `Snapshot ${snapshotMeta.releaseId}; ${snapshotMeta.latestRecordedDate || 'latest recorded date'}; ${snapshotMeta.latestOfficialDate ? `latest direct RBI decision ${snapshotMeta.latestOfficialDate}` : 'direct decision date not reported'}; ${bundle.coverage.totalRecords} records from ${bundle.sources.length} sources.`,
+      footer: `RBI Repo Rate Visualizer · ${snapshotMeta.releaseId} · ${dateRange.start || 'all'} to ${dateRange.end || 'all'} · ${bundle.coverage.totalRecords} records · ${bundle.sources.length} sources · retrieved ${snapshotMeta.retrievedAt || 'not reported'}`,
+    };
+  };
+
+  const downloadJson = () => {
+    const bundle = buildBundle();
+    const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = citationFilename({ format: 'json', view: activeView || 'records', dateRange, releaseId: snapshotMeta.releaseId });
+    link.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
+  };
+
+  const copyCitation = async () => {
+    const text = buildBundle().citationText;
+    if (!text) {
+      setExportError('Select a record before copying a citation.');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setExportError('Citation could not be copied.');
+    }
+  };
+
+  const downloadCitationText = () => {
+    const text = buildBundle().citationText;
+    if (!text) {
+      setExportError('Select a record before downloading a citation.');
+      return;
+    }
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = citationFilename({ format: 'txt', view: activeView || 'record', dateRange, releaseId: snapshotMeta.releaseId });
+    link.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
   };
 
   return (
@@ -107,6 +176,18 @@ export default function ExportBar({ dateRange, activeView, className = '' }) {
           <DropdownMenuItem onSelect={downloadCSV}>
             <Download className="size-4" aria-hidden="true" />
             Download CSV
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={downloadJson}>
+            <FileCode2 className="size-4" aria-hidden="true" />
+            Download citation JSON
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={downloadCitationText}>
+            <Share2 className="size-4" aria-hidden="true" />
+            Download text citation
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => void copyCitation()}>
+            <Check className="size-4" aria-hidden="true" />
+            Copy citation
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -7,7 +7,7 @@
 
 ## 1. Product Intent & Aesthetic Character
 
-The RBI Repo Rate Visualizer is an institutional-grade, open-access monetary policy observatory. It visualizes every benchmark repo rate decision made by the Reserve Bank of India (RBI) from 2000 to the present day.
+The RBI Repo Rate Visualizer is an open-access monetary policy observatory. It visualizes the available repo-rate records and identified direct policy decisions published in each release, with coverage beginning in 2000.
 
 The visual interface is deliberately designed at the intersection of two distinct disciplines:
 
@@ -17,7 +17,7 @@ The visual interface is deliberately designed at the intersection of two distinc
 ### The Core Feeling
 - **Authoritative, not decorative**: Every visual element communicates empirical data. There are no ornamental gradients, meaningless background blobs, or arbitrary floating shapes.
 - **Calm, neutral canvas**: The interface uses a near-monochrome foundation (`oklch` slates) so that the semantic monetary policy colors (easing, tightening, pause) immediately command visual attention.
-- **Provenance first**: Data is never anonymous. Every rate observation links directly to an official RBI resolution document with timestamped retrieval records and SHA-256 checksums.
+- **Provenance first**: Data is never anonymous. Each record exposes its evidence class and source metadata; direct RBI resolution links are shown where they exist, while historical observations remain explicitly labelled as such.
 - **High information density without claustrophobia**: Spacing is calibrated so that dozens of historical decisions can be scanned rapidly while retaining generous touch targets and comfortable reading lines.
 
 ---
@@ -229,7 +229,7 @@ The visualizer provides four specialized D3 analytical views, each addressing a 
 | **1. Timeline** | *"How has the policy rate evolved over time?"*<br>Step function (`curveStepAfter`) with 20% vertical gradient fill, terminal pulse callout, peak annotation, translucent regime bands, and macro-event vertical pins. |
 | **2. Breakdown** | *"What is the policy composition across regimes & years?"*<br>Stacked bar charts decomposing decisions into Holds, Cuts, and Hikes with hold-to-move ratio badges and bps volume metrics. |
 | **3. Rate Changes** | *"What was the magnitude and distribution of moves?"*<br>Diverging zero-line bar chart showing basis-point shifts with border highlights on extreme moves ($\ge 50\text{ bps}$). |
-| **4. Cycles** | *"How do historical easing & tightening phases compare?"*<br>Normalized trajectory overlay starting at $t=0$ to compare transmission velocity (bps/mo) and terminal levels. |
+| **4. Cycles** | *"How do historical easing & tightening phases compare?"*<br>Normalized trajectory overlay starting at $t=0$ to compare recorded rate changes, adjustment pace (bps/mo), and terminal levels. |
 
 ### Chart Styling Tokens & Details
 - **Step Line**: `stroke: var(--color-line)`, `stroke-width: 2.25`, `stroke-linecap: square`, `stroke-linejoin: round`.
@@ -310,7 +310,7 @@ When extending the site or building new features, adhere to these explicit desig
 2. **Always enable `tabular-nums`** on any element rendering a number, rate, bps count, or date.
 3. **Preserve the semantic triad**: Cut = Emerald (`--cut`), Hike = Rose (`--hike`), Hold = Cobalt (`--hold`).
 4. **Anchor all controls to the 36px baseline (`h-9`)** on desktop.
-5. **Always attach data provenance**: Every metric must be source-backed with official RBI citations.
+5. **Always attach data provenance**: Every metric must be source-backed with a declared evidence class and source citation.
 6. **Use hairline borders and muted inset wells** rather than heavy drop shadows.
 7. **Ensure zero layout shifts** across theme toggles and responsive breakpoints.
 

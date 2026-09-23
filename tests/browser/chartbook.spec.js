@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 async function waitForChart(page) {
   await page.waitForFunction(() => document.querySelectorAll('.decision-marker').length > 0);
@@ -11,7 +12,7 @@ test('desktop overview, source trail, and decision spine are visible', async ({ 
   await expect(page.locator('.rate-summary').getByText(/RBI Policy Rate|Repo rate/i).first()).toBeVisible();
   await expect(page.getByText('Current trend', { exact: true })).toBeVisible();
   await expect(page.getByText('Latest decision', { exact: true })).toBeVisible();
-  await expect(page.getByText('Official decision record', { exact: true })).toBeVisible();
+  await expect(page.getByText('Rate record', { exact: true })).toBeVisible();
   const attribution = page.locator('[role="note"][aria-labelledby="attribution-title"]');
   await expect(attribution).toBeVisible();
   await expect(attribution.getByRole('heading', { name: 'Attribution & Usage' })).toBeVisible();
@@ -123,17 +124,38 @@ test('range state, views, and exports remain functional', async ({ page }) => {
   await page.getByRole('button', { name: 'More export options' }).click();
   const csvDownload = page.waitForEvent('download');
   await page.getByRole('menuitem', { name: 'Download CSV' }).click();
-  expect((await csvDownload).suggestedFilename()).toMatch(/\.csv$/);
+  const csv = await csvDownload;
+  expect(csv.suggestedFilename()).toMatch(/\.csv$/);
+  expect(await readFile(await csv.path(), 'utf8')).toContain('Snapshot Release ID');
 
   await page.getByRole('button', { name: 'Download chart' }).click();
   const svgDownload = page.waitForEvent('download');
   await page.getByRole('menuitem', { name: 'Download SVG' }).click();
-  expect((await svgDownload).suggestedFilename()).toMatch(/\.svg$/);
+  const svg = await svgDownload;
+  expect(svg.suggestedFilename()).toMatch(/\.svg$/);
+  const svgText = await readFile(await svg.path(), 'utf8');
+  expect(svgText).toContain('<title>');
+  expect(svgText).toContain('records');
+  expect(svgText).toContain('snapshot-');
 
   await page.getByRole('button', { name: 'Download chart' }).click();
   const pngDownload = page.waitForEvent('download');
   await page.getByRole('menuitem', { name: 'Download PNG' }).click();
-  expect((await pngDownload).suggestedFilename()).toMatch(/\.png$/);
+  const png = await pngDownload;
+  expect(png.suggestedFilename()).toMatch(/\.png$/);
+  expect((await readFile(await png.path())).byteLength).toBeGreaterThan(100);
+
+  await page.locator('.decision-marker').first().click();
+  await page.getByRole('button', { name: 'More export options' }).click();
+  const jsonDownload = page.waitForEvent('download');
+  await page.getByRole('menuitem', { name: 'Download citation JSON' }).click();
+  const jsonText = await readFile(await (await jsonDownload).path(), 'utf8');
+  expect(JSON.parse(jsonText).release.releaseId).toMatch(/^snapshot-/);
+
+  await page.getByRole('button', { name: 'More export options' }).click();
+  const citationDownload = page.waitForEvent('download');
+  await page.getByRole('menuitem', { name: 'Download text citation' }).click();
+  expect(await readFile(await (await citationDownload).path(), 'utf8')).toContain('Snapshot snapshot-');
 });
 
 test('workspace controls are grouped and Layers exposes a selected state', async ({ page }) => {
@@ -359,7 +381,7 @@ test('data and evidence keeps dataset metadata and source integrity together', a
   await expect(evidenceTrigger).toHaveAttribute('aria-expanded', 'true');
 
   await expect(page.locator('.data-evidence__masthead')).toBeVisible();
-  await expect(page.getByText(/107 decisions/).first()).toBeVisible();
+  await expect(page.getByText(/107 records/).first()).toBeVisible();
   await expect(page.getByText(/Coverage/).first()).toBeVisible();
   await expect(page.getByRole('button', { name: 'Download the complete repo-rate decision CSV' })).toBeVisible();
   await expect(page.locator('[data-source-id]').first()).toBeVisible();
@@ -386,3 +408,29 @@ test('root landing defaults to Max range and displays all data', async ({ page }
   await expect(page).toHaveURL(/range=ALL/);
 });
 
+test('@trust selected records open a versioned citable dossier', async ({ page }) => {
+  await page.goto('/?view=timeline&range=10Y');
+  await waitForChart(page);
+
+  const marker = page.locator('.decision-marker').first();
+  const markerId = await marker.getAttribute('data-decision-id');
+  await marker.click();
+  const dossierLink = page.getByRole('link', { name: /Open citable record/ });
+  await expect(dossierLink).toBeVisible();
+  await expect(dossierLink).toHaveAttribute('href', /\/decision\/.*snapshot=snapshot-/);
+
+  await dossierLink.click();
+  await expect(page.getByRole('heading', { name: /Repo-rate observation|RBI policy decision/ })).toBeVisible();
+  await expect(page.getByText(/Snapshot and coverage/)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Copy citation' })).toBeVisible();
+
+  await page.goBack();
+  await waitForChart(page);
+  await expect(page.locator(`[data-decision-id="${markerId}"] button[aria-pressed="true"]`)).toBeFocused();
+});
+
+test('@trust pinned dossiers fail closed when the release is unavailable', async ({ page }) => {
+  await page.goto('/decision/decision-2025-12-05-reuters?snapshot=snapshot-missing');
+  await expect(page.getByRole('heading', { name: 'Citable record unavailable' })).toBeVisible();
+  await expect(page.getByText(/not been replaced|not available/i)).toBeVisible();
+});

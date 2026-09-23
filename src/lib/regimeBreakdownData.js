@@ -2,6 +2,7 @@
  * Helper to compute policy decomposition data for regimes, years, and cycles.
  * All numbers are derived strictly from the canonical decisions and regimes.
  */
+import { decisionsForRegime, isWithinDateRange } from './dateBoundaries.js';
 
 function formatRatio(holds, moves) {
   if (moves === 0) {
@@ -18,26 +19,20 @@ function formatRatio(holds, moves) {
  * @param {Object} [dateRange]
  */
 export function getRegimeBreakdowns(regimes, decisions, dateRange = {}) {
-  const startDate = dateRange.start ? new Date(dateRange.start) : null;
-  const endDate = dateRange.end ? new Date(dateRange.end) : null;
-
   return regimes
-    .filter(r => {
-      if (startDate && r.endObj < startDate) return false;
-      if (endDate && r.startObj > endDate) return false;
+    .map((regime, index) => ({ regime, index }))
+    .filter(({ regime: r }) => {
+      if (dateRange.start && r.endObj < new Date(dateRange.start)) return false;
+      if (dateRange.end && r.startObj > new Date(dateRange.end)) return false;
       return true;
     })
-    .map((r, index) => {
-      const regimeDecisions = decisions.filter(d => {
-        if (d.dateObj < r.startObj || d.dateObj > r.endObj) return false;
-        if (startDate && d.dateObj < startDate) return false;
-        if (endDate && d.dateObj > endDate) return false;
-        return true;
-      });
+    .map(({ regime: r, index }) => {
+      const regimeDecisions = decisionsForRegime(decisions, regimes, index)
+        .filter(decision => isWithinDateRange(decision.dateObj, dateRange));
 
       const cuts = regimeDecisions.filter(d => d.action === 'cut');
       const hikes = regimeDecisions.filter(d => d.action === 'hike');
-      const holds = regimeDecisions.filter(d => d.action === 'hold' || d.action === 'initial');
+      const holds = regimeDecisions.filter(d => d.action === 'hold');
 
       const cutBps = cuts.reduce((sum, d) => sum + Math.abs(d.changeBps), 0);
       const hikeBps = hikes.reduce((sum, d) => sum + d.changeBps, 0);
@@ -83,13 +78,8 @@ export function getRegimeBreakdowns(regimes, decisions, dateRange = {}) {
  * @param {Object} [dateRange]
  */
 export function getYearlyBreakdowns(decisions, dateRange = {}) {
-  const startDate = dateRange.start ? new Date(dateRange.start) : null;
-  const endDate = dateRange.end ? new Date(dateRange.end) : null;
-
   const filteredDecisions = decisions.filter(d => {
-    if (startDate && d.dateObj < startDate) return false;
-    if (endDate && d.dateObj > endDate) return false;
-    return true;
+    return isWithinDateRange(d.dateObj, dateRange);
   });
 
   const byYear = new Map();
@@ -107,7 +97,7 @@ export function getYearlyBreakdowns(decisions, dateRange = {}) {
     .map(([year, yearDecisions]) => {
       const cuts = yearDecisions.filter(d => d.action === 'cut');
       const hikes = yearDecisions.filter(d => d.action === 'hike');
-      const holds = yearDecisions.filter(d => d.action === 'hold' || d.action === 'initial');
+      const holds = yearDecisions.filter(d => d.action === 'hold');
 
       const cutBps = cuts.reduce((sum, d) => sum + Math.abs(d.changeBps), 0);
       const hikeBps = hikes.reduce((sum, d) => sum + d.changeBps, 0);
@@ -142,18 +132,14 @@ export function getYearlyBreakdowns(decisions, dateRange = {}) {
  * @param {Object} [dateRange]
  */
 export function getAggregateStats(decisions, dateRange = {}) {
-  const startDate = dateRange.start ? new Date(dateRange.start) : null;
-  const endDate = dateRange.end ? new Date(dateRange.end) : null;
-
   const filtered = decisions.filter(d => {
-    if (startDate && d.dateObj < startDate) return false;
-    if (endDate && d.dateObj > endDate) return false;
-    return true;
+    return isWithinDateRange(d.dateObj, dateRange);
   });
 
   const cuts = filtered.filter(d => d.action === 'cut');
   const hikes = filtered.filter(d => d.action === 'hike');
-  const holds = filtered.filter(d => d.action === 'hold' || d.action === 'initial');
+  const holds = filtered.filter(d => d.action === 'hold');
+  const initialRecords = filtered.filter(d => d.action === 'initial');
 
   const totalCutBps = cuts.reduce((sum, d) => sum + Math.abs(d.changeBps), 0);
   const totalHikeBps = hikes.reduce((sum, d) => sum + d.changeBps, 0);
@@ -165,6 +151,7 @@ export function getAggregateStats(decisions, dateRange = {}) {
 
   return {
     totalDecisions: filtered.length,
+    initialRecordsCount: initialRecords.length,
     holdsCount: holds.length,
     cutsCount: cuts.length,
     hikesCount: hikes.length,

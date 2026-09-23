@@ -1,5 +1,7 @@
 {
+  "manifestVersion": 2,
   "latest": "2026-08-14",
+  "latestReleaseId": "snapshot-e8bdc7bd70cd4eb13a77258cfcf7f5794e02dbfc44c97b3b22c3c44a303b9729",
   "snapshots": [
     {
       "id": "2026-02-10-v1",
@@ -173,7 +175,26 @@
       "id": "2026-08-14-v2",
       "date": "2026-08-14",
       "file": "snapshots/2026-08-14.json",
-      "checksum": "sha256:fcc166f8987ccd63431cf14d29131d4977725018117a48ad9f56d98ddac5ea45"
+      "checksum": "sha256:fcc166f8987ccd63431cf14d29131d4977725018117a48ad9f56d98ddac5ea45",
+      "legacy": true
+    },
+    {
+      "id": "snapshot-e8bdc7bd70cd4eb13a77258cfcf7f5794e02dbfc44c97b3b22c3c44a303b9729",
+      "releaseId": "snapshot-e8bdc7bd70cd4eb13a77258cfcf7f5794e02dbfc44c97b3b22c3c44a303b9729",
+      "legacyId": "2026-08-14-v2",
+      "date": "2026-08-14",
+      "file": "snapshots/snapshot-e8bdc7bd70cd4eb13a77258cfcf7f5794e02dbfc44c97b3b22c3c44a303b9729.json",
+      "checksum": "sha256:e8bdc7bd70cd4eb13a77258cfcf7f5794e02dbfc44c97b3b22c3c44a303b9729",
+      "artifactSha256": "a49ad500c577faf8c14f272c9741ffd607f037a33da011ef361e1f36ce11bf56",
+      "schemaVersion": 2,
+      "retrievedAt": "2026-08-14T07:35:45.400Z",
+      "coverage": {
+        "totalRecords": 107,
+        "directDecisionRecords": 3,
+        "officialContextRecords": 0,
+        "historicalObservationRecords": 104,
+        "mixedRecords": 0
+      }
     }
   ]
 }

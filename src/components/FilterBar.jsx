@@ -15,7 +15,7 @@ export const RANGE_PRESETS = [
 ];
 
 const coverageStart = decisions[0]?.date || '';
-const coverageEnd = snapshotMeta.latestOfficialDate || currentRate.date;
+const coverageEnd = snapshotMeta.latestRecordedDate || currentRate.date;
 
 function rangeForPreset(years) {
   if (years === null) return { start: null, end: null };

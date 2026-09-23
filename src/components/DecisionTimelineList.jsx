@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ChevronDown, ExternalLink } from 'lucide-react';
-import { decisions, sources } from '../data/dataLoader.js';
+import { decisions, snapshotMeta, sources } from '../data/dataLoader.js';
 import { getTrend, formatBps } from '../lib/trend.js';
+import { actionForRecord, isCountableHold } from '../lib/evidence.js';
 import { Badge } from './ui/badge.jsx';
 import { Button } from './ui/button.jsx';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
@@ -9,6 +10,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 const sourceById = new Map(sources.map(source => [source.id, source]));
 
 const INITIAL_MOBILE_COUNT = 6;
+
+function dossierHref(decision) {
+  return `/decision/${encodeURIComponent(decision.id)}?snapshot=${encodeURIComponent(snapshotMeta.releaseId)}`;
+}
+
+function changeLabel(decision) {
+  return decision.action === 'initial' ? 'Baseline' : formatBps(decision.changeBps);
+}
 
 function visibleDecisions(dateRange) {
   return decisions.filter(decision => {
@@ -48,7 +57,7 @@ function DecisionCard({ decision, source, isActive, onSelect }) {
       data-mobile-decision-id={decision.id}
       data-action={decision.action}
       aria-pressed={isActive}
-      aria-label={`${trend.actionLabel} on ${formatDate(decision.date)}, repo rate ${decision.repoRate.toFixed(2)} percent, ${formatBps(decision.changeBps)}`}
+      aria-label={`${actionForRecord(decision)} on ${formatDate(decision.date)}, repo rate ${decision.repoRate.toFixed(2)} percent, ${changeLabel(decision)}`}
       onClick={() => onSelect?.(decision.id)}
     >
       {/* Row 1: Left = Date & Stance; Right = Big Rate & Bps */}
@@ -69,7 +78,7 @@ function DecisionCard({ decision, source, isActive, onSelect }) {
             {decision.repoRate.toFixed(2)}%
           </span>
           <span className={`text-xs font-semibold tabular-nums ${trend.textClass}`}>
-            {formatBps(decision.changeBps)}
+            {changeLabel(decision)}
           </span>
         </div>
       </div>
@@ -111,12 +120,12 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
     all: allFilteredDecisions.length,
     cut: allFilteredDecisions.filter(d => d.action === 'cut').length,
     hike: allFilteredDecisions.filter(d => d.action === 'hike').length,
-    hold: allFilteredDecisions.filter(d => d.action === 'hold' || d.action === 'initial').length,
+    hold: allFilteredDecisions.filter(isCountableHold).length,
   }), [allFilteredDecisions]);
 
   const displayedDecisions = useMemo(() => {
     if (actionFilter === 'all') return allFilteredDecisions;
-    if (actionFilter === 'hold') return allFilteredDecisions.filter(d => d.action === 'hold' || d.action === 'initial');
+    if (actionFilter === 'hold') return allFilteredDecisions.filter(isCountableHold);
     return allFilteredDecisions.filter(d => d.action === actionFilter);
   }, [actionFilter, allFilteredDecisions]);
 
@@ -150,16 +159,16 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
       {/* Header */}
       <div className="decision-record__header flex flex-col gap-2.5 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
-          <h2 id="timeline-decisions-title" className="m-0 text-base font-bold tracking-tight text-foreground sm:text-lg">Official decision record</h2>
-          <p className="mt-0.5 mb-0 text-xs text-muted-foreground">Every source-backed decision in the selected range, including holds.</p>
+          <h2 id="timeline-decisions-title" className="m-0 text-base font-bold tracking-tight text-foreground sm:text-lg">Rate record</h2>
+          <p className="mt-0.5 mb-0 text-xs text-muted-foreground">Recorded repo-rate observations and directly evidenced RBI policy decisions in the selected range.</p>
         </div>
         <span className="text-xs font-semibold text-muted-foreground tabular-nums shrink-0">
-          {allFilteredDecisions.length} decisions
+          {allFilteredDecisions.length} records
         </span>
       </div>
 
       {/* Filter Tabs: All / Cuts / Hikes / Holds */}
-      <div className="mt-3 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" role="tablist" aria-label="Filter decisions by action">
+      <div className="mt-3 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" role="tablist" aria-label="Filter records by action">
         <button
           type="button"
           role="tab"
@@ -221,22 +230,41 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
               <span className={`size-1.5 rounded-full ${getTrend(selectedDecision.action).dotClass}`} aria-hidden="true" />
               Selected {getTrend(selectedDecision.action).actionLabel}
             </Badge>
-            <span className="text-muted-foreground">{formatDate(selectedDecision.date)} · <strong className="font-semibold text-foreground tabular-nums">{selectedDecision.repoRate.toFixed(2)}%</strong> · {formatBps(selectedDecision.changeBps)}</span>
+            <span className="text-muted-foreground">{formatDate(selectedDecision.date)} · <strong className="font-semibold text-foreground tabular-nums">{selectedDecision.repoRate.toFixed(2)}%</strong> · {changeLabel(selectedDecision)} · {selectedDecision.evidenceLabel}</span>
           </div>
-          {selectedSource ? (
+          <div className="flex flex-wrap items-center gap-2">
             <Button asChild className="h-7 px-2.5 text-xs" size="sm" variant="outline">
-              <a href={selectedSource.url} target="_blank" rel="noopener noreferrer" aria-label={`Open selected source for ${formatDate(selectedDecision.date)}`}>
-                Open source
-                <ExternalLink className="size-3" aria-hidden="true" />
+              <a
+                href={dossierHref(selectedDecision)}
+                aria-label={`Open citable record for ${formatDate(selectedDecision.date)}`}
+                onClick={event => {
+                  if (!event.metaKey && !event.ctrlKey && !event.shiftKey && event.button === 0) {
+                    try {
+                      window.sessionStorage.setItem('rbi-return-focus', selectedDecision.id);
+                    } catch {
+                      // Focus restoration is an enhancement; private browsing may deny storage.
+                    }
+                  }
+                }}
+              >
+                Open citable record
               </a>
             </Button>
-          ) : null}
+            {selectedSource ? (
+              <Button asChild className="h-7 px-2.5 text-xs" size="sm" variant="ghost">
+                <a href={selectedSource.url} target="_blank" rel="noopener noreferrer" aria-label={`Open selected source for ${formatDate(selectedDecision.date)}`}>
+                  Source
+                  <ExternalLink className="size-3" aria-hidden="true" />
+                </a>
+              </Button>
+            ) : null}
+          </div>
         </div>
       ) : null}
 
       {/* ── MOBILE: Compact Collapsible Card Feed (<sm) ── */}
       <div className={`${selectedDecision ? 'mt-3' : 'mt-3'} sm:hidden`}>
-        <div className="decision-card-feed flex flex-col gap-2" role="list" aria-label="Official RBI decisions">
+        <div className="decision-card-feed flex flex-col gap-2" role="list" aria-label="Repo rate records">
           {mobileVisibleDecisions.map(decision => {
             const source = decision.sourceIds.map(sourceId => sourceById.get(sourceId)).find(Boolean);
             return (
@@ -268,8 +296,8 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
 
       {/* ── DESKTOP: Contained Scrollable Table with Sticky Header (sm+) ── */}
       <div className={`${selectedDecision ? 'mt-3' : 'mt-3'} hidden sm:block decision-spine-list`}>
-        <div className={`decision-table-wrap w-full rounded-xl border border-border/60 bg-card shadow-2xs ${desktopExpanded ? 'overflow-hidden' : 'max-h-[460px] overflow-y-auto overscroll-contain relative'}`} role="list" aria-label="Official RBI decisions">
-          <Table className="decision-table" aria-label="Official RBI decisions">
+        <div className={`decision-table-wrap w-full rounded-xl border border-border/60 bg-card shadow-2xs ${desktopExpanded ? 'overflow-hidden' : 'max-h-[460px] overflow-y-auto overscroll-contain relative'}`} role="list" aria-label="Repo rate records">
+          <Table className="decision-table" aria-label="Repo rate records">
             <colgroup>
               <col style={{ width: '17%' }} />
               <col style={{ width: '16%' }} />
@@ -281,7 +309,7 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
             <TableHeader className="sticky top-0 z-10 bg-muted/95 backdrop-blur border-b border-border/60 shadow-2xs">
               <TableRow className="border-border/60 bg-transparent hover:bg-transparent">
                 <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Date</TableHead>
-                <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Decision</TableHead>
+                <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Record</TableHead>
                 <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Rate</TableHead>
                 <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Change</TableHead>
                 <TableHead className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Stance</TableHead>
@@ -302,7 +330,7 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
                         size="sm"
                         variant="link"
                         aria-pressed={isActive}
-                        aria-label={`Select ${trend.actionLabel} on ${formatDate(decision.date)}, repo rate ${decision.repoRate.toFixed(2)} percent, ${formatBps(decision.changeBps)}`}
+                        aria-label={`Select ${actionForRecord(decision)} on ${formatDate(decision.date)}, repo rate ${decision.repoRate.toFixed(2)} percent, ${changeLabel(decision)}`}
                         onClick={event => {
                           onDecisionSelect?.(decision.id);
                           event.currentTarget.closest('.decision-spine-row')?.focus({ preventScroll: true });
@@ -311,19 +339,19 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
                         <time dateTime={decision.date}>{formatDate(decision.date)}</time>
                       </Button>
                     </TableCell>
-                    <TableCell data-label="Decision">
+                    <TableCell data-label="Record">
                       <Badge className="px-2 py-0.5" variant={trend.badgeVariant}>
                         <span className={`size-1.5 rounded-full ${trend.dotClass}`} aria-hidden="true" />
                         {trend.actionLabel}
                       </Badge>
                     </TableCell>
                     <TableCell data-label="Rate" className="font-bold tabular-nums text-foreground">{decision.repoRate.toFixed(2)}%</TableCell>
-                    <TableCell data-label="Change" className={`text-xs font-semibold tabular-nums ${trend.textClass}`}>{formatBps(decision.changeBps)}</TableCell>
+                    <TableCell data-label="Change" className={`text-xs font-semibold tabular-nums ${trend.textClass}`}>{changeLabel(decision)}</TableCell>
                     <TableCell data-label="Stance" className="whitespace-normal break-words text-xs text-muted-foreground">{decision.stance || 'Stance not reported'}</TableCell>
                     <TableCell data-label="Source" className="text-right">
                       {source ? (
                         <Button asChild className="size-7" size="icon-sm" variant="ghost">
-                          <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`} title="Open source">
+                          <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Open source for ${formatDate(decision.date)}`} title="Open cited source">
                             <ExternalLink className="size-3.5 text-muted-foreground hover:text-foreground" aria-hidden="true" />
                             <span className="sr-only">Source</span>
                           </a>

@@ -47,8 +47,12 @@ function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
 }
 
+function serializeJson(value) {
+  return `${JSON.stringify(value, null, 2)}\n`;
+}
+
 function writeJson(path, value) {
-  writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`);
+  writeFileSync(path, serializeJson(value));
 }
 
 function todayFrom(timestamp) {
@@ -175,6 +179,46 @@ function contentChecksum(snapshot) {
   return sha256(JSON.stringify(stableContent(snapshot)));
 }
 
+function releaseIdForSnapshot(snapshot) {
+  return `snapshot-${snapshot.meta.checksum.replace(/^sha256:/, '')}`;
+}
+
+function releaseCoverage(snapshot) {
+  const sourceById = new Map(snapshot.sources.map(source => [source.id, source]));
+  const counts = {
+    totalRecords: snapshot.decisions.length,
+    directDecisionRecords: 0,
+    officialContextRecords: 0,
+    historicalObservationRecords: 0,
+    mixedRecords: 0,
+  };
+  snapshot.decisions.forEach(decision => {
+    const types = new Set(decision.sourceIds.map(sourceId => sourceById.get(sourceId)?.type).filter(Boolean));
+    const hasPrimary = types.has('policy-resolution');
+    const hasOfficialContext = ['policy-archive', 'policy-minutes', 'current-policy-rates'].some(type => types.has(type));
+    const hasHistorical = ['historical-rate-series', 'secondary-historical-reference'].some(type => types.has(type));
+    if (hasPrimary) counts.directDecisionRecords += 1;
+    if (hasPrimary && (hasOfficialContext || hasHistorical)) counts.mixedRecords += 1;
+    else if (!hasPrimary && hasHistorical) counts.historicalObservationRecords += 1;
+    else if (!hasPrimary && hasOfficialContext) counts.officialContextRecords += 1;
+  });
+  return counts;
+}
+
+function writeBundledReleaseMeta({ releaseId, artifactSha256, artifactPath, legacySnapshotId, snapshot }) {
+  const contents = `/**\n * Generated release identity for the bundled snapshot. The ingestion script\n * updates this file whenever it publishes a new content-addressed artifact.\n */\nexport const bundledRelease = Object.freeze(${JSON.stringify({
+    releaseId,
+    artifactSha256,
+    artifactPath,
+    legacySnapshotId,
+    checksum: snapshot.meta.checksum,
+    retrievedAt: snapshot.meta.retrievedAt,
+    schemaVersion: snapshot.schemaVersion,
+    coverage: releaseCoverage(snapshot),
+  }, null, 2)});\n`;
+  writeFileSync(join(ROOT, 'src', 'data', 'releaseMeta.js'), contents);
+}
+
 function buildSnapshot({
   baseline,
   retrievedAt,
@@ -224,12 +268,17 @@ function buildSnapshot({
     ...latestDecision.sourceIds,
     currentRates.sourceRecord.id,
   ])];
+  const sourceById = new Map(uniqueSources.map(source => [source.id, source]));
+  const latestOfficialDate = decisions
+    .filter(decision => decision.sourceIds.some(sourceId => sourceById.get(sourceId)?.type === 'policy-resolution'))
+    .at(-1)?.date || null;
   const snapshotWithoutChecksum = {
     schemaVersion: 2,
     meta: {
       snapshotId: `${todayFrom(retrievedAt)}-v2`,
       retrievedAt,
-      latestOfficialDate: latestDecision.date,
+      latestOfficialDate,
+      latestRecordedDate: latestDecision.date,
       latestSourcePublishedAt: publishedDates.at(-1) || null,
       sourceUrl: currentRates.sourceRecord.url,
       checksum: null,
@@ -364,27 +413,45 @@ export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN
   }
 
   const dateStr = todayFrom(retrievedAt);
-  const snapshotPath = join(SNAPSHOTS_DIR, `${dateStr}.json`);
+  const releaseId = releaseIdForSnapshot(snapshot);
+  const snapshotFile = `${releaseId}.json`;
+  const snapshotPath = join(SNAPSHOTS_DIR, snapshotFile);
+  const serializedSnapshot = serializeJson(snapshot);
+  const artifactSha256 = sha256(serializedSnapshot).replace(/^sha256:/, '');
   mkdirSync(SNAPSHOTS_DIR, { recursive: true });
-  writeJson(snapshotPath, snapshot);
-  writeJson(BUILD_SNAPSHOT, snapshot);
+  writeFileSync(snapshotPath, serializedSnapshot);
+  writeFileSync(BUILD_SNAPSHOT, serializedSnapshot);
+  writeBundledReleaseMeta({
+    releaseId,
+    artifactSha256,
+    artifactPath: `snapshots/${snapshotFile}`,
+    legacySnapshotId: snapshot.meta.snapshotId,
+    snapshot,
+  });
 
   const manifest = readJson(MANIFEST_PATH);
+  manifest.manifestVersion = 2;
   const entry = {
-    id: snapshot.meta.snapshotId,
+    id: releaseId,
+    releaseId,
+    legacyId: snapshot.meta.snapshotId,
     date: dateStr,
-    file: `snapshots/${dateStr}.json`,
+    file: `snapshots/${snapshotFile}`,
     checksum: snapshot.meta.checksum,
+    artifactSha256,
+    schemaVersion: snapshot.schemaVersion,
+    retrievedAt: snapshot.meta.retrievedAt,
+    coverage: releaseCoverage(snapshot),
   };
-  const existingIndex = manifest.snapshots.findIndex(item => item.date === dateStr);
-  if (existingIndex >= 0) manifest.snapshots[existingIndex] = entry;
-  else manifest.snapshots.push(entry);
+  const existingIndex = manifest.snapshots.findIndex(item => item.releaseId === releaseId || item.id === releaseId);
+  if (existingIndex < 0) manifest.snapshots.push(entry);
   manifest.latest = dateStr;
+  manifest.latestReleaseId = releaseId;
   writeJson(MANIFEST_PATH, manifest);
   console.log(`Written snapshot: ${snapshotPath}`);
   console.log(`Updated build snapshot: ${BUILD_SNAPSHOT}`);
-  console.log(`Updated manifest latest: ${dateStr}`);
-  return { snapshot, contentChanged, wrote: true };
+  console.log(`Updated manifest latest: ${releaseId}`);
+  return { snapshot, contentChanged, wrote: true, releaseId, artifactSha256 };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

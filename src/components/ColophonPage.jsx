@@ -15,7 +15,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react';
-import { snapshotMeta, decisions, sources } from '../data/dataLoader.js';
+import { snapshotMeta, decisions, coverage } from '../data/dataLoader.js';
 import { Button } from './ui/button.jsx';
 import { Badge } from './ui/badge.jsx';
 import { Card } from './ui/card.jsx';
@@ -90,7 +90,7 @@ export default function ColophonPage() {
       path: '/src/data/snapshot.json',
       format: 'JSON',
       formatVariant: 'cut',
-      description: 'Full chronological ledger of all RBI decisions, verified sources, and macro event layers.',
+      description: 'Full chronological ledger of rate records, evidence labels, source metadata, and macro event layers.',
       actionType: 'copy',
       copyValue: 'import snapshot from "./src/data/snapshot.json";',
     },
@@ -208,34 +208,34 @@ export default function ColophonPage() {
               </h1>
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="font-mono text-xs">v{snapshotMeta?.schemaVersion || '2.0.0'}</Badge>
-                <Badge variant="cut" className="font-mono text-xs">Production Verified</Badge>
+                <Badge variant="cut" className="font-mono text-xs">Release Verified</Badge>
               </div>
             </div>
             <p className="m-0 text-sm leading-relaxed text-muted-foreground sm:text-base max-w-3xl">
-              What this is, and how it is made. Technical architecture, data pipelines, cryptographic provenance proofs, and machine-readable surfaces for India's repo rate observatory.
+              What this is, and how it is made. Technical architecture, release provenance, validation, and machine-readable surfaces for India's repo rate observatory.
             </p>
 
             {/* Flat 4-Stat Strip (No cards-in-card) */}
             <div className="grid grid-cols-2 divide-y divide-border/60 rounded-xl border border-border/70 bg-muted/20 sm:grid-cols-4 sm:divide-y-0 sm:divide-x mt-2">
               <div className="p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Ledger</span>
-                <div className="mt-1 text-lg sm:text-xl font-bold text-foreground tabular-nums">{decisions.length} Decisions</div>
-                <span className="text-xs text-muted-foreground">2000 to present</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Records</span>
+                <div className="mt-1 text-lg sm:text-xl font-bold text-foreground tabular-nums">{decisions.length} Records</div>
+                <span className="text-xs text-muted-foreground">2000 to snapshot coverage</span>
               </div>
               <div className="p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Official Sources</span>
-                <div className="mt-1 text-lg sm:text-xl font-bold text-foreground tabular-nums">{sources.length} Documents</div>
-                <span className="text-xs text-muted-foreground">RBI Resolutions &amp; DBIE</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Direct evidence</span>
+                <div className="mt-1 text-lg sm:text-xl font-bold text-foreground tabular-nums">{coverage.directDecisionRecords} Decisions</div>
+                <span className="text-xs text-muted-foreground">{coverage.historicalObservationRecords} historical observations</span>
               </div>
               <div className="p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Integrity</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Release</span>
                 <div className="mt-1 text-lg sm:text-xl font-bold text-foreground font-mono">SHA-256</div>
-                <span className="text-xs text-muted-foreground">Cryptographic proofs</span>
+                <span className="text-xs text-muted-foreground">Content-addressed artifact</span>
               </div>
               <div className="p-4">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Bundle Budget</span>
-                <div className="mt-1 text-lg sm:text-xl font-bold text-foreground font-mono">&lt; 65 KB</div>
-                <span className="text-xs text-muted-foreground">Gzip · Zero trackers</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block">Retrieved</span>
+                <div className="mt-1 text-lg sm:text-xl font-bold text-foreground font-mono">{snapshotMeta.retrievedAt?.slice(0, 10) || '—'}</div>
+                <span className="text-xs text-muted-foreground">Release retrieval date</span>
               </div>
             </div>
           </section>
@@ -302,12 +302,12 @@ export default function ColophonPage() {
                 <div className="flex flex-col gap-2">
                   <h3 className="m-0 text-sm font-bold text-foreground">Automated Ingestion Streams</h3>
                   <p className="m-0 text-xs leading-relaxed text-muted-foreground">
-                    Historical series are scraped and cross-validated against the RBI Database on Indian Economy (DBIE). An automated GitHub Actions pipeline runs weekly (every Wednesday after MPC releases) to scrape current rates, parse MPC resolutions from <code className="font-mono text-[11px]">rbi.org.in</code>, refresh the Hugging Face Parquet dataset, and validate data integrity.
+                    Historical rate observations are sourced from the RBI Database on Indian Economy (DBIE) and other declared source records. An automated GitHub Actions pipeline runs weekly (every Wednesday after MPC releases) to check current rates, parse available policy material from <code className="font-mono text-[11px]">rbi.org.in</code>, refresh the Hugging Face Parquet dataset, and validate release integrity.
                   </p>
                 </div>
                 <ul className="m-0 p-0 pl-4 text-xs text-muted-foreground flex flex-col gap-1 list-disc">
-                  <li><strong className="text-foreground">DBIE Archives (2000–2016)</strong>: Validated historical rate series.</li>
-                  <li><strong className="text-foreground">MPC Resolutions (2016–Present)</strong>: Resolution PDFs, statements, voting.</li>
+                  <li><strong className="text-foreground">DBIE archives</strong>: Historical rate observations beginning in 2000.</li>
+                  <li><strong className="text-foreground">RBI policy material</strong>: Direct resolution evidence and official context where available.</li>
                   <li><strong className="text-foreground">GitHub Actions Automation</strong>: Scheduled cron &amp; on-demand ingestion.</li>
                 </ul>
               </Card>
@@ -316,17 +316,17 @@ export default function ColophonPage() {
                 <div className="flex flex-col gap-2">
                   <h3 className="m-0 text-sm font-bold text-foreground">Cryptographic Verification</h3>
                   <p className="m-0 text-xs leading-relaxed text-muted-foreground">
-                    Deterministic JSON snapshot serialization with automated validation test suites. Every official document record stores its retrieval timestamp and SHA-256 hash to guarantee archival immutability.
+                    Deterministic JSON snapshot serialization with automated validation test suites. Each release is content-addressed, and its exact artifact bytes are verified with SHA-256; source records expose retrieval metadata and hashes where available.
                   </p>
                 </div>
                 <div className="flex flex-col gap-1 text-xs font-mono text-muted-foreground border-t border-border/50 pt-2">
                   <div className="flex justify-between">
                     <span>Validation Suite</span>
-                    <span className="text-foreground font-semibold">23 Data Tests Passed</span>
+                    <span className="text-foreground font-semibold">Data + release checks</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Source Citations</span>
-                    <span className="text-foreground font-semibold">RBI Official Domains Only</span>
+                    <span className="text-foreground font-semibold">Declared evidence classes</span>
                   </div>
                 </div>
               </Card>

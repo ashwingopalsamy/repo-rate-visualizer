@@ -34,14 +34,14 @@ export default function DecisionLedger({ limit = 8 }) {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="min-w-0">
           <p className="mb-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Decision spine</p>
-          <h2 id="decision-register-title" className="m-0 text-xl font-semibold tracking-[-0.03em] text-foreground sm:text-2xl">Recent policy decisions</h2>
-          <p className="mt-2 mb-0 max-w-2xl text-sm leading-6 text-muted-foreground">Official RBI records, including unchanged repo-rate decisions.</p>
+          <h2 id="decision-register-title" className="m-0 text-xl font-semibold tracking-[-0.03em] text-foreground sm:text-2xl">Recent rate records</h2>
+          <p className="mt-2 mb-0 max-w-2xl text-sm leading-6 text-muted-foreground">Source-backed observations and directly evidenced RBI decisions, including unchanged repo-rate records.</p>
         </div>
         <span className="shrink-0 text-sm tabular-nums text-muted-foreground">{recentDecisions.length} of {decisions.length}</span>
       </div>
 
       <div className="decision-ledger-table overflow-hidden rounded-2xl border border-border/80 bg-card">
-        <Table aria-label="Recent official policy decisions">
+        <Table aria-label="Recent rate records">
           <TableHeader>
             <TableRow className="border-border/70 hover:bg-transparent">
               <TableHead>Date</TableHead>
