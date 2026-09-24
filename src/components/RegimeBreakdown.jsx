@@ -100,7 +100,7 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
       .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(isMobile ? 4 : 6));
 
     const colorForKey = {
-      holds: 'var(--color-hold)',
+      holds: 'var(--muted-foreground)',
       cuts: 'var(--color-cut)',
       hikes: 'var(--color-hike)',
       cutBps: 'var(--color-cut)',
@@ -121,7 +121,7 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
         rate: item.endRate,
         action: item.netBps < 0 ? 'cut' : item.netBps > 0 ? 'hike' : 'hold',
         changeBps: item.netBps,
-        annotation: `${item.label}: ${item.holds} Holds, ${item.cuts} Cuts, ${item.hikes} Hikes · ${item.ratio} ratio`,
+        annotation: `${item.label}: ${item.holds} unchanged records, ${item.cuts} decreases, ${item.hikes} increases · ${item.ratio} ratio`,
       };
 
       const anchor = {
@@ -186,7 +186,7 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
             .attr('cursor', 'pointer')
             .attr('tabindex', 0)
             .attr('role', 'button')
-            .attr('aria-label', `${item.label}: ${key} ${val}${metricMode === 'bps' ? ' bps' : ' decisions'}`)
+            .attr('aria-label', `${item.label}: ${key === 'holds' ? 'unchanged records' : key} ${val}${metricMode === 'bps' ? ' bps' : ' records'}`)
             .on('mouseenter focus', () => {
               setReadoutFor(item, false);
             })
@@ -335,7 +335,7 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
       .attr('y', -34)
       .attr('x', -innerH / 2)
       .attr('text-anchor', 'middle')
-      .text(metricMode === 'count' ? 'Decisions count' : 'Volume (bps)');
+      .text(metricMode === 'count' ? 'Record count' : 'Volume (bps)');
 
     return () => {
       svg.selectAll('*').on('.mouseenter', null).on('.mouseleave', null).on('.pointerup', null);
@@ -351,24 +351,24 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
             {groupBy === 'regime' ? 'RBI Policy Regime Decomposition' : 'Annual Monetary Policy Breakdown'}
           </span>
           <h2 className="m-0 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-            {aggregate.holdPct}% holds.
+            {aggregate.holdPct}% unchanged records.
           </h2>
           <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-            Most central bank decisions are pauses — <strong className="font-semibold text-foreground">{aggregate.holdRatio}</strong> vs active rate adjustments. Over this timeline, the RBI recorded <strong className="font-semibold text-cut">{aggregate.cutsCount} cuts</strong> totaling -{aggregate.totalCutBps} bps against <strong className="font-semibold text-hike">{aggregate.hikesCount} hikes</strong> totaling +{aggregate.totalHikeBps} bps.
+            Among records in this release, unchanged rates outnumber changes by <strong className="font-semibold text-foreground">{aggregate.holdRatio}</strong>. Historical observations do not prove an MPC hold. The series records <strong className="font-semibold text-cut">{aggregate.cutsCount} decreases</strong> totaling -{aggregate.totalCutBps} bps and <strong className="font-semibold text-hike">{aggregate.hikesCount} increases</strong> totaling +{aggregate.totalHikeBps} bps.
           </p>
         </div>
 
         {/* Metric Summary Strip */}
         <div className="grid grid-cols-2 divide-y divide-border/60 rounded-xl border border-border/60 bg-muted/20 shadow-2xs sm:grid-cols-4 sm:divide-y-0 sm:divide-x">
           <div className="p-3 sm:p-3.5">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Total decisions</span>
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Total records</span>
             <div className="mt-1 text-sm sm:text-base font-semibold tabular-nums text-foreground">
               {aggregate.totalDecisions}
             </div>
           </div>
 
           <div className="p-3 sm:p-3.5">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Holds</span>
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Unchanged records</span>
             <div className="mt-1 text-sm sm:text-base font-semibold tabular-nums text-hold">
               {aggregate.holdsCount} <span className="text-xs font-normal text-muted-foreground">({aggregate.holdPct}%)</span>
             </div>
@@ -394,8 +394,8 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
           {/* Legend pills */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-medium">
             <div className="flex items-center gap-1.5">
-              <span className="size-2 rounded-full bg-hold" aria-hidden="true" />
-              <span>Holds</span>
+              <span className="size-2 rounded-full bg-muted-foreground" aria-hidden="true" />
+              <span>Unchanged</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="size-2 rounded-full bg-cut" aria-hidden="true" />
@@ -418,7 +418,7 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
 
             <Tabs value={metricMode} onValueChange={metric => updateBreakdown({ metric })} className="min-w-0">
               <TabsList className="gap-1">
-                <TabsTrigger value="count" className="px-2.5 sm:px-3 text-xs">Decisions</TabsTrigger>
+                <TabsTrigger value="count" className="px-2.5 sm:px-3 text-xs">Records</TabsTrigger>
                 <TabsTrigger value="bps" className="px-2.5 sm:px-3 text-xs">Bps Volume</TabsTrigger>
               </TabsList>
             </Tabs>
@@ -446,7 +446,7 @@ export default function RegimeBreakdown({ dateRange, recordFilters, breakdownSta
       {/* 3. Footer Annotation */}
       <p className="m-0 text-center text-[11px] text-muted-foreground">
         {metricMode === 'count'
-          ? 'Number above each bar = total decisions · Values inside segments = decision count.'
+          ? 'Number above each bar = total records · Values inside segments = record count.'
           : 'Number above each bar = net cumulative bps move · Values inside segments = basis points.'}
       </p>
     </div>

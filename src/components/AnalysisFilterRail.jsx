@@ -7,7 +7,7 @@ const ACTION_LABELS = {
   all: 'All records',
   cut: 'Cuts',
   hike: 'Hikes',
-  hold: 'Holds',
+  hold: 'Unchanged',
 };
 
 export default function AnalysisFilterRail({ recordFilters = {}, timelineMode = 'all', onRecordFiltersChange, onTimelineModeChange }) {

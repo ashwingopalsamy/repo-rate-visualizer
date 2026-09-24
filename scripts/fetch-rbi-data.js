@@ -40,6 +40,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const SNAPSHOTS_DIR = join(ROOT, 'public', 'data', 'snapshots');
 const MANIFEST_PATH = join(ROOT, 'public', 'data', 'manifest.json');
+const COUNTRY_MANIFEST_PATH = join(ROOT, 'public', 'data', 'countries', 'manifest.json');
 const BUILD_SNAPSHOT = join(ROOT, 'src', 'data', 'snapshot.json');
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -436,6 +437,9 @@ export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN
   }
 
   const dateStr = todayFrom(retrievedAt);
+  const countryManifest = readJson(COUNTRY_MANIFEST_PATH);
+  const indiaEntry = countryManifest.countries.find(country => country.code === 'IN');
+  if (!indiaEntry) throw new Error('India entry missing from country manifest');
   const releaseId = releaseIdForSnapshot(snapshot);
   const snapshotFile = `${releaseId}.json`;
   const snapshotPath = join(SNAPSHOTS_DIR, snapshotFile);
@@ -471,6 +475,11 @@ export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN
   manifest.latest = dateStr;
   manifest.latestReleaseId = releaseId;
   writeJson(MANIFEST_PATH, manifest);
+  indiaEntry.releaseId = releaseId;
+  indiaEntry.coverageFrom = snapshot.decisions[0]?.date || null;
+  indiaEntry.coverageThrough = snapshot.decisions.at(-1)?.date || null;
+  indiaEntry.retrievedAt = snapshot.meta.retrievedAt;
+  writeJson(COUNTRY_MANIFEST_PATH, countryManifest);
   console.log(`Written snapshot: ${snapshotPath}`);
   console.log(`Updated build snapshot: ${BUILD_SNAPSHOT}`);
   console.log(`Updated manifest latest: ${releaseId}`);

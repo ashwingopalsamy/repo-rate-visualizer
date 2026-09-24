@@ -1,13 +1,20 @@
-# RBI Repo Rate Visualizer — Design System & Engineering Notes
+# Policy Rate Atlas — Design System & Engineering Notes
 
 > **Internal Reference & Design Colophon**  
-> A living specification of the visual principles, semantic tokens, component geometry, data-visualization language, and interaction patterns behind the RBI Repo Rate Visualizer.
+> A living specification of the visual principles, semantic tokens, component geometry, data-visualization language, and interaction patterns behind the Policy Rate Atlas. The `/design` page is its rendered component reference.
 
 ---
 
 ## 1. Product Intent & Aesthetic Character
 
-The RBI Repo Rate Visualizer is an open-access monetary policy observatory. It visualizes the available repo-rate records and identified direct policy decisions published in each release, with coverage beginning in 2000.
+The Policy Rate Atlas is an open-access monetary policy observatory. The India explorer retains the RBI repo-rate history and its separate observation and decision evidence. The United States explorer records published Federal Reserve target changes as a point target or range. Country pages do not assume their instruments have the same economic meaning.
+
+### Country-wise rules
+- Country selection sits in the page identity area, outside the analytical control rail. The index uses a typographic table, without flags or country color themes.
+- A single-rate instrument has one value. A target range displays both endpoints as numbers and two stepped paths with a restrained band between them. Never calculate a midpoint for presentation.
+- Every record retains a record date, optional decision and effective dates, evidence type, policy framework, source link, and release identity. Unknown dates stay unknown.
+- Only directly supported decisions are called decisions; observations do not imply holds. Federal Reserve change tables omit unchanged meetings, so the US chart is a history of published changes, not a full meeting ledger.
+- Primary source freshness and coverage are visible. Country snapshots are immutable and identified by a SHA-256 digest in the manifest.
 
 The visual interface is deliberately designed at the intersection of two distinct disciplines:
 
@@ -25,7 +32,7 @@ The visual interface is deliberately designed at the intersection of two distinc
 ## 2. Core Visual Principles
 
 ### 1. Form Follows Policy Mechanics
-Central bank policy rates are **discrete step functions**, not continuous analog curves. Rates are held constant across policy horizons and change instantaneously at Monetary Policy Committee (MPC) resolution dates.
+Policy-rate histories are **discrete step functions**, not continuous analog curves. A step begins at the documented source date. Decision and effective dates can differ from that date, and are never inferred when unavailable.
 - Charts *must* render using stepped interpolation (`d3.curveStepAfter`). Smooth bezier splines or linear point-to-point diagonals misrepresent the legal reality of monetary policy.
 - Every rate inflection point features an interactive decision node (`circle.rate-dot` / `.decision-marker`) that binds directly to the canonical policy record.
 
@@ -33,7 +40,7 @@ Central bank policy rates are **discrete step functions**, not continuous analog
 Color is strictly semantic, derived from monetary policy dynamics rather than general UI tropes:
 - **Easing / Rate Cuts**: Emerald green (`oklch(0.60 0.19 148)` light / `oklch(0.74 0.16 148)` dark). Represents monetary accommodation, liquidity injection, and economic stimulus.
 - **Tightening / Rate Hikes**: Crimson / Rose-amber (`oklch(0.58 0.22 25)` light / `oklch(0.74 0.18 25)` dark). Represents monetary restriction, inflation cooling, and policy tightening.
-- **Pause / Holds**: Cobalt indigo (`oklch(0.56 0.19 255)` light / `oklch(0.74 0.16 255)` dark). Represents status quo maintenance, neutral stances, and observation periods.
+- **Pause / Holds**: Cobalt indigo (`oklch(0.56 0.19 255)` light / `oklch(0.74 0.16 255)` dark). Reserved for directly evidenced holds; an unchanged historical observation is labelled as an unchanged record.
 - **Data Provenance**: Slate steel (`oklch(0.34 0.010 240)` light / `oklch(0.84 0.006 240)` dark). Represents official citations, resolution PDFs, and integrity records.
 
 ### 3. Hairline Architecture Over Shadow Soup

@@ -1,0 +1,1250 @@
+{
+  "schemaVersion": 1,
+  "country": "US",
+  "centralBank": "Federal Reserve",
+  "instrument": "Federal funds target rate or range",
+  "frameworks": [
+    {
+      "from": "2000-02-02",
+      "to": "2008-12-15",
+      "label": "Target rate"
+    },
+    {
+      "from": "2008-12-16",
+      "to": null,
+      "label": "Target range"
+    }
+  ],
+  "coverage": {
+    "from": "2000-02-02",
+    "through": "2026-09-17",
+    "grain": "Published target changes; unchanged meetings are not included"
+  },
+  "retrievedAt": "2026-09-24T10:55:08Z",
+  "sources": [
+    {
+      "id": "fed-change-table-1",
+      "title": "Federal Reserve open-market operations change table",
+      "url": "https://www.federalreserve.gov/monetarypolicy/openmarket.htm",
+      "retrievedAt": "2026-09-24T10:55:08Z",
+      "sha256": "2c1ea01cd97bb3ad30bbb8b7bc6e3d1948a884f08cefa8f7faba40bbafa5dfa7"
+    },
+    {
+      "id": "fed-change-table-2",
+      "title": "Federal Reserve historical open-market operations archive",
+      "url": "https://www.federalreserve.gov/monetarypolicy/openmarket_archive.htm",
+      "retrievedAt": "2026-09-24T10:55:08Z",
+      "sha256": "fb69b15ba30088fdfab874d583e0661e2d9dd3f724a5db328275df1d4e1f9f93"
+    },
+    {
+      "id": "fed-fomc-statements",
+      "title": "Federal Reserve FOMC meeting calendars and statements",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "retrievedAt": null,
+      "sha256": null,
+      "role": "Decision-date cross-check; no meeting-level reconciliation claimed"
+    }
+  ],
+  "records": [
+    {
+      "id": "us-2000-02-02",
+      "recordDate": "2000-02-02",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 575,
+        "highBps": 575
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2000-03-21",
+      "recordDate": "2000-03-21",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 600,
+        "highBps": 600
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2000-05-16",
+      "recordDate": "2000-05-16",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 650,
+        "highBps": 650
+      },
+      "changeBps": 50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-01-03",
+      "recordDate": "2001-01-03",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 600,
+        "highBps": 600
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-01-31",
+      "recordDate": "2001-01-31",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 550,
+        "highBps": 550
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-03-20",
+      "recordDate": "2001-03-20",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 500,
+        "highBps": 500
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-04-18",
+      "recordDate": "2001-04-18",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 450,
+        "highBps": 450
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-05-15",
+      "recordDate": "2001-05-15",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 400,
+        "highBps": 400
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-06-27",
+      "recordDate": "2001-06-27",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 375,
+        "highBps": 375
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-08-21",
+      "recordDate": "2001-08-21",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 350,
+        "highBps": 350
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-09-17",
+      "recordDate": "2001-09-17",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 300,
+        "highBps": 300
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-10-02",
+      "recordDate": "2001-10-02",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 250,
+        "highBps": 250
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-11-06",
+      "recordDate": "2001-11-06",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 200,
+        "highBps": 200
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2001-12-11",
+      "recordDate": "2001-12-11",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 175,
+        "highBps": 175
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2002-11-06",
+      "recordDate": "2002-11-06",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 125,
+        "highBps": 125
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-2"
+      ]
+    },
+    {
+      "id": "us-2003-06-25",
+      "recordDate": "2003-06-25",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 100,
+        "highBps": 100
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2004-06-30",
+      "recordDate": "2004-06-30",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 125,
+        "highBps": 125
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2004-08-10",
+      "recordDate": "2004-08-10",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 150,
+        "highBps": 150
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2004-09-21",
+      "recordDate": "2004-09-21",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 175,
+        "highBps": 175
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2004-11-10",
+      "recordDate": "2004-11-10",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 200,
+        "highBps": 200
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2004-12-14",
+      "recordDate": "2004-12-14",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 225,
+        "highBps": 225
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-02-02",
+      "recordDate": "2005-02-02",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 250,
+        "highBps": 250
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-03-22",
+      "recordDate": "2005-03-22",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 275,
+        "highBps": 275
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-05-03",
+      "recordDate": "2005-05-03",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 300,
+        "highBps": 300
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-06-30",
+      "recordDate": "2005-06-30",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 325,
+        "highBps": 325
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-08-09",
+      "recordDate": "2005-08-09",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 350,
+        "highBps": 350
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-09-20",
+      "recordDate": "2005-09-20",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 375,
+        "highBps": 375
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-11-01",
+      "recordDate": "2005-11-01",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 400,
+        "highBps": 400
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2005-12-13",
+      "recordDate": "2005-12-13",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 425,
+        "highBps": 425
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2006-01-31",
+      "recordDate": "2006-01-31",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 450,
+        "highBps": 450
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2006-03-28",
+      "recordDate": "2006-03-28",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 475,
+        "highBps": 475
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2006-05-10",
+      "recordDate": "2006-05-10",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 500,
+        "highBps": 500
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2006-06-29",
+      "recordDate": "2006-06-29",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 525,
+        "highBps": 525
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2007-09-18",
+      "recordDate": "2007-09-18",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 475,
+        "highBps": 475
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2007-10-31",
+      "recordDate": "2007-10-31",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 450,
+        "highBps": 450
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2007-12-11",
+      "recordDate": "2007-12-11",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 425,
+        "highBps": 425
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2008-01-22",
+      "recordDate": "2008-01-22",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 350,
+        "highBps": 350
+      },
+      "changeBps": -75,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2008-01-30",
+      "recordDate": "2008-01-30",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 300,
+        "highBps": 300
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2008-03-18",
+      "recordDate": "2008-03-18",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 225,
+        "highBps": 225
+      },
+      "changeBps": -75,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2008-04-30",
+      "recordDate": "2008-04-30",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 200,
+        "highBps": 200
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2008-10-08",
+      "recordDate": "2008-10-08",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 150,
+        "highBps": 150
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2008-10-29",
+      "recordDate": "2008-10-29",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "point",
+        "lowBps": 100,
+        "highBps": 100
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2008-12-16",
+      "recordDate": "2008-12-16",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "changeBps": null,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2015-12-17",
+      "recordDate": "2015-12-17",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 25,
+        "highBps": 50
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2016-12-15",
+      "recordDate": "2016-12-15",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 50,
+        "highBps": 75
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2017-03-16",
+      "recordDate": "2017-03-16",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 75,
+        "highBps": 100
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2017-06-15",
+      "recordDate": "2017-06-15",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 100,
+        "highBps": 125
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2017-12-14",
+      "recordDate": "2017-12-14",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 125,
+        "highBps": 150
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2018-03-22",
+      "recordDate": "2018-03-22",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 150,
+        "highBps": 175
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2018-06-14",
+      "recordDate": "2018-06-14",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 175,
+        "highBps": 200
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2018-09-27",
+      "recordDate": "2018-09-27",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 200,
+        "highBps": 225
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2018-12-20",
+      "recordDate": "2018-12-20",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 225,
+        "highBps": 250
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2019-08-01",
+      "recordDate": "2019-08-01",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 200,
+        "highBps": 225
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2019-09-19",
+      "recordDate": "2019-09-19",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 175,
+        "highBps": 200
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2019-10-31",
+      "recordDate": "2019-10-31",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 150,
+        "highBps": 175
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2020-03-04",
+      "recordDate": "2020-03-04",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 100,
+        "highBps": 125
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2020-03-16",
+      "recordDate": "2020-03-16",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "changeBps": -100,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2022-03-17",
+      "recordDate": "2022-03-17",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 25,
+        "highBps": 50
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2022-05-05",
+      "recordDate": "2022-05-05",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 75,
+        "highBps": 100
+      },
+      "changeBps": 50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2022-06-16",
+      "recordDate": "2022-06-16",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 150,
+        "highBps": 175
+      },
+      "changeBps": 75,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2022-07-28",
+      "recordDate": "2022-07-28",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 225,
+        "highBps": 250
+      },
+      "changeBps": 75,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2022-09-22",
+      "recordDate": "2022-09-22",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 300,
+        "highBps": 325
+      },
+      "changeBps": 75,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2022-11-03",
+      "recordDate": "2022-11-03",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "changeBps": 75,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2022-12-15",
+      "recordDate": "2022-12-15",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "changeBps": 50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2023-02-02",
+      "recordDate": "2023-02-02",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 450,
+        "highBps": 475
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2023-03-23",
+      "recordDate": "2023-03-23",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 475,
+        "highBps": 500
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2023-05-04",
+      "recordDate": "2023-05-04",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 500,
+        "highBps": 525
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2023-07-27",
+      "recordDate": "2023-07-27",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2024-09-19",
+      "recordDate": "2024-09-19",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 475,
+        "highBps": 500
+      },
+      "changeBps": -50,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2024-11-08",
+      "recordDate": "2024-11-08",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 450,
+        "highBps": 475
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2024-12-19",
+      "recordDate": "2024-12-19",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2025-09-18",
+      "recordDate": "2025-09-18",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 400,
+        "highBps": 425
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2025-10-30",
+      "recordDate": "2025-10-30",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2025-12-11",
+      "recordDate": "2025-12-11",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "changeBps": -25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    },
+    {
+      "id": "us-2026-09-17",
+      "recordDate": "2026-09-17",
+      "decisionDate": null,
+      "effectiveDate": null,
+      "recordType": "policy_change",
+      "value": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "changeBps": 25,
+      "sourceIds": [
+        "fed-change-table-1"
+      ]
+    }
+  ]
+}

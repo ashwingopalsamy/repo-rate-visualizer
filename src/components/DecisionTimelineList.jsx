@@ -250,7 +250,7 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
               : 'bg-hold/10 text-hold hover:bg-hold/20'
           }`}
         >
-          Holds ({counts.hold})
+          Unchanged ({counts.hold})
         </button>
       </div>
 
@@ -319,7 +319,7 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
             onClick={() => setIsExpanded(!isExpanded)}
             aria-expanded={isExpanded}
           >
-            <span>{isExpanded ? 'Show fewer decisions' : `Show all ${displayedDecisions.length} decisions (${displayedDecisions.length - INITIAL_MOBILE_COUNT} more)`}</span>
+            <span>{isExpanded ? 'Show fewer records' : `Show all ${displayedDecisions.length} records (${displayedDecisions.length - INITIAL_MOBILE_COUNT} more)`}</span>
             <ChevronDown className={`size-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} aria-hidden="true" />
           </Button>
         ) : null}
@@ -401,7 +401,7 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
             onClick={() => setDesktopExpanded(!desktopExpanded)}
             aria-expanded={desktopExpanded}
           >
-            <span>{desktopExpanded ? 'Collapse table to compact scroll window' : `Expand all ${allFilteredDecisions.length} decisions to full page`}</span>
+            <span>{desktopExpanded ? 'Collapse table to compact scroll window' : `Expand all ${allFilteredDecisions.length} records to full page`}</span>
             <ChevronDown className={`size-3.5 transition-transform duration-200 ${desktopExpanded ? 'rotate-180' : ''}`} aria-hidden="true" />
           </Button>
         ) : null}

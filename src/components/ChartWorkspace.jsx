@@ -33,11 +33,11 @@ const VIEW_COPY = {
   },
   breakdown: {
     label: 'Breakdown',
-    description: 'Stacked decomposition of policy regimes, holds vs moves, and rate move volume.',
+    description: 'Stacked decomposition of recorded rate changes and unchanged observations across regimes.',
   },
   'rate-change': {
     label: 'Rate changes',
-    description: 'Basis-point moves derived from the canonical decision series.',
+    description: 'Basis-point moves derived from the recorded rate series.',
   },
   cycles: {
     label: 'Cycles',

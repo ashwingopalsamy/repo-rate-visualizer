@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "validate:countries": "node scripts/validate-country-data.js",
     "preview": "vite preview",
     "test:data": "node --test tests/data/snapshotV2.test.js tests/data/rbiSources.test.js tests/data/csvExport.test.js tests/data/supplementalHistory.test.js tests/data/chartReadout.test.js tests/data/regimeBreakdown.test.js tests/data/evidence.test.js tests/data/citationBundle.test.js tests/data/urlState.test.js tests/data/releaseManifest.test.js tests/data/analysisState.test.js tests/data/releaseReport.test.js",
     "test:app": "node --test tests/data/citationBundle.test.js tests/data/urlState.test.js tests/data/analysisState.test.js tests/data/releaseReport.test.js",

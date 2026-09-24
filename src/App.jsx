@@ -13,6 +13,7 @@ import { DEFAULT_BREAKDOWN_STATE, DEFAULT_RATE_CHANGE_STATE, DEFAULT_RECORD_FILT
 import AsOfLookup from './components/AsOfLookup.jsx';
 import ReleaseDiffPage from './components/ReleaseDiffPage.jsx';
 import DataLimitations from './components/DataLimitations.jsx';
+import { CountryIdentity, CountryIndex, UnitedStatesPage } from './components/CountryAtlas.jsx';
 
 function initialUrlState() {
   if (typeof window === 'undefined') {
@@ -34,6 +35,8 @@ export default function App() {
   const isAsOfPage = currentPath === '/as-of' || currentPath === '/as-of/';
   const isReleaseDiffPage = currentPath === '/releases' || currentPath === '/releases/';
   const isLimitationsPage = currentPath === '/limitations' || currentPath === '/limitations/';
+  const isCountryIndex = currentPath === '/countries' || currentPath === '/countries/';
+  const isUnitedStatesPage = currentPath === '/country/us' || currentPath === '/country/us/';
   const dossierMatch = currentPath.match(/^\/decision\/([^/]+)\/?$/);
   const initialState = initialUrlState();
 
@@ -179,6 +182,14 @@ export default function App() {
     );
   }
 
+  if (isCountryIndex) {
+    return <ThemeProvider><CountryIndex /></ThemeProvider>;
+  }
+
+  if (isUnitedStatesPage) {
+    return <ThemeProvider><UnitedStatesPage /></ThemeProvider>;
+  }
+
   if (isColophonPage) {
     return (
       <ThemeProvider>
@@ -226,6 +237,7 @@ export default function App() {
         />
         <div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 pb-12 sm:px-6 lg:px-8">
           <main className="flex flex-col gap-6 py-4 sm:gap-8 sm:py-6">
+            <CountryIdentity country="IN" />
             <RateSummary />
 
             <ChartWorkspace

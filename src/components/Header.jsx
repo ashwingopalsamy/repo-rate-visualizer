@@ -38,6 +38,18 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
   }, []);
 
   const commands = useMemo(() => [
+    {
+      id: 'country-index',
+      group: 'Navigate',
+      label: 'Browse countries',
+      execute: () => { window.location.href = '/countries'; },
+    },
+    {
+      id: 'united-states',
+      group: 'Navigate',
+      label: 'United States federal funds target',
+      execute: () => { window.location.href = '/country/us'; },
+    },
     ...VIEWS.map(view => ({
       id: `view-${view.id}`,
       group: 'Navigate',
@@ -95,10 +107,10 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
           }`}
         >
           <Button asChild className="brand-link group h-9 min-w-0 gap-2.5 px-2 hover:bg-muted/60 rounded-lg" variant="ghost">
-            <a href="/" aria-label="RBI Repo Rate home" className="flex items-center gap-2.5">
-              <span className="brand-mark flex size-8 shrink-0 items-center justify-center rounded-md border border-black bg-black font-bold text-xs tracking-tight text-white shadow-2xs transition-transform group-hover:scale-105 dark:border-white dark:bg-white dark:text-black">RBI</span>
-              <span className="truncate font-semibold tracking-tight text-foreground text-xs sm:hidden">Repo Rate</span>
-              <span className="hidden truncate font-semibold tracking-tight text-foreground text-sm sm:inline">India's Federal Repo Rate Data</span>
+            <a href="/countries" aria-label="Policy Rate Atlas country index" className="flex items-center gap-2.5">
+              <span className="brand-mark flex size-8 shrink-0 items-center justify-center rounded-md border border-black bg-black font-bold text-xs tracking-tight text-white shadow-2xs transition-transform group-hover:scale-105 dark:border-white dark:bg-white dark:text-black">PR</span>
+              <span className="truncate font-semibold tracking-tight text-foreground text-xs sm:hidden">Rate Atlas</span>
+              <span className="hidden truncate font-semibold tracking-tight text-foreground text-sm sm:inline">Policy Rate Atlas <span className="text-muted-foreground font-normal">/ India</span></span>
             </a>
           </Button>
 

@@ -11,6 +11,8 @@ on:
       - "src/hooks/**"
       - "src/lib/**"
       - "src/data/dataLoader.js"
+      - "src/data/countrySnapshot.js"
+      - "public/data/countries/**"
       - "src/data/citationBundle.js"
       - "src/data/csvExport.js"
       - "src/data/releaseMeta.js"
@@ -30,6 +32,8 @@ on:
       - "src/hooks/**"
       - "src/lib/**"
       - "src/data/dataLoader.js"
+      - "src/data/countrySnapshot.js"
+      - "public/data/countries/**"
       - "src/data/citationBundle.js"
       - "src/data/csvExport.js"
       - "src/data/releaseMeta.js"
@@ -66,6 +70,7 @@ jobs:
       - name: Validate application contracts and production build
         run: |
           npm run test:app
+          npm run validate:countries
           npm run build
           git diff --check
 
@@ -73,4 +78,4 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run citable-trust browser smoke tests
-        run: npx playwright test tests/browser/chartbook.spec.js --grep "@trust"
+        run: npx playwright test tests/browser/chartbook.spec.js tests/browser/country-atlas.spec.js --grep "@trust"

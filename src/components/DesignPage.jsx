@@ -37,6 +37,16 @@ import CommandDialog from './ui/command-dialog.jsx';
 import DataCitation from './DataCitation.jsx';
 import ChartReadout from './ChartReadout.jsx';
 import { VIEWS } from './viewConfig.js';
+import { CountryIdentity, RangeChart } from './CountryAtlas.jsx';
+
+const RANGE_SPECIMEN = [
+  { recordDate: '2007-01-01', value: { kind: 'point', lowBps: 525, highBps: 525 } },
+  { recordDate: '2008-12-16', value: { kind: 'range', lowBps: 0, highBps: 25 } },
+  { recordDate: '2016-01-01', value: { kind: 'range', lowBps: 25, highBps: 50 } },
+  { recordDate: '2020-03-16', value: { kind: 'range', lowBps: 0, highBps: 25 } },
+  { recordDate: '2023-07-27', value: { kind: 'range', lowBps: 525, highBps: 550 } },
+  { recordDate: '2026-01-01', value: { kind: 'range', lowBps: 350, highBps: 375 } },
+];
 
 // Interactive Step Curve Specimen
 function MiniStepChartSpecimen() {
@@ -60,7 +70,7 @@ function MiniStepChartSpecimen() {
     { date: new Date('2022-12-07'), rate: 6.25, action: 'hike', changeBps: 35, label: 'Hike 35 bps' },
     { date: new Date('2023-02-08'), rate: 6.50, action: 'hike', changeBps: 25, label: 'Peak 6.50%' },
     { date: new Date('2025-02-07'), rate: 6.25, action: 'cut', changeBps: -25, label: 'Easing 6.25%' },
-    { date: new Date('2026-03-01'), rate: 5.25, action: 'cut', changeBps: -25, label: 'Current 5.25%' },
+    { date: new Date('2026-03-01'), rate: 5.25, action: 'cut', changeBps: -25, label: 'Illustrative 5.25%' },
   ], []);
 
   useEffect(() => {
@@ -519,12 +529,12 @@ export default function DesignPage() {
         <div className="mx-auto w-full max-w-[1180px] px-4 sm:px-6 lg:px-8">
           <div className="site-header__navbar pointer-events-auto flex w-full items-center justify-between gap-3 sm:gap-4 px-4 sm:px-5 py-2 sm:py-2.5">
             <Button asChild className="brand-link group h-9 min-w-0 gap-2.5 px-2 hover:bg-muted/60 rounded-lg" variant="ghost">
-              <a href="/" aria-label="RBI Repo Rate home" className="flex items-center gap-2.5">
+              <a href="/countries" aria-label="Policy Rate Atlas country index" className="flex items-center gap-2.5">
                 <span className="brand-mark flex size-8 shrink-0 items-center justify-center rounded-md border border-black bg-black font-bold text-xs tracking-tight text-white shadow-2xs transition-transform group-hover:scale-105 dark:border-white dark:bg-white dark:text-black">
-                  RBI
+                  PR
                 </span>
                 <span className="truncate font-semibold tracking-tight text-foreground text-xs sm:hidden">Design System</span>
-                <span className="hidden truncate font-semibold tracking-tight text-foreground text-sm sm:inline">India's Federal Repo Rate · Design System</span>
+                <span className="hidden truncate font-semibold tracking-tight text-foreground text-sm sm:inline">Policy Rate Atlas · Design System</span>
               </a>
             </Button>
 
@@ -585,7 +595,7 @@ export default function DesignPage() {
               <Badge variant="outline" className="font-mono text-xs">v1.0.0 · Production</Badge>
             </div>
             <p className="m-0 text-sm leading-relaxed text-muted-foreground sm:text-base max-w-3xl">
-              The design judgment behind the RBI Repo Rate Visualizer: stepped chart interpolations, semantic OKLCH monetary colors, tabular typography, and hairline spatial hierarchy.
+              The design judgment behind the Policy Rate Atlas: stepped chart interpolations, native point and range targets, semantic OKLCH monetary colors, tabular typography, and hairline spatial hierarchy.
             </p>
 
             {/* Flat 4-Stat Strip */}
@@ -624,7 +634,7 @@ export default function DesignPage() {
                 <div className="flex flex-col gap-2">
                   <h3 className="m-0 text-sm font-bold text-foreground">1. Stepped Policy Mechanics</h3>
                   <p className="m-0 text-xs leading-relaxed text-muted-foreground">
-                    Central bank policy rates are legal step functions, not analog curves. Rates are held constant across policy horizons and change instantaneously on MPC resolution dates.
+                    Policy-rate histories use steps at documented source dates. Decision and effective dates remain separate; when either is unknown, the interface does not infer it.
                   </p>
                 </div>
                 <Badge variant="cut" className="w-fit text-[10px]">`curveStepAfter` enforced</Badge>
@@ -634,7 +644,7 @@ export default function DesignPage() {
                 <div className="flex flex-col gap-2">
                   <h3 className="m-0 text-sm font-bold text-foreground">2. Provenance &amp; Verification</h3>
                   <p className="m-0 text-xs leading-relaxed text-muted-foreground">
-                    Data is never anonymous. Each record exposes its evidence class and source metadata; direct RBI resolution links, publication timestamps, and SHA-256 checksums are shown where available.
+                    Data is never anonymous. Each record exposes its evidence class and source metadata; central-bank links, publication timestamps, and SHA-256 checksums are shown where available.
                   </p>
                 </div>
                 <Badge variant="source" className="w-fit text-[10px]">Cryptographic checksums</Badge>
@@ -750,7 +760,7 @@ export default function DesignPage() {
                 darkVal="oklch(0.84 0.006 240)"
                 bgClass="bg-source"
                 textClass="text-source"
-                description="Official RBI citations, technical metadata, checksum badges."
+                description="Central-bank citations, technical metadata, checksum badges."
               />
             </div>
 
@@ -965,7 +975,7 @@ export default function DesignPage() {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Projection 2</span>
                   <h4 className="m-0 text-sm font-bold text-foreground mt-0.5">Breakdown View</h4>
                   <p className="m-0 mt-1 text-xs text-muted-foreground">
-                    Stacked policy decomposition across regimes and calendar years, isolating hold-to-move ratios and bps move volume.
+                    Stacked policy decomposition across regimes and calendar years, separating unchanged records from recorded moves and bps volume.
                   </p>
                 </div>
                 <Badge variant="outline" className="w-fit text-[10px]">Stacked Volume</Badge>
@@ -992,6 +1002,26 @@ export default function DesignPage() {
                 </div>
                 <Badge variant="outline" className="w-fit text-[10px]">Recorded Change Pace</Badge>
               </Card>
+            </div>
+          </section>
+
+          {/* Global atlas specimens use the same tokens as the RBI explorer. */}
+          <section id="atlas" className="scroll-mt-24 flex flex-col gap-4">
+            <div>
+              <h2 className="m-0 text-base sm:text-lg font-bold tracking-tight text-foreground">Country Atlas Patterns</h2>
+              <p className="m-0 mt-1 text-xs text-muted-foreground">Point and range instruments retain their own meaning. These values are illustrative specimens, not a current-rate feed.</p>
+            </div>
+            <div className="rounded-xl border border-border/70 bg-card px-4 pt-4">
+              <CountryIdentity country="US" />
+              <div className="grid grid-cols-1 gap-4 pb-5 sm:grid-cols-2">
+                <div className="border-t border-border/60 pt-3"><span className="atlas-kicker">POINT TARGET · RBI EXAMPLE</span><div className="mt-2 text-4xl font-semibold tracking-tight tabular-nums">5.25%</div><span className="text-xs text-muted-foreground">One published repo-rate value</span></div>
+                <div className="border-t border-border/60 pt-3"><span className="atlas-kicker">RANGE TARGET · FED EXAMPLE</span><div className="mt-2 text-4xl font-semibold tracking-tight tabular-nums">3.50–3.75%</div><span className="text-xs text-muted-foreground">Two endpoints, never a midpoint</span></div>
+              </div>
+            </div>
+            <RangeChart records={RANGE_SPECIMEN} title="Range and point specimen" />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-border/70 bg-card p-5"><span className="atlas-kicker">INDEX ROW · AVAILABLE</span><div className="mt-3 flex items-baseline justify-between gap-3 border-t border-border pt-3"><div><strong className="text-base">United States</strong><span className="mt-1 block text-xs text-muted-foreground">Federal Reserve · target range</span></div><span className="font-mono text-xs tabular-nums">2000–2026</span></div></div>
+              <div className="rounded-xl border border-border/70 bg-card p-5"><span className="atlas-kicker">SOURCE STATES</span><div className="mt-3 flex flex-wrap gap-2 border-t border-border pt-3"><Badge variant="source">Verified decision</Badge><Badge variant="outline">Rate observation</Badge><Badge variant="outline">Date unknown</Badge><Badge variant="outline">Source gap</Badge></div><p className="mt-3 mb-0 text-xs text-muted-foreground">A missing citation or decision date is shown as a gap, never converted into a hold.</p></div>
             </div>
           </section>
 

@@ -7,7 +7,7 @@ import { filterDecisions } from './analysisState.js';
 
 function formatRatio(holds, moves) {
   if (moves === 0) {
-    return holds > 0 ? 'Hold' : '0:1';
+    return holds > 0 ? 'Unchanged' : '0:1';
   }
   const ratio = (holds / moves).toFixed(1);
   return `${ratio.endsWith('.0') ? Math.round(holds / moves) : ratio}:1`;

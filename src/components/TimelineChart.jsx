@@ -468,7 +468,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, recordFilte
                 ? `Repo rate has eased by ${Math.abs(stats.netBps)} bps across this period from the ${stats.maxRate?.toFixed(2)}% peak, with ${stats.cutsCount} cuts totaling ${Math.abs(stats.netBps)} bps.`
                 : stats.netBps > 0
                 ? `Repo rate has tightened by +${stats.netBps} bps across this period, peaking at ${stats.maxRate?.toFixed(2)}% with ${stats.hikesCount} rate hikes.`
-                : `Repo rate recorded no net change at ${stats.latestRate.toFixed(2)}% in this window, including ${stats.holdsCount} explicit holds${stats.initialRecordsCount ? ` and ${stats.initialRecordsCount} initial observation` : ''}.`}
+                : `Repo rate recorded no net change at ${stats.latestRate.toFixed(2)}% in this window. ${stats.holdsCount} directly evidenced holds are included; historical observations alone do not establish holds.`}
             </p>
 
             <div className="grid grid-cols-2 divide-y divide-border/60 rounded-xl border border-border/70 bg-muted/20 shadow-2xs sm:grid-cols-4 sm:divide-y-0 sm:divide-x">
