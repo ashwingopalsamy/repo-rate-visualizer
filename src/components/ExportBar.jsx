@@ -4,6 +4,7 @@ import { decisions, macroEvents, regimes, snapshotMeta, snapshotRelease, sources
 import { buildDecisionCsv } from '../data/csvExport.js';
 import { buildCitationBundle, citationFilename } from '../data/citationBundle.js';
 import { downloadPng, downloadSvg } from '../lib/chartExport.js';
+import { filterDecisions } from '../lib/analysisState.js';
 import { Button } from './ui/button.jsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
 import {
@@ -14,20 +15,20 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu.jsx';
 
-export default function ExportBar({ dateRange, activeView, layers, selectedDecisionId, cycleSelection, className = '' }) {
+export default function ExportBar({ dateRange, activeView, layers, selectedDecisionId, cycleSelection, recordFilters, timelineMode, rateChangeState, breakdownState, className = '' }) {
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState(false);
   const [exportError, setExportError] = useState('');
 
   const buildBundle = () => buildCitationBundle({
-    decisions,
+    decisions: filterDecisions(decisions, { dateRange, recordFilters, timelineMode }),
     sources,
     macroEvents,
     regimes,
     dateRange,
     release: snapshotRelease,
     selectedDecisionId,
-    scope: { view: activeView, layers: layers || null, cycleSelection: cycleSelection || null },
+    scope: { view: activeView, layers: layers || null, cycleSelection: cycleSelection || null, recordFilters: recordFilters || null, timelineMode: timelineMode || 'all', rateChangeState: rateChangeState || null, breakdownState: breakdownState || null },
   });
 
   const handleCopyLink = async () => {
@@ -41,7 +42,7 @@ export default function ExportBar({ dateRange, activeView, layers, selectedDecis
   };
 
   const downloadCSV = () => {
-    const csvContent = buildDecisionCsv({ decisions, sources, macroEvents, regimes, dateRange, snapshotMeta });
+    const csvContent = buildDecisionCsv({ decisions: filterDecisions(decisions, { dateRange, recordFilters, timelineMode }), sources, macroEvents, regimes, dateRange, snapshotMeta });
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');

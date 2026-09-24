@@ -5,7 +5,7 @@ An independent public chartbook and versioned dataset of Reserve Bank of India r
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](tests/)
 
-[Live Demo](https://ashwingopalsamy.github.io/repo-rate-visualizer/) • [Hugging Face Dataset](https://huggingface.co/datasets/ashwingopalsamy/rbi-repo-rate-india)
+[Live Demo](https://ashwingopalsamy.github.io/repo-rate-visualizer/) • [Hugging Face Dataset](https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset)
 
 ## What it does
 
@@ -17,6 +17,7 @@ Most rate trackers only plot rate hikes and cuts as a line chart. This visualize
 - **Rate Change Distribution**: Histogram and calendar ledger of policy moves.
 - **Source Transparency**: Evidence labels and source cards distinguish direct RBI resolutions, official context, and historical observations.
 - **Data Export**: Export charts and records as provenance-rich SVG, PNG, CSV, JSON, and copyable citations.
+- **Research workflows**: Look up the nearest recorded rate for a date, compare two windows, compare immutable releases, and save local analysis states.
 
 ## Open Dataset
 
@@ -59,7 +60,17 @@ npm run preview
 ```bash
 # Run data pipeline and validation tests
 npm run test:data
+npm run test:app
+npm run test:browser
 ```
+
+## Research routes
+
+- `/as-of?date=2026-08-05` looks up the nearest recorded rate and creates a pinned citation.
+- `/releases` compares two verified content-addressed snapshot releases.
+- `/limitations` documents coverage boundaries, evidence classes, record grain, and derived-value limits.
+- The **Compare** workspace compares two date windows using the active release and filters.
+- **Notebook** saves analysis state locally in the browser; it does not upload data or create an account.
 
 ## Data Pipeline
 
@@ -67,6 +78,10 @@ npm run test:data
 2. **Validation**: `src/data/snapshotV2.js` verifies date ordering, rate-change derivation, record schemas, and trusted source domains.
 3. **Snapshots**: Append-only, content-addressed releases are archived under `public/data/snapshots/` and registered in `public/data/manifest.json`.
 
+Scheduled refreshes also produce a reviewable release change report as a GitHub Actions artifact before generated files are committed.
+
 ## Attribution & Disclaimer
 
-This project is an independent educational tool and is not affiliated with, authorised by, or endorsed by the Reserve Bank of India. Records identify their evidence class and link to the declared source; historical observations should not be read as direct RBI resolution citations. Always verify figures against primary source publications before using them in research or reporting.
+This project is an independent educational tool and is not affiliated with, authorised by, or endorsed by the Reserve Bank of India. Records identify their evidence class and link to the declared source; historical observations should not be read as direct RBI resolution citations. Read the [data limitations](https://ashwingopalsamy.github.io/repo-rate-visualizer/limitations) page and always verify figures against primary source publications before using them in research or reporting.
+
+Code is licensed under MIT. Dataset and third-party source rights are described in [`DATA-LICENSE.md`](DATA-LICENSE.md) and `hf-dataset/NOTICE.md`.

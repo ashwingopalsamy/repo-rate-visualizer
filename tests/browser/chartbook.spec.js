@@ -468,3 +468,52 @@ test('@trust pinned dossiers fail closed when the release is unavailable', async
   await expect(page.getByRole('heading', { name: 'Citable record unavailable' })).toBeVisible();
   await expect(page.getByText(/not been replaced|not available/i)).toBeVisible();
 });
+
+test('shared analysis filters are URL-addressable and update the record ledger', async ({ page }) => {
+  await page.goto('/?view=timeline&range=ALL&action=cut&evidence=historical-secondary&mode=changes');
+  await waitForChart(page);
+  await expect(page.getByRole('tab', { name: 'Cuts (46)' })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.locator('.decision-table tbody [data-decision-id]')).toHaveCount(46);
+  await expect(page.getByRole('status', { name: 'Current analysis state' })).toContainText('Changes only');
+  await expect(page.getByRole('button', { name: 'Reset analysis' })).toBeVisible();
+});
+
+test('as-of lookup returns a pinned nearest-record citation workflow', async ({ page }) => {
+  await page.goto('/as-of?date=2026-08-04');
+  await expect(page.getByRole('heading', { name: 'What rate was recorded on this date?' })).toBeVisible();
+  await expect(page.getByText('Latest preceding recorded rate')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Next known record' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Copy citation' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Open dossier' }).first()).toHaveAttribute('href', /snapshot=/);
+});
+
+test('compare workspace preserves two research windows in the URL', async ({ page }) => {
+  await page.goto('/?view=compare&range=ALL');
+  await expect(page.getByRole('heading', { name: 'Two windows, one release.' })).toBeVisible();
+  await expect(page.getByLabel('Window A start')).toBeVisible();
+  await page.getByLabel('Window A start').fill('2020-01-01');
+  await expect(page).toHaveURL(/aStart=2020-01-01/);
+  await expect(page.locator('[data-comparison-window="window a"]')).toContainText('Records');
+});
+
+test('release history verifies and summarizes archived snapshot differences', async ({ page }) => {
+  await page.goto('/releases');
+  await expect(page.getByRole('heading', { name: 'What changed between releases?' })).toBeVisible();
+  await expect(page.getByText('Release differences')).toBeVisible({ timeout: 15000 });
+  await expect(page.getByText('Changed sources')).toBeVisible();
+});
+
+test('rate-change analysis controls are shareable and cumulative mode is visible', async ({ page }) => {
+  await page.goto('/?view=rate-change&range=ALL&moveBand=26-50&moveSort=magnitude&moveView=cumulative');
+  await expect(page.getByRole('group', { name: 'RBI Repo Rate changes in basis points' })).toBeVisible();
+  await expect(page.getByRole('tab', { name: 'Cumulative path' })).toHaveAttribute('data-state', 'active');
+  await expect(page.getByLabel('Filter by move size')).toContainText('26-50 bps');
+  await expect(page.getByRole('status', { name: 'Current analysis state' })).toContainText('Cumulative moves');
+});
+
+test('limitations page states the release boundary', async ({ page }) => {
+  await page.goto('/limitations');
+  await expect(page.getByRole('heading', { name: 'Data limitations' })).toBeVisible();
+  await expect(page.getByText('Record grain')).toBeVisible();
+  await expect(page.getByText(/snapshot-/).last()).toBeVisible();
+});

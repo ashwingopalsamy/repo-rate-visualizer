@@ -327,9 +327,9 @@ function buildSnapshot({
   });
 }
 
-async function fetchPolicyDocuments(entries) {
+async function fetchPolicyDocuments(entries, fetchImpl) {
   return mapWithConcurrency(entries, async entry => {
-    const fetched = await fetchText(entry.url);
+    const fetched = await fetchText(entry.url, { fetchImpl });
     const parsed = parsePolicyDocument(fetched.body, entry, { url: fetched.url });
     const sourceRecord = enrichSource(parsed.source, fetched, entry.title, {
       decision: parsed.decision,
@@ -344,13 +344,13 @@ async function fetchPolicyDocuments(entries) {
   }, 4);
 }
 
-async function fetchDbieIfConfigured() {
+async function fetchDbieIfConfigured(fetchImpl) {
   const url = process.env.RBI_DBIE_KEY_RATES_URL;
   if (!url) {
     console.warn('RBI_DBIE_KEY_RATES_URL is not configured; retaining the last validated historical series.');
     return null;
   }
-  const fetched = await fetchText(url);
+  const fetched = await fetchText(url, { fetchImpl });
   const parsed = parseDbieKeyRates(fetched.body, {
     contentType: fetched.contentType,
     url: fetched.url,
@@ -393,7 +393,7 @@ export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN
     ...minutesEntries.slice(-Math.max(documentLimit, 1)),
   ].sort((a, b) => a.publicationDate.localeCompare(b.publicationDate));
   if (resolutionEntries.length === 0) throw new SourceParseError('No RBI policy resolutions were selected');
-  const documents = await fetchPolicyDocuments(selectedEntries);
+  const documents = await fetchPolicyDocuments(selectedEntries, fetchImpl);
   const policyDecisions = documents
     .filter(document => document.sourceRecord.type === 'policy-resolution')
     .map(document => {
@@ -407,7 +407,7 @@ export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN
     });
   if (policyDecisions.length === 0) throw new SourceParseError('No source-backed RBI policy decisions were parsed');
 
-  const dbie = await fetchDbieIfConfigured();
+  const dbie = await fetchDbieIfConfigured(fetchImpl);
   const snapshot = buildSnapshot({
     baseline,
     retrievedAt,

@@ -4,6 +4,7 @@ import { decisions, repoRateData, macroEvents, regimes } from '../data/dataLoade
 import DecisionTimelineList from './DecisionTimelineList.jsx';
 import ChartReadout from './ChartReadout.jsx';
 import { isCountableHold } from '../lib/evidence.js';
+import { filterDecisions } from '../lib/analysisState.js';
 
 const DESKTOP_MARGIN = { top: 28, right: 20, bottom: 38, left: 50 };
 const MOBILE_MARGIN = { top: 22, right: 10, bottom: 32, left: 38 };
@@ -35,7 +36,7 @@ function formatReadoutDatum(datum) {
   };
 }
 
-export default function TimelineChart({ activeDecisionId, dateRange, onDecisionSelect, showEvents = false, showRegimes = false }) {
+export default function TimelineChart({ activeDecisionId, dateRange, recordFilters, timelineMode = 'all', onDecisionSelect, onRecordFiltersChange, showEvents = false, showRegimes = false }) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const readoutStateRef = useRef(null);
@@ -44,16 +45,14 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
 
   const stats = useMemo(() => {
     let data = repoRateData;
-    let filteredDecisions = decisions;
+    let filteredDecisions = filterDecisions(decisions, { dateRange, recordFilters, timelineMode });
     if (dateRange.start) {
       const startDate = new Date(dateRange.start);
       data = data.filter(d => d.dateObj >= startDate);
-      filteredDecisions = filteredDecisions.filter(d => d.dateObj >= startDate);
     }
     if (dateRange.end) {
       const endDate = new Date(dateRange.end);
       data = data.filter(d => d.dateObj <= endDate);
-      filteredDecisions = filteredDecisions.filter(d => d.dateObj <= endDate);
     }
     if (!data.length) return null;
 
@@ -81,7 +80,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
       hikesCount: hikes.length,
       holdsCount: holds.length,
     };
-  }, [dateRange.start, dateRange.end]);
+  }, [dateRange, recordFilters, timelineMode]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -117,21 +116,19 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
     if (innerW <= 0 || innerH <= 0) return undefined;
 
     let data = repoRateData;
-    let filteredDecisions = decisions;
+    let filteredDecisions = filterDecisions(decisions, { dateRange, recordFilters, timelineMode });
     let filteredRegimes = showRegimes ? regimes : [];
     let filteredEvents = showEvents ? macroEvents : [];
 
     if (dateRange.start) {
       const startDate = new Date(dateRange.start);
       data = data.filter(d => d.dateObj >= startDate);
-      filteredDecisions = filteredDecisions.filter(d => d.dateObj >= startDate);
       filteredRegimes = filteredRegimes.filter(r => r.endObj >= startDate);
       filteredEvents = filteredEvents.filter(e => e.dateObj >= startDate);
     }
     if (dateRange.end) {
       const endDate = new Date(dateRange.end);
       data = data.filter(d => d.dateObj <= endDate);
-      filteredDecisions = filteredDecisions.filter(d => d.dateObj <= endDate);
       filteredRegimes = filteredRegimes.filter(r => r.startObj <= endDate);
       filteredEvents = filteredEvents.filter(e => e.dateObj <= endDate);
     }
@@ -435,7 +432,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
     return () => {
       svg.selectAll('*').on('.pointermove', null).on('.pointerleave', null).on('.pointerup', null);
     };
-  }, [activeDecisionId, dateRange, dimensions, onDecisionSelect, showEvents, showRegimes]);
+  }, [activeDecisionId, dateRange, dimensions, onDecisionSelect, recordFilters, showEvents, showRegimes, timelineMode]);
 
   return (
     <>
@@ -523,7 +520,7 @@ export default function TimelineChart({ activeDecisionId, dateRange, onDecisionS
           }}
         />
       </div>
-      <DecisionTimelineList activeDecisionId={activeDecisionId} dateRange={dateRange} onDecisionSelect={onDecisionSelect} />
+      <DecisionTimelineList activeDecisionId={activeDecisionId} dateRange={dateRange} recordFilters={recordFilters} timelineMode={timelineMode} onRecordFiltersChange={onRecordFiltersChange} onDecisionSelect={onDecisionSelect} />
     </>
   );
 }

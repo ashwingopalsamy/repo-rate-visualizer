@@ -7,6 +7,7 @@ import TimelineChart from './TimelineChart.jsx';
 import RegimeBreakdown from './RegimeBreakdown.jsx';
 import RateChangeBar from './RateChangeBar.jsx';
 import CycleComparison from './CycleComparison.jsx';
+import WindowComparison from './WindowComparison.jsx';
 import EventsList from './EventsList.jsx';
 import { Button } from './ui/button.jsx';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card.jsx';
@@ -21,6 +22,9 @@ import {
 } from './ui/dropdown-menu.jsx';
 import { Separator } from './ui/separator.jsx';
 import { VIEWS } from './viewConfig.js';
+import AnalysisFilterRail from './AnalysisFilterRail.jsx';
+import AnalysisStateStrip from './AnalysisStateStrip.jsx';
+import ResearchNotebook from './ResearchNotebook.jsx';
 
 const VIEW_COPY = {
   timeline: {
@@ -39,9 +43,13 @@ const VIEW_COPY = {
     label: 'Cycles',
     description: 'A normalized comparison of easing and tightening periods.',
   },
+  compare: {
+    label: 'Compare',
+    description: 'A deterministic comparison of two selected date windows.',
+  },
 };
 
-export default function ChartWorkspace({ activeView, activeDecisionId, dateRange, onDateRangeChange, activePreset, onPresetChange, layers, onLayersChange, onDecisionSelect, cycleSelection, onCycleSelectionChange, onViewChange }) {
+export default function ChartWorkspace({ activeView, activeDecisionId, dateRange, onDateRangeChange, activePreset, onPresetChange, layers, onLayersChange, onDecisionSelect, cycleSelection, onCycleSelectionChange, recordFilters, onRecordFiltersChange, timelineMode, onTimelineModeChange, rateChangeState, onRateChangeStateChange, breakdownState, onBreakdownStateChange, comparison, onComparisonChange, analysisState, onLoadState, onResetAnalysis, onViewChange }) {
   const copy = VIEW_COPY[activeView] || VIEW_COPY.timeline;
   const [layersOpen, setLayersOpen] = useState(false);
   const activeLayerCount = useMemo(() => [layers?.regimes, layers?.events].filter(Boolean).length, [layers]);
@@ -70,7 +78,7 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
                 <div className="workspace-control-group" data-control-group="view">
                   <span className="workspace-control-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground hidden sm:block">View</span>
                   <Tabs className="min-w-0 w-full" value={activeView} onValueChange={onViewChange}>
-                    <TabsList aria-label="Analytical views" className="workspace-view-switcher__list w-full grid grid-cols-4 lg:flex lg:w-auto gap-0.5 sm:gap-1 p-0.5 sm:p-1">
+                    <TabsList aria-label="Analytical views" className="workspace-view-switcher__list w-full grid grid-cols-5 lg:flex lg:w-auto gap-0.5 sm:gap-1 p-0.5 sm:p-1">
                       {VIEWS.map(view => (
                         <TabsTrigger className="workspace-view-switcher__trigger text-center px-0.5 min-[360px]:px-1 sm:px-3 text-[11px] min-[360px]:text-xs sm:text-sm font-medium truncate" key={view.id} value={view.id}>
                           {view.label}
@@ -95,6 +103,7 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
 
                 {/* Actions */}
                 <div className="workspace-actions flex min-w-0 items-center gap-1.5" aria-label="Chart actions">
+                  <ResearchNotebook analysisState={analysisState} onLoadState={onLoadState} />
                   <DropdownMenu open={layersOpen} onOpenChange={setLayersOpen}>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -135,19 +144,25 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
                       </p>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  <ExportBar className="workspace-export-actions" activeView={activeView} dateRange={dateRange} layers={layers} selectedDecisionId={activeDecisionId} cycleSelection={cycleSelection} />
+                  <ExportBar className="workspace-export-actions" activeView={activeView} dateRange={dateRange} layers={layers} selectedDecisionId={activeDecisionId} cycleSelection={cycleSelection} recordFilters={recordFilters} timelineMode={timelineMode} rateChangeState={rateChangeState} breakdownState={breakdownState} />
                 </div>
               </div>
             </div>
+            <div className="mt-3 border-t border-border/60 pt-3">
+              <AnalysisFilterRail recordFilters={recordFilters} onRecordFiltersChange={onRecordFiltersChange} timelineMode={timelineMode} onTimelineModeChange={onTimelineModeChange} />
+            </div>
           </div>
+
+          <AnalysisStateStrip dateRange={dateRange} recordFilters={recordFilters} timelineMode={timelineMode} rateChangeState={rateChangeState} breakdownState={breakdownState} activeDecisionId={activeDecisionId} cycleSelection={cycleSelection} onReset={onResetAnalysis} />
 
           {/* Chart body */}
           <div className="workspace-body min-w-0 px-3.5 py-4 sm:px-6 sm:py-6">
             <div className="workspace-main min-w-0">
-              {activeView === 'timeline' ? <TimelineChart activeDecisionId={activeDecisionId} dateRange={dateRange} onDecisionSelect={onDecisionSelect} showEvents={layers?.events} showRegimes={layers?.regimes} /> : null}
-              {activeView === 'breakdown' ? <RegimeBreakdown dateRange={dateRange} /> : null}
-              {activeView === 'rate-change' ? <RateChangeBar dateRange={dateRange} /> : null}
-              {activeView === 'cycles' ? <CycleComparison cycleSelection={cycleSelection} onCycleSelectionChange={onCycleSelectionChange} /> : null}
+              {activeView === 'timeline' ? <TimelineChart activeDecisionId={activeDecisionId} dateRange={dateRange} recordFilters={recordFilters} timelineMode={timelineMode} onDecisionSelect={onDecisionSelect} onRecordFiltersChange={onRecordFiltersChange} showEvents={layers?.events} showRegimes={layers?.regimes} /> : null}
+              {activeView === 'breakdown' ? <RegimeBreakdown dateRange={dateRange} recordFilters={recordFilters} breakdownState={breakdownState} onBreakdownStateChange={onBreakdownStateChange} onDecisionSelect={onDecisionSelect} onViewChange={onViewChange} /> : null}
+              {activeView === 'rate-change' ? <RateChangeBar dateRange={dateRange} recordFilters={recordFilters} rateChangeState={rateChangeState} onRateChangeStateChange={onRateChangeStateChange} onDecisionSelect={onDecisionSelect} /> : null}
+              {activeView === 'cycles' ? <CycleComparison cycleSelection={cycleSelection} onCycleSelectionChange={onCycleSelectionChange} recordFilters={recordFilters} onDecisionSelect={onDecisionSelect} onViewChange={onViewChange} /> : null}
+              {activeView === 'compare' ? <WindowComparison comparison={comparison} onComparisonChange={onComparisonChange} recordFilters={recordFilters} /> : null}
             </div>
 
             {activeView === 'timeline' && layers?.events ? (

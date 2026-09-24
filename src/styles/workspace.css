@@ -69,12 +69,15 @@
   min-width: 0;
 }
 
-/* Desktop: single flex row */
+/* Keep the rail single-line when it fits, and wrap whole control groups before
+   allowing an action group to cover an adjacent date control. */
 .workspace-controls__grid {
   display: flex;
   min-width: 0;
   align-items: center;
   gap: 0.875rem;
+  flex-wrap: wrap;
+  row-gap: 0.75rem;
 }
 
 .workspace-control-group[data-control-group="view"] {

@@ -1,0 +1,23 @@
+name: UI or accessibility issue
+description: Report a reproducible chartbook interaction or accessibility problem.
+title: "ui: "
+labels: [ui, accessibility]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and viewport
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true

@@ -2,7 +2,8 @@
  * Helper to compute policy decomposition data for regimes, years, and cycles.
  * All numbers are derived strictly from the canonical decisions and regimes.
  */
-import { decisionsForRegime, isWithinDateRange } from './dateBoundaries.js';
+import { decisionsForRegime } from './dateBoundaries.js';
+import { filterDecisions } from './analysisState.js';
 
 function formatRatio(holds, moves) {
   if (moves === 0) {
@@ -18,7 +19,7 @@ function formatRatio(holds, moves) {
  * @param {Array<Object>} decisions
  * @param {Object} [dateRange]
  */
-export function getRegimeBreakdowns(regimes, decisions, dateRange = {}) {
+export function getRegimeBreakdowns(regimes, decisions, dateRange = {}, recordFilters = {}) {
   return regimes
     .map((regime, index) => ({ regime, index }))
     .filter(({ regime: r }) => {
@@ -27,8 +28,7 @@ export function getRegimeBreakdowns(regimes, decisions, dateRange = {}) {
       return true;
     })
     .map(({ regime: r, index }) => {
-      const regimeDecisions = decisionsForRegime(decisions, regimes, index)
-        .filter(decision => isWithinDateRange(decision.dateObj, dateRange));
+      const regimeDecisions = filterDecisions(decisionsForRegime(decisions, regimes, index), { dateRange, recordFilters });
 
       const cuts = regimeDecisions.filter(d => d.action === 'cut');
       const hikes = regimeDecisions.filter(d => d.action === 'hike');
@@ -77,10 +77,8 @@ export function getRegimeBreakdowns(regimes, decisions, dateRange = {}) {
  * @param {Array<Object>} decisions
  * @param {Object} [dateRange]
  */
-export function getYearlyBreakdowns(decisions, dateRange = {}) {
-  const filteredDecisions = decisions.filter(d => {
-    return isWithinDateRange(d.dateObj, dateRange);
-  });
+export function getYearlyBreakdowns(decisions, dateRange = {}, recordFilters = {}) {
+  const filteredDecisions = filterDecisions(decisions, { dateRange, recordFilters });
 
   const byYear = new Map();
 
@@ -131,10 +129,8 @@ export function getYearlyBreakdowns(decisions, dateRange = {}) {
  * @param {Array<Object>} decisions
  * @param {Object} [dateRange]
  */
-export function getAggregateStats(decisions, dateRange = {}) {
-  const filtered = decisions.filter(d => {
-    return isWithinDateRange(d.dateObj, dateRange);
-  });
+export function getAggregateStats(decisions, dateRange = {}, recordFilters = {}) {
+  const filtered = filterDecisions(decisions, { dateRange, recordFilters });
 
   const cuts = filtered.filter(d => d.action === 'cut');
   const hikes = filtered.filter(d => d.action === 'hike');

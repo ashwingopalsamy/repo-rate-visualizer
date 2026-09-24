@@ -4,18 +4,20 @@ import { decisions, regimes } from '../data/dataLoader.js';
 import { getRegimeBreakdowns, getYearlyBreakdowns, getAggregateStats } from '../lib/regimeBreakdownData.js';
 import ChartReadout from './ChartReadout.jsx';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs.jsx';
+import { normalizeBreakdownState } from '../lib/analysisState.js';
 
 const DESKTOP_MARGIN = { top: 36, right: 24, bottom: 92, left: 48 };
 const MOBILE_MARGIN = { top: 32, right: 12, bottom: 84, left: 36 };
 
-export default function RegimeBreakdown({ dateRange }) {
+export default function RegimeBreakdown({ dateRange, recordFilters, breakdownState, onBreakdownStateChange, onDecisionSelect, onViewChange }) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const readoutStateRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [readout, setReadout] = useState(null);
-  const [groupBy, setGroupBy] = useState('regime'); // 'regime' | 'year'
-  const [metricMode, setMetricMode] = useState('count'); // 'count' | 'bps'
+  const breakdown = normalizeBreakdownState(breakdownState);
+  const { group: groupBy, metric: metricMode } = breakdown;
+  const updateBreakdown = next => onBreakdownStateChange?.({ ...breakdown, ...next });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -43,13 +45,13 @@ export default function RegimeBreakdown({ dateRange }) {
 
   const rawData = useMemo(() => {
     return groupBy === 'regime'
-      ? getRegimeBreakdowns(regimes, decisions, dateRange)
-      : getYearlyBreakdowns(decisions, dateRange);
-  }, [dateRange, groupBy]);
+      ? getRegimeBreakdowns(regimes, decisions, dateRange, recordFilters)
+      : getYearlyBreakdowns(decisions, dateRange, recordFilters);
+  }, [dateRange, groupBy, recordFilters]);
 
   const aggregate = useMemo(() => {
-    return getAggregateStats(decisions, dateRange);
-  }, [dateRange]);
+    return getAggregateStats(decisions, dateRange, recordFilters);
+  }, [dateRange, recordFilters]);
 
   useEffect(() => {
     if (!dimensions.width || !dimensions.height) return undefined;
@@ -138,6 +140,17 @@ export default function RegimeBreakdown({ dateRange }) {
       setReadout(null);
     };
 
+    const openItemRecords = (event, item) => {
+      if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      setReadoutFor(item, true);
+      const latestRecord = item.decisions?.at(-1);
+      if (latestRecord) {
+        onDecisionSelect?.(latestRecord.id);
+        onViewChange?.('timeline');
+      }
+    };
+
     // Render stacked segments
     stackedSeries.forEach(layer => {
       const key = layer.key;
@@ -178,10 +191,7 @@ export default function RegimeBreakdown({ dateRange }) {
               setReadoutFor(item, false);
             })
             .on('mouseleave blur', clearReadout)
-            .on('pointerup', (event) => {
-              event.preventDefault();
-              setReadoutFor(item, true);
-            });
+            .on('pointerup keydown', (event) => openItemRecords(event, item));
 
           // Text inside segment if there is enough height and width
           if (segHeight >= 16 && barW >= 18) {
@@ -265,12 +275,12 @@ export default function RegimeBreakdown({ dateRange }) {
         .attr('class', 'x-axis-label-group')
         .attr('transform', `translate(${x}, 8) rotate(${labelAngle})`)
         .attr('cursor', 'pointer')
+        .attr('tabindex', 0)
+        .attr('role', 'button')
+        .attr('aria-label', `Open records for ${item.label}`)
         .on('mouseenter focus', () => setReadoutFor(item, false))
         .on('mouseleave blur', clearReadout)
-        .on('pointerup', (event) => {
-          event.preventDefault();
-          setReadoutFor(item, true);
-        });
+        .on('pointerup keydown', (event) => openItemRecords(event, item));
 
       if (groupBy === 'regime') {
         const text = labelGroup.append('text')
@@ -330,7 +340,7 @@ export default function RegimeBreakdown({ dateRange }) {
     return () => {
       svg.selectAll('*').on('.mouseenter', null).on('.mouseleave', null).on('.pointerup', null);
     };
-  }, [dimensions, rawData, groupBy, metricMode]);
+  }, [dimensions, rawData, groupBy, metricMode, onDecisionSelect, onViewChange]);
 
   return (
     <div className="breakdown-view flex flex-col gap-5">
@@ -399,14 +409,14 @@ export default function RegimeBreakdown({ dateRange }) {
 
           {/* Mode switchers — side-by-side, no wrap on mobile */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
-            <Tabs value={groupBy} onValueChange={setGroupBy} className="min-w-0">
+            <Tabs value={groupBy} onValueChange={group => updateBreakdown({ group })} className="min-w-0">
               <TabsList className="gap-1">
                 <TabsTrigger value="regime" className="px-2.5 sm:px-3 text-xs">By Regime</TabsTrigger>
                 <TabsTrigger value="year" className="px-2.5 sm:px-3 text-xs">By Year</TabsTrigger>
               </TabsList>
             </Tabs>
 
-            <Tabs value={metricMode} onValueChange={setMetricMode} className="min-w-0">
+            <Tabs value={metricMode} onValueChange={metric => updateBreakdown({ metric })} className="min-w-0">
               <TabsList className="gap-1">
                 <TabsTrigger value="count" className="px-2.5 sm:px-3 text-xs">Decisions</TabsTrigger>
                 <TabsTrigger value="bps" className="px-2.5 sm:px-3 text-xs">Bps Volume</TabsTrigger>

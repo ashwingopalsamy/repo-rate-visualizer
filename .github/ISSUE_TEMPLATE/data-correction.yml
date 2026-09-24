@@ -1,0 +1,26 @@
+name: Data correction
+description: Report a possible record, source, or release error.
+title: "data: "
+labels: [data]
+body:
+  - type: input
+    id: record
+    attributes:
+      label: Record or release
+      description: Give the record date/ID or release ID.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Primary source
+      description: Link the original publisher material and describe the discrepancy.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the current value, expected value, and any relevant release.
+    validations:
+      required: true

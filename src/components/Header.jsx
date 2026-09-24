@@ -52,6 +52,24 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
       execute: () => document.querySelector('.chart-workspace')?.scrollIntoView({ behavior: 'auto', block: 'start' }),
     },
     {
+      id: 'as-of-lookup',
+      group: 'Research',
+      label: 'Look up rate on a date',
+      execute: () => { window.location.href = '/as-of'; },
+    },
+    {
+      id: 'release-diff',
+      group: 'Research',
+      label: 'Compare snapshot releases',
+      execute: () => { window.location.href = '/releases'; },
+    },
+    {
+      id: 'data-limitations',
+      group: 'Research',
+      label: 'Read data limitations',
+      execute: () => { window.location.href = '/limitations'; },
+    },
+    {
       id: 'navigate-design',
       group: 'Reference',
       label: 'Design System & Tokens (/design)',

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import * as d3 from 'd3';
-import { decisions, regimes } from '../data/dataLoader.js';
+import { decisions, regimes, snapshotMeta } from '../data/dataLoader.js';
+import { filterDecisions, normalizeRecordFilters } from '../lib/analysisState.js';
 import {
   Select,
   SelectContent,
@@ -45,7 +46,23 @@ const cycles = regimes
   };
   });
 
-export default function CycleComparison({ cycleSelection, onCycleSelectionChange }) {
+export default function CycleComparison({ cycleSelection, onCycleSelectionChange, recordFilters, onDecisionSelect, onViewChange }) {
+  const filters = normalizeRecordFilters(recordFilters);
+  const visibleCycles = useMemo(() => cycles.map(cycle => {
+    const visibleRateData = filterDecisions(cycle.rateData, { recordFilters: filters });
+    const moves = visibleRateData.filter(decision => ['cut', 'hike'].includes(decision.action));
+    const totalBps = visibleRateData.length > 0 && cycle.baselineRate !== null
+      ? Math.round((visibleRateData.at(-1).rate - cycle.baselineRate) * 100)
+      : 0;
+    const largestMove = moves.slice().sort((a, b) => Math.abs(b.changeBps) - Math.abs(a.changeBps))[0] || null;
+    return {
+      ...cycle,
+      rateData: visibleRateData,
+      totalBps,
+      largestMove,
+      moveCount: moves.length,
+    };
+  }), [filters.action, filters.evidence]);
   const defaultA = safeCycleIndex(cycleSelection?.a, 0, cycles.length);
   const defaultB = safeCycleIndex(cycleSelection?.b, cycles.length - 1, cycles.length);
   const [cycleA, setCycleA] = useState(defaultA);
@@ -78,8 +95,8 @@ export default function CycleComparison({ cycleSelection, onCycleSelectionChange
     return () => ro.disconnect();
   }, []);
 
-  const selectedA = cycles[cycleA];
-  const selectedB = cycles[cycleB];
+  const selectedA = visibleCycles[cycleA];
+  const selectedB = visibleCycles[cycleB];
 
   // Normalize both cycles to t=0
   const normalizedA = useMemo(() => {
@@ -91,8 +108,10 @@ export default function CycleComparison({ cycleSelection, onCycleSelectionChange
       rateDelta: Math.round((d.rate - baseRate) * 100),
       rate: d.rate,
       date: d.date,
+      decisionId: d.id,
+      action: d.action,
     }));
-  }, [cycleA]);
+  }, [cycleA, selectedA]);
 
   const normalizedB = useMemo(() => {
     if (!selectedB?.rateData.length) return [];
@@ -103,11 +122,15 @@ export default function CycleComparison({ cycleSelection, onCycleSelectionChange
       rateDelta: Math.round((d.rate - baseRate) * 100),
       rate: d.rate,
       date: d.date,
+      decisionId: d.id,
+      action: d.action,
     }));
-  }, [cycleB]);
+  }, [cycleB, selectedB]);
 
   useEffect(() => {
     if (!dimensions.width || !dimensions.height) return;
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('*').remove();
     if (!normalizedA.length || !normalizedB.length) return;
 
     const { width, height } = dimensions;
@@ -116,9 +139,6 @@ export default function CycleComparison({ cycleSelection, onCycleSelectionChange
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
     if (innerW <= 0 || innerH <= 0) return;
-
-    const svg = d3.select(svgRef.current);
-    svg.selectAll('*').remove();
 
     const maxDays = Math.max(
       d3.max(normalizedA, d => d.dayOffset) || 0,
@@ -157,10 +177,28 @@ export default function CycleComparison({ cycleSelection, onCycleSelectionChange
     // Dots
     g.selectAll('.dot-a').data(normalizedA).join('circle')
       .attr('cx', d => xScale(d.dayOffset)).attr('cy', d => yScale(d.rateDelta))
-      .attr('r', isMobile ? 2.5 : 3).attr('fill', 'var(--color-cut)');
+      .attr('r', isMobile ? 2.5 : 3).attr('fill', 'var(--color-cut)')
+      .attr('role', 'button').attr('tabindex', 0)
+      .attr('aria-label', d => `Open ${d.date} record, ${d.rate.toFixed(2)} percent`)
+      .attr('cursor', 'pointer')
+      .on('pointerup keydown', (event, datum) => {
+        if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        onDecisionSelect?.(datum.decisionId);
+        onViewChange?.('timeline');
+      });
     g.selectAll('.dot-b').data(normalizedB).join('circle')
       .attr('cx', d => xScale(d.dayOffset)).attr('cy', d => yScale(d.rateDelta))
-      .attr('r', isMobile ? 2.5 : 3).attr('fill', 'var(--color-hike)');
+      .attr('r', isMobile ? 2.5 : 3).attr('fill', 'var(--color-hike)')
+      .attr('role', 'button').attr('tabindex', 0)
+      .attr('aria-label', d => `Open ${d.date} record, ${d.rate.toFixed(2)} percent`)
+      .attr('cursor', 'pointer')
+      .on('pointerup keydown', (event, datum) => {
+        if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        onDecisionSelect?.(datum.decisionId);
+        onViewChange?.('timeline');
+      });
 
     // X axis (days)
     g.append('g').attr('class', 'axis axis--x')
@@ -182,7 +220,11 @@ export default function CycleComparison({ cycleSelection, onCycleSelectionChange
         .text('Cumulative change (bps from t=0)');
     }
 
-  }, [dimensions, normalizedA, normalizedB]);
+  }, [dimensions, normalizedA, normalizedB, onDecisionSelect, onViewChange]);
+
+  const cycleLink = decision => decision
+    ? `/decision/${encodeURIComponent(decision.id)}?snapshot=${encodeURIComponent(snapshotMeta.releaseId)}`
+    : null;
 
   return (
     <div className="space-y-4">
@@ -244,11 +286,13 @@ export default function CycleComparison({ cycleSelection, onCycleSelectionChange
       <div id="cycle-comparison-summary" className="grid gap-2.5 border-b border-border/70 pb-3 text-sm grid-cols-1 sm:grid-cols-2 sm:gap-x-6" role="status" aria-live="polite">
         <div className="min-w-0 rounded-xl border border-border/60 bg-muted/20 px-3.5 py-3 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:rounded-none">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-cut"><span className="size-1.5 rounded-full bg-cut" aria-hidden="true" />{selectedA?.label}</div>
-          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedA?.durationMonths}mo · {selectedA?.avgBpsPerMonth} bps/mo from baseline</span></p>
+          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedA?.totalBps > 0 ? '+' : ''}{selectedA?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedA?.durationMonths}mo · {selectedA?.moveCount || 0} recorded moves</span></p>
+          {selectedA?.rateData.length ? <a className="mt-2 inline-block text-xs font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline" href={cycleLink(selectedA.rateData.at(-1))}>Open latest record</a> : null}
         </div>
         <div className="min-w-0 rounded-xl border border-border/60 bg-muted/20 px-3.5 py-3 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:rounded-none">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-hike"><span className="size-1.5 rounded-full bg-hike" aria-hidden="true" />{selectedB?.label}</div>
-          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedB?.durationMonths}mo · {selectedB?.avgBpsPerMonth} bps/mo from baseline</span></p>
+          <p className="mt-1.5 mb-0 text-foreground"><strong className="font-semibold tabular-nums">{selectedB?.totalBps > 0 ? '+' : ''}{selectedB?.totalBps} bps</strong><span className="ml-2 text-xs text-muted-foreground">{selectedB?.durationMonths}mo · {selectedB?.moveCount || 0} recorded moves</span></p>
+          {selectedB?.rateData.length ? <a className="mt-2 inline-block text-xs font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline" href={cycleLink(selectedB.rateData.at(-1))}>Open latest record</a> : null}
         </div>
       </div>
 

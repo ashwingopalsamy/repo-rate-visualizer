@@ -9,6 +9,10 @@ import DesignPage from './components/DesignPage.jsx';
 import ColophonPage from './components/ColophonPage.jsx';
 import DecisionDossier from './components/DecisionDossier.jsx';
 import useUrlState, { parseUrlState } from './hooks/useUrlState.js';
+import { DEFAULT_BREAKDOWN_STATE, DEFAULT_RATE_CHANGE_STATE, DEFAULT_RECORD_FILTERS } from './lib/analysisState.js';
+import AsOfLookup from './components/AsOfLookup.jsx';
+import ReleaseDiffPage from './components/ReleaseDiffPage.jsx';
+import DataLimitations from './components/DataLimitations.jsx';
 
 function initialUrlState() {
   if (typeof window === 'undefined') {
@@ -27,6 +31,9 @@ export default function App() {
 
   const isDesignPage = currentPath === '/design' || currentPath === '/design/';
   const isColophonPage = currentPath === '/colophon' || currentPath === '/colophon/';
+  const isAsOfPage = currentPath === '/as-of' || currentPath === '/as-of/';
+  const isReleaseDiffPage = currentPath === '/releases' || currentPath === '/releases/';
+  const isLimitationsPage = currentPath === '/limitations' || currentPath === '/limitations/';
   const dossierMatch = currentPath.match(/^\/decision\/([^/]+)\/?$/);
   const initialState = initialUrlState();
 
@@ -43,11 +50,54 @@ export default function App() {
   const [layers, setLayers] = useState(initialState.layers);
   const [cycleSelection, setCycleSelection] = useState({ a: initialState.cycleA, b: initialState.cycleB });
   const [dateRange, setDateRange] = useState(initialState.dateRange);
+  const [recordFilters, setRecordFilters] = useState(initialState.recordFilters);
+  const [timelineMode, setTimelineMode] = useState(initialState.timelineMode);
+  const [rateChangeState, setRateChangeState] = useState(initialState.rateChangeState);
+  const [breakdownState, setBreakdownState] = useState(initialState.breakdownState);
+  const [comparison, setComparison] = useState(initialState.comparison);
 
   const handleViewChange = useCallback((view) => {
     setActiveView(view);
   }, []);
   const [activePreset, setActivePreset] = useState(initialState.activePreset);
+
+  const resetAnalysis = useCallback(() => {
+    setActiveDecisionId(null);
+    setCycleSelection({ a: null, b: null });
+    setRecordFilters(DEFAULT_RECORD_FILTERS);
+    setTimelineMode('all');
+    setRateChangeState(DEFAULT_RATE_CHANGE_STATE);
+    setBreakdownState(DEFAULT_BREAKDOWN_STATE);
+    setComparison(null);
+  }, []);
+
+  const analysisState = {
+    activeView,
+    activePreset,
+    dateRange,
+    layers,
+    activeDecisionId,
+    cycleSelection,
+    recordFilters,
+    timelineMode,
+    rateChangeState,
+    breakdownState,
+    comparison,
+  };
+
+  const loadAnalysisState = useCallback((savedState = {}) => {
+    if (savedState.activeView) setActiveView(savedState.activeView);
+    if (savedState.activePreset) setActivePreset(savedState.activePreset);
+    if (savedState.dateRange) setDateRange(savedState.dateRange);
+    if (savedState.layers) setLayers(savedState.layers);
+    setActiveDecisionId(savedState.activeDecisionId || null);
+    setCycleSelection(savedState.cycleSelection || { a: null, b: null });
+    setRecordFilters(savedState.recordFilters || DEFAULT_RECORD_FILTERS);
+    setTimelineMode(savedState.timelineMode || 'all');
+    setRateChangeState(savedState.rateChangeState || DEFAULT_RATE_CHANGE_STATE);
+    setBreakdownState(savedState.breakdownState || DEFAULT_BREAKDOWN_STATE);
+    setComparison(savedState.comparison || null);
+  }, []);
 
   useEffect(() => {
     if (dossierMatch || typeof window === 'undefined') return undefined;
@@ -91,12 +141,22 @@ export default function App() {
     layers,
     activeDecisionId,
     cycleSelection,
+    recordFilters,
+    timelineMode,
+    rateChangeState,
+    breakdownState,
+    comparison,
     onViewChange: handleViewChange,
     onDateRangeChange: setDateRange,
     onPresetChange: setActivePreset,
     onLayersChange: setLayers,
     onDecisionSelect: setActiveDecisionId,
     onCycleSelectionChange: setCycleSelection,
+    onRecordFiltersChange: setRecordFilters,
+    onTimelineModeChange: setTimelineMode,
+    onRateChangeStateChange: setRateChangeState,
+    onBreakdownStateChange: setBreakdownState,
+    onComparisonChange: setComparison,
   });
 
   if (dossierMatch) {
@@ -123,6 +183,30 @@ export default function App() {
     return (
       <ThemeProvider>
         <ColophonPage />
+      </ThemeProvider>
+    );
+  }
+
+  if (isAsOfPage) {
+    return (
+      <ThemeProvider>
+        <AsOfLookup />
+      </ThemeProvider>
+    );
+  }
+
+  if (isReleaseDiffPage) {
+    return (
+      <ThemeProvider>
+        <ReleaseDiffPage />
+      </ThemeProvider>
+    );
+  }
+
+  if (isLimitationsPage) {
+    return (
+      <ThemeProvider>
+        <DataLimitations />
       </ThemeProvider>
     );
   }
@@ -156,6 +240,19 @@ export default function App() {
               onDecisionSelect={setActiveDecisionId}
               cycleSelection={cycleSelection}
               onCycleSelectionChange={setCycleSelection}
+              recordFilters={recordFilters}
+              onRecordFiltersChange={setRecordFilters}
+              timelineMode={timelineMode}
+              onTimelineModeChange={setTimelineMode}
+              rateChangeState={rateChangeState}
+              onRateChangeStateChange={setRateChangeState}
+              breakdownState={breakdownState}
+              onBreakdownStateChange={setBreakdownState}
+              comparison={comparison}
+              onComparisonChange={setComparison}
+              analysisState={analysisState}
+              onLoadState={loadAnalysisState}
+              onResetAnalysis={resetAnalysis}
               onViewChange={handleViewChange}
             />
 

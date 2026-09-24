@@ -3,6 +3,7 @@ import { ChevronDown, ExternalLink } from 'lucide-react';
 import { decisions, snapshotMeta, sources } from '../data/dataLoader.js';
 import { getTrend, formatBps } from '../lib/trend.js';
 import { actionForRecord, isCountableHold } from '../lib/evidence.js';
+import { filterDecisions, normalizeRecordFilters } from '../lib/analysisState.js';
 import { Badge } from './ui/badge.jsx';
 import { Button } from './ui/button.jsx';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
@@ -17,14 +18,6 @@ function dossierHref(decision) {
 
 function changeLabel(decision) {
   return decision.action === 'initial' ? 'Baseline' : formatBps(decision.changeBps);
-}
-
-function visibleDecisions(dateRange) {
-  return decisions.filter(decision => {
-    if (dateRange.start && decision.dateObj < new Date(dateRange.start)) return false;
-    if (dateRange.end && decision.dateObj > new Date(dateRange.end)) return false;
-    return true;
-  });
 }
 
 function formatDate(value) {
@@ -109,12 +102,16 @@ function DecisionCard({ decision, source, isActive, onSelect }) {
   );
 }
 
-export default function DecisionTimelineList({ dateRange, activeDecisionId, onDecisionSelect }) {
+export default function DecisionTimelineList({ dateRange, activeDecisionId, onDecisionSelect, recordFilters = {}, timelineMode = 'all', onRecordFiltersChange }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [desktopExpanded, setDesktopExpanded] = useState(false);
-  const [actionFilter, setActionFilter] = useState('all');
+  const filters = normalizeRecordFilters(recordFilters);
 
-  const allFilteredDecisions = useMemo(() => visibleDecisions(dateRange), [dateRange]);
+  const allFilteredDecisions = useMemo(() => filterDecisions(decisions, {
+    dateRange,
+    recordFilters: { ...filters, action: 'all' },
+    timelineMode,
+  }), [dateRange, filters.evidence, timelineMode]);
 
   const counts = useMemo(() => ({
     all: allFilteredDecisions.length,
@@ -124,10 +121,10 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
   }), [allFilteredDecisions]);
 
   const displayedDecisions = useMemo(() => {
-    if (actionFilter === 'all') return allFilteredDecisions;
-    if (actionFilter === 'hold') return allFilteredDecisions.filter(isCountableHold);
-    return allFilteredDecisions.filter(d => d.action === actionFilter);
-  }, [actionFilter, allFilteredDecisions]);
+    if (filters.action === 'all') return allFilteredDecisions;
+    if (filters.action === 'hold') return allFilteredDecisions.filter(isCountableHold);
+    return allFilteredDecisions.filter(d => d.action === filters.action);
+  }, [filters.action, allFilteredDecisions]);
 
   const selectedDecision = allFilteredDecisions.find(decision => decision.id === activeDecisionId);
   const selectedSource = selectedDecision?.sourceIds.map(sourceId => sourceById.get(sourceId)).find(Boolean);
@@ -149,6 +146,40 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
       }
     }
   }, [activeDecisionId, isExpanded, desktopExpanded]);
+
+  useEffect(() => {
+    const handleRecordNavigation = event => {
+      const target = event.target;
+      if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement || target.isContentEditable) return;
+      const key = event.key.toLowerCase();
+      if (key === 'escape') {
+        if (activeDecisionId) {
+          event.preventDefault();
+          onDecisionSelect?.(null);
+        }
+        return;
+      }
+      if (key === 'enter') {
+        const selected = displayedDecisions.find(decision => decision.id === activeDecisionId);
+        if (selected) {
+          event.preventDefault();
+          window.location.href = dossierHref(selected);
+        }
+        return;
+      }
+      if (!['j', 'k', 'arrowdown', 'arrowup'].includes(key) || !displayedDecisions.length) return;
+      event.preventDefault();
+      const ordered = displayedDecisions.slice().reverse();
+      const currentIndex = ordered.findIndex(decision => decision.id === activeDecisionId);
+      const nextIndex = ['j', 'arrowdown'].includes(key)
+        ? Math.min(ordered.length - 1, currentIndex < 0 ? 0 : currentIndex + 1)
+        : Math.max(0, currentIndex <= 0 ? 0 : currentIndex - 1);
+      onDecisionSelect?.(ordered[nextIndex].id);
+      requestAnimationFrame(() => document.querySelector(`[data-decision-id="${CSS.escape(ordered[nextIndex].id)}"] button[aria-pressed], [data-mobile-decision-id="${CSS.escape(ordered[nextIndex].id)}"]`)?.focus({ preventScroll: true }));
+    };
+    window.addEventListener('keydown', handleRecordNavigation);
+    return () => window.removeEventListener('keydown', handleRecordNavigation);
+  }, [activeDecisionId, displayedDecisions, onDecisionSelect]);
 
   const reversedDecisions = useMemo(() => displayedDecisions.slice().reverse(), [displayedDecisions]);
   const mobileVisibleDecisions = isExpanded ? reversedDecisions : reversedDecisions.slice(0, INITIAL_MOBILE_COUNT);
@@ -172,10 +203,10 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
         <button
           type="button"
           role="tab"
-          aria-selected={actionFilter === 'all'}
-          onClick={() => setActionFilter('all')}
+          aria-selected={filters.action === 'all'}
+          onClick={() => onRecordFiltersChange?.({ ...filters, action: 'all' })}
           className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors shrink-0 ${
-            actionFilter === 'all'
+            filters.action === 'all'
               ? 'bg-foreground text-background shadow-2xs'
               : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground'
           }`}
@@ -185,10 +216,10 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
         <button
           type="button"
           role="tab"
-          aria-selected={actionFilter === 'cut'}
-          onClick={() => setActionFilter('cut')}
+          aria-selected={filters.action === 'cut'}
+          onClick={() => onRecordFiltersChange?.({ ...filters, action: 'cut' })}
           className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors shrink-0 ${
-            actionFilter === 'cut'
+            filters.action === 'cut'
               ? 'bg-cut text-cut-foreground shadow-2xs'
               : 'bg-cut/10 text-cut hover:bg-cut/20'
           }`}
@@ -198,10 +229,10 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
         <button
           type="button"
           role="tab"
-          aria-selected={actionFilter === 'hike'}
-          onClick={() => setActionFilter('hike')}
+          aria-selected={filters.action === 'hike'}
+          onClick={() => onRecordFiltersChange?.({ ...filters, action: 'hike' })}
           className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors shrink-0 ${
-            actionFilter === 'hike'
+            filters.action === 'hike'
               ? 'bg-hike text-hike-foreground shadow-2xs'
               : 'bg-hike/10 text-hike hover:bg-hike/20'
           }`}
@@ -211,10 +242,10 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
         <button
           type="button"
           role="tab"
-          aria-selected={actionFilter === 'hold'}
-          onClick={() => setActionFilter('hold')}
+          aria-selected={filters.action === 'hold'}
+          onClick={() => onRecordFiltersChange?.({ ...filters, action: 'hold' })}
           className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors shrink-0 ${
-            actionFilter === 'hold'
+            filters.action === 'hold'
               ? 'bg-hold text-hold-foreground shadow-2xs'
               : 'bg-hold/10 text-hold hover:bg-hold/20'
           }`}

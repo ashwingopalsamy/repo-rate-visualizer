@@ -1,33 +1,44 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { rateChanges } from '../data/dataLoader.js';
+import { decisions, rateChanges } from '../data/dataLoader.js';
+import { filterDecisions, filterRateChanges, normalizeRateChangeState, RATE_CHANGE_SIZE_BANDS, RATE_CHANGE_SORTS } from '../lib/analysisState.js';
 import ChartReadout from './ChartReadout.jsx';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select.jsx';
+import { Tabs, TabsList, TabsTrigger } from './ui/tabs.jsx';
 
 const DESKTOP_MARGIN = { top: 24, right: 20, bottom: 38, left: 50 };
 const MOBILE_MARGIN = { top: 20, right: 10, bottom: 32, left: 38 };
 const EXTREME_THRESHOLD = 50;
 
-function readoutDatum(datum) {
+function readoutDatum(datum, viewMode = 'distribution') {
   return {
     date: datum.date,
     rate: datum.rate,
     action: datum.changeBps < 0 ? 'cut' : 'hike',
     changeBps: datum.changeBps,
-    annotation: Math.abs(datum.changeBps) >= EXTREME_THRESHOLD ? 'Large move' : undefined,
+    annotation: viewMode === 'cumulative'
+      ? `Cumulative recorded change: ${datum.chartValue > 0 ? '+' : ''}${datum.chartValue} bps`
+      : Math.abs(datum.changeBps) >= EXTREME_THRESHOLD ? 'Large move' : undefined,
   };
 }
 
-export default function RateChangeBar({ dateRange }) {
+export default function RateChangeBar({ dateRange, recordFilters, rateChangeState, onRateChangeStateChange, onDecisionSelect }) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const readoutStateRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [readout, setReadout] = useState(null);
+  const settings = normalizeRateChangeState(rateChangeState);
+  const { sizeBand, sort: sortMode, view: viewMode } = settings;
+  const updateSettings = next => onRateChangeStateChange?.({ ...settings, ...next });
+
+  const visibleData = useMemo(() => {
+    const allowedIds = new Set(filterDecisions(decisions, { dateRange, recordFilters }).map(decision => decision.id));
+    return filterRateChanges(rateChanges.filter(change => allowedIds.has(change.decisionId)), { sizeBand, sort: sortMode });
+  }, [dateRange, recordFilters, sizeBand, sortMode]);
 
   const summary = useMemo(() => {
-    let data = rateChanges;
-    if (dateRange.start) data = data.filter(d => d.dateObj >= new Date(dateRange.start));
-    if (dateRange.end) data = data.filter(d => d.dateObj <= new Date(dateRange.end));
+    const data = visibleData;
     if (!data.length) return null;
 
     const cuts = data.filter(d => d.changeBps < 0);
@@ -47,7 +58,7 @@ export default function RateChangeBar({ dateRange }) {
       totalHikeBps,
       netBps: totalHikeBps - totalCutBps,
     };
-  }, [dateRange.start, dateRange.end]);
+  }, [visibleData]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -81,16 +92,21 @@ export default function RateChangeBar({ dateRange }) {
     const innerH = height - margin.top - margin.bottom;
     if (innerW <= 0 || innerH <= 0) return undefined;
 
-    let data = rateChanges;
-    if (dateRange.start) data = data.filter(d => d.dateObj >= new Date(dateRange.start));
-    if (dateRange.end) data = data.filter(d => d.dateObj <= new Date(dateRange.end));
+    const orderedData = viewMode === 'cumulative'
+      ? visibleData.slice().sort((a, b) => String(a.date).localeCompare(String(b.date)))
+      : visibleData;
+    let runningBps = 0;
+    const data = orderedData.map(datum => {
+      runningBps += datum.changeBps;
+      return { ...datum, chartValue: viewMode === 'cumulative' ? runningBps : datum.changeBps };
+    });
 
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
     if (data.length === 0) return undefined;
 
     const xScale = d3.scaleBand().domain(data.map(d => d.date)).range([0, innerW]).padding(0.28);
-    const maxBps = d3.max(data, d => Math.abs(d.changeBps)) || 50;
+    const maxBps = d3.max(data, d => Math.abs(d.chartValue)) || 50;
     const yScale = d3.scaleLinear().domain([-maxBps - 10, maxBps + 10]).range([innerH, 0]).nice();
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
@@ -100,7 +116,7 @@ export default function RateChangeBar({ dateRange }) {
     const zeroY = margin.top + yScale(0);
     const barRects = data.map(datum => {
       const x = margin.left + (xScale(datum.date) || 0);
-      const endY = margin.top + yScale(datum.changeBps);
+      const endY = margin.top + yScale(datum.chartValue);
       return {
         left: x,
         top: Math.min(zeroY, endY),
@@ -117,7 +133,7 @@ export default function RateChangeBar({ dateRange }) {
         x: bar?.x ?? margin.left + (xScale(datum.date) || 0) + xScale.bandwidth() / 2,
         y: bar?.y ?? margin.top + yScale(datum.changeBps),
       };
-      const next = { visible: true, datum: readoutDatum(datum), anchor, nearbyPoints: barRects, persistent };
+      const next = { visible: true, datum: readoutDatum(datum, viewMode), anchor, nearbyPoints: barRects, persistent };
       readoutStateRef.current = next;
       setReadout(next);
     };
@@ -130,20 +146,21 @@ export default function RateChangeBar({ dateRange }) {
     const bars = g.selectAll('.bar')
       .data(data)
       .join('rect')
-      .attr('class', d => `bar ${d.changeBps > 0 ? 'bar-positive' : 'bar-negative'}${Math.abs(d.changeBps) >= EXTREME_THRESHOLD ? ' bar-extreme' : ''}`)
+      .attr('class', d => `bar ${d.changeBps > 0 ? 'bar-positive' : 'bar-negative'}${Math.abs(d.changeBps) >= EXTREME_THRESHOLD ? ' bar-extreme' : ''}${viewMode === 'cumulative' ? ' bar-cumulative' : ''}`)
       .attr('x', d => xScale(d.date))
       .attr('width', xScale.bandwidth())
-      .attr('y', d => d.changeBps > 0 ? yScale(d.changeBps) : yScale(0))
-      .attr('height', d => Math.abs(yScale(d.changeBps) - yScale(0)))
+      .attr('y', d => viewMode === 'cumulative' ? (d.chartValue > 0 ? yScale(d.chartValue) : yScale(0)) : (d.changeBps > 0 ? yScale(d.changeBps) : yScale(0)))
+      .attr('height', d => viewMode === 'cumulative' ? Math.abs(yScale(d.chartValue) - yScale(0)) : Math.abs(yScale(d.changeBps) - yScale(0)))
       .attr('rx', 2)
       .attr('role', 'button')
       .attr('tabindex', 0)
-      .attr('aria-label', d => `${d.changeBps > 0 ? 'Hike' : 'Cut'} on ${d.date}, ${d.changeBps > 0 ? '+' : ''}${d.changeBps} basis points, repo rate ${d.rate.toFixed(2)} percent`)
+      .attr('aria-label', d => `${d.changeBps > 0 ? 'Hike' : 'Cut'} on ${d.date}, ${d.changeBps > 0 ? '+' : ''}${d.changeBps} basis points${viewMode === 'cumulative' ? `, cumulative ${d.chartValue > 0 ? '+' : ''}${d.chartValue} basis points` : ''}, repo rate ${d.rate.toFixed(2)} percent`)
       .on('mouseenter focus', (event, datum) => setReadoutFor(datum, false))
       .on('mouseleave blur', clearReadout)
       .on('pointerup', (event, datum) => {
         event.preventDefault();
         setReadoutFor(datum, true);
+        onDecisionSelect?.(datum.decisionId);
       })
       .on('keydown', (event, datum) => {
         if (event.key === 'Escape') {
@@ -162,12 +179,12 @@ export default function RateChangeBar({ dateRange }) {
       .call(d3.axisBottom(xScale).tickValues(data.filter((_, index) => index % tickEvery === 0).map(d => d.date)).tickFormat(d => d3.timeFormat('%Y')(new Date(d))).tickSizeOuter(0));
     g.append('g').attr('class', 'axis axis--y')
       .call(d3.axisLeft(yScale).ticks(6).tickFormat(d => `${d > 0 ? '+' : ''}${d}`).tickSizeOuter(0));
-    g.append('text').attr('class', 'chart-axis-label').attr('transform', 'rotate(-90)').attr('y', -36).attr('x', -innerH / 2).attr('text-anchor', 'middle').text('Change (bps)');
+    g.append('text').attr('class', 'chart-axis-label').attr('transform', 'rotate(-90)').attr('y', -36).attr('x', -innerH / 2).attr('text-anchor', 'middle').text(viewMode === 'cumulative' ? 'Cumulative change (bps)' : 'Change (bps)');
 
     return () => {
       bars.on('.mouseenter', null).on('.mouseleave', null).on('.pointerup', null).on('.keydown', null);
     };
-  }, [dateRange, dimensions]);
+  }, [dateRange, dimensions, onDecisionSelect, recordFilters, viewMode, visibleData]);
 
   return (
     <div className="derived-chart-view flex flex-col gap-5">
@@ -216,6 +233,30 @@ export default function RateChangeBar({ dateRange }) {
           </div>
         </div>
       ) : null}
+
+      <div className="flex flex-wrap items-center justify-between gap-2 border-y border-border/60 py-2.5" aria-label="Rate change chart controls">
+        <Tabs value={viewMode} onValueChange={view => updateSettings({ view })}>
+          <TabsList className="gap-1">
+            <TabsTrigger value="distribution" className="px-2.5 text-xs">Move distribution</TabsTrigger>
+            <TabsTrigger value="cumulative" className="px-2.5 text-xs">Cumulative path</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <div className="flex flex-wrap items-center gap-2">
+          <Select value={sizeBand} onValueChange={value => updateSettings({ sizeBand: value })}>
+            <SelectTrigger className="h-8 w-[9rem] text-xs" aria-label="Filter by move size"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All move sizes</SelectItem>
+              {RATE_CHANGE_SIZE_BANDS.filter(band => band !== 'all').map(band => <SelectItem key={band} value={band}>{band === '75-plus' ? '75+ bps' : `${band} bps`}</SelectItem>)}
+            </SelectContent>
+          </Select>
+          <Select value={sortMode} onValueChange={value => updateSettings({ sort: value })}>
+            <SelectTrigger className="h-8 w-[9rem] text-xs" aria-label="Sort rate changes"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {RATE_CHANGE_SORTS.map(sort => <SelectItem key={sort} value={sort}>{sort === 'date' ? 'Chronological' : sort === 'latest' ? 'Latest first' : 'Largest moves'}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
 
       <div className="chart-container" ref={containerRef} role="group" aria-label="RBI Repo Rate changes in basis points">
         <svg ref={svgRef} className="chart-svg" width={dimensions.width} height={dimensions.height} />

@@ -1,0 +1,19 @@
+name: Feature proposal
+description: Propose a focused research or contributor workflow.
+title: "feature: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Research problem
+      description: What real question would this help someone answer?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Data and evidence boundary
+      description: Which existing records or sources support it, and what would remain unknown?
+    validations:
+      required: true
