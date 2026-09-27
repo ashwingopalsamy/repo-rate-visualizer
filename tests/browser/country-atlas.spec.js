@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('@trust country index exposes only published country histories', async ({ page }) => {
   await page.goto('/countries');
   await expect(page.getByRole('heading', { name: 'Policy rates, in their own terms.' })).toBeVisible();
-  await expect(page.locator('.atlas-index').getByRole('link', { name: /United States/ })).toHaveAttribute('href', '/country/us');
+  await expect(page.locator('.atlas-index').getByRole('link', { name: /United States/ })).toHaveAttribute('href', '/?country=US');
   await expect(page.getByText('United Kingdom', { exact: true })).toBeVisible();
   await expect(page.getByText('Pending source review').first()).toBeVisible();
 });
@@ -21,6 +21,23 @@ test('@trust US target range, sources, and keyboard readout survive mobile width
   await expect(page.locator('.atlas-chart__readout')).toContainText('Feb 2, 2000');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   expect(overflow).toBe(false);
+});
+
+test('@trust country selection swaps data in place and history restores the explorer', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.rate-summary h1')).toContainText('5.25%');
+  await page.evaluate(() => { window.__countrySwitchSentinel = true; });
+
+  await page.getByRole('navigation', { name: 'Country selection' }).locator('select').selectOption('US');
+  await expect(page).toHaveURL(/\?country=US/);
+  await expect(page.locator('.rate-summary h1')).toContainText('3.75%–4.00%');
+  expect(await page.evaluate(() => window.__countrySwitchSentinel)).toBe(true);
+  await expect(page.getByRole('tab', { name: /Unchanged|Holds/ })).toHaveCount(0);
+
+  await page.goBack();
+  await expect(page.locator('.rate-summary h1')).toContainText('5.25%');
+  await page.goForward();
+  await expect(page.locator('.rate-summary h1')).toContainText('3.75%–4.00%');
 });
 
 test('@trust design reference includes global point and range specimens', async ({ page }) => {

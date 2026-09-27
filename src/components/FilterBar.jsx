@@ -14,10 +14,10 @@ export const RANGE_PRESETS = [
   { id: 'ALL', label: 'Max', years: null },
 ];
 
-const coverageStart = decisions[0]?.date || '';
-const coverageEnd = snapshotMeta.latestRecordedDate || currentRate.date;
+const defaultCoverageStart = decisions[0]?.date || '';
+const defaultCoverageEnd = snapshotMeta.latestRecordedDate || currentRate.date;
 
-function rangeForPreset(years) {
+function rangeForPreset(years, coverageEnd = defaultCoverageEnd) {
   if (years === null) return { start: null, end: null };
   const end = new Date(`${coverageEnd}T00:00:00.000Z`);
   const start = new Date(end);
@@ -28,9 +28,9 @@ function rangeForPreset(years) {
   };
 }
 
-function formatShortDate(value) {
+function formatShortDate(value, locale = 'en-IN') {
   if (!value) return 'Any date';
-  return new Date(`${value}T00:00:00.000Z`).toLocaleDateString('en-IN', {
+  return new Date(`${value}T00:00:00.000Z`).toLocaleDateString(locale, {
     day: '2-digit',
     month: 'short',
     year: 'numeric',
@@ -48,7 +48,9 @@ function validDate(value) {
   return Boolean(value && /^\d{4}-\d{2}-\d{2}$/.test(value));
 }
 
-export default function FilterBar({ dateRange, onDateRangeChange, activePreset, onPresetChange, onApplyRange, onReset, className = '' }) {
+export default function FilterBar({ dateRange, onDateRangeChange, activePreset, onPresetChange, onApplyRange, onReset, className = '', coverage = null, locale = 'en-IN' }) {
+  const coverageStart = coverage?.from || defaultCoverageStart;
+  const coverageEnd = coverage?.through || defaultCoverageEnd;
   const [customDatesOpen, setCustomDatesOpen] = useState(false);
   const [draftRange, setDraftRange] = useState(() => ({
     start: dateRange.start || coverageStart,
@@ -65,8 +67,8 @@ export default function FilterBar({ dateRange, onDateRangeChange, activePreset, 
     const preset = RANGE_PRESETS.find(item => item.id === presetId);
     if (!preset) return;
     onPresetChange?.(preset.id);
-    onDateRangeChange?.(rangeForPreset(preset.years));
-  }, [onDateRangeChange, onPresetChange]);
+    onDateRangeChange?.(rangeForPreset(preset.years, coverageEnd));
+  }, [coverageEnd, onDateRangeChange, onPresetChange]);
 
   const handleOpenChange = (open) => {
     if (open) {
@@ -116,7 +118,7 @@ export default function FilterBar({ dateRange, onDateRangeChange, activePreset, 
               className="range-control__custom-trigger h-9 rounded-lg border border-border/60 bg-background/80 px-2 sm:px-3 text-xs font-medium hover:bg-muted/60 transition-colors shadow-2xs shrink-0"
               variant={activePreset === 'CUSTOM' ? 'secondary' : 'outline'}
               aria-expanded={customDatesOpen}
-              aria-label={activePreset === 'CUSTOM' ? `Custom dates, ${formatShortDate(dateRange.start)} through ${formatShortDate(dateRange.end)}` : 'Choose custom date range'}
+              aria-label={activePreset === 'CUSTOM' ? `Custom dates, ${formatShortDate(dateRange.start, locale)} through ${formatShortDate(dateRange.end, locale)}` : 'Choose custom date range'}
               data-custom-range-trigger
             >
               <CalendarDays className="size-3.5" aria-hidden="true" />
@@ -158,7 +160,7 @@ export default function FilterBar({ dateRange, onDateRangeChange, activePreset, 
               />
             </div>
           </div>
-          <p className="mt-3 mb-0 text-xs text-muted-foreground">Available {formatShortDate(coverageStart)} – {formatShortDate(coverageEnd)}</p>
+          <p className="mt-3 mb-0 text-xs text-muted-foreground">Available {formatShortDate(coverageStart, locale)} – {formatShortDate(coverageEnd, locale)}</p>
           <p id="range-error" className={`mt-2 mb-0 text-xs text-destructive ${validationMessage ? '' : 'sr-only'}`} aria-live="polite">{validationMessage || 'No date range error.'}</p>
           <div className="mt-4 flex items-center justify-between gap-2 border-t border-border/80 pt-3">
             <Button className="px-0" size="sm" variant="ghost" onClick={handleReset}>Reset to Max</Button>

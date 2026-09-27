@@ -181,7 +181,7 @@ test('rate record action tabs filter the rendered records', async ({ page }) => 
   await expect(tableRows).toHaveCount(43);
   await expect.poll(async () => tableRows.evaluateAll(rows => rows.every(row => row.dataset.action === 'hike'))).toBe(true);
 
-  await page.getByRole('tab', { name: 'Holds (17)' }).click();
+  await page.getByRole('tab', { name: 'Unchanged (17)' }).click();
   await expect(tableRows).toHaveCount(17);
   await expect.poll(async () => tableRows.evaluateAll(rows => rows.every(row => row.dataset.action === 'hold'))).toBe(true);
 });

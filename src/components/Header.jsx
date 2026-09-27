@@ -5,8 +5,9 @@ import CommandDialog from './ui/command-dialog.jsx';
 import { Button } from './ui/button.jsx';
 import MobileNav from '../mobile/MobileNav.jsx';
 import { VIEWS } from './viewConfig.js';
+import { formatCountryValue, formatCountryChange } from '../data/countryModel.js';
 
-export default function Header({ activeView = 'timeline', onViewChange, dateRange, activePreset, onDateRangeChange, onPresetChange, layers, onLayersChange }) {
+export default function Header({ activeView = 'timeline', onViewChange, dateRange, activePreset, onDateRangeChange, onPresetChange, layers, onLayersChange, countryModel = null, countryCode = 'IN', countryName = null, countries = [], onCountryChange, onDecisionSelect, onRecordFiltersChange }) {
   const [commandOpen, setCommandOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -44,12 +45,12 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
       label: 'Browse countries',
       execute: () => { window.location.href = '/countries'; },
     },
-    {
-      id: 'united-states',
-      group: 'Navigate',
-      label: 'United States federal funds target',
-      execute: () => { window.location.href = '/country/us'; },
-    },
+    ...countries.filter(country => country.status === 'available').map(country => ({
+      id: `country-${country.code.toLowerCase()}`,
+      group: 'Countries',
+      label: `${country.name} ${country.instrument}`,
+      execute: () => onCountryChange?.(country.code),
+    })),
     ...VIEWS.map(view => ({
       id: `view-${view.id}`,
       group: 'Navigate',
@@ -66,20 +67,20 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
     {
       id: 'as-of-lookup',
       group: 'Research',
-      label: 'Look up rate on a date',
-      execute: () => { window.location.href = '/as-of'; },
+      label: 'India · Look up RBI repo rate on a date',
+      execute: () => { window.location.href = '/as-of?country=IN'; },
     },
     {
       id: 'release-diff',
       group: 'Research',
-      label: 'Compare snapshot releases',
-      execute: () => { window.location.href = '/releases'; },
+      label: 'India · Compare RBI snapshot releases',
+      execute: () => { window.location.href = '/releases?country=IN'; },
     },
     {
       id: 'data-limitations',
       group: 'Research',
-      label: 'Read data limitations',
-      execute: () => { window.location.href = '/limitations'; },
+      label: 'India · Read RBI data limitations',
+      execute: () => { window.location.href = '/limitations?country=IN'; },
     },
     {
       id: 'navigate-design',
@@ -93,7 +94,24 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
       label: 'Colophon & Architecture (/colophon)',
       execute: () => { window.location.href = '/colophon'; },
     },
-  ], [activeView, onViewChange]);
+    ...(countryModel?.records || []).map(record => ({
+      id: `record-${record.id}`,
+      group: `${countryModel.name} records`,
+      label: `${record.action || 'Published record'} · ${record.recordDate} · ${formatCountryValue(record.value)} · ${formatCountryChange(record)}`,
+      execute: () => {
+        onViewChange?.('timeline');
+        onRecordFiltersChange?.({ action: 'all', evidence: 'all' });
+        onDecisionSelect?.(record.id);
+        requestAnimationFrame(() => document.querySelector('.decision-record')?.scrollIntoView({ behavior: 'auto', block: 'start' }));
+      },
+    })),
+    ...(countryModel?.sources || []).map(source => ({
+      id: `source-${countryModel.code}-${source.id}`,
+      group: `${countryModel.name} sources`,
+      label: source.title,
+      execute: () => window.open(source.url, '_blank', 'noopener,noreferrer'),
+    })),
+  ], [activeView, countries, countryModel, onCountryChange, onDecisionSelect, onRecordFiltersChange, onViewChange]);
 
   return (
     <header
@@ -110,7 +128,7 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
             <a href="/countries" aria-label="Policy Rate Atlas country index" className="flex items-center gap-2.5">
               <span className="brand-mark flex size-8 shrink-0 items-center justify-center rounded-md border border-black bg-black font-bold text-xs tracking-tight text-white shadow-2xs transition-transform group-hover:scale-105 dark:border-white dark:bg-white dark:text-black">PR</span>
               <span className="truncate font-semibold tracking-tight text-foreground text-xs sm:hidden">Rate Atlas</span>
-              <span className="hidden truncate font-semibold tracking-tight text-foreground text-sm sm:inline">Policy Rate Atlas <span className="text-muted-foreground font-normal">/ India</span></span>
+              <span className="hidden truncate font-semibold tracking-tight text-foreground text-sm sm:inline">Policy Rate Atlas <span className="text-muted-foreground font-normal">/ {countryModel?.name || countryName || 'India'}</span></span>
             </a>
           </Button>
 
@@ -146,6 +164,8 @@ export default function Header({ activeView = 'timeline', onViewChange, dateRang
               onLayersChange={onLayersChange}
               onPresetChange={onPresetChange}
               onViewChange={onViewChange}
+              countryModel={countryModel}
+              countryCode={countryCode}
             />
             <ThemeToggle />
           </div>

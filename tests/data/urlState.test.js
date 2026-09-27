@@ -39,3 +39,18 @@ test('URL state normalizes MAX and rejects malformed custom dates', () => {
   assert.equal(malformed.activePreset, 'ALL');
   assert.equal(parseUrlState('?decision=missing-record&a=999&b=-1').activeDecisionId, null);
 });
+
+test('country URL state supports manifest country codes and the range layer', () => {
+  const parsed = parseUrlState('?country=JP&view=cycles&layers=range&action=framework');
+  assert.equal(parsed.activeView, 'cycles');
+  assert.deepEqual(parsed.layers, { range: true });
+  assert.equal(parsed.recordFilters.action, 'framework');
+
+  const hidden = parseUrlState('?country=US&layers=');
+  assert.deepEqual(hidden.layers, { range: false });
+
+  const query = serializeUrlState({ country: 'US', activePreset: 'ALL', layers: { range: true } });
+  assert.match(query, /(?:^|&)country=US(?:&|$)/);
+  assert.match(query, /(?:^|&)layers=range(?:&|$)/);
+  assert.deepEqual(parseUrlState(`?${query}`).layers, { range: true });
+});

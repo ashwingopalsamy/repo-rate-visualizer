@@ -10,6 +10,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collap
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover.jsx';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip.jsx';
+import CountryEvidence from './CountryEvidence.jsx';
 
 function formatDate(value) {
   if (!value) return 'Not reported';
@@ -151,8 +152,9 @@ function IntegrityPopover({ source, linkedCount }) {
   );
 }
 
-export default function SourceTransparency() {
+export default function SourceTransparency({ countryModel = null }) {
   const [sourcesOpen, setSourcesOpen] = useState(false);
+  if (countryModel && countryModel.code !== 'IN') return <CountryEvidence model={countryModel} />;
   const coverageStart = decisions[0]?.date;
   const coverageEnd = decisions.at(-1)?.date;
 

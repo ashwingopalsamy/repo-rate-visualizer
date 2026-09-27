@@ -1,6 +1,7 @@
 import { isWithinDateRange } from './dateBoundaries.js';
 
 export const ACTION_FILTERS = Object.freeze(['all', 'cut', 'hike', 'hold']);
+export const URL_ACTION_FILTERS = Object.freeze([...ACTION_FILTERS, 'framework']);
 export const EVIDENCE_FILTERS = Object.freeze(['all', 'primary-decision', 'official-context', 'historical-secondary', 'mixed']);
 export const TIMELINE_MODES = Object.freeze(['all', 'changes']);
 export const RATE_CHANGE_SIZE_BANDS = Object.freeze(['all', '0-25', '26-50', '51-75', '75-plus']);
@@ -40,7 +41,7 @@ export const EVIDENCE_FILTER_LABELS = Object.freeze({
 
 export function normalizeRecordFilters(filters = {}) {
   return {
-    action: ACTION_FILTERS.includes(filters.action) ? filters.action : 'all',
+    action: URL_ACTION_FILTERS.includes(filters.action) ? filters.action : 'all',
     evidence: EVIDENCE_FILTERS.includes(filters.evidence) ? filters.evidence : 'all',
   };
 }

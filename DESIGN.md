@@ -17,6 +17,8 @@ The Policy Rate Atlas is an open-access monetary policy observatory. The India e
 - Primary source freshness and coverage are visible. Country snapshots are immutable and identified by a SHA-256 digest in the manifest.
 - Country pages share the India explorer's composition: compact navigation and country identity, a three-column Overview card, an integrated Timeline card with its controls, chart, and rate record, then a separate evidence card. Country-specific instruments and evidence determine the content of each section.
 - The US workspace uses published target changes for its chart, summaries, filters, and exports. Its filters distinguish cuts, hikes, and the point-to-range framework change; no hold count, meeting ledger, or unsupported macro-event annotation is shown.
+- The homepage mounts one country-aware explorer. Country selection changes its verified snapshot in place and updates a shareable `country` query parameter; back and forward restore the selected country. The header, search, evidence panel, export controls, and footer keep the same geometry for every instrument.
+- Action filters lead with cuts, hikes, verified holds when present, and framework changes when relevant. Evidence type is separate metadata. A country can add sourced context or instrument-specific analytics without duplicating the page shell.
 
 The visual interface is deliberately designed at the intersection of two distinct disciplines:
 
@@ -231,7 +233,7 @@ Tooltips in data-dense D3 charts frequently obscure adjacent data points or acti
 
 ## 7. Data Visualization Language
 
-The India explorer provides four specialized D3 analytical views, each addressing a distinct monetary policy question. The US explorer presents Timeline and Rate changes views from its published target changes; country pages only expose views supported by their records:
+The shared explorer provides five analytical view positions. India retains its existing regime and source-backed context. US views are derived only from published target changes: yearly action breakdowns, numeric rate moves, consecutive same-direction published-move runs, and two-window comparisons with both range endpoints. These runs do not claim a continuous policy stance:
 
 | View | Analytical Question & Visual Representation |
 | :--- | :--- |
@@ -239,6 +241,7 @@ The India explorer provides four specialized D3 analytical views, each addressin
 | **2. Breakdown** | *"What is the policy composition across regimes & years?"*<br>Stacked bar charts decomposing decisions into Holds, Cuts, and Hikes with hold-to-move ratio badges and bps volume metrics. |
 | **3. Rate Changes** | *"What was the magnitude and distribution of moves?"*<br>Diverging zero-line bar chart showing basis-point shifts with border highlights on extreme moves ($\ge 50\text{ bps}$). |
 | **4. Cycles** | *"How do historical easing & tightening phases compare?"*<br>Normalized trajectory overlay starting at $t=0$ to compare recorded rate changes, adjustment pace (bps/mo), and terminal levels. |
+| **5. Compare** | *"How do two selected windows differ?"*<br>Counts and endpoint-aware values for each window; a target range keeps both bounds rather than a midpoint. |
 
 ### Chart Styling Tokens & Details
 - **Step Line**: `stroke: var(--color-line)`, `stroke-width: 2.25`, `stroke-linecap: square`, `stroke-linejoin: round`.

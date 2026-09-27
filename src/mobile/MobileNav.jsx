@@ -39,7 +39,9 @@ function LayerOption({ label, description, checked, disabled, onToggle }) {
   );
 }
 
-export default function MobileNav({ activeView, activePreset, dateRange, layers, onDateRangeChange, onLayersChange, onPresetChange, onViewChange }) {
+export default function MobileNav({ activeView, activePreset, dateRange, layers, onDateRangeChange, onLayersChange, onPresetChange, onViewChange, countryCode = 'IN', countryModel = null }) {
+  const isCountryLoading = countryCode !== 'IN' && !countryModel;
+  const hasRangeLayer = Boolean(countryModel?.capabilities.range);
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
@@ -92,21 +94,24 @@ export default function MobileNav({ activeView, activePreset, dateRange, layers,
 
           <section aria-labelledby="mobile-range-heading">
             <h2 id="mobile-range-heading" className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">Range</h2>
-            <FilterBar
+            {isCountryLoading ? <p className="m-0 text-xs text-muted-foreground" role="status">Country coverage appears after its release is verified.</p> : <FilterBar
               activePreset={activePreset}
               className="mobile-range-control"
               dateRange={dateRange}
               onDateRangeChange={onDateRangeChange}
               onPresetChange={onPresetChange}
-            />
+              coverage={countryModel?.coverage}
+              locale={countryModel?.locale || 'en-IN'}
+            />}
           </section>
 
           <section aria-labelledby="mobile-layers-heading">
             <div className="mb-2 flex items-baseline justify-between gap-3">
               <h2 id="mobile-layers-heading" className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">Layers</h2>
-              <span className="text-xs tabular-nums text-muted-foreground">{activeView === 'timeline' ? `${[layers?.regimes, layers?.events].filter(Boolean).length} active` : 'Timeline only'}</span>
+              <span className="text-xs tabular-nums text-muted-foreground">{activeView === 'timeline' ? `${countryCode !== 'IN' ? hasRangeLayer && layers?.range !== false ? 1 : 0 : [layers?.regimes, layers?.events].filter(Boolean).length} active` : 'Timeline only'}</span>
             </div>
             <div className="grid gap-1.5" role="group" aria-label="Chart context layers">
+              {countryCode !== 'IN' ? hasRangeLayer ? <LayerOption label="Published target range" description="Shade the published interval between lower and upper bounds." checked={layers?.range !== false} disabled={activeView !== 'timeline'} onToggle={() => onLayersChange?.(current => ({ ...current, range: current.range === false }))} /> : <p className="m-0 text-xs leading-5 text-muted-foreground">{isCountryLoading ? 'Verifying country release…' : 'No interval band is available for this policy instrument.'}</p> : <>
               <LayerOption
                 label="Regime bands"
                 description={activeView === 'timeline' ? 'Show easing, pause, and tightening periods.' : 'Available on the Timeline view.'}
@@ -121,6 +126,7 @@ export default function MobileNav({ activeView, activePreset, dateRange, layers,
                 disabled={activeView !== 'timeline'}
                 onToggle={() => onLayersChange?.(current => ({ ...current, events: !current.events }))}
               />
+              </>}
             </div>
             {activeView !== 'timeline' ? <p className="mt-2 mb-0 text-xs leading-5 text-muted-foreground">Switch to Timeline to change the context layers.</p> : null}
           </section>
@@ -145,7 +151,7 @@ export default function MobileNav({ activeView, activePreset, dateRange, layers,
             </div>
             <div className="rounded-xl border border-border/80 bg-card/60 p-3">
               <span className="text-xs font-semibold text-muted-foreground mb-2 block">Share &amp; Export</span>
-              <ExportBar activeView={activeView} dateRange={dateRange} />
+              {isCountryLoading ? <p className="m-0 text-xs leading-5 text-muted-foreground">Export is available after the country release is verified.</p> : <ExportBar activeView={activeView} dateRange={dateRange} countryModel={countryModel} />}
             </div>
           </section>
         </div>

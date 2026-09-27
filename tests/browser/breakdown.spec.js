@@ -11,13 +11,13 @@ test('breakdown view renders stacked bars, segment labels, ratio badges, and met
   // Verify view title and description
   await expect(page.getByRole('tab', { name: 'Breakdown' })).toHaveAttribute('data-state', 'active');
   await expect(page.getByText('RBI Policy Regime Decomposition')).toBeVisible();
-  await expect(page.getByText(/% holds\./)).toBeVisible();
+  await expect(page.getByText(/% unchanged records\./)).toBeVisible();
 
   // Verify metric cards row
-  await expect(page.getByText('Total decisions', { exact: true })).toBeVisible();
-  await expect(page.getByText('Holds', { exact: true }).first()).toBeVisible();
-  await expect(page.getByText('Rate Cuts', { exact: true })).toBeVisible();
-  await expect(page.getByText('Rate Hikes', { exact: true })).toBeVisible();
+  await expect(page.getByText('Total records', { exact: true })).toBeVisible();
+  await expect(page.getByText('Unchanged records', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('Cuts', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('Hikes', { exact: true }).first()).toBeVisible();
 
   // Verify SVG stacked bars and top ratio badges
   const svg = page.locator('.chart-svg');

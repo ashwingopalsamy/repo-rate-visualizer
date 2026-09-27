@@ -7,6 +7,7 @@ import { filterDecisions, normalizeRecordFilters } from '../lib/analysisState.js
 import { Badge } from './ui/badge.jsx';
 import { Button } from './ui/button.jsx';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table.jsx';
+import CountryRecordList from './CountryRecordList.jsx';
 
 const sourceById = new Map(sources.map(source => [source.id, source]));
 
@@ -102,7 +103,7 @@ function DecisionCard({ decision, source, isActive, onSelect }) {
   );
 }
 
-export default function DecisionTimelineList({ dateRange, activeDecisionId, onDecisionSelect, recordFilters = {}, timelineMode = 'all', onRecordFiltersChange }) {
+function IndiaDecisionTimelineList({ dateRange, activeDecisionId, onDecisionSelect, recordFilters = {}, timelineMode = 'all', onRecordFiltersChange }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [desktopExpanded, setDesktopExpanded] = useState(false);
   const filters = normalizeRecordFilters(recordFilters);
@@ -408,4 +409,18 @@ export default function DecisionTimelineList({ dateRange, activeDecisionId, onDe
       </div>
     </section>
   );
+}
+
+export default function DecisionTimelineList({ countryModel = null, ...props }) {
+  if (countryModel && countryModel.code !== 'IN') {
+    return <CountryRecordList
+      model={countryModel}
+      dateRange={props.dateRange}
+      recordFilters={props.recordFilters}
+      onRecordFiltersChange={props.onRecordFiltersChange}
+      selectedRecordId={props.activeDecisionId}
+      onRecordSelect={props.onDecisionSelect}
+    />;
+  }
+  return <IndiaDecisionTimelineList {...props} />;
 }

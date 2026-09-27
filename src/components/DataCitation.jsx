@@ -1,7 +1,15 @@
 import { Button } from './ui/button.jsx';
 import { Separator } from './ui/separator.jsx';
 
-export default function DataCitation() {
+export default function DataCitation({ countryModel = null }) {
+  const countryName = countryModel?.name || 'India';
+  const centralBank = countryModel?.centralBank || 'Reserve Bank of India';
+  const countryDatasetPath = countryModel?.entry?.snapshot?.split('/').slice(0, -1).join('/');
+  const datasetUrl = countryModel?.code === 'IN'
+    ? 'https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset'
+    : countryDatasetPath
+      ? `https://github.com/ashwingopalsamy/repo-rate-visualizer/tree/main/public/data/${countryDatasetPath}`
+      : null;
   return (
     <footer className="mt-auto pt-2 text-sm text-muted-foreground" role="contentinfo" aria-label="Project source">
       <Separator />
@@ -16,11 +24,11 @@ export default function DataCitation() {
               GitHub
             </a>
           </Button>{' '}</span>
-          <span className="inline-block sm:inline">and the dataset is available in{' '}<Button asChild className="h-7 align-middle items-center gap-1 px-1 text-sm text-foreground" size="sm" variant="link">
-            <a href="https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset" target="_blank" rel="noopener noreferrer" aria-label="Open the RBI repo-rate dataset on Hugging Face">
-              <img className="size-4" src="/hf-logo.svg" alt="" aria-hidden="true" /> HuggingFace
+          {datasetUrl ? <span className="inline-block sm:inline">and the dataset is available in{' '}<Button asChild className="h-7 align-middle items-center gap-1 px-1 text-sm text-foreground" size="sm" variant="link">
+            <a href={datasetUrl} target="_blank" rel="noopener noreferrer" aria-label={countryModel?.code === 'IN' ? 'Open the RBI repo-rate dataset on Hugging Face' : `Open the ${countryName} policy-rate dataset`}>
+              {countryModel?.code === 'IN' ? <img className="size-4" src="/hf-logo.svg" alt="" aria-hidden="true" /> : null} {countryModel?.code === 'IN' ? 'HuggingFace' : 'GitHub'}
             </a>
-          </Button>.</span>
+          </Button>.</span> : countryModel?.code !== 'IN' ? <span className="inline-block sm:inline">The {countryName} dataset is not published yet.</span> : null}
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-2 mt-0.5 mb-1">
@@ -39,7 +47,7 @@ export default function DataCitation() {
           </Button>
         </div>
 
-        <p className="m-0 max-w-2xl text-xs leading-5 text-muted-foreground">Independent educational reference. Not affiliated with or endorsed by the Reserve Bank of India. Not financial advice.</p>
+        <p className="m-0 max-w-2xl text-xs leading-5 text-muted-foreground">Independent educational reference. Not affiliated with or endorsed by the {centralBank}{countryModel?.code === 'IN' ? '' : ' or any government agency'}. Not financial advice.</p>
       </div>
     </footer>
   );

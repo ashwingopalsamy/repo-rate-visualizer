@@ -25,6 +25,8 @@ import { VIEWS } from './viewConfig.js';
 import AnalysisFilterRail from './AnalysisFilterRail.jsx';
 import AnalysisStateStrip from './AnalysisStateStrip.jsx';
 import ResearchNotebook from './ResearchNotebook.jsx';
+import DecisionTimelineList from './DecisionTimelineList.jsx';
+import { CountryTimeline, CountryYearBreakdown, CountryRateChanges, CountryMoveRuns, CountryWindowCompare } from './CountryAnalysisViews.jsx';
 
 const VIEW_COPY = {
   timeline: {
@@ -49,15 +51,19 @@ const VIEW_COPY = {
   },
 };
 
-export default function ChartWorkspace({ activeView, activeDecisionId, dateRange, onDateRangeChange, activePreset, onPresetChange, layers, onLayersChange, onDecisionSelect, cycleSelection, onCycleSelectionChange, recordFilters, onRecordFiltersChange, timelineMode, onTimelineModeChange, rateChangeState, onRateChangeStateChange, breakdownState, onBreakdownStateChange, comparison, onComparisonChange, analysisState, onLoadState, onResetAnalysis, onViewChange }) {
-  const copy = VIEW_COPY[activeView] || VIEW_COPY.timeline;
+export default function ChartWorkspace({ activeView, activeDecisionId, dateRange, onDateRangeChange, activePreset, onPresetChange, layers, onLayersChange, onDecisionSelect, cycleSelection, onCycleSelectionChange, recordFilters, onRecordFiltersChange, timelineMode, onTimelineModeChange, rateChangeState, onRateChangeStateChange, breakdownState, onBreakdownStateChange, comparison, onComparisonChange, analysisState, onLoadState, onResetAnalysis, onViewChange, countryModel = null }) {
+  const isCountryModel = Boolean(countryModel && countryModel.code !== 'IN');
+  const copy = isCountryModel ? ({
+    timeline: { label: 'Timeline', description: `Published ${countryModel.instrument} records and their point or range values.` },
+    breakdown: { label: 'Breakdown', description: 'Published cuts, hikes, and framework changes grouped by table year.' },
+    'rate-change': { label: 'Rate changes', description: 'Numeric published target changes in basis points.' },
+    cycles: { label: 'Cycles', description: 'Runs of consecutive published moves in the same direction.' },
+    compare: { label: 'Compare', description: 'Compare published target endpoints and move counts across two windows.' },
+  }[activeView] || VIEW_COPY.timeline) : VIEW_COPY[activeView] || VIEW_COPY.timeline;
   const [layersOpen, setLayersOpen] = useState(false);
-  const activeLayerCount = useMemo(() => [layers?.regimes, layers?.events].filter(Boolean).length, [layers]);
-  const selectedDecisionCount = useMemo(() => decisions.filter(decision => {
-    if (dateRange.start && decision.date < dateRange.start) return false;
-    if (dateRange.end && decision.date > dateRange.end) return false;
-    return true;
-  }).length, [dateRange.end, dateRange.start]);
+  const activeLayerCount = useMemo(() => isCountryModel
+    ? countryModel.capabilities.range && layers?.range !== false ? 1 : 0
+    : [layers?.regimes, layers?.events].filter(Boolean).length, [countryModel, isCountryModel, layers]);
 
   return (
     <section className="chart-workspace scroll-mt-24" aria-labelledby="chart-workspace-title">
@@ -97,13 +103,15 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
                   dateRange={dateRange}
                   onDateRangeChange={onDateRangeChange}
                   onPresetChange={onPresetChange}
+                  coverage={countryModel?.coverage}
+                  locale={countryModel?.locale || 'en-IN'}
                 />
 
                 <div className="workspace-control-divider hidden h-5 w-px bg-border/60 lg:block" aria-hidden="true" />
 
                 {/* Actions */}
                 <div className="workspace-actions flex min-w-0 items-center gap-1.5" aria-label="Chart actions">
-                  <ResearchNotebook analysisState={analysisState} onLoadState={onLoadState} />
+                  {!isCountryModel ? <ResearchNotebook analysisState={analysisState} onLoadState={onLoadState} /> : null}
                   <DropdownMenu open={layersOpen} onOpenChange={setLayersOpen}>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -120,8 +128,15 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" sideOffset={8} collisionPadding={12} className="w-60">
-                      <DropdownMenuLabel>Chart context</DropdownMenuLabel>
+                      <DropdownMenuLabel>{isCountryModel ? countryModel.capabilities.range ? 'Target range' : 'Chart context' : 'Chart context'}</DropdownMenuLabel>
                       <DropdownMenuSeparator />
+                      {isCountryModel && countryModel.capabilities.range ? <DropdownMenuCheckboxItem
+                        checked={layers?.range !== false}
+                        disabled={activeView !== 'timeline'}
+                        onCheckedChange={checked => onLayersChange?.(current => ({ ...current, range: checked }))}
+                      >
+                        Published target range band
+                      </DropdownMenuCheckboxItem> : isCountryModel ? <p className="m-0 px-2 py-1.5 text-xs leading-5 text-muted-foreground">This policy instrument is published as a point value; no range band is available.</p> : <>
                       <DropdownMenuCheckboxItem
                         checked={Boolean(layers?.regimes)}
                         disabled={activeView !== 'timeline'}
@@ -136,36 +151,39 @@ export default function ChartWorkspace({ activeView, activeDecisionId, dateRange
                       >
                         Macro events
                       </DropdownMenuCheckboxItem>
+                      </>}
                       <DropdownMenuSeparator />
                       <p className="m-0 px-2 py-1.5 text-xs leading-5 text-muted-foreground">
-                        {activeView === 'timeline'
+                        {isCountryModel ? 'Lower and upper target bounds remain separate. No midpoint is calculated.' : activeView === 'timeline'
                           ? 'Context is visible by default. Turn a layer off for a cleaner read.'
                           : 'Context layers are available on the Timeline view.'}
                       </p>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  <ExportBar className="workspace-export-actions" activeView={activeView} dateRange={dateRange} layers={layers} selectedDecisionId={activeDecisionId} cycleSelection={cycleSelection} recordFilters={recordFilters} timelineMode={timelineMode} rateChangeState={rateChangeState} breakdownState={breakdownState} />
+                  <ExportBar className="workspace-export-actions" activeView={activeView} dateRange={dateRange} layers={layers} selectedDecisionId={activeDecisionId} cycleSelection={cycleSelection} recordFilters={recordFilters} timelineMode={timelineMode} rateChangeState={rateChangeState} breakdownState={breakdownState} countryModel={countryModel} />
                 </div>
               </div>
             </div>
             <div className="mt-3 border-t border-border/60 pt-3">
-              <AnalysisFilterRail recordFilters={recordFilters} onRecordFiltersChange={onRecordFiltersChange} timelineMode={timelineMode} onTimelineModeChange={onTimelineModeChange} />
+              <AnalysisFilterRail recordFilters={recordFilters} onRecordFiltersChange={onRecordFiltersChange} timelineMode={timelineMode} onTimelineModeChange={onTimelineModeChange} actions={isCountryModel ? ['all', 'cut', 'hike', ...(countryModel.capabilities.holds ? ['hold'] : []), ...(countryModel.capabilities.framework ? ['framework'] : [])] : undefined} showEvidence={!isCountryModel} showTimelineMode={!isCountryModel} evidenceLabel={isCountryModel ? 'Evidence · published source rows' : null} holdLabel={isCountryModel ? 'Verified holds' : undefined} />
             </div>
           </div>
 
-          <AnalysisStateStrip dateRange={dateRange} recordFilters={recordFilters} timelineMode={timelineMode} rateChangeState={rateChangeState} breakdownState={breakdownState} activeDecisionId={activeDecisionId} cycleSelection={cycleSelection} onReset={onResetAnalysis} />
+          {!isCountryModel ? <AnalysisStateStrip dateRange={dateRange} recordFilters={recordFilters} timelineMode={timelineMode} rateChangeState={rateChangeState} breakdownState={breakdownState} activeDecisionId={activeDecisionId} cycleSelection={cycleSelection} onReset={onResetAnalysis} /> : null}
 
           {/* Chart body */}
           <div className="workspace-body min-w-0 px-3.5 py-4 sm:px-6 sm:py-6">
             <div className="workspace-main min-w-0">
-              {activeView === 'timeline' ? <TimelineChart activeDecisionId={activeDecisionId} dateRange={dateRange} recordFilters={recordFilters} timelineMode={timelineMode} onDecisionSelect={onDecisionSelect} onRecordFiltersChange={onRecordFiltersChange} showEvents={layers?.events} showRegimes={layers?.regimes} /> : null}
-              {activeView === 'breakdown' ? <RegimeBreakdown dateRange={dateRange} recordFilters={recordFilters} breakdownState={breakdownState} onBreakdownStateChange={onBreakdownStateChange} onDecisionSelect={onDecisionSelect} onViewChange={onViewChange} /> : null}
-              {activeView === 'rate-change' ? <RateChangeBar dateRange={dateRange} recordFilters={recordFilters} rateChangeState={rateChangeState} onRateChangeStateChange={onRateChangeStateChange} onDecisionSelect={onDecisionSelect} /> : null}
-              {activeView === 'cycles' ? <CycleComparison cycleSelection={cycleSelection} onCycleSelectionChange={onCycleSelectionChange} recordFilters={recordFilters} onDecisionSelect={onDecisionSelect} onViewChange={onViewChange} /> : null}
-              {activeView === 'compare' ? <WindowComparison comparison={comparison} onComparisonChange={onComparisonChange} recordFilters={recordFilters} /> : null}
+              {activeView === 'timeline' ? (isCountryModel
+                ? <><CountryTimeline model={countryModel} dateRange={dateRange} recordFilters={recordFilters} showBand={layers?.range !== false} /><DecisionTimelineList countryModel={countryModel} activeDecisionId={activeDecisionId} dateRange={dateRange} recordFilters={recordFilters} onRecordFiltersChange={onRecordFiltersChange} onDecisionSelect={onDecisionSelect} /></>
+                : <TimelineChart activeDecisionId={activeDecisionId} dateRange={dateRange} recordFilters={recordFilters} timelineMode={timelineMode} onDecisionSelect={onDecisionSelect} onRecordFiltersChange={onRecordFiltersChange} showEvents={layers?.events} showRegimes={layers?.regimes} />) : null}
+              {activeView === 'breakdown' ? (isCountryModel ? <CountryYearBreakdown model={countryModel} dateRange={dateRange} recordFilters={recordFilters} /> : <RegimeBreakdown dateRange={dateRange} recordFilters={recordFilters} breakdownState={breakdownState} onBreakdownStateChange={onBreakdownStateChange} onDecisionSelect={onDecisionSelect} onViewChange={onViewChange} />) : null}
+              {activeView === 'rate-change' ? (isCountryModel ? <CountryRateChanges model={countryModel} dateRange={dateRange} recordFilters={recordFilters} /> : <RateChangeBar dateRange={dateRange} recordFilters={recordFilters} rateChangeState={rateChangeState} onRateChangeStateChange={onRateChangeStateChange} onDecisionSelect={onDecisionSelect} />) : null}
+              {activeView === 'cycles' ? (isCountryModel ? <CountryMoveRuns model={countryModel} dateRange={dateRange} recordFilters={recordFilters} /> : <CycleComparison cycleSelection={cycleSelection} onCycleSelectionChange={onCycleSelectionChange} recordFilters={recordFilters} onDecisionSelect={onDecisionSelect} onViewChange={onViewChange} />) : null}
+              {activeView === 'compare' ? (isCountryModel ? <CountryWindowCompare model={countryModel} comparison={comparison} onComparisonChange={onComparisonChange} /> : <WindowComparison comparison={comparison} onComparisonChange={onComparisonChange} recordFilters={recordFilters} />) : null}
             </div>
 
-            {activeView === 'timeline' && layers?.events ? (
+            {activeView === 'timeline' && !isCountryModel && layers?.events ? (
               <>
                 <Separator className="my-6" />
                 <aside className="workspace-context" aria-labelledby="chart-context-title">

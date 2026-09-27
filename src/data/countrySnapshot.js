@@ -12,7 +12,15 @@ export function indiaCountrySnapshot() {
     coverage: { from: snapshot.decisions[0]?.date, through: snapshot.decisions.at(-1)?.date, grain: 'Rate observations and directly evidenced policy decisions' },
     retrievedAt: snapshotMeta.retrievedAt,
     releaseId: snapshotMeta.releaseId,
-    sources: snapshot.sources.map(source => ({ id: source.id, title: source.title, url: source.url })),
+    sources: snapshot.sources.map(source => ({
+      id: source.id,
+      title: source.title,
+      url: source.url,
+      type: source.type,
+      publishedAt: source.publishedAt || null,
+      retrievedAt: source.retrievedAt || snapshotMeta.retrievedAt,
+      checksum: source.checksum || null,
+    })),
     records: snapshot.decisions.map(record => ({
       id: record.id,
       recordDate: record.date,
@@ -39,8 +47,8 @@ export function validateCountrySnapshot(value, expectedCountry) {
       lowBps > highBps || (kind === 'point' && lowBps !== highBps) ||
       !['policy_change', 'policy_decision', 'rate_observation'].includes(record.recordType) ||
       !Array.isArray(record.sourceIds) || !record.sourceIds.every(id => sources.has(id)) ||
-      (record.effectiveDate !== null && !DATE.test(record.effectiveDate)) ||
-      (record.decisionDate !== null && !DATE.test(record.decisionDate))) {
+      (record.effectiveDate != null && !DATE.test(record.effectiveDate)) ||
+      (record.decisionDate != null && !DATE.test(record.decisionDate))) {
       throw new Error(`Invalid country record ${record.id || ''}.`);
     }
     previous = record.recordDate;
@@ -53,12 +61,27 @@ export async function loadCountryManifest() {
   if (!response.ok) throw new Error('Country manifest unavailable.');
   const manifest = await response.json();
   if (manifest?.schemaVersion !== 1 || !Array.isArray(manifest.countries)) throw new Error('Invalid country manifest.');
+  const codes = new Set();
+  for (const entry of manifest.countries) {
+    if (!/^[A-Z]{2}$/.test(entry.code || '') || codes.has(entry.code) || !entry.name || !entry.instrument || !['available', 'planned'].includes(entry.status)) {
+      throw new Error('Invalid country manifest entry.');
+    }
+    codes.add(entry.code);
+  }
   return manifest;
 }
 
 export async function loadCountrySnapshot(entry) {
-  if (entry.code === 'IN') return validateCountrySnapshot(indiaCountrySnapshot(), 'IN');
-  if (entry.code !== 'US' || !/^countries\/us\/[a-f0-9]{64}\.json$/.test(entry.snapshot || '')) throw new Error('Country release unavailable.');
+  if (!entry || entry.status !== 'available' || !/^[A-Z]{2}$/.test(entry.code || '')) throw new Error('Country release unavailable.');
+  if (entry.code === 'IN' && !entry.snapshot) {
+    const bundled = validateCountrySnapshot(indiaCountrySnapshot(), 'IN');
+    if (entry.releaseId && entry.releaseId !== bundled.releaseId) throw new Error('Country release identity mismatch.');
+    if (entry.coverageFrom && entry.coverageFrom !== bundled.coverage.from) throw new Error('Country release coverage mismatch.');
+    if (entry.coverageThrough && entry.coverageThrough !== bundled.coverage.through) throw new Error('Country release coverage mismatch.');
+    return bundled;
+  }
+  const expectedPath = new RegExp(`^countries/${entry.code.toLowerCase()}/[a-f0-9]{64}\\.json$`);
+  if (!expectedPath.test(entry.snapshot || '') || !/^[a-f0-9]{64}$/.test(entry.sha256 || '')) throw new Error('Country release unavailable.');
   const response = await fetch(`/data/${entry.snapshot}`);
   if (!response.ok) throw new Error('Country release unavailable.');
   const bytes = await response.arrayBuffer();
@@ -66,5 +89,9 @@ export async function loadCountrySnapshot(entry) {
   const digest = await globalThis.crypto.subtle.digest('SHA-256', bytes);
   const hex = [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
   if (hex !== entry.sha256) throw new Error('Country release checksum mismatch.');
-  return validateCountrySnapshot(JSON.parse(new TextDecoder().decode(bytes)), entry.code);
+  const countrySnapshot = validateCountrySnapshot(JSON.parse(new TextDecoder().decode(bytes)), entry.code);
+  if (entry.releaseId && countrySnapshot.releaseId && entry.releaseId !== countrySnapshot.releaseId) throw new Error('Country release identity mismatch.');
+  if (entry.coverageFrom && entry.coverageFrom !== countrySnapshot.coverage.from) throw new Error('Country release coverage mismatch.');
+  if (entry.coverageThrough && entry.coverageThrough !== countrySnapshot.coverage.through) throw new Error('Country release coverage mismatch.');
+  return countrySnapshot;
 }

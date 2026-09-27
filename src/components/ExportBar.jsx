@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Check, Download, FileCode2, MoreHorizontal, Share2 } from 'lucide-react';
 import { decisions, macroEvents, regimes, snapshotMeta, snapshotRelease, sources } from '../data/dataLoader.js';
 import { buildDecisionCsv } from '../data/csvExport.js';
+import { downloadCountryCsv } from '../data/countryCsv.js';
 import { buildCitationBundle, citationFilename } from '../data/citationBundle.js';
 import { downloadPng, downloadSvg } from '../lib/chartExport.js';
 import { filterDecisions } from '../lib/analysisState.js';
@@ -15,10 +16,25 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu.jsx';
 
-export default function ExportBar({ dateRange, activeView, layers, selectedDecisionId, cycleSelection, recordFilters, timelineMode, rateChangeState, breakdownState, className = '' }) {
+function CountryExportBar({ model, dateRange = {}, recordFilters = {}, className = '' }) {
+  const [copied, setCopied] = useState(false);
+  const records = model.records.filter(record => (!dateRange.start || record.recordDate >= dateRange.start) && (!dateRange.end || record.recordDate <= dateRange.end) && ((recordFilters.action || 'all') === 'all' || (record.changeBps === null ? 'framework' : record.changeBps > 0 ? 'hike' : record.changeBps < 0 ? 'cut' : 'hold') === recordFilters.action));
+  const copyLink = async () => {
+    try { await navigator.clipboard.writeText(window.location.href); setCopied(true); window.setTimeout(() => setCopied(false), 1800); }
+    catch { setCopied(false); }
+  };
+  return <div className={`flex min-w-0 flex-wrap items-center justify-end gap-1.5 ${className}`} aria-label="Share and export actions">
+    <Button className="size-9 rounded-lg border border-border/60 bg-background/80 shadow-2xs" size="icon" variant="outline" aria-label={copied ? 'Link copied' : 'Share current country and view'} onClick={() => void copyLink()}>{copied ? <Check className="size-3.5" aria-hidden="true" /> : <Share2 className="size-3.5" aria-hidden="true" />}</Button>
+    <Button className="h-9 gap-1.5 rounded-lg border border-border/60 bg-background/80 px-3 text-xs shadow-2xs" size="sm" variant="outline" aria-label={`Download ${records.length} ${model.name} published records as CSV`} onClick={() => downloadCountryCsv(model, records)}><Download className="size-3.5" aria-hidden="true" />CSV</Button>
+  </div>;
+}
+
+export default function ExportBar({ dateRange, activeView, layers, selectedDecisionId, cycleSelection, recordFilters, timelineMode, rateChangeState, breakdownState, className = '', countryModel = null }) {
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState(false);
   const [exportError, setExportError] = useState('');
+
+  if (countryModel && countryModel.code !== 'IN') return <CountryExportBar model={countryModel} dateRange={dateRange} recordFilters={recordFilters} className={className} />;
 
   const buildBundle = () => buildCitationBundle({
     decisions: filterDecisions(decisions, { dateRange, recordFilters, timelineMode }),
