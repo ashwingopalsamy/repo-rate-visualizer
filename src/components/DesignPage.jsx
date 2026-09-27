@@ -1012,6 +1012,10 @@ export default function DesignPage() {
               <p className="m-0 mt-1 text-xs text-muted-foreground">Point and range instruments retain their own meaning. These values are illustrative specimens, not a current-rate feed.</p>
             </div>
             <div className="rounded-xl border border-border/70 bg-card px-4 pt-4"><CountryIdentity country="US" /></div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-border/70 bg-card p-5"><span className="atlas-kicker">POINT TARGET · RBI EXAMPLE</span><div className="mt-2 text-4xl font-semibold tracking-tight tabular-nums">5.25%</div><span className="text-xs text-muted-foreground">One published repo-rate value</span></div>
+              <div className="rounded-xl border border-border/70 bg-card p-5"><span className="atlas-kicker">RANGE TARGET · FED EXAMPLE</span><div className="mt-2 text-4xl font-semibold tracking-tight tabular-nums">3.50–3.75%</div><span className="text-xs text-muted-foreground">Two endpoints, never a midpoint</span></div>
+            </div>
             <div className="atlas-us-overview">
               <div className="atlas-us-overview__header"><h3 className="m-0">Overview</h3><p>Point and range targets use the same three-column rhythm as the India explorer.</p></div>
               <div className="atlas-us-overview__grid">
