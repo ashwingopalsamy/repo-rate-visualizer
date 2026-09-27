@@ -15,6 +15,8 @@ The Policy Rate Atlas is an open-access monetary policy observatory. The India e
 - Every record retains a record date, optional decision and effective dates, evidence type, policy framework, source link, and release identity. Unknown dates stay unknown.
 - Only directly supported decisions are called decisions; observations do not imply holds. Federal Reserve change tables omit unchanged meetings, so the US chart is a history of published changes, not a full meeting ledger.
 - Primary source freshness and coverage are visible. Country snapshots are immutable and identified by a SHA-256 digest in the manifest.
+- Country pages share the India explorer's composition: compact navigation and country identity, a three-column Overview card, an integrated Timeline card with its controls, chart, and rate record, then a separate evidence card. Country-specific instruments and evidence determine the content of each section.
+- The US workspace uses published target changes for its chart, summaries, filters, and exports. Its filters distinguish cuts, hikes, and the point-to-range framework change; no hold count, meeting ledger, or unsupported macro-event annotation is shown.
 
 The visual interface is deliberately designed at the intersection of two distinct disciplines:
 
@@ -34,7 +36,7 @@ The visual interface is deliberately designed at the intersection of two distinc
 ### 1. Form Follows Policy Mechanics
 Policy-rate histories are **discrete step functions**, not continuous analog curves. A step begins at the documented source date. Decision and effective dates can differ from that date, and are never inferred when unavailable.
 - Charts *must* render using stepped interpolation (`d3.curveStepAfter`). Smooth bezier splines or linear point-to-point diagonals misrepresent the legal reality of monetary policy.
-- Every rate inflection point features an interactive decision node (`circle.rate-dot` / `.decision-marker`) that binds directly to the canonical policy record.
+- Every rate inflection point features an interactive record marker that binds directly to the canonical source-backed record. Only directly evidenced policy decisions are described as decisions.
 
 ### 2. Semantic Monetary Policy Grammar
 Color is strictly semantic, derived from monetary policy dynamics rather than general UI tropes:
@@ -229,7 +231,7 @@ Tooltips in data-dense D3 charts frequently obscure adjacent data points or acti
 
 ## 7. Data Visualization Language
 
-The visualizer provides four specialized D3 analytical views, each addressing a distinct monetary policy question:
+The India explorer provides four specialized D3 analytical views, each addressing a distinct monetary policy question. The US explorer presents Timeline and Rate changes views from its published target changes; country pages only expose views supported by their records:
 
 | View | Analytical Question & Visual Representation |
 | :--- | :--- |
