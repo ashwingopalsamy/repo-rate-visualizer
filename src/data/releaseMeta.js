@@ -3,12 +3,12 @@
  * updates this file whenever it publishes a new content-addressed artifact.
  */
 export const bundledRelease = Object.freeze({
-  "releaseId": "snapshot-239efcd7effd3d74476ff45491d109f0a02d1373838be94b04bef733abc73da2",
-  "artifactSha256": "019aa34fa79ead13ac710ec368e2aeae913bbf58da79f3c3d8e72f3387c2ec64",
-  "artifactPath": "snapshots/snapshot-239efcd7effd3d74476ff45491d109f0a02d1373838be94b04bef733abc73da2.json",
-  "legacySnapshotId": "2026-09-23-v2",
-  "checksum": "sha256:239efcd7effd3d74476ff45491d109f0a02d1373838be94b04bef733abc73da2",
-  "retrievedAt": "2026-09-23T15:59:28.977Z",
+  "releaseId": "snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f",
+  "artifactSha256": "21daa1c622c46d6ae09214ba38b0f54a0859c3d2726c6210ae069891aad0c81b",
+  "artifactPath": "snapshots/snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f.json",
+  "legacySnapshotId": "2026-09-30-v2",
+  "checksum": "sha256:9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f",
+  "retrievedAt": "2026-09-30T12:07:26.744Z",
   "schemaVersion": 2,
   "coverage": {
     "totalRecords": 107,

@@ -1,7 +1,7 @@
 {
   "manifestVersion": 2,
-  "latest": "2026-09-23",
-  "latestReleaseId": "snapshot-239efcd7effd3d74476ff45491d109f0a02d1373838be94b04bef733abc73da2",
+  "latest": "2026-09-30",
+  "latestReleaseId": "snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f",
   "snapshots": [
     {
       "id": "2026-02-10-v1",
@@ -242,6 +242,24 @@
       "artifactSha256": "019aa34fa79ead13ac710ec368e2aeae913bbf58da79f3c3d8e72f3387c2ec64",
       "schemaVersion": 2,
       "retrievedAt": "2026-09-23T15:59:28.977Z",
+      "coverage": {
+        "totalRecords": 107,
+        "directDecisionRecords": 3,
+        "officialContextRecords": 0,
+        "historicalObservationRecords": 104,
+        "mixedRecords": 0
+      }
+    },
+    {
+      "id": "snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f",
+      "releaseId": "snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f",
+      "legacyId": "2026-09-30-v2",
+      "date": "2026-09-30",
+      "file": "snapshots/snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f.json",
+      "checksum": "sha256:9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f",
+      "artifactSha256": "21daa1c622c46d6ae09214ba38b0f54a0859c3d2726c6210ae069891aad0c81b",
+      "schemaVersion": 2,
+      "retrievedAt": "2026-09-30T12:07:26.744Z",
       "coverage": {
         "totalRecords": 107,
         "directDecisionRecords": 3,
