@@ -33,3 +33,9 @@ export function zonedInstant(date: string, time: string, timeZone: string): stri
 export function minutesBetween(fromIso: string, toIso: string): number {
   return Math.round((Date.parse(toIso) - Date.parse(fromIso)) / 60_000);
 }
+
+/** The plain date `days` after `date`. */
+export function addDays(date: string, days: number): string {
+  const t = Date.parse(`${plainDate(date)}T00:00:00Z`) + days * 86_400_000;
+  return new Date(t).toISOString().slice(0, 10);
+}

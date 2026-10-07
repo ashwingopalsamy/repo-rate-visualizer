@@ -2,7 +2,7 @@ export const USER_AGENT = 'PolicyRateAtlas/2.0 (+https://github.com/ashwingopals
 
 export type Fetched = { body: string; url: string; status: number; contentType: string; fetchedAt: string };
 
-class HttpStatusError extends Error {
+export class HttpStatusError extends Error {
   readonly status: number;
   constructor(url: string, status: number) {
     super(`HTTP ${status} for ${url}`);
