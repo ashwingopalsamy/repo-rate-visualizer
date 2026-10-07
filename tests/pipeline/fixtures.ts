@@ -35,3 +35,12 @@ export function baseRelease(): CountryRelease {
 }
 
 export const ALLOWLIST_US = ['federalreserve.gov', 'fred.stlouisfed.org'];
+
+/** The same shape re-pointed at RBI hosts, so it validates against India's allowlist. */
+export function indiaLikeRelease(): CountryRelease {
+  const text = JSON.stringify(baseRelease())
+    .replaceAll('www.federalreserve.gov', 'www.rbi.org.in')
+    .replaceAll('fred.stlouisfed.org', 'www.rbi.org.in')
+    .replaceAll('"code":"US"', '"code":"IN"');
+  return JSON.parse(text) as CountryRelease;
+}
