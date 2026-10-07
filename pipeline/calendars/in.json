@@ -1,0 +1,55 @@
+{
+  "sources": [
+    {
+      "id": "in-mpc-schedule-2026-27",
+      "type": "calendar",
+      "title": "RBI: Schedule of the Monetary Policy Committee for 2026-2027 (23 Mar 2026)",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    }
+  ],
+  "notes": "Decision date is the last day of each MPC meeting. Meetings before FY2026-27 are appended by the MPC backfill (pipeline/countries/in/backfill.json).",
+  "meetings": [
+    {
+      "id": "IN-2026-04-08",
+      "date": "2026-04-08",
+      "meetingStart": "2026-04-06",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-06-05",
+      "date": "2026-06-05",
+      "meetingStart": "2026-06-03",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-08-05",
+      "date": "2026-08-05",
+      "meetingStart": "2026-08-03",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-10-07",
+      "date": "2026-10-07",
+      "meetingStart": "2026-10-05",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-12-04",
+      "date": "2026-12-04",
+      "meetingStart": "2026-12-02",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2027-02-05",
+      "date": "2027-02-05",
+      "meetingStart": "2027-02-03",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "id": "us-dprime",
+      "type": "series",
+      "title": "FRED: Bank Prime Loan Rate (DPRIME)",
+      "url": "https://fred.stlouisfed.org/series/DPRIME"
+    },
+    {
+      "id": "us-mortgage30",
+      "type": "series",
+      "title": "FRED: 30-Year Fixed Rate Mortgage Average (MORTGAGE30US)",
+      "url": "https://fred.stlouisfed.org/series/MORTGAGE30US"
+    }
+  ],
+  "entries": [
+    {
+      "product": "Prime-linked credit line",
+      "benchmark": "Bank prime rate",
+      "spreadBps": 300,
+      "reset": "Within days of a Fed move",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Credit cards and home equity lines are priced off the bank prime rate, which has sat 3 points above the target range's upper bound.",
+      "sourceId": "us-dprime"
+    },
+    {
+      "product": "30-year fixed mortgage",
+      "benchmark": "Fixed at origination",
+      "reset": "Never, unless refinanced",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "A fixed-rate mortgage does not change with the Fed. New mortgage rates follow longer-term bond yields rather than the target directly.",
+      "sourceId": "us-mortgage30"
+    }
+  ]
+}
