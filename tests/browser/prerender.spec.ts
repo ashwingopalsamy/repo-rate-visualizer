@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { test, expect } from './fixtures.ts';
 
@@ -33,4 +34,13 @@ test('an unknown address shows the not-found page with every country', async ({ 
   await page.goto('/nowhere/', { waitUntil: 'networkidle' });
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
   await expect(page.locator('#banks a.item')).toHaveCount(7);
+});
+
+test('every page runs under the production Content-Security-Policy without a violation', async ({ page }) => {
+  const csp = /Content-Security-Policy: (.+)/.exec(html('_headers'))![1].replace('; upgrade-insecure-requests', '');
+  for (const p of ['index.html', 'in/index.html', 'privacy/index.html', '404.html']) {
+    for (const [, body] of html(p).matchAll(/<script>([\s\S]*?)<\/script>/g)) expect(csp).toContain(`'sha256-${createHash('sha256').update(body).digest('base64')}'`);
+  }
+  await page.route(/\/(|[a-z]{2}\/|privacy\/)$/, async r => { const res = await r.fetch(); await r.fulfill({ response: res, headers: { ...res.headers(), 'content-security-policy': csp } }); });
+  for (const p of ['/', '/in/', '/privacy/']) { await page.goto(p, { waitUntil: 'networkidle' }); await page.locator('#ladder .rung, #league, #counted').first().waitFor(); }
 });

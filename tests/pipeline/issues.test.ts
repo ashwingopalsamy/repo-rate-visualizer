@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { syncIssues } from '../../pipeline/issues.ts';
+import { deployTitle, liveBehind, syncDeploy, syncIssues } from '../../pipeline/issues.ts';
+import type { Manifest } from '../../schema/files.ts';
 import type { GhClient, OpenIssue } from '../../pipeline/issues.ts';
 import type { CountryStatus } from '../../pipeline/run.ts';
 
@@ -44,4 +45,15 @@ test('a decision pending more than six hours after its announcement opens the pe
   assert.deepEqual(calls, []);
   syncIssues([pending], gh, '2026-09-17T00:01:00Z', announce);
   assert.deepEqual(calls, ['create Pipeline: US decision pending over 6 hours']);
+});
+
+test('the live site behind the manifest opens one deploy issue, and catching up closes it', () => {
+  const manifest = { schemaVersion: 1, countries: { IN: { status: 'available', release: 'aaa' }, US: { status: 'available', release: 'bbb' }, EA: { status: 'unavailable' } } } as unknown as Manifest;
+  assert.deepEqual(liveBehind(manifest, { countries: { IN: { release: 'aaa' }, US: { release: 'old' } } }), ['US']);
+  assert.deepEqual(liveBehind(manifest, { countries: { IN: { release: 'aaa' } } }), ['US']);
+  const { gh, calls } = fakeGh();
+  syncDeploy(['US'], gh, '2026-10-07T07:00:00Z');
+  syncDeploy(['US'], gh, '2026-10-07T08:00:00Z');
+  syncDeploy([], gh, '2026-10-07T09:00:00Z');
+  assert.deepEqual(calls, [`create ${deployTitle}`, 'edit 100', 'close 100']);
 });
