@@ -156,3 +156,8 @@ vite.config.ts.timestamp-*
 
 # Prototype screenshots and recordings (shared in PR descriptions, not versioned)
 design/prototype/shots/
+
+# Generated at build time from data/releases (scripts/build-atlas.ts, scripts/build-api.ts)
+public/atlas.json
+public/api/
+public/_redirects
