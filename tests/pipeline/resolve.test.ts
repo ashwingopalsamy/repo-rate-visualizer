@@ -36,6 +36,13 @@ test('resolveMeetings synthesises an unchanged decision once a flat series is ob
   assert.deepEqual(synthesized[0].level, { kind: 'range', lowBps: 350, highBps: 375 });
 });
 
+test('a country without an independent official series never gets a synthesised unchanged decision', () => {
+  const { calendar, decisions, series } = setup();
+  const { statuses, synthesized } = resolveMeetings(calendar, decisions, series, '2026-09-30', { ...COUNTRIES.US, independentSeries: false }, '2026-09-30T12:00:00Z');
+  assert.equal(statuses.find(s => s.meetingId === 'US-2026-09-16')?.state, 'pending');
+  assert.deepEqual(synthesized, []);
+});
+
 test('resolveMeetings ignores meetings not yet announced', () => {
   const { calendar, decisions, series } = setup();
   const { statuses } = resolveMeetings(calendar, decisions, series, '2026-09-16', COUNTRIES.US, '2026-09-16T17:59:00Z');

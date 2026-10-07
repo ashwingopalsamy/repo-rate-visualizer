@@ -17,21 +17,29 @@ export const statementId = (meeting: Meeting) => meeting.date.replaceAll('-', ''
 export const statementUrl = (meeting: Meeting) => `https://www.federalreserve.gov/newsevents/pressreleases/monetary${statementId(meeting)}a.htm`;
 
 const longDate = (date: string) => new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00Z`));
-const names = (list: string) => list.split(/\s*,\s*|\s+and\s+/).map(n => n.replace(/^and\s+/, '').trim()).filter(Boolean);
 
-function parseDissents(text: string): string[] {
-  const against = /Voting against (?:this|the monetary policy) action (?:was|were) (.+?)\.\s+(?=Absent|For media|Implementation|Last Update)/.exec(text);
-  return against ? against[1].split(/;\s*(?:and\s+)?/).flatMap(clause => names(clause.split(/,\s*who\b/)[0])) : [];
+/** Dissenting members named in "Voting against ... action was/were ...", with each "who preferred ..." reason removed. */
+function parseDissents(text: string): { mentioned: boolean; names: string[] } {
+  const mentioned = /Voting against\b/.test(text);
+  const against = /Voting against (?:this|the(?: monetary policy)?) action (?:was|were) (.+?)\.\s+(?=Absent|For media|Implementation|Last Update)/.exec(text);
+  if (!against) return { mentioned, names: [] };
+  const withoutReasons = against[1].replace(/,\s*who\b[\s\S]*?(?=(?:;\s*(?:and\s+)?|,\s*and\s+)[A-Z]|$)/g, '');
+  return { mentioned, names: withoutReasons.split(/\s*;\s*(?:and\s+)?|\s*,\s*(?:and\s+)?|\s+and\s+/).map(n => n.trim()).filter(Boolean) };
 }
 
+/** The vote, failing closed: a dissent that is mentioned but cannot be read gives null rather than a false unanimous vote. */
 function parseVote(text: string): Decision['vote'] {
-  const dissents = parseDissents(text);
+  const dissent = parseDissents(text);
   const tally = /by an? (\d+)\s*[–-]\s*(\d+) vote/i.exec(text);
-  if (tally) return { for: Number(tally[1]), against: Number(tally[2]), dissents };
+  if (tally) {
+    const against = Number(tally[2]);
+    return { for: Number(tally[1]), against, dissents: dissent.names.length === against ? dissent.names : [] };
+  }
   const forList = /Voting for the monetary policy action were (.+?)\.\s+(?=Voting against|Absent|For media|Implementation)/.exec(text);
   if (!forList) return null;
+  if (dissent.mentioned && dissent.names.length === 0) return null;
   const voters = forList[1].split(/;\s*(?:and\s+)?/).map(n => n.replace(/,\s*(?:Vice\s+)?Chair\b.*$/, '').trim()).filter(Boolean);
-  return { for: voters.length, against: dissents.length, dissents };
+  return { for: voters.length, against: dissent.names.length, dissents: dissent.names };
 }
 
 /** One FOMC statement page to a decision record. Throws SourceParseError when the page is not the expected statement. */

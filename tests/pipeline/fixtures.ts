@@ -28,9 +28,9 @@ export function baseRelease(): CountryRelease {
       { id: 'fed-0916', type: 'statement', title: 'FOMC statement, 16 Sep 2026', url: 'https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm', official: true, publishedAt: '2026-09-16', retrievedAt: null, sha256: null },
       { id: 'fred', type: 'series', title: 'FRED DFEDTARU and DFEDTARL', url: 'https://fred.stlouisfed.org/series/DFEDTARU', official: true, publishedAt: null, retrievedAt: null, sha256: null },
     ],
-    coverage: { seriesFrom: '2025-12-11', seriesThrough: '2026-10-06', ledgerFrom: '2026-07-29', grain: 'Every scheduled FOMC meeting from July 2026; target changes from the official series.' },
+    coverage: { seriesFrom: '2025-12-11', ledgerFrom: '2026-07-29', grain: 'Every scheduled FOMC meeting from July 2026; target changes from the official series.' },
     corrections: [],
-    release: { hash: '', generator: 'tests/pipeline/fixtures' },
+    release: { hash: '', generator: 'tests/pipeline/fixtures', observedThrough: '2026-10-06' },
   };
 }
 

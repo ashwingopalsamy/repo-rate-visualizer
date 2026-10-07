@@ -31,7 +31,7 @@ test('releaseHash is stable under key reordering', () => {
 test('releaseHash ignores changes inside the release block', () => {
   const a = baseRelease();
   const b = baseRelease();
-  b.release = { hash: 'different', generator: 'elsewhere', upstream: { kind: 'x', id: 'y', sha256: 'z' } };
+  b.release = { hash: 'different', generator: 'elsewhere', observedThrough: '2027-01-01', upstream: { kind: 'x', id: 'y', sha256: 'z' } };
   assert.equal(releaseHash(a), releaseHash(b));
   assert.match(releaseHash(a), /^[0-9a-f]{64}$/);
 });
@@ -41,4 +41,11 @@ test('formatLevel writes ranges with "to" and both bounds', () => {
   assert.equal(formatLevel({ kind: 'point', bps: 550 }), '5.50%');
   assert.equal(formatLevel({ kind: 'point', bps: -50 }), '−0.50%');
   assert.equal(formatLevel({ kind: 'none', label: 'No policy rate target' }), 'No policy rate target');
+});
+
+test('releaseHash ignores release.observedThrough, so a quiet day does not create a new release', () => {
+  const a = baseRelease();
+  const b = baseRelease();
+  b.release.observedThrough = '2026-12-31';
+  assert.equal(releaseHash(a), releaseHash(b));
 });

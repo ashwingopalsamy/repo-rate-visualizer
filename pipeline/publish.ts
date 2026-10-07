@@ -2,6 +2,7 @@
  * Merge candidate releases from .out/ into data/. Usage: node pipeline/publish.ts [--check]
  * Writes a release only when its hash differs from the manifest; never rewrites an existing release file.
  */
+import { execFileSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,6 +21,7 @@ const writeJson = (path: string, value: unknown) => { mkdirSync(dirname(path), {
 const allowlistFor = (code: string) => COUNTRIES[code as CountryCode]?.allowlist;
 const latestRecordDate = (r: CountryRelease) => [...r.decisions.map(d => d.announcedAt.slice(0, 10)), ...r.series.map(p => p.date)].sort().at(-1) ?? r.coverage.seriesFrom;
 const HEALTH_REFRESH_MS = 7 * 86_400_000;
+const V2_PATHS = ['public/data', 'src/data', 'hf-dataset'];
 
 export function publish({ outDir, dataDir, now }: { outDir: string; dataDir: string; now: string }): { changed: string[]; errors: string[] } {
   const manifestPath = join(dataDir, 'manifest.json');
@@ -55,7 +57,8 @@ export function publish({ outDir, dataDir, now }: { outDir: string; dataDir: str
     manifest.countries[code] = { status: 'available', release: hash, path, latestRecordDate: latestRecordDate(candidate), lastChangedAt: now };
     changed.push(code);
     const v2 = join(outDir, code, 'v2');
-    if (code === 'IN' && existsSync(v2)) cpSync(v2, dirname(dataDir), { recursive: true });
+    // Only India's v2 data paths may be written from a candidate; anything else in the artifact is ignored.
+    if (code === 'IN') for (const path of V2_PATHS) if (existsSync(join(v2, path))) cpSync(join(v2, path), join(dirname(dataDir), path), { recursive: true });
   }
 
   if (changed.length) writeJson(manifestPath, manifest);
@@ -71,7 +74,7 @@ export function publish({ outDir, dataDir, now }: { outDir: string; dataDir: str
 }
 
 /** Validate every committed release, its hash, and the side files. Returns human-readable problems; empty means valid. */
-export function checkData(dataDir: string): string[] {
+export function checkData(dataDir: string, readBase?: (path: string) => string | undefined): string[] {
   const problems: string[] = [];
   const manifestPath = join(dataDir, 'manifest.json');
   if (!existsSync(manifestPath)) return ['data/manifest.json is missing'];
@@ -82,7 +85,12 @@ export function checkData(dataDir: string): string[] {
     if (!existsSync(path)) { problems.push(`${code}: release file ${entry.path} is missing`); continue; }
     const release = readJson<CountryRelease>(path);
     if (releaseHash(release) !== entry.release) problems.push(`${code}: release hash does not match manifest`);
-    validateRelease(release, undefined, allowlistFor(code)).forEach(i => problems.push(`${code}: ${i.code} ${i.message}`));
+    // Append-only against the base branch: a PR may add releases but never rewrite what was published.
+    const baseManifest = readBase?.('manifest.json');
+    const baseEntry = baseManifest ? (JSON.parse(baseManifest) as Manifest).countries[code] : undefined;
+    const baseText = baseEntry && baseEntry.release !== entry.release ? readBase?.(baseEntry.path) : undefined;
+    const previous = baseText ? (JSON.parse(baseText) as CountryRelease) : undefined;
+    validateRelease(release, previous, allowlistFor(code)).forEach(i => problems.push(`${code}: ${i.code} ${i.message}`));
   }
   const schedulePath = join(dataDir, 'schedule.json');
   if (existsSync(schedulePath) && !ScheduleFileSchema.safeParse(readJson(schedulePath)).success) problems.push('schedule.json does not match its schema');
@@ -94,7 +102,10 @@ export function checkData(dataDir: string): string[] {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const root = fileURLToPath(new URL('../', import.meta.url));
   if (process.argv.includes('--check')) {
-    const problems = checkData(join(root, 'data'));
+    const baseIndex = process.argv.indexOf('--base');
+    const baseRef = baseIndex >= 0 ? process.argv[baseIndex + 1] : undefined;
+    const readBase = baseRef ? (path: string) => { try { return execFileSync('git', ['show', `${baseRef}:data/${path}`], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); } catch { return undefined; } } : undefined;
+    const problems = checkData(join(root, 'data'), readBase);
     problems.forEach(p => console.error(p));
     console.log(problems.length ? `${problems.length} problem(s)` : 'data/ is valid');
     process.exitCode = problems.length ? 1 : 0;

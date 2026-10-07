@@ -120,3 +120,18 @@ test('a raise without "by X" takes its change from the previous official level',
 test('a raise without "by X" and without a previous level is rejected rather than recorded as zero', () => {
   assert.throws(() => parseFomcStatement(fixture('monetary20220316a.htm'), meeting('US-2022-03-16')), SourceParseError);
 });
+
+test('the 18 Dec 2024 statement names its single dissent ("Voting against the action was")', () => {
+  const d = parseFomcStatement(fixture('monetary20241218a.htm'), meeting('US-2024-12-18'), 450);
+  assert.deepEqual(d.vote, { for: 11, against: 1, dissents: ['Beth M. Hammack'] });
+});
+
+test('the 29 Oct 2025 statement names both dissents joined by ", and"', () => {
+  const d = parseFomcStatement(fixture('monetary20251029a.htm'), meeting('US-2025-10-29'), 425);
+  assert.deepEqual(d.vote, { for: 10, against: 2, dissents: ['Stephen I. Miran', 'Jeffrey R. Schmid'] });
+});
+
+test('an unreadable "Voting against" sentence gives no vote rather than a false unanimous one', () => {
+  const html = fixture('monetary20250730a.htm').replace('Voting against this action were', 'Voting against, in a departure, were');
+  assert.equal(parseFomcStatement(html, meeting('US-2025-07-30')).vote, null);
+});

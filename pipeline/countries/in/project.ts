@@ -10,7 +10,7 @@ import type { LedgerEntry } from './backfill.ts';
 type V2Source = { id: string; type: string; title: string; url: string; publishedAt?: string | null; retrievedAt?: string | null; checksum?: string | null };
 type V2Decision = { id: string; date: string; repoRate: number; stance: string | null; summary: string | null; sourceIds: string[] };
 type V2Event = { id: string; date: string; label: string; description: string; citation: string };
-type V2Snapshot = { meta: { snapshotId: string; retrievedAt: string }; decisions: V2Decision[]; sources: V2Source[]; events: V2Event[] };
+type V2Snapshot = { meta: { snapshotId: string; retrievedAt: string; latestRecordedDate?: string; latestOfficialDate?: string }; decisions: V2Decision[]; sources: V2Source[]; events: V2Event[] };
 
 const V2_TYPES: Record<string, string> = {
   'policy-resolution': 'statement', 'policy-minutes': 'minutes', 'policy-archive': 'archive', 'current-policy-rates': 'current-rates',
@@ -31,7 +31,8 @@ export function projectIndia(input: unknown, ctx: { v2ReleaseId: string; v2Sha25
   for (const s of v2.sources) {
     const type = V2_TYPES[s.type];
     if (!type) throw new SourceParseError(`Unknown v2 source type "${s.type}" on ${s.id}`);
-    addSource({ id: s.id, type, title: s.title, url: s.url, official: isOfficial(s.url), publishedAt: s.publishedAt ?? null, retrievedAt: s.retrievedAt ?? null, sha256: s.checksum ?? null });
+    // v2 retrieval times and page checksums change on every fetch; keeping them would mint a new v3 release each day.
+    addSource({ id: s.id, type, title: s.title, url: s.url, official: isOfficial(s.url), publishedAt: s.publishedAt ?? null, retrievedAt: null, sha256: null });
   }
   [...loadSources('IN'), IN_LAF_2004].forEach(addSource);
   const mpc = ledger();
@@ -98,10 +99,14 @@ export function projectIndia(input: unknown, ctx: { v2ReleaseId: string; v2Sha25
     context,
     sources: [...sources.values()].sort((a, b) => a.id.localeCompare(b.id)),
     coverage: {
-      seriesFrom: series[0].date, seriesThrough: v2.meta.retrievedAt.slice(0, 10), ledgerFrom: LEDGER_FROM,
+      seriesFrom: series[0].date, ledgerFrom: LEDGER_FROM,
       grain: 'Every MPC decision from 4 Oct 2016 from its official resolution; earlier rate changes from the v2 record, with secondary sources labelled. Historical announcement times use 10:00 IST as a convention.',
     },
     corrections: [],
-    release: { hash: '', generator: 'pipeline/countries/in', upstream: { kind: 'rbi-snapshot-v2', id: ctx.v2ReleaseId, sha256: ctx.v2Sha256 } },
+    release: {
+      hash: '', generator: 'pipeline/countries/in',
+      observedThrough: v2.meta.latestRecordedDate ?? v2.meta.latestOfficialDate ?? series.at(-1)!.date,
+      upstream: { kind: 'rbi-snapshot-v2', id: ctx.v2ReleaseId, sha256: ctx.v2Sha256 },
+    },
   };
 }

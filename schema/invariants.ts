@@ -6,6 +6,7 @@ import { canonicalJson } from './hash.ts';
 export type Issue = { code: string; path: string; message: string };
 
 const SECRET_PARAMS = /^(key|apikey|api_key|token|access_token|auth)$/i;
+const EXCERPT_MAX = 400;
 
 const decisionDate = (d: Decision) => d.effectiveDate ?? d.announcedAt.slice(0, 10);
 const eraOf = (eras: Era[], date: string) => eras.find(e => e.from <= date && (e.to === null || date <= e.to))?.id ?? null;
@@ -46,7 +47,8 @@ export function validateRelease(next: CountryRelease, previous?: CountryRelease,
     }
     if (d.direction === 'hold' && d.evidence !== 'statement') add('hold-evidence', path, `${d.id} is a hold without a parsed statement`);
     if (d.direction === 'unchanged' && d.evidence !== 'series') add('unchanged-evidence', path, `${d.id} is unchanged but not series evidence`);
-    if (d.evidence === 'statement' && d.level.kind !== 'none' && r.coverage.seriesThrough >= date) {
+    if (d.excerpt !== null && d.excerpt.length > EXCERPT_MAX) add('excerpt-length', path, `${d.id} excerpt is ${d.excerpt.length} characters; at most ${EXCERPT_MAX}`);
+    if (d.evidence === 'statement' && d.level.kind !== 'none' && r.release.observedThrough >= date) {
       const observed = levelAt(r.series, date);
       if (observed && !sameLevel(observed.level, d.level)) add('series-disagrees', path, `${d.id} disagrees with the official series on ${date}`);
     }
@@ -80,9 +82,12 @@ export function validateRelease(next: CountryRelease, previous?: CountryRelease,
 
   if (previous) {
     const corrected = new Set(r.corrections.map(c => c.recordId));
-    const nextDecisions = new Map(r.decisions.map(d => [d.id, canonicalJson(d)]));
+    const nextDecisions = new Map(r.decisions.map(d => [d.id, d]));
     previous.decisions.forEach(d => {
-      if (!corrected.has(d.id) && nextDecisions.get(d.id) !== canonicalJson(d)) add('history-rewrite', `decisions.${d.id}`, `${d.id} changed or disappeared`);
+      const next = nextDecisions.get(d.id);
+      // A provisional decision inferred from the series may be replaced once its statement is parsed.
+      const superseded = d.evidence === 'series' && next?.evidence === 'statement';
+      if (!corrected.has(d.id) && !superseded && (!next || canonicalJson(next) !== canonicalJson(d))) add('history-rewrite', `decisions.${d.id}`, `${d.id} changed or disappeared`);
     });
     const nextSeries = new Map(r.series.map(p => [p.date, canonicalJson(p)]));
     previous.series.forEach(p => {

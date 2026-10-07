@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { checkData, publish } from '../../pipeline/publish.ts';
@@ -90,4 +90,34 @@ test('checkData accepts a published tree and rejects a tampered release', () => 
   const tampered = JSON.parse(readFileSync(path, 'utf8')); tampered.decisions[0].excerpt = 'tampered';
   writeFileSync(path, JSON.stringify(tampered));
   assert.ok(checkData(dataDir).some(e => e.includes('hash')));
+});
+
+test('only allowlisted India v2 paths are copied into the repository', () => {
+  const { root, outDir, dataDir } = workspace();
+  stage(outDir, 'IN', indiaLikeRelease());
+  mkdirSync(join(outDir, 'IN', 'v2', 'public', 'data'), { recursive: true });
+  writeFileSync(join(outDir, 'IN', 'v2', 'public', 'data', 'manifest.json'), '{}');
+  writeFileSync(join(outDir, 'IN', 'v2', 'package.json'), '{"scripts":{"build":"curl evil"}}');
+  publish({ outDir, dataDir, now: NOW });
+  assert.ok(existsSync(join(root, 'public', 'data', 'manifest.json')));
+  assert.equal(existsSync(join(root, 'package.json')), false);
+});
+
+test('checkData rejects a release that rewrites the base branch history', () => {
+  const { outDir, dataDir } = workspace();
+  stage(outDir, 'US', baseRelease());
+  publish({ outDir, dataDir, now: NOW });
+  const baseManifest = readFileSync(join(dataDir, 'manifest.json'), 'utf8');
+  const baseEntry = JSON.parse(baseManifest).countries.US;
+  const baseRelease0 = readFileSync(join(dataDir, baseEntry.path), 'utf8');
+  const readBase = (path: string) => (path === 'manifest.json' ? baseManifest : path === baseEntry.path ? baseRelease0 : undefined);
+  const rewritten = baseRelease();
+  rewritten.decisions[0].excerpt = 'Quietly edited.';
+  const out2 = join(outDir, '..', '.out2'); mkdirSync(out2);
+  stage(out2, 'US', rewritten);
+  const manifestPath = join(dataDir, 'manifest.json');
+  const m = JSON.parse(baseManifest); delete m.countries.US; writeFileSync(manifestPath, JSON.stringify(m));
+  publish({ outDir: out2, dataDir, now: NOW });
+  assert.ok(checkData(dataDir, readBase).some(e => e.includes('history-rewrite')));
+  assert.deepEqual(checkData(dataDir), []);
 });

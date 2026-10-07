@@ -45,7 +45,7 @@ function copyV2Changes(dir: string): void {
 
 export async function runCountries(codes: string[], opts: {
   now: string; outDir: string; reason?: string; adapters?: Partial<Record<string, Adapter>>;
-  readPrevious?: (code: string) => CountryRelease | undefined; fetchImpl?: typeof fetch; collectV2?: boolean;
+  readPrevious?: (code: string) => CountryRelease | undefined; fetchImpl?: typeof fetch; collectV2?: (dir: string) => void;
 }): Promise<CountryStatus[]> {
   const adapters: Partial<Record<string, Adapter>> = opts.adapters ?? DEFAULT_ADAPTERS;
   const readPrevious = opts.readPrevious ?? readCommittedRelease;
@@ -60,7 +60,7 @@ export async function runCountries(codes: string[], opts: {
     try {
       const previous = readPrevious(code);
       const { release } = await adapter({ now: opts.now, previous, fetchImpl: opts.fetchImpl });
-      const { statuses, synthesized } = resolveMeetings(release.calendar, release.decisions, release.series, release.coverage.seriesThrough, profile, opts.now, release.coverage.ledgerFrom);
+      const { statuses, synthesized } = resolveMeetings(release.calendar, release.decisions, release.series, release.release.observedThrough, profile, opts.now, release.coverage.ledgerFrom);
       if (synthesized.length) {
         const held = new Set(synthesized.map(d => d.meetingId));
         release.decisions = [...release.decisions, ...synthesized].sort((a, b) => a.announcedAt.localeCompare(b.announcedAt));
@@ -70,7 +70,8 @@ export async function runCountries(codes: string[], opts: {
       if (issues.length) { write({ code, ok: false, reason: opts.reason, statuses, issues }); continue; }
       release.release = { ...release.release, hash: releaseHash(release) };
       writeFileSync(join(dir, 'candidate.json'), `${JSON.stringify(release, null, 2)}\n`);
-      if (code === 'IN' && opts.collectV2 !== false && !opts.adapters) copyV2Changes(dir);
+      // India's v2 files travel only with a real v3 change, so quiet-day v2 churn never reaches a commit.
+      if (code === 'IN' && release.release.hash !== previous?.release.hash) (opts.collectV2 ?? (opts.adapters ? () => {} : copyV2Changes))(dir);
       write({ code, ok: true, reason: opts.reason, statuses, hash: release.release.hash });
     } catch (error) {
       write({ code, ok: false, reason: opts.reason, statuses: [], error: `${(error as Error).name}: ${(error as Error).message}` });

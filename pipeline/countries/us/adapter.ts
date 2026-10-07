@@ -75,11 +75,11 @@ export async function runUs(ctx: RunContext): Promise<CountryResult> {
         ...statementSources,
       ],
       coverage: {
-        seriesFrom: series[0].date, seriesThrough, ledgerFrom: LEDGER_FROM,
+        seriesFrom: series[0].date, ledgerFrom: LEDGER_FROM,
         grain: 'Every scheduled FOMC meeting from 27 Jan 2021, from its statement; target changes before then from the official FRED series (effective dates).',
       },
       corrections: [],
-      release: { hash: '', generator: 'pipeline/countries/us' },
+      release: { hash: '', generator: 'pipeline/countries/us', observedThrough: seriesThrough },
     },
   };
 }

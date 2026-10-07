@@ -29,12 +29,12 @@ test('the Oct 2016 resolution (first MPC) is a cut to 6.25% with six votes in fa
   assert.deepEqual(r.vote, { for: 6, against: 0, dissents: [] });
 });
 
-test('the May 2020 off-cycle resolution is a cut to 4.00%, voted by all members', () => {
+test('the May 2020 off-cycle resolution is a cut to 4.00% with one member voting for a smaller cut', () => {
   const r = parseMpcResolution(res('49843'), url('49843'));
   assert.equal(r.date, '2020-05-22');
   assert.equal(r.rateBps, 400);
   assert.equal(r.direction, 'cut');
-  assert.deepEqual(r.vote, { for: 6, against: 0, dissents: [] });
+  assert.deepEqual(r.vote, { for: 5, against: 1, dissents: ['Dr. Chetan Ghate'] });
 });
 
 test('the Feb 2023 resolution is a 4 to 2 hike to 6.50% with named dissents', () => {
@@ -114,4 +114,29 @@ test('an unknown v2 source type fails the projection', () => {
   const v2 = snapshot();
   v2.sources[0].type = 'mystery';
   assert.throws(() => projectIndia(v2, ctx()), SourceParseError);
+});
+
+test('resolution excerpts are the decision clause, never page navigation', () => {
+  for (const prid of ['38224', '49843', '55178', '60957', '62169']) {
+    const { excerpt } = parseMpcResolution(res(prid), url(prid));
+    assert.ok(excerpt.length <= 400, `${prid}: ${excerpt.length} chars`);
+    assert.doesNotMatch(excerpt, /Skip to main content|About Us|हिंदी/, prid);
+    assert.match(excerpt, /policy repo rate/, prid);
+  }
+  assert.match(parseMpcResolution(res('38224'), url('38224')).excerpt, /^The Monetary Policy Committee \(MPC\) decided to/);
+});
+
+test('projected v2 sources carry no volatile retrieval metadata', () => {
+  const release = projectIndia(snapshot(), ctx());
+  const v2Ids = new Set(snapshot().sources.map((s: { id: string }) => s.id));
+  for (const s of release.sources.filter(s => v2Ids.has(s.id))) {
+    assert.equal(s.retrievedAt, null, s.id);
+    assert.equal(s.sha256, null, s.id);
+  }
+});
+
+test('the Aug 2019 resolution splits four to two on the size of the cut despite "unanimously voted to reduce"', () => {
+  const r = parseMpcResolution(res('47818'), url('47818'));
+  assert.equal(r.rateBps, 540);
+  assert.deepEqual(r.vote, { for: 4, against: 2, dissents: ['Dr. Chetan Ghate', 'Dr. Pami Dua'] });
 });

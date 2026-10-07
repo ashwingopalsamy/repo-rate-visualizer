@@ -88,6 +88,20 @@ test('release passes when the only difference is an appended decision', () => {
   prev.decisions = prev.decisions.slice(0, 1);
   prev.calendar = prev.calendar.slice(0, 1);
   prev.series = prev.series.slice(0, 1);
-  prev.coverage.seriesThrough = '2026-08-01';
+  prev.release.observedThrough = '2026-08-01';
+  assert.deepEqual(codes(baseRelease(), prev), []);
+});
+
+test('an excerpt longer than 400 characters is rejected', () => {
+  const r = baseRelease();
+  r.decisions[1].excerpt = 'x'.repeat(401);
+  assert.ok(codes(r).includes('excerpt-length'));
+});
+
+test('a series-evidence decision may be superseded by its statement', () => {
+  const prev = baseRelease();
+  prev.decisions[1] = { ...prev.decisions[1], direction: 'unchanged', evidence: 'series', changeBps: 0, level: { kind: 'range', lowBps: 350, highBps: 375 }, vote: null, statementUrl: null };
+  prev.series = prev.series.slice(0, 1);
+  prev.release.observedThrough = '2026-09-16';
   assert.deepEqual(codes(baseRelease(), prev), []);
 });

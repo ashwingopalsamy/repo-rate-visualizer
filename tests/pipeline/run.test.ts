@@ -5,7 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { runCountries } from '../../pipeline/run.ts';
 import { SourceParseError } from '../../pipeline/lib/errors.ts';
-import { baseRelease } from './fixtures.ts';
+import { baseRelease, indiaLikeRelease } from './fixtures.ts';
+import { releaseHash } from '../../schema/hash.ts';
 
 test('run marks a failing country failed, writes no candidate for it, and still writes the others', async () => {
   const outDir = mkdtempSync(join(tmpdir(), 'atlas-run-'));
@@ -36,4 +37,22 @@ test('run rejects a candidate that breaks an invariant', async () => {
   assert.equal(status.ok, false);
   assert.ok(status.issues.some((i: { code: string }) => i.code === 'series-order'));
   assert.equal(existsSync(join(outDir, 'US', 'candidate.json')), false);
+});
+
+test('India v2 changes are collected only when the India release changed', async () => {
+  const outDir = mkdtempSync(join(tmpdir(), 'atlas-run-'));
+  const committed = indiaLikeRelease();
+  committed.release.hash = releaseHash(committed);
+  const collected: string[] = [];
+  const opts = (previous: ReturnType<typeof indiaLikeRelease> | undefined) => ({
+    now: '2026-10-07T12:00:00Z', outDir, readPrevious: () => previous,
+    adapters: { IN: async () => ({ release: indiaLikeRelease(), statuses: [] }) },
+    collectV2: (dir: string) => { collected.push(dir); },
+  });
+  await runCountries(['IN'], opts(committed));
+  assert.deepEqual(collected, []);
+  const older = indiaLikeRelease(); older.decisions = older.decisions.slice(0, 1); older.series = older.series.slice(0, 1); older.calendar = older.calendar.slice(0, 1); older.release.observedThrough = '2026-08-01';
+  older.release.hash = releaseHash(older);
+  await runCountries(['IN'], opts(older));
+  assert.equal(collected.length, 1);
 });

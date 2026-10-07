@@ -15,6 +15,8 @@ export type CountryProfile = {
   allowlist: string[];
   effectiveLagDays: number;
   announceTime: string;
+  /** True when an official level series exists independently of the decision statements (needed to infer an unchanged meeting). */
+  independentSeries: boolean;
 };
 
 export const COUNTRIES: Record<CountryCode, CountryProfile> = {
@@ -26,7 +28,7 @@ export const COUNTRIES: Record<CountryCode, CountryProfile> = {
       explainer: 'The repo rate is the rate at which the Reserve Bank of India lends overnight to banks against government securities. The Monetary Policy Committee sets it six times a year to keep inflation close to its 4% target. Most new floating-rate retail loans are priced off it.',
     },
     allowlist: ['rbi.org.in', 'rbidocs.rbi.org.in', 'website.rbi.org.in'],
-    effectiveLagDays: 0, announceTime: '10:00',
+    effectiveLagDays: 0, announceTime: '10:00', independentSeries: false,
   },
   US: {
     code: 'US', name: 'United States', currency: 'USD', locale: 'en-US', timeZone: 'America/New_York',
@@ -36,7 +38,7 @@ export const COUNTRIES: Record<CountryCode, CountryProfile> = {
       explainer: 'The federal funds target range is where the Federal Reserve wants the overnight rate between banks to trade. The Federal Open Market Committee sets it eight times a year in pursuit of maximum employment and 2% inflation. Prime-linked borrowing moves with it almost at once.',
     },
     allowlist: ['federalreserve.gov', 'fred.stlouisfed.org'],
-    effectiveLagDays: 1, announceTime: '14:00',
+    effectiveLagDays: 1, announceTime: '14:00', independentSeries: true,
   },
 };
 

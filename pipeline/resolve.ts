@@ -11,8 +11,8 @@ const levelAt = (series: SeriesPoint[], date: string) => [...series].reverse().f
  * synthesised only when no statement was parsed and the official series is observed flat on or after the effective date.
  */
 export function resolveMeetings(
-  calendar: Meeting[], decisions: Decision[], series: SeriesPoint[], seriesThrough: string,
-  _profile: CountryProfile, now: string, ledgerFrom: string | null = null,
+  calendar: Meeting[], decisions: Decision[], series: SeriesPoint[], observedThrough: string,
+  profile: CountryProfile, now: string, ledgerFrom: string | null = null,
 ): { statuses: MeetingStatus[]; synthesized: Decision[] } {
   const statuses: MeetingStatus[] = [];
   const synthesized: Decision[] = [];
@@ -23,7 +23,7 @@ export function resolveMeetings(
     if (ledgerFrom && meeting.date < ledgerFrom) continue;
     if (decided.has(meeting.id)) { statuses.push({ meetingId: meeting.id, state: 'verified' }); continue; }
     const effective = addDays(meeting.date, meeting.effectiveLagDays);
-    if (seriesThrough < effective) { statuses.push({ meetingId: meeting.id, state: 'pending', detail: 'Waiting for the official release' }); continue; }
+    if (!profile.independentSeries || observedThrough < effective) { statuses.push({ meetingId: meeting.id, state: 'pending', detail: 'Waiting for the official release' }); continue; }
     const before = levelAt(series, addDays(meeting.date, -1));
     const after = levelAt(series, effective);
     if (before && after && after.evidence === 'official' && sameLevel(before.level, after.level)) {

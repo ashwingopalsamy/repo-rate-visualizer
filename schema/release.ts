@@ -49,9 +49,10 @@ export const CountryReleaseSchema = z.strictObject({
   transmission: z.array(TransmissionSchema),
   context: z.array(ContextEventSchema),
   sources: z.array(SourceSchema).min(1),
-  coverage: z.strictObject({ seriesFrom: isoDate, seriesThrough: isoDate, ledgerFrom: isoDate.nullable(), grain: z.string() }),
+  coverage: z.strictObject({ seriesFrom: isoDate, ledgerFrom: isoDate.nullable(), grain: z.string() }),
   corrections: z.array(z.strictObject({ recordId: id, reason: z.string().min(1), sourceId: id })).default([]),
-  release: z.strictObject({ hash: z.string(), generator: z.string(), upstream: z.strictObject({ kind: z.string(), id: z.string(), sha256: z.string() }).optional() }),
+  // Excluded from the hash: identity, provenance, and the last date the official series was observed (changes on quiet days).
+  release: z.strictObject({ hash: z.string(), generator: z.string(), observedThrough: isoDate, upstream: z.strictObject({ kind: z.string(), id: z.string(), sha256: z.string() }).optional() }),
 });
 
 export type Era = z.infer<typeof EraSchema>;

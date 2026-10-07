@@ -46,6 +46,10 @@ jobs:
         run: |
           all=$(node --input-type=module -e "import { COUNTRIES } from './pipeline/countries/registry.ts'; console.log(Object.keys(COUNTRIES).join(','))")
           list=$([ "${REQUESTED^^}" = "ALL" ] && echo "$all" || echo "${REQUESTED^^}")
+          for c in ${list//,/ }; do
+            [[ "$c" =~ ^[A-Z]{2}$ && ",$all," == *",$c,"* ]] || { echo "::error::unknown country code '$c'"; exit 1; }
+          done
+          [[ "$REASON" =~ ^[A-Za-z0-9:,._\ -]{1,200}$ ]] || REASON=manual
           echo "countries=$(node -e "console.log(JSON.stringify(process.argv[1].split(',').map(s => s.trim()).filter(Boolean)))" "$list")" >> "$GITHUB_OUTPUT"
           echo "reason=$REASON" >> "$GITHUB_OUTPUT"
 
@@ -65,7 +69,10 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - name: Build candidate release
-        run: node pipeline/run.ts --countries ${{ matrix.cc }} --reason "${{ needs.plan.outputs.reason }}"
+        env:
+          CC: ${{ matrix.cc }}
+          REASON: ${{ needs.plan.outputs.reason }}
+        run: node pipeline/run.ts --countries "$CC" --reason "$REASON"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
