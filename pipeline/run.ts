@@ -15,6 +15,7 @@ import { COUNTRIES } from './countries/registry.ts';
 import type { CountryCode } from './countries/registry.ts';
 import { runIndia } from './countries/in/adapter.ts';
 import { runUs } from './countries/us/adapter.ts';
+import { SERIES_ADAPTERS } from './countries/series.ts';
 import { resolveMeetings } from './resolve.ts';
 import type { CountryResult, MeetingStatus, RunContext } from './types.ts';
 
@@ -22,7 +23,7 @@ export type Adapter = (ctx: RunContext) => Promise<CountryResult>;
 export type CountryStatus = { code: string; ok: boolean; reason?: string; statuses: MeetingStatus[]; hash?: string; error?: string; issues?: Issue[] };
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const DEFAULT_ADAPTERS: Record<CountryCode, Adapter> = { IN: runIndia, US: runUs };
+const DEFAULT_ADAPTERS: Record<CountryCode, Adapter> = { IN: runIndia, US: runUs, ...SERIES_ADAPTERS };
 const V2_PATHS = ['public/data', 'src/data', 'hf-dataset'];
 
 /** The release the manifest currently points at, if any. */

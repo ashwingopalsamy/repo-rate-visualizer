@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "id": "gb-bank-rate",
+      "type": "page",
+      "title": "Bank of England: Interest rates and Bank Rate",
+      "url": "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate"
+    }
+  ],
+  "entries": [
+    {
+      "product": "Tracker mortgage",
+      "benchmark": "Bank Rate plus a margin",
+      "reset": "Usually from the next monthly payment",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "A tracker follows Bank Rate one for one.",
+      "sourceId": "gb-bank-rate"
+    },
+    {
+      "product": "Fixed-rate mortgage",
+      "benchmark": "Fixed for two to five years",
+      "reset": "When the deal ends",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Most UK borrowers are on fixed deals and feel Bank Rate when they remortgage.",
+      "sourceId": "gb-bank-rate"
+    }
+  ]
+}

@@ -1,0 +1,1451 @@
+{
+  "schemaVersion": 3,
+  "country": {
+    "code": "BR",
+    "name": "Brazil",
+    "currency": "BRL",
+    "locale": "pt-BR",
+    "timeZone": "America/Sao_Paulo"
+  },
+  "authority": {
+    "name": "Banco Central do Brasil",
+    "short": "BCB",
+    "body": "Monetary Policy Committee (Copom)",
+    "bodyShort": "Copom",
+    "url": "https://www.bcb.gov.br/"
+  },
+  "instrument": {
+    "name": "Selic target",
+    "short": "Selic",
+    "explainer": "The Selic target is the rate the Banco Central do Brasil aims for in overnight trading of government bonds. Copom sets it eight times a year to meet the national inflation target, and floating-rate credit and CDI-linked savings follow it closely."
+  },
+  "eras": [
+    {
+      "id": "br-selic-target",
+      "instrument": "Selic target",
+      "note": "The Copom target for the overnight Selic rate.",
+      "from": "2000-01-01",
+      "to": null,
+      "kind": "point",
+      "basis": "policy",
+      "sourceId": "br-bcb-sgs432"
+    }
+  ],
+  "calendar": [],
+  "decisions": [],
+  "series": [
+    {
+      "date": "2000-01-01",
+      "level": {
+        "kind": "point",
+        "bps": 1900
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2000-03-29",
+      "level": {
+        "kind": "point",
+        "bps": 1850
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2000-06-21",
+      "level": {
+        "kind": "point",
+        "bps": 1750
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2000-07-10",
+      "level": {
+        "kind": "point",
+        "bps": 1700
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2000-07-20",
+      "level": {
+        "kind": "point",
+        "bps": 1650
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2000-12-21",
+      "level": {
+        "kind": "point",
+        "bps": 1575
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2001-01-18",
+      "level": {
+        "kind": "point",
+        "bps": 1525
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2001-03-22",
+      "level": {
+        "kind": "point",
+        "bps": 1575
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2001-04-19",
+      "level": {
+        "kind": "point",
+        "bps": 1625
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2001-05-24",
+      "level": {
+        "kind": "point",
+        "bps": 1675
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2001-06-21",
+      "level": {
+        "kind": "point",
+        "bps": 1825
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2001-07-19",
+      "level": {
+        "kind": "point",
+        "bps": 1900
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2002-02-21",
+      "level": {
+        "kind": "point",
+        "bps": 1875
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2002-03-21",
+      "level": {
+        "kind": "point",
+        "bps": 1850
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2002-07-18",
+      "level": {
+        "kind": "point",
+        "bps": 1800
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2002-10-15",
+      "level": {
+        "kind": "point",
+        "bps": 2100
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2002-11-21",
+      "level": {
+        "kind": "point",
+        "bps": 2200
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2002-12-19",
+      "level": {
+        "kind": "point",
+        "bps": 2500
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-01-23",
+      "level": {
+        "kind": "point",
+        "bps": 2550
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-02-20",
+      "level": {
+        "kind": "point",
+        "bps": 2650
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-06-20",
+      "level": {
+        "kind": "point",
+        "bps": 2600
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-07-24",
+      "level": {
+        "kind": "point",
+        "bps": 2450
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-08-21",
+      "level": {
+        "kind": "point",
+        "bps": 2200
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-09-18",
+      "level": {
+        "kind": "point",
+        "bps": 2000
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-10-23",
+      "level": {
+        "kind": "point",
+        "bps": 1900
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-11-20",
+      "level": {
+        "kind": "point",
+        "bps": 1750
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2003-12-18",
+      "level": {
+        "kind": "point",
+        "bps": 1650
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2004-03-18",
+      "level": {
+        "kind": "point",
+        "bps": 1625
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2004-04-15",
+      "level": {
+        "kind": "point",
+        "bps": 1600
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2004-09-16",
+      "level": {
+        "kind": "point",
+        "bps": 1625
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2004-10-21",
+      "level": {
+        "kind": "point",
+        "bps": 1675
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2004-11-18",
+      "level": {
+        "kind": "point",
+        "bps": 1725
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2004-12-16",
+      "level": {
+        "kind": "point",
+        "bps": 1775
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-01-20",
+      "level": {
+        "kind": "point",
+        "bps": 1825
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-02-17",
+      "level": {
+        "kind": "point",
+        "bps": 1875
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-03-17",
+      "level": {
+        "kind": "point",
+        "bps": 1925
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-04-21",
+      "level": {
+        "kind": "point",
+        "bps": 1950
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-05-19",
+      "level": {
+        "kind": "point",
+        "bps": 1975
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-09-15",
+      "level": {
+        "kind": "point",
+        "bps": 1950
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-10-20",
+      "level": {
+        "kind": "point",
+        "bps": 1900
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-11-24",
+      "level": {
+        "kind": "point",
+        "bps": 1850
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2005-12-15",
+      "level": {
+        "kind": "point",
+        "bps": 1800
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-01-19",
+      "level": {
+        "kind": "point",
+        "bps": 1725
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-03-09",
+      "level": {
+        "kind": "point",
+        "bps": 1650
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-04-20",
+      "level": {
+        "kind": "point",
+        "bps": 1575
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-06-01",
+      "level": {
+        "kind": "point",
+        "bps": 1525
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-07-20",
+      "level": {
+        "kind": "point",
+        "bps": 1475
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-08-31",
+      "level": {
+        "kind": "point",
+        "bps": 1425
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-10-19",
+      "level": {
+        "kind": "point",
+        "bps": 1375
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2006-11-30",
+      "level": {
+        "kind": "point",
+        "bps": 1325
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2007-01-25",
+      "level": {
+        "kind": "point",
+        "bps": 1300
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2007-03-08",
+      "level": {
+        "kind": "point",
+        "bps": 1275
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2007-04-19",
+      "level": {
+        "kind": "point",
+        "bps": 1250
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2007-06-08",
+      "level": {
+        "kind": "point",
+        "bps": 1200
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2007-07-19",
+      "level": {
+        "kind": "point",
+        "bps": 1150
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2007-09-06",
+      "level": {
+        "kind": "point",
+        "bps": 1125
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2008-04-17",
+      "level": {
+        "kind": "point",
+        "bps": 1175
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2008-06-05",
+      "level": {
+        "kind": "point",
+        "bps": 1225
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2008-07-24",
+      "level": {
+        "kind": "point",
+        "bps": 1300
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2008-09-11",
+      "level": {
+        "kind": "point",
+        "bps": 1375
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2009-01-22",
+      "level": {
+        "kind": "point",
+        "bps": 1275
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2009-03-12",
+      "level": {
+        "kind": "point",
+        "bps": 1125
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2009-04-30",
+      "level": {
+        "kind": "point",
+        "bps": 1025
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2009-06-12",
+      "level": {
+        "kind": "point",
+        "bps": 925
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2009-07-23",
+      "level": {
+        "kind": "point",
+        "bps": 875
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2010-04-29",
+      "level": {
+        "kind": "point",
+        "bps": 950
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2010-06-10",
+      "level": {
+        "kind": "point",
+        "bps": 1025
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2010-07-22",
+      "level": {
+        "kind": "point",
+        "bps": 1075
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-01-20",
+      "level": {
+        "kind": "point",
+        "bps": 1125
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-03-03",
+      "level": {
+        "kind": "point",
+        "bps": 1175
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-04-25",
+      "level": {
+        "kind": "point",
+        "bps": 1200
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-06-09",
+      "level": {
+        "kind": "point",
+        "bps": 1225
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-07-21",
+      "level": {
+        "kind": "point",
+        "bps": 1250
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-09-01",
+      "level": {
+        "kind": "point",
+        "bps": 1200
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-10-20",
+      "level": {
+        "kind": "point",
+        "bps": 1150
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2011-12-01",
+      "level": {
+        "kind": "point",
+        "bps": 1100
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2012-01-19",
+      "level": {
+        "kind": "point",
+        "bps": 1050
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2012-03-08",
+      "level": {
+        "kind": "point",
+        "bps": 975
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2012-04-19",
+      "level": {
+        "kind": "point",
+        "bps": 900
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2012-05-31",
+      "level": {
+        "kind": "point",
+        "bps": 850
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2012-07-12",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2012-08-30",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2012-10-11",
+      "level": {
+        "kind": "point",
+        "bps": 725
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2013-04-18",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2013-05-30",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2013-07-11",
+      "level": {
+        "kind": "point",
+        "bps": 850
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2013-08-29",
+      "level": {
+        "kind": "point",
+        "bps": 900
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2013-10-10",
+      "level": {
+        "kind": "point",
+        "bps": 950
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2013-11-28",
+      "level": {
+        "kind": "point",
+        "bps": 1000
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2014-01-16",
+      "level": {
+        "kind": "point",
+        "bps": 1050
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2014-02-27",
+      "level": {
+        "kind": "point",
+        "bps": 1075
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2014-04-03",
+      "level": {
+        "kind": "point",
+        "bps": 1100
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2014-10-30",
+      "level": {
+        "kind": "point",
+        "bps": 1125
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2014-12-04",
+      "level": {
+        "kind": "point",
+        "bps": 1175
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2015-01-22",
+      "level": {
+        "kind": "point",
+        "bps": 1225
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2015-03-05",
+      "level": {
+        "kind": "point",
+        "bps": 1275
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2015-04-30",
+      "level": {
+        "kind": "point",
+        "bps": 1325
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2015-06-04",
+      "level": {
+        "kind": "point",
+        "bps": 1375
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2015-07-30",
+      "level": {
+        "kind": "point",
+        "bps": 1425
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2016-10-20",
+      "level": {
+        "kind": "point",
+        "bps": 1400
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2016-12-01",
+      "level": {
+        "kind": "point",
+        "bps": 1375
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-01-12",
+      "level": {
+        "kind": "point",
+        "bps": 1300
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-02-23",
+      "level": {
+        "kind": "point",
+        "bps": 1225
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-04-13",
+      "level": {
+        "kind": "point",
+        "bps": 1125
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-06-01",
+      "level": {
+        "kind": "point",
+        "bps": 1025
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-07-27",
+      "level": {
+        "kind": "point",
+        "bps": 925
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-09-08",
+      "level": {
+        "kind": "point",
+        "bps": 825
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-10-26",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2017-12-07",
+      "level": {
+        "kind": "point",
+        "bps": 700
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2018-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 675
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2018-03-22",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2019-08-01",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2019-09-19",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2019-10-31",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2019-12-12",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2020-02-06",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2020-03-19",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2020-05-07",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2020-06-18",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2020-08-06",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2021-03-18",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2021-05-06",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2021-06-17",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2021-08-05",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2021-09-23",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2021-10-28",
+      "level": {
+        "kind": "point",
+        "bps": 775
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2021-12-09",
+      "level": {
+        "kind": "point",
+        "bps": 925
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2022-02-03",
+      "level": {
+        "kind": "point",
+        "bps": 1075
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2022-03-17",
+      "level": {
+        "kind": "point",
+        "bps": 1175
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2022-05-05",
+      "level": {
+        "kind": "point",
+        "bps": 1275
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2022-06-16",
+      "level": {
+        "kind": "point",
+        "bps": 1325
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2022-08-04",
+      "level": {
+        "kind": "point",
+        "bps": 1375
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2023-08-03",
+      "level": {
+        "kind": "point",
+        "bps": 1325
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2023-09-21",
+      "level": {
+        "kind": "point",
+        "bps": 1275
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2023-11-02",
+      "level": {
+        "kind": "point",
+        "bps": 1225
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2023-12-14",
+      "level": {
+        "kind": "point",
+        "bps": 1175
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2024-02-01",
+      "level": {
+        "kind": "point",
+        "bps": 1125
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2024-03-21",
+      "level": {
+        "kind": "point",
+        "bps": 1075
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2024-05-09",
+      "level": {
+        "kind": "point",
+        "bps": 1050
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2024-09-19",
+      "level": {
+        "kind": "point",
+        "bps": 1075
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2024-11-07",
+      "level": {
+        "kind": "point",
+        "bps": 1125
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2024-12-12",
+      "level": {
+        "kind": "point",
+        "bps": 1225
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2025-01-30",
+      "level": {
+        "kind": "point",
+        "bps": 1325
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2025-03-20",
+      "level": {
+        "kind": "point",
+        "bps": 1425
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2025-05-08",
+      "level": {
+        "kind": "point",
+        "bps": 1475
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2025-06-19",
+      "level": {
+        "kind": "point",
+        "bps": 1500
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2026-03-19",
+      "level": {
+        "kind": "point",
+        "bps": 1475
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2026-04-30",
+      "level": {
+        "kind": "point",
+        "bps": 1450
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2026-06-18",
+      "level": {
+        "kind": "point",
+        "bps": 1425
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2026-08-06",
+      "level": {
+        "kind": "point",
+        "bps": 1400
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    },
+    {
+      "date": "2026-09-17",
+      "level": {
+        "kind": "point",
+        "bps": 1375
+      },
+      "evidence": "official",
+      "sourceId": "br-bcb-sgs432"
+    }
+  ],
+  "transmission": [
+    {
+      "product": "Floating-rate credit",
+      "benchmark": "Selic or CDI",
+      "reset": "Quickly",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Overdrafts, floating loans and CDB yields move closely with the Selic.",
+      "sourceId": "br-selic"
+    },
+    {
+      "product": "Home loan",
+      "benchmark": "Often TR or IPCA plus a spread",
+      "reset": "Depends on the index",
+      "adjusts": "payment",
+      "passThrough": "lagged",
+      "note": "Many home loans follow other indices, so mortgage pass-through is weaker.",
+      "sourceId": "br-selic"
+    }
+  ],
+  "context": [],
+  "sources": [
+    {
+      "id": "br-bcb-sgs432",
+      "title": "Banco Central do Brasil SGS: Selic target (series 432)",
+      "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json",
+      "type": "series",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "br-selic",
+      "type": "page",
+      "title": "Banco Central do Brasil: Selic rate",
+      "url": "https://www.bcb.gov.br/en/monetarypolicy/selicrate",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    }
+  ],
+  "coverage": {
+    "seriesFrom": "2000-01-01",
+    "ledgerFrom": null,
+    "grain": "Every change in the Selic target from BCB SGS series 432 (daily). Decision records are being added."
+  },
+  "corrections": [],
+  "release": {
+    "hash": "59c6949350fb38008d952ac1510c310429ae0f266d9f4524660a0ba9ff53155a",
+    "generator": "pipeline/countries/br",
+    "observedThrough": "2026-10-07"
+  }
+}

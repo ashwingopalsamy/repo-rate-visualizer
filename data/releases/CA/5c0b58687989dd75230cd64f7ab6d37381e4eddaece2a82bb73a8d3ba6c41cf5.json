@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 3,
+  "country": {
+    "code": "CA",
+    "name": "Canada",
+    "currency": "CAD",
+    "locale": "en-CA",
+    "timeZone": "America/Toronto"
+  },
+  "authority": {
+    "name": "Bank of Canada",
+    "short": "BoC",
+    "body": "Governing Council",
+    "bodyShort": "Governing Council",
+    "url": "https://www.bankofcanada.ca/"
+  },
+  "instrument": {
+    "name": "Target for the overnight rate",
+    "short": "Policy rate",
+    "explainer": "The target for the overnight rate is the rate the Bank of Canada wants for overnight lending between major financial institutions. It is set eight times a year to keep inflation near 2%, and lenders' prime rates move with it."
+  },
+  "eras": [
+    {
+      "id": "ca-overnight-target",
+      "instrument": "Target for the overnight rate",
+      "note": "The Bank of Canada policy rate; the daily Valet series starts in April 2009.",
+      "from": "2009-04-21",
+      "to": null,
+      "kind": "point",
+      "basis": "policy",
+      "sourceId": "ca-boc-v39079"
+    }
+  ],
+  "calendar": [],
+  "decisions": [],
+  "series": [
+    {
+      "date": "2009-04-21",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2010-06-01",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2010-07-20",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2010-09-08",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2015-01-21",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2015-07-15",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2017-07-12",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2017-09-06",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2018-01-17",
+      "level": {
+        "kind": "point",
+        "bps": 125
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2018-07-11",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2018-10-24",
+      "level": {
+        "kind": "point",
+        "bps": 175
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2020-03-04",
+      "level": {
+        "kind": "point",
+        "bps": 125
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2020-03-16",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2020-03-27",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2022-03-03",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2022-04-14",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2022-06-02",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2022-07-14",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2022-09-08",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2022-10-27",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2022-12-08",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2023-01-26",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2023-06-08",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2023-07-13",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2024-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2024-07-25",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2024-09-05",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2024-10-24",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2024-12-12",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2025-01-30",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2025-03-13",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2025-09-18",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    },
+    {
+      "date": "2025-10-30",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "ca-boc-v39079"
+    }
+  ],
+  "transmission": [
+    {
+      "product": "Variable-rate mortgage",
+      "benchmark": "Lender's prime rate",
+      "reset": "Within days of a decision",
+      "adjusts": "both",
+      "passThrough": "direct",
+      "note": "On many variable mortgages the payment stays fixed and the share going to interest changes instead.",
+      "sourceId": "ca-policy-rate"
+    },
+    {
+      "product": "Fixed-rate mortgage",
+      "benchmark": "Fixed for the term, often five years",
+      "reset": "At renewal",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Fixed terms reprice when they renew.",
+      "sourceId": "ca-policy-rate"
+    }
+  ],
+  "context": [],
+  "sources": [
+    {
+      "id": "ca-boc-v39079",
+      "title": "Bank of Canada Valet: Target for the overnight rate (V39079)",
+      "url": "https://www.bankofcanada.ca/valet/observations/V39079",
+      "type": "series",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "ca-policy-rate",
+      "type": "page",
+      "title": "Bank of Canada: Policy interest rate",
+      "url": "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    }
+  ],
+  "coverage": {
+    "seriesFrom": "2009-04-21",
+    "ledgerFrom": null,
+    "grain": "Every change in the overnight rate target from Bank of Canada Valet (daily series from April 2009). Decision records are being added."
+  },
+  "corrections": [],
+  "release": {
+    "hash": "5c0b58687989dd75230cd64f7ab6d37381e4eddaece2a82bb73a8d3ba6c41cf5",
+    "generator": "pipeline/countries/ca",
+    "observedThrough": "2026-10-06"
+  }
+}

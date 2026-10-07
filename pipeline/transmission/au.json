@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "id": "au-transmission",
+      "type": "explainer",
+      "title": "RBA: The Transmission of Monetary Policy (explainer)",
+      "url": "https://www.rba.gov.au/education/resources/explainers/the-transmission-of-monetary-policy.html"
+    }
+  ],
+  "entries": [
+    {
+      "product": "Variable-rate home loan",
+      "benchmark": "Lender's standard variable rate",
+      "reset": "Usually within weeks",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Most Australian home loans are variable, one of the most direct channels to household budgets.",
+      "sourceId": "au-transmission"
+    },
+    {
+      "product": "Fixed-rate home loan",
+      "benchmark": "Fixed for one to five years",
+      "reset": "Rolls to variable when the fix ends",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Fixed loans meet the cash rate when they roll off.",
+      "sourceId": "au-transmission"
+    }
+  ]
+}

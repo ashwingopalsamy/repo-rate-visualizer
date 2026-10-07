@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "id": "ca-policy-rate",
+      "type": "page",
+      "title": "Bank of Canada: Policy interest rate",
+      "url": "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/"
+    }
+  ],
+  "entries": [
+    {
+      "product": "Variable-rate mortgage",
+      "benchmark": "Lender's prime rate",
+      "reset": "Within days of a decision",
+      "adjusts": "both",
+      "passThrough": "direct",
+      "note": "On many variable mortgages the payment stays fixed and the share going to interest changes instead.",
+      "sourceId": "ca-policy-rate"
+    },
+    {
+      "product": "Fixed-rate mortgage",
+      "benchmark": "Fixed for the term, often five years",
+      "reset": "At renewal",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Fixed terms reprice when they renew.",
+      "sourceId": "ca-policy-rate"
+    }
+  ]
+}

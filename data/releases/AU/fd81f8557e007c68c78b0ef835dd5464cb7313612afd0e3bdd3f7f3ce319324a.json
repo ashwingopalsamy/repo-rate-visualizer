@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 3,
+  "country": {
+    "code": "AU",
+    "name": "Australia",
+    "currency": "AUD",
+    "locale": "en-AU",
+    "timeZone": "Australia/Sydney"
+  },
+  "authority": {
+    "name": "Reserve Bank of Australia",
+    "short": "RBA",
+    "body": "Monetary Policy Board",
+    "bodyShort": "Monetary Policy Board",
+    "url": "https://www.rba.gov.au/"
+  },
+  "instrument": {
+    "name": "Cash rate target",
+    "short": "Cash rate",
+    "explainer": "The cash rate target is the RBA's target for the rate on overnight loans between banks. The Monetary Policy Board sets it eight times a year to keep inflation between 2 and 3%, and most home loans in Australia are variable and follow it."
+  },
+  "eras": [
+    {
+      "id": "au-cash-rate",
+      "instrument": "Cash rate target",
+      "note": "The RBA target for overnight interbank loans; table F1 carries the daily series from January 2011.",
+      "from": "2011-01-04",
+      "to": null,
+      "kind": "point",
+      "basis": "policy",
+      "sourceId": "au-rba-f1"
+    }
+  ],
+  "calendar": [],
+  "decisions": [],
+  "series": [
+    {
+      "date": "2011-01-04",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2011-11-02",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2011-12-07",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2012-05-02",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2012-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2012-10-03",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2012-12-05",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2013-05-08",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2013-08-07",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2015-02-04",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2015-05-06",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2016-05-04",
+      "level": {
+        "kind": "point",
+        "bps": 175
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2016-08-03",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2019-06-05",
+      "level": {
+        "kind": "point",
+        "bps": 125
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2019-07-03",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2019-10-02",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2020-03-04",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2020-03-20",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2020-11-04",
+      "level": {
+        "kind": "point",
+        "bps": 10
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-05-04",
+      "level": {
+        "kind": "point",
+        "bps": 35
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-06-08",
+      "level": {
+        "kind": "point",
+        "bps": 85
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-07-06",
+      "level": {
+        "kind": "point",
+        "bps": 135
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-08-03",
+      "level": {
+        "kind": "point",
+        "bps": 185
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-09-07",
+      "level": {
+        "kind": "point",
+        "bps": 235
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-10-05",
+      "level": {
+        "kind": "point",
+        "bps": 260
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-11-02",
+      "level": {
+        "kind": "point",
+        "bps": 285
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2022-12-07",
+      "level": {
+        "kind": "point",
+        "bps": 310
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2023-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 335
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2023-03-08",
+      "level": {
+        "kind": "point",
+        "bps": 360
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2023-05-03",
+      "level": {
+        "kind": "point",
+        "bps": 385
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2023-06-07",
+      "level": {
+        "kind": "point",
+        "bps": 410
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2023-11-08",
+      "level": {
+        "kind": "point",
+        "bps": 435
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2025-02-19",
+      "level": {
+        "kind": "point",
+        "bps": 410
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2025-05-21",
+      "level": {
+        "kind": "point",
+        "bps": 385
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2025-08-13",
+      "level": {
+        "kind": "point",
+        "bps": 360
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2026-02-04",
+      "level": {
+        "kind": "point",
+        "bps": 385
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2026-03-18",
+      "level": {
+        "kind": "point",
+        "bps": 410
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2026-05-06",
+      "level": {
+        "kind": "point",
+        "bps": 435
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    },
+    {
+      "date": "2026-09-30",
+      "level": {
+        "kind": "point",
+        "bps": 460
+      },
+      "evidence": "official",
+      "sourceId": "au-rba-f1"
+    }
+  ],
+  "transmission": [
+    {
+      "product": "Variable-rate home loan",
+      "benchmark": "Lender's standard variable rate",
+      "reset": "Usually within weeks",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Most Australian home loans are variable, one of the most direct channels to household budgets.",
+      "sourceId": "au-transmission"
+    },
+    {
+      "product": "Fixed-rate home loan",
+      "benchmark": "Fixed for one to five years",
+      "reset": "Rolls to variable when the fix ends",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Fixed loans meet the cash rate when they roll off.",
+      "sourceId": "au-transmission"
+    }
+  ],
+  "context": [],
+  "sources": [
+    {
+      "id": "au-rba-f1",
+      "title": "RBA statistical table F1: Cash Rate Target (FIRMMCRTD)",
+      "url": "https://www.rba.gov.au/statistics/tables/csv/f1-data.csv",
+      "type": "series",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "au-transmission",
+      "type": "explainer",
+      "title": "RBA: The Transmission of Monetary Policy (explainer)",
+      "url": "https://www.rba.gov.au/education/resources/explainers/the-transmission-of-monetary-policy.html",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    }
+  ],
+  "coverage": {
+    "seriesFrom": "2011-01-04",
+    "ledgerFrom": null,
+    "grain": "Every change in the cash rate target from RBA table F1 (daily series from January 2011). Decision records are being added."
+  },
+  "corrections": [],
+  "release": {
+    "hash": "fd81f8557e007c68c78b0ef835dd5464cb7313612afd0e3bdd3f7f3ce319324a",
+    "generator": "pipeline/countries/au",
+    "observedThrough": "2026-10-06"
+  }
+}
