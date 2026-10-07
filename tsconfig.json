@@ -3,8 +3,12 @@
     "target": "es2023",
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "lib": ["es2023"],
-    "types": ["node"],
+    "lib": [
+      "es2023"
+    ],
+    "types": [
+      "node"
+    ],
     "strict": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
@@ -15,5 +19,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["schema", "pipeline", "worker", "tests/pipeline"]
+  "include": [
+    "schema",
+    "pipeline",
+    "tests/pipeline",
+    "worker/dispatch/plan.ts"
+  ]
 }

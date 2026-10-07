@@ -12,7 +12,7 @@
     "test:app": "node --test tests/data/citationBundle.test.js tests/data/countryCsv.test.js tests/data/urlState.test.js tests/data/analysisState.test.js tests/data/releaseReport.test.js",
     "test:hf-dataset": "python3 -m unittest tests/data/test_hf_dataset.py",
     "test:browser": "playwright test",
-    "typecheck": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.worker.json",
     "test:pipeline": "node --test \"tests/pipeline/**/*.test.ts\"",
     "validate:data": "node pipeline/publish.ts --check"
   },

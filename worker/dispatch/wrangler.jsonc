@@ -1,0 +1,11 @@
+{
+  // Cron-only Worker: no routes, no public URL. Secret: GITHUB_DISPATCH_TOKEN (fine-grained, this repo, Actions read and write).
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "atlas-dispatch",
+  "main": "index.ts",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "triggers": { "crons": ["*/10 * * * *", "17 6 * * *"] },
+  "observability": { "enabled": true, "head_sampling_rate": 0.1 }
+}
