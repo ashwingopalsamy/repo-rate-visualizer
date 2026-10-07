@@ -7,10 +7,10 @@
       "status": "available",
       "path": "/",
       "instrument": "Policy repo rate",
-      "releaseId": "snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f",
+      "releaseId": "snapshot-498d4e1254548cbb51e3ababf17e53508e77a3160562023a855c7653bc114e61",
       "coverageFrom": "2000-06-05",
-      "coverageThrough": "2026-08-05",
-      "retrievedAt": "2026-09-30T12:07:26.744Z",
+      "coverageThrough": "2026-10-07",
+      "retrievedAt": "2026-10-07T07:14:33.532Z",
       "centralBank": "Reserve Bank of India",
       "locale": "en-IN"
     },
