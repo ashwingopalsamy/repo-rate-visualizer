@@ -112,7 +112,7 @@ jobs:
       - name: Detect India v2 changes
         id: v2
         run: |
-          if [ -n "$(git status --porcelain -- public/data src/data)" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
+          if [ -n "$(git status --porcelain -- public/data data/legacy)" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         if: steps.v2.outputs.changed == 'true'
         with:
@@ -138,7 +138,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data public/data src/data hf-dataset
+          git add data public/data hf-dataset
           if git diff --staged --quiet; then echo "No data change."; exit 0; fi
           changed=$(git diff --staged --name-only -- data/releases | cut -d/ -f3 | sort -u | paste -sd' ' -)
           git commit -m "chore(data): ${changed:-health} ${REASON}"

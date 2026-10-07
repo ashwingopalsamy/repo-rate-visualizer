@@ -9,7 +9,7 @@ import {
   deriveRateSeries,
   migrateSnapshot,
   validateSnapshotV2,
-} from '../../src/data/snapshotV2.js';
+} from '../../pipeline/legacy/in/snapshotV2.js';
 
 const TEST_DIR = resolve(fileURLToPath(new URL('.', import.meta.url)));
 const legacySnapshot = JSON.parse(readFileSync(resolve(TEST_DIR, '../../public/data/snapshots/2026-08-12.json'), 'utf8'));

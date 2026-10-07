@@ -29,7 +29,7 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = ROOT / "src" / "data" / "snapshot.json"
+DEFAULT_INPUT = ROOT / "data" / "legacy" / "in" / "snapshot.json"
 DEFAULT_OUTPUT = ROOT / "hf-dataset"
 DATASET_SCHEMA_VERSION = "1.0.0"
 GENERATOR_VERSION = "1.1.0"

@@ -48,8 +48,8 @@ class HuggingFaceDatasetArtifactTest(unittest.TestCase):
         second = temp_root / "second"
         self.copy_static_files(first)
         self.copy_static_files(second)
-        first_manifest = BUILDER.build_dataset(ROOT / "src" / "data" / "snapshot.json", first)
-        second_manifest = BUILDER.build_dataset(ROOT / "src" / "data" / "snapshot.json", second)
+        first_manifest = BUILDER.build_dataset(ROOT / "data" / "legacy" / "in" / "snapshot.json", first)
+        second_manifest = BUILDER.build_dataset(ROOT / "data" / "legacy" / "in" / "snapshot.json", second)
         return first, second, first_manifest, second_manifest
 
     def setUp(self) -> None:
@@ -108,7 +108,7 @@ class HuggingFaceDatasetArtifactTest(unittest.TestCase):
 
     def test_schema_provenance_nulls_and_annual_semantics(self) -> None:
         first, _, manifest, _ = self.build_twice()
-        snapshot = json.loads((ROOT / "src" / "data" / "snapshot.json").read_text(encoding="utf-8"))
+        snapshot = json.loads((ROOT / "data" / "legacy" / "in" / "snapshot.json").read_text(encoding="utf-8"))
         first_year = int(snapshot["decisions"][0]["date"][:4])
         latest_year = int(snapshot["decisions"][-1]["date"][:4])
         self.assertEqual(

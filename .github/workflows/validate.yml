@@ -66,11 +66,11 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: App contracts and production build
+      - name: App type check, unit tests and production build
         run: |
+          npm run typecheck
           npm run test:app
-          npm run validate:countries
           npm run build
       - run: npx playwright install --with-deps chromium
-      - name: Citable-trust browser smoke tests
-        run: npx playwright test tests/browser/chartbook.spec.js tests/browser/country-atlas.spec.js --grep "@trust"
+      - name: Browser guards (layout, typography, switch smoothness, accessibility)
+        run: npx playwright test

@@ -24,7 +24,7 @@ export type CountryStatus = { code: string; ok: boolean; reason?: string; status
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const DEFAULT_ADAPTERS: Record<CountryCode, Adapter> = { IN: runIndia, US: runUs, ...SERIES_ADAPTERS };
-const V2_PATHS = ['public/data', 'src/data', 'hf-dataset'];
+const V2_PATHS = ['public/data', 'data/legacy', 'hf-dataset'];
 
 /** The release the manifest currently points at, if any. */
 export function readCommittedRelease(code: string): CountryRelease | undefined {

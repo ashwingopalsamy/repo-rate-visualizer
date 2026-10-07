@@ -211,7 +211,7 @@ causal explanations for decisions.
 
 ## Source methodology and provenance
 
-The build reads only `src/data/snapshot.json`, validates SnapshotV2, and does
+The build reads only `data/legacy/in/snapshot.json`, validates SnapshotV2, and does
 not use historical V1 snapshots or website runtime exports as additional inputs.
 The canonical rate transitions are checked with decimal arithmetic. Source IDs,
 source checksums, retrieval timestamps, and publication timestamps are preserved
