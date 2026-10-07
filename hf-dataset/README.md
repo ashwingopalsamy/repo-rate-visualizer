@@ -50,7 +50,7 @@ repository-provided regime intervals are separate configurations derived from
 or accompanying that ledger.
 
 <!-- BUILD-SUMMARY:START -->
-**Current build:** SnapshotV2 `2026-10-07-v2`, retrieved `2026-10-07T07:14:33.532Z`; coverage `2000-06-05` to `2026-10-07`; 108 canonical records, 27 annual rows, 11 sources, 8 contextual events, and 15 regime intervals.
+**Current build:** SnapshotV2 `2026-10-07-v2`, retrieved `2026-10-07T12:52:39.041Z`; coverage `2000-06-05` to `2026-10-07`; 108 canonical records, 27 annual rows, 11 sources, 8 contextual events, and 15 regime intervals.
 <!-- BUILD-SUMMARY:END -->
 
 ## At a glance
