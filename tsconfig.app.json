@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "es2023",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "vite/client",
+      "node"
+    ],
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "@schema/*": [
+        "./schema/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "erasableSyntaxOnly": true
+  },
+  "include": [
+    "src",
+    "vite.config.ts",
+    "playwright.config.ts",
+    "tests/browser",
+    "tests/app",
+    "scripts/build-atlas.ts",
+    "scripts/build-api.ts",
+    "scripts/prerender.ts",
+    "scripts/check-bundle.ts",
+    "scripts/analytics-report.ts"
+  ],
+  "exclude": [
+    "tests/app/events.test.ts"
+  ]
+}

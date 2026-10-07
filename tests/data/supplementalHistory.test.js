@@ -8,10 +8,10 @@ import {
   REUTERS_HISTORY,
   REUTERS_HISTORY_SOURCE,
   SHRIRAM_HISTORY_SOURCE,
-} from '../../src/data/supplementalHistory.js';
+} from '../../pipeline/legacy/in/supplementalHistory.js';
 
 const TEST_DIR = resolve(fileURLToPath(new URL('.', import.meta.url)));
-const snapshot = JSON.parse(readFileSync(resolve(TEST_DIR, '../../src/data/snapshot.json'), 'utf8'));
+const snapshot = JSON.parse(readFileSync(resolve(TEST_DIR, '../../data/legacy/in/snapshot.json'), 'utf8'));
 
 test('imports every supplied Reuters observation into the canonical decision ledger', () => {
   const imported = snapshot.decisions

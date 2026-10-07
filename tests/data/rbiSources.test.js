@@ -98,7 +98,7 @@ test('fails closed when a DBIE export has no repo-rate column', () => {
 });
 
 test('does not overwrite the validated build snapshot when a source fetch fails', async () => {
-  const snapshotPath = resolve(FIXTURE_DIR, '../../../src/data/snapshot.json');
+  const snapshotPath = resolve(FIXTURE_DIR, '../../../data/legacy/in/snapshot.json');
   const before = readFileSync(snapshotPath, 'utf8');
   const unavailableFetch = async () => ({
     ok: false,

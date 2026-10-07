@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "id": "br-selic",
+      "type": "page",
+      "title": "Banco Central do Brasil: Selic rate",
+      "url": "https://www.bcb.gov.br/en/monetarypolicy/selicrate"
+    }
+  ],
+  "entries": [
+    {
+      "product": "Floating-rate credit",
+      "benchmark": "Selic or CDI",
+      "reset": "Quickly",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Overdrafts, floating loans and CDB yields move closely with the Selic.",
+      "sourceId": "br-selic"
+    },
+    {
+      "product": "Home loan",
+      "benchmark": "Often TR or IPCA plus a spread",
+      "reset": "Depends on the index",
+      "adjusts": "payment",
+      "passThrough": "lagged",
+      "note": "Many home loans follow other indices, so mortgage pass-through is weaker.",
+      "sourceId": "br-selic"
+    }
+  ]
+}

@@ -1,0 +1,642 @@
+{
+  "schemaVersion": 3,
+  "country": {
+    "code": "EA",
+    "name": "Euro area",
+    "currency": "EUR",
+    "locale": "en-IE",
+    "timeZone": "Europe/Berlin"
+  },
+  "authority": {
+    "name": "European Central Bank",
+    "short": "ECB",
+    "body": "Governing Council",
+    "bodyShort": "Governing Council",
+    "url": "https://www.ecb.europa.eu/"
+  },
+  "instrument": {
+    "name": "Deposit facility rate",
+    "short": "Deposit rate",
+    "explainer": "The deposit facility rate is what banks earn on overnight deposits with the Eurosystem. The ECB steers its policy stance through it, and the Governing Council sets it about every six weeks to keep euro-area inflation at 2% over the medium term."
+  },
+  "eras": [
+    {
+      "id": "ea-dfr",
+      "instrument": "Deposit facility rate",
+      "note": "The rate on overnight deposits with the Eurosystem, the rate through which the ECB steers policy.",
+      "from": "1999-11-05",
+      "to": null,
+      "kind": "point",
+      "basis": "policy",
+      "sourceId": "ea-ecb-dfr"
+    }
+  ],
+  "calendar": [],
+  "decisions": [],
+  "series": [
+    {
+      "date": "1999-11-05",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2000-02-04",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2000-03-17",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2000-04-28",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2000-06-09",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2000-09-01",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2000-10-06",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2001-05-11",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2001-08-31",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2001-09-18",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2001-11-09",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2002-12-06",
+      "level": {
+        "kind": "point",
+        "bps": 175
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2003-03-07",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2003-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2005-12-06",
+      "level": {
+        "kind": "point",
+        "bps": 125
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2006-03-08",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2006-06-15",
+      "level": {
+        "kind": "point",
+        "bps": 175
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2006-08-09",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2006-10-11",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2006-12-13",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2007-03-14",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2007-06-13",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2008-07-09",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2008-10-08",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2008-10-09",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2008-11-12",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2008-12-10",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2009-01-21",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2009-03-11",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2009-04-08",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2011-04-13",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2011-07-13",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2011-11-09",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2011-12-14",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2012-07-11",
+      "level": {
+        "kind": "point",
+        "bps": 0
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2014-06-11",
+      "level": {
+        "kind": "point",
+        "bps": -10
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2014-09-10",
+      "level": {
+        "kind": "point",
+        "bps": -20
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2015-12-09",
+      "level": {
+        "kind": "point",
+        "bps": -30
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2016-03-16",
+      "level": {
+        "kind": "point",
+        "bps": -40
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2019-09-18",
+      "level": {
+        "kind": "point",
+        "bps": -50
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2022-07-27",
+      "level": {
+        "kind": "point",
+        "bps": 0
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2022-09-14",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2022-11-02",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2022-12-21",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2023-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2023-03-22",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2023-05-10",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2023-06-21",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2023-08-02",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2023-09-20",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2024-06-12",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2024-09-18",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2024-10-23",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2024-12-18",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2025-02-05",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2025-03-12",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2025-04-23",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2025-06-11",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2026-06-17",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    },
+    {
+      "date": "2026-09-16",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "ea-ecb-dfr"
+    }
+  ],
+  "transmission": [
+    {
+      "product": "Variable-rate mortgage",
+      "benchmark": "Euribor, usually 3 or 12 months",
+      "reset": "Every 3 to 12 months",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Euribor moves on expectations for ECB policy, so it often shifts before the decision itself.",
+      "sourceId": "ea-transmission"
+    },
+    {
+      "product": "Fixed-rate mortgage",
+      "benchmark": "Fixed at origination",
+      "reset": "At the end of the fixed period",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Germany and France lean fixed; Spain, Portugal and Finland lean variable.",
+      "sourceId": "ea-transmission"
+    }
+  ],
+  "context": [],
+  "sources": [
+    {
+      "id": "ea-ecb-dfr",
+      "title": "ECB Data Portal: Deposit facility rate (FM.D.U2.EUR.4F.KR.DFR.LEV)",
+      "url": "https://data.ecb.europa.eu/data/datasets/FM/FM.D.U2.EUR.4F.KR.DFR.LEV",
+      "type": "series",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "ea-transmission",
+      "type": "explainer",
+      "title": "ECB: Transmission mechanism of monetary policy",
+      "url": "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "ea-key-rates",
+      "type": "page",
+      "title": "ECB: Official interest rates",
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    }
+  ],
+  "coverage": {
+    "seriesFrom": "1999-11-05",
+    "ledgerFrom": null,
+    "grain": "Every change in the deposit facility rate from the ECB Data Portal (dates of change). Decision records and votes are being added."
+  },
+  "corrections": [],
+  "release": {
+    "hash": "499b2f064dfe033ce9bc5d0dabb98ef8e48b2db44d66ff48a02ec929e91acb1b",
+    "generator": "pipeline/countries/ea",
+    "observedThrough": "2026-10-07"
+  }
+}

@@ -14,6 +14,41 @@
       "path": "releases/US/03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d.json",
       "latestRecordDate": "2026-09-17",
       "lastChangedAt": "2026-10-07T10:30:09.340Z"
+    },
+    "AU": {
+      "status": "available",
+      "release": "fd81f8557e007c68c78b0ef835dd5464cb7313612afd0e3bdd3f7f3ce319324a",
+      "path": "releases/AU/fd81f8557e007c68c78b0ef835dd5464cb7313612afd0e3bdd3f7f3ce319324a.json",
+      "latestRecordDate": "2026-09-30",
+      "lastChangedAt": "2026-10-07T14:47:02.122Z"
+    },
+    "BR": {
+      "status": "available",
+      "release": "59c6949350fb38008d952ac1510c310429ae0f266d9f4524660a0ba9ff53155a",
+      "path": "releases/BR/59c6949350fb38008d952ac1510c310429ae0f266d9f4524660a0ba9ff53155a.json",
+      "latestRecordDate": "2026-09-17",
+      "lastChangedAt": "2026-10-07T14:47:02.122Z"
+    },
+    "CA": {
+      "status": "available",
+      "release": "5c0b58687989dd75230cd64f7ab6d37381e4eddaece2a82bb73a8d3ba6c41cf5",
+      "path": "releases/CA/5c0b58687989dd75230cd64f7ab6d37381e4eddaece2a82bb73a8d3ba6c41cf5.json",
+      "latestRecordDate": "2025-10-30",
+      "lastChangedAt": "2026-10-07T14:47:02.122Z"
+    },
+    "EA": {
+      "status": "available",
+      "release": "499b2f064dfe033ce9bc5d0dabb98ef8e48b2db44d66ff48a02ec929e91acb1b",
+      "path": "releases/EA/499b2f064dfe033ce9bc5d0dabb98ef8e48b2db44d66ff48a02ec929e91acb1b.json",
+      "latestRecordDate": "2026-09-16",
+      "lastChangedAt": "2026-10-07T14:47:02.122Z"
+    },
+    "GB": {
+      "status": "available",
+      "release": "38d45b4be6a03ceca1a86a766772e94f807c1b0db7ca30408eed922982835ff1",
+      "path": "releases/GB/38d45b4be6a03ceca1a86a766772e94f807c1b0db7ca30408eed922982835ff1.json",
+      "latestRecordDate": "2025-12-18",
+      "lastChangedAt": "2026-10-07T14:47:02.122Z"
     }
   }
 }

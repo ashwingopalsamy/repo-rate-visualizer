@@ -1,8 +1,8 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import type { Meeting, Source, Transmission } from '../../schema/release.ts';
 import { zonedInstant } from '../lib/time.ts';
 
-export type CountryCode = 'IN' | 'US';
+export type CountryCode = 'IN' | 'US' | 'EA' | 'GB' | 'CA' | 'AU' | 'BR';
 
 export type CountryProfile = {
   code: CountryCode;
@@ -40,13 +40,63 @@ export const COUNTRIES: Record<CountryCode, CountryProfile> = {
     allowlist: ['federalreserve.gov', 'fred.stlouisfed.org'],
     effectiveLagDays: 1, announceTime: '14:00', independentSeries: true,
   },
+  // Series-only countries: the official level series, no decision records or calendar yet (daily sweep keeps them current).
+  EA: {
+    code: 'EA', name: 'Euro area', currency: 'EUR', locale: 'en-IE', timeZone: 'Europe/Berlin',
+    authority: { name: 'European Central Bank', short: 'ECB', body: 'Governing Council', bodyShort: 'Governing Council', url: 'https://www.ecb.europa.eu/' },
+    instrument: {
+      name: 'Deposit facility rate', short: 'Deposit rate',
+      explainer: 'The deposit facility rate is what banks earn on overnight deposits with the Eurosystem. The ECB steers its policy stance through it, and the Governing Council sets it about every six weeks to keep euro-area inflation at 2% over the medium term.',
+    },
+    allowlist: ['ecb.europa.eu'], effectiveLagDays: 6, announceTime: '14:15', independentSeries: true,
+  },
+  GB: {
+    code: 'GB', name: 'United Kingdom', currency: 'GBP', locale: 'en-GB', timeZone: 'Europe/London',
+    authority: { name: 'Bank of England', short: 'BoE', body: 'Monetary Policy Committee', bodyShort: 'MPC', url: 'https://www.bankofengland.co.uk/' },
+    instrument: {
+      name: 'Bank Rate', short: 'Bank Rate',
+      explainer: 'Bank Rate is what the Bank of England pays on reserves held by commercial banks. The Monetary Policy Committee sets it eight times a year to meet the 2% inflation target, and tracker mortgages follow it directly.',
+    },
+    allowlist: ['bankofengland.co.uk'], effectiveLagDays: 0, announceTime: '12:00', independentSeries: true,
+  },
+  CA: {
+    code: 'CA', name: 'Canada', currency: 'CAD', locale: 'en-CA', timeZone: 'America/Toronto',
+    authority: { name: 'Bank of Canada', short: 'BoC', body: 'Governing Council', bodyShort: 'Governing Council', url: 'https://www.bankofcanada.ca/' },
+    instrument: {
+      name: 'Target for the overnight rate', short: 'Policy rate',
+      explainer: 'The target for the overnight rate is the rate the Bank of Canada wants for overnight lending between major financial institutions. It is set eight times a year to keep inflation near 2%, and lenders\' prime rates move with it.',
+    },
+    allowlist: ['bankofcanada.ca'], effectiveLagDays: 1, announceTime: '09:45', independentSeries: true,
+  },
+  AU: {
+    code: 'AU', name: 'Australia', currency: 'AUD', locale: 'en-AU', timeZone: 'Australia/Sydney',
+    authority: { name: 'Reserve Bank of Australia', short: 'RBA', body: 'Monetary Policy Board', bodyShort: 'Monetary Policy Board', url: 'https://www.rba.gov.au/' },
+    instrument: {
+      name: 'Cash rate target', short: 'Cash rate',
+      explainer: 'The cash rate target is the RBA\'s target for the rate on overnight loans between banks. The Monetary Policy Board sets it eight times a year to keep inflation between 2 and 3%, and most home loans in Australia are variable and follow it.',
+    },
+    allowlist: ['rba.gov.au'], effectiveLagDays: 1, announceTime: '14:30', independentSeries: true,
+  },
+  BR: {
+    code: 'BR', name: 'Brazil', currency: 'BRL', locale: 'pt-BR', timeZone: 'America/Sao_Paulo',
+    authority: { name: 'Banco Central do Brasil', short: 'BCB', body: 'Monetary Policy Committee (Copom)', bodyShort: 'Copom', url: 'https://www.bcb.gov.br/' },
+    instrument: {
+      name: 'Selic target', short: 'Selic',
+      explainer: 'The Selic target is the rate the Banco Central do Brasil aims for in overnight trading of government bonds. Copom sets it eight times a year to meet the national inflation target, and floating-rate credit and CDI-linked savings follow it closely.',
+    },
+    allowlist: ['bcb.gov.br'], effectiveLagDays: 1, announceTime: '18:30', independentSeries: true,
+  },
 };
 
 type SourceEntry = { id: string; type: string; title: string; url: string };
 type CalendarEntry = { id: string; date: string; meetingStart: string | null; status: Meeting['status']; movedTo?: string; sourceId: string };
 
 const readJson = <T>(relative: string): T => JSON.parse(readFileSync(new URL(relative, import.meta.url), 'utf8')) as T;
-const calendarFile = (code: CountryCode) => readJson<{ sources: SourceEntry[]; meetings: CalendarEntry[] }>(`../calendars/${code.toLowerCase()}.json`);
+// Countries without a published calendar yet have no calendar file; they have no meetings and cite no calendar source.
+const calendarFile = (code: CountryCode): { sources: SourceEntry[]; meetings: CalendarEntry[] } => {
+  const path = `../calendars/${code.toLowerCase()}.json`;
+  return existsSync(new URL(path, import.meta.url)) ? readJson(path) : { sources: [], meetings: [] };
+};
 const transmissionFile = (code: CountryCode) => readJson<{ sources: SourceEntry[]; entries: Transmission[] }>(`../transmission/${code.toLowerCase()}.json`);
 
 /** Scheduled meetings with announceAt resolved to the authority's local announcement time on the decision date. */

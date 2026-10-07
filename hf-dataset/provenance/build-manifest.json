@@ -29,7 +29,7 @@
   "output_checksums": {
     "CHANGELOG.md": "e34653a068058163ad79fbafd35a581eade86c3bba8e3b485cb1202280bf46fe",
     "NOTICE.md": "9a30ab8cf8980bfc0d8a217cd58bceb5d03b7a82fc9f68ee0f658cda9513ef46",
-    "README.md": "4abbd3556974fdd818239e62a283bbfa3bc6c0bd5a301fc98482a1ba704501b0",
+    "README.md": "cc10f6d3c767bd79e8c62cc67e5e1fce26c5470a97ad850fb68e5d4880ca6ed3",
     "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
     "data/annual.parquet": "46998e6eb973acdafeec5f2031c8ccffff3bd5ae4ca7cc10aa66d581288f5316",
     "data/decisions.parquet": "af09b7c0ea2d0a6d4172e028191cd1c7972f8bc23c8a826fb70f619491df98f7",

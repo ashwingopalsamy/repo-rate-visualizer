@@ -10,8 +10,8 @@ import { SourceParseError } from '../../pipeline/lib/errors.ts';
 
 const res = (prid: string) => readFileSync(new URL(`../fixtures/rbi/mpc/${prid}.htm`, import.meta.url), 'utf8');
 const url = (prid: string) => `https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=${prid}`;
-const snapshot = () => JSON.parse(readFileSync(new URL('../../src/data/snapshot.json', import.meta.url), 'utf8'));
-const bundled = () => readFileSync(new URL('../../src/data/releaseMeta.js', import.meta.url), 'utf8');
+const snapshot = () => JSON.parse(readFileSync(new URL('../../data/legacy/in/snapshot.json', import.meta.url), 'utf8'));
+const bundled = () => readFileSync(new URL('../../data/legacy/in/releaseMeta.js', import.meta.url), 'utf8');
 const ctx = () => {
   const meta = bundled();
   return {

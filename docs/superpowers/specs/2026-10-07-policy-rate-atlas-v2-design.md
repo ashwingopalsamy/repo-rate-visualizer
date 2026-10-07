@@ -356,12 +356,12 @@ The policy stripes and the rates-by-year heat matrix are **dropped**. The owner 
 | Toolbar crumb | Rolls vertically in the scroll direction over 340 ms (scroll-spy). The toolbar hairline appears once scrolled. |
 | Rail | Expands from 64 to 212 px over 300 ms. Labels fade and slide in 6 px. Tooltips are inverted pills. |
 | Lists: ledger rows, cycles, palette rows, heat rows | Enter with a 4 px rise over 180 ms, staggered 8 ms per item up to 64 ms |
-| Stat sparks | Bars grow from the baseline (12 ms stagger, 180 ms max delay); step lines draw over 520 ms; gauges grow over 420 ms. Replayed on country switch. |
+| Stat sparks | Bars grow from the baseline (12 ms stagger, 180 ms max delay); step lines draw over 520 ms; gauges grow over 420 ms. First paint only; a country switch morphs them instead. |
 | Re-sorts (world table) | FLIP: rows glide to their new positions over 280 ms |
 | Palette and theme | 260 ms colour crossfade on palette switch (Claret ↔ Clay); theme switch uses a View Transitions crossfade |
 | Tooltip | Inverted card, 140 ms fade plus 4 px rise. Colour swatches, mono numbers. |
 | Brand mark | Builds once (about 1.4 s): tile fades in, the step draws, the decision dot rises on a spring. On hover the dot hops a step. |
-| Country switch | The crumb meta, heading and lede swap in the direction of the move. Tiles swap and their sparks regrow. The old plot fades out over 90 ms and the new one fades in over 180 ms. The tiles re-render with growing bars, drawn lines and springing dots. The loan panel resets to local currency and defaults. The cycle, gap and ledger re-draw and re-enter staggered. The world table highlights the new row. |
+| Country switch | **A country is data, not identity.** The shell, cards, card headers, controls and chart frames are never recreated, and no card, row or shell element changes opacity. One transaction of about 420 ms: every changed text fades out over 90 ms, commits on one frame and fades in over 220 ms (unchanged text never moves); lines, areas and range bands morph from what is on screen to the new values over 420 ms on a fixed 2000-to-today axis, with the y scale and gridlines tweening; markers fade out and land again, left to right, once the line lands; shapes that differ between countries (cycle analogs, histograms) crossfade their data layer; rows glide to their new height over 340 ms and blocks inside cards slide to their new places (FLIP). A switch started mid-flight continues from the on-screen state. The world table highlights the new row. |
 | First visit to a country (once per session) | The plot is revealed along the time axis over 700 ms with a playhead |
 | Cross-panel sync | Several hover links, each within one frame: <ul><li>A ledger row lights its tenure on the chart.</li><li>A cycle lights its span.</li><li>A chart marker highlights its ledger row.</li><li>A hovered cycle line highlights its row in the cycle list, and the reverse.</li><li>A pulse quarter highlights the matching decisions in the latest-decisions list.</li></ul> |
 | Decision moment | <ul><li>A hatched pending step appears while the decision is unconfirmed.</li><li>On verification the riser snaps and a coloured burst ring fades (650 ms).</li><li>The level extends over 260 ms and a coloured stamp springs in.</li><li>The stat tile, lede and "last decision" spark update together.</li><li>It plays once per visitor, keyed by record id.</li></ul> |
@@ -456,7 +456,7 @@ The policy stripes and the rates-by-year heat matrix are **dropped**. The owner 
   - Touch targets ≥ 44 px, and no information depends on hover.
 
 ### 6.8 Rendering, performance, SEO
-- **Prerendering.** Every route is prerendered with React 19 `renderToString` and then hydrated. Prerendered HTML contains absolute dates only. Countdowns, relative times and decision-day state appear after mount.
+- **Prerendering.** Every route is prerendered by running the same typed page modules against a server-side DOM (linkedom). On load the client fills the charts and wires the page; nothing already rendered is replaced. Text is computed as of the build date and recomputed on load, so a cached page is never wrong for longer than it takes the script to run.
 - **Dates.** Dates are plain dates formatted in UTC, so no time zone can shift them.
 - **Release ids.** HTML embeds its release ids. The client fetches the immutable `/api/v1/releases/{cc}/{hash}.json` and `latest.json` (revalidated) to detect anything newer.
 - **Bundle.**
@@ -520,8 +520,8 @@ The policy stripes and the rates-by-year heat matrix are **dropped**. The owner 
 schema/      v3 types + validator (shared)
 pipeline/    run, adapters/<cc>/{decision,series}.ts, calendars/<cc>.json, transmission/<cc>.json, fixtures/
 data/        manifest.json, schedule.json, health.json, releases/<cc>/<hash>.json
-src/         React 19 app (views, components, lib, styles, agent/webmcp.ts, prerender.tsx)
-worker/      site.ts (mcp + scheduled dispatcher)
+src/         typed vanilla TypeScript app (lib, charts, app pages and shell, analytics, styles)
+worker/      site/ (POST /e collector, daily rollup; /mcp in Phase 4), dispatch/ (cron dispatcher)
 scripts/     existing RBI fetcher + HF build (kept); build-api.ts, prerender.ts, og.ts
 public/      _headers, _redirects, robots.txt, fonts
 ```

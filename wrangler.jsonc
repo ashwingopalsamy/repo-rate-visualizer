@@ -1,0 +1,24 @@
+{
+  // The site: static assets from dist/ (free, uncapped) plus a Worker that runs only for POST /e and a daily rollup.
+  // Secrets (set by the owner): ANALYTICS_SALT_KEY, CF_ANALYTICS_READ_TOKEN. Variable: CF_ACCOUNT_ID.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "policy-rate-atlas",
+  "main": "worker/site/index.ts",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/e"]
+  },
+  "routes": [{ "pattern": "rates.ashwingopalsamy.in", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
+  "analytics_engine_datasets": [{ "binding": "EVENTS", "dataset": "atlas_events" }],
+  "triggers": { "crons": ["40 0 * * *"] },
+  "observability": { "enabled": true, "head_sampling_rate": 1 }
+  // Rollup storage: `npx wrangler d1 create atlas-analytics`, add the binding below with its id, then
+  // `npx wrangler d1 migrations apply atlas-analytics --remote`.
+  // "d1_databases": [{ "binding": "DB", "database_name": "atlas-analytics", "database_id": "<id>", "migrations_dir": "worker/site/migrations" }]
+}

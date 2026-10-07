@@ -23,8 +23,8 @@ import {
   assertValidSnapshotV2,
   deriveRateSeries,
   migrateSnapshot,
-} from '../src/data/snapshotV2.js';
-import { mergeSupplementalHistory } from '../src/data/supplementalHistory.js';
+} from '../pipeline/legacy/in/snapshotV2.js';
+import { mergeSupplementalHistory } from '../pipeline/legacy/in/supplementalHistory.js';
 import {
   RBI_SOURCE_URLS,
   SourceParseError,
@@ -41,7 +41,7 @@ const ROOT = join(__dirname, '..');
 const SNAPSHOTS_DIR = join(ROOT, 'public', 'data', 'snapshots');
 const MANIFEST_PATH = join(ROOT, 'public', 'data', 'manifest.json');
 const COUNTRY_MANIFEST_PATH = join(ROOT, 'public', 'data', 'countries', 'manifest.json');
-const BUILD_SNAPSHOT = join(ROOT, 'src', 'data', 'snapshot.json');
+const BUILD_SNAPSHOT = join(ROOT, 'data', 'legacy', 'in', 'snapshot.json');
 const DRY_RUN = process.argv.includes('--dry-run');
 
 function readJson(path) {
@@ -236,7 +236,7 @@ function writeBundledReleaseMeta({ releaseId, artifactSha256, artifactPath, lega
     schemaVersion: snapshot.schemaVersion,
     coverage: releaseCoverage(snapshot),
   }, null, 2)});\n`;
-  writeFileSync(join(ROOT, 'src', 'data', 'releaseMeta.js'), contents);
+  writeFileSync(join(ROOT, 'data', 'legacy', 'in', 'releaseMeta.js'), contents);
 }
 
 function buildSnapshot({

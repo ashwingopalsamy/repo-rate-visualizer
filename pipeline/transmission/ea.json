@@ -1,0 +1,36 @@
+{
+  "sources": [
+    {
+      "id": "ea-transmission",
+      "type": "explainer",
+      "title": "ECB: Transmission mechanism of monetary policy",
+      "url": "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html"
+    },
+    {
+      "id": "ea-key-rates",
+      "type": "page",
+      "title": "ECB: Official interest rates",
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html"
+    }
+  ],
+  "entries": [
+    {
+      "product": "Variable-rate mortgage",
+      "benchmark": "Euribor, usually 3 or 12 months",
+      "reset": "Every 3 to 12 months",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Euribor moves on expectations for ECB policy, so it often shifts before the decision itself.",
+      "sourceId": "ea-transmission"
+    },
+    {
+      "product": "Fixed-rate mortgage",
+      "benchmark": "Fixed at origination",
+      "reset": "At the end of the fixed period",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Germany and France lean fixed; Spain, Portugal and Finland lean variable.",
+      "sourceId": "ea-transmission"
+    }
+  ]
+}

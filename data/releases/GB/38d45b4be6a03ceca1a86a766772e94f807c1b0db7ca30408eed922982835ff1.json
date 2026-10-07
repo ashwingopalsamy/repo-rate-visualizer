@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 3,
+  "country": {
+    "code": "GB",
+    "name": "United Kingdom",
+    "currency": "GBP",
+    "locale": "en-GB",
+    "timeZone": "Europe/London"
+  },
+  "authority": {
+    "name": "Bank of England",
+    "short": "BoE",
+    "body": "Monetary Policy Committee",
+    "bodyShort": "MPC",
+    "url": "https://www.bankofengland.co.uk/"
+  },
+  "instrument": {
+    "name": "Bank Rate",
+    "short": "Bank Rate",
+    "explainer": "Bank Rate is what the Bank of England pays on reserves held by commercial banks. The Monetary Policy Committee sets it eight times a year to meet the 2% inflation target, and tracker mortgages follow it directly."
+  },
+  "eras": [
+    {
+      "id": "gb-bank-rate",
+      "instrument": "Bank Rate",
+      "note": "The rate the Bank of England pays on commercial bank reserves.",
+      "from": "1999-11-04",
+      "to": null,
+      "kind": "point",
+      "basis": "policy",
+      "sourceId": "gb-boe-iudbedr"
+    }
+  ],
+  "calendar": [],
+  "decisions": [],
+  "series": [
+    {
+      "date": "1999-11-04",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2000-01-13",
+      "level": {
+        "kind": "point",
+        "bps": 575
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2000-02-10",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2001-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 575
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2001-04-05",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2001-05-10",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2001-08-02",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2001-09-18",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2001-10-04",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2001-11-08",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2003-02-06",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2003-07-10",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2003-11-06",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2004-02-05",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2004-05-06",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2004-06-10",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2004-08-05",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2005-08-04",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2006-08-03",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2006-11-09",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2007-01-11",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2007-05-10",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2007-07-05",
+      "level": {
+        "kind": "point",
+        "bps": 575
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2007-12-06",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2008-02-07",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2008-04-10",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2008-10-08",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2008-11-06",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2008-12-04",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2009-01-08",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2009-02-05",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2009-03-05",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2016-08-04",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2017-11-02",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2018-08-02",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2020-03-11",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2020-03-19",
+      "level": {
+        "kind": "point",
+        "bps": 10
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2021-12-16",
+      "level": {
+        "kind": "point",
+        "bps": 25
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-02-03",
+      "level": {
+        "kind": "point",
+        "bps": 50
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-03-17",
+      "level": {
+        "kind": "point",
+        "bps": 75
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-05-05",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-06-16",
+      "level": {
+        "kind": "point",
+        "bps": 125
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-08-04",
+      "level": {
+        "kind": "point",
+        "bps": 175
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-09-22",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-11-03",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2022-12-15",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2023-02-02",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2023-03-23",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2023-05-11",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2023-06-22",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2023-08-03",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2024-08-01",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2024-11-07",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2025-02-06",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2025-05-08",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2025-08-07",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    },
+    {
+      "date": "2025-12-18",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "gb-boe-iudbedr"
+    }
+  ],
+  "transmission": [
+    {
+      "product": "Tracker mortgage",
+      "benchmark": "Bank Rate plus a margin",
+      "reset": "Usually from the next monthly payment",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "A tracker follows Bank Rate one for one.",
+      "sourceId": "gb-bank-rate"
+    },
+    {
+      "product": "Fixed-rate mortgage",
+      "benchmark": "Fixed for two to five years",
+      "reset": "When the deal ends",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "Most UK borrowers are on fixed deals and feel Bank Rate when they remortgage.",
+      "sourceId": "gb-bank-rate"
+    }
+  ],
+  "context": [],
+  "sources": [
+    {
+      "id": "gb-boe-iudbedr",
+      "title": "Bank of England database: Official Bank Rate (IUDBEDR)",
+      "url": "https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp",
+      "type": "series",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "gb-bank-rate",
+      "type": "page",
+      "title": "Bank of England: Interest rates and Bank Rate",
+      "url": "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    }
+  ],
+  "coverage": {
+    "seriesFrom": "1999-11-04",
+    "ledgerFrom": null,
+    "grain": "Every change in Bank Rate from the Bank of England database (daily series). Decision records and votes are being added."
+  },
+  "corrections": [],
+  "release": {
+    "hash": "38d45b4be6a03ceca1a86a766772e94f807c1b0db7ca30408eed922982835ff1",
+    "generator": "pipeline/countries/gb",
+    "observedThrough": "2026-10-06"
+  }
+}

@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { bundledRelease } from '../../src/data/releaseMeta.js';
+import { bundledRelease } from '../../data/legacy/in/releaseMeta.js';
 
 const root = resolve(new URL('../..', import.meta.url).pathname);
 const readJson = path => JSON.parse(readFileSync(resolve(root, path), 'utf8'));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 
 test('public, bundled, and Hugging Face artifacts identify the same release bytes', () => {
-  const snapshotBytes = readFileSync(resolve(root, 'src/data/snapshot.json'));
+  const snapshotBytes = readFileSync(resolve(root, 'data/legacy/in/snapshot.json'));
   const archiveBytes = readFileSync(resolve(root, `public/data/${bundledRelease.artifactPath}`));
   const manifest = readJson('public/data/manifest.json');
   const hfManifest = readJson('hf-dataset/provenance/build-manifest.json');

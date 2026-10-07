@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace the v1 app with the production Policy Rate Atlas: an insight-first, prerendered React 19 site for IN and US on `rates.ashwingopalsamy.in`. Automated layout, typography and accessibility guards enforce its design system.
+**Goal:** Replace the v1 app with the production Policy Rate Atlas: an insight-first, prerendered React 19 site for IN, US, EA, GB, CA, AU and BR on `rates.ashwingopalsamy.in`. Automated layout, typography and accessibility guards enforce its design system.
 
 **Architecture:**
 - **Delivery.** A Vite + React 19 + TypeScript single-page app. Every route is prerendered with `renderToString` and then hydrated from embedded release data.
@@ -21,9 +21,173 @@
 
 **Depends on:** Plan 1 completed. `data/` holds IN and US v3 releases, `data/schedule.json` and `schema/`.
 
+## Revision 3 (7 Oct 2026): typed vanilla TypeScript instead of React
+
+The approved prototype is framework-free, and its switch contract (queued text swaps committed on one frame, in-card FLIP, keyed tweens on one rAF clock) works on DOM nodes directly. Porting it to React would mean re-deriving that contract around reconciliation. The production site is therefore the prototype's code, typed, in `src/lib` (findings, motion, formatting), `src/charts`, `src/app` (pages, shell, routing) and `src/analytics`, with one global stylesheet ported from `design/prototype/styles.css`. Where a task below names a React component, hook or `.tsx` file, read it as the corresponding typed module. Prerendering runs the same modules against linkedom (`scripts/prerender.ts`). Results: 36 KB JS and 10 KB CSS gzip, against budgets of 90 and 25.
+
+## Revision 2 (7 Oct 2026): what the approved prototype changes
+
+The owner approved the HTML prototype in `design/prototype/`. It is the reference implementation. Port its logic and measurements; do not re-derive them:
+- `lib.js`: findings, keyed tweens, `morph`, `sampleStep`, `transact`;
+- `charts.js`: persistent charts;
+- `app.js`: page composition and copy;
+- `styles.css`: tokens and the phone shell;
+- `check.mjs`: guards.
+
+The amendments below override the original text of the tasks they name. Owner decisions: all 7 countries at launch, two stacked PRs, and `/mcp` plus WebMCP stay in Phase 4.
+
+- **Branch and PR.**
+  - Work on `v2/experience`, stacked on `v2/phase1-data-foundation` (PR #3).
+  - The PR targets that branch until #3 merges, then `main`.
+- **Countries.**
+  - IN, US, EA, GB, CA, AU and BR, all through the same shell.
+  - Every list (world page, peer ladder, pulse, ⌘K, API) reads `data/manifest.json`. No country code is hard-coded.
+  - Countries without decision records show "Every move" and the line "Votes and statements for the {bank} are being added".
+- **Visual system** (overrides the Global Constraints colour and type lines and Task 2's token source).
+  - Tokens are copied from `design/prototype/styles.css` `:root`: cool neutral greys for light; the existing dark values; the Claret and Clay data palettes unchanged.
+  - Tabular figures apply only to figure classes, never to `body`, so hyphens in prose keep their normal width.
+  - No status pills ("Verified against …").
+  - Circular flags come from HatScripts/circle-flags (MIT), vendored under `public/flags/` with the licence. `Flag({ cc })` replaces `Disc`.
+  - Negative rates use a true minus sign.
+  - No internal jargon in UI copy.
+- **Phone shell (≤ 720 px)** (overrides Task 6's rail-on-phone behaviour).
+  - The shell copies home.ashwingopalsamy.in (`ravanan-kudil/src/styles/mobile/base.css`):
+    - a `#f2f3f5` page with white soft-shadow cards;
+    - a fixed top bar in five 44 px columns: round mark (scroll to top), centred title (the country name, or "World"), theme button, flag button (opens the switcher);
+    - a floating pill dock with Decision, Loan, Cycle, Record and World, where the active tab is an ink pill with its label that glides between tabs.
+  - Cards are calm by default, with one finding and one visual each. Hidden on phones: card footers, the quote, glance stats, tile captions, the loan note and its last two result rows, transmission notes, the cycle list, legends, gap stats, the Live/Announced/Decided control, and all footer columns but the first.
+  - Insight tiles swipe sideways (scroll-snap).
+  - The world league table becomes a list below 1000 px.
+- **Desktop shell.**
+  - The theme toggle is a round button in the toolbar beside the country chip; the rail keeps the palette and collapse buttons.
+  - The rolling title uses a single-flight `roll()`: anything still leaving is dropped when a newer label arrives. Scroll-spy is throttled to rAF.
+- **Country switch** (Task 6 contract, spec §6.5).
+  - `useSwitchTransaction` ports `transact`. `useMorph` ports `morph` and `tween`.
+  - The record and gap charts use a fixed 2000-to-today x axis. Series starting later sweep their start edge and carry a "Series starts …" or "Comparison starts …" label.
+  - The y scale tweens and has a floor below zero for negative rates. Gridlines crossfade through a tick layer.
+  - Markers land left to right after the line.
+  - Cycle analogs and histograms crossfade.
+  - The peer ladder keeps its rows and moves only `.cur`.
+- **Motion on lists.** Country rows (peer ladder, league table, latest moves, ⌘K) respond to hover: the background washes in, the flag scales to 1.1 on a spring, the name nudges 3 px, and the peer row's arrow slides in. In ⌘K the mouse moves the highlight. Rates in ⌘K sit in a fixed two-column grid (mark, then a right-aligned value).
+- **Copy rules.**
+  - Quotes carry paired marks.
+  - The gap note is written for both signs ("Holding rupees earns more than holding dollars, which supports the rupee; …").
+  - A single earlier cycle is "previous", never "median", and draws no median line.
+  - "Not on our calendar yet" when a bank has no calendar.
+- **Guards** (extends Task 2). Port every `check.mjs` guard into `tests/browser/guards.ts`:
+  - page overflow;
+  - content escaping its card;
+  - clipped text;
+  - text overlap (including SVG text);
+  - mono in prose;
+  - equal row heights;
+  - empty card areas over 24 px;
+  - toolbar and phone top-bar collisions;
+  - dock pill under the active tab;
+  - dock clearance;
+  - table edge alignment;
+  - figure wrapping;
+  - footer on the grid.
+
+  Add these specs:
+  - switch smoothness (node identity, no opacity dip, at least 3 distinct record paths, exact landing; via ⌘K, peer row, five rapid previews, and phone);
+  - rolling title under fast scroll;
+  - a copy audit on every page (null/undefined/NaN, double spaces, a space before punctuation, `1 months`-style plurals, unbalanced quotes or brackets);
+  - reduced motion.
+- **New Task 0** (before Task 1): series adapters for EA, GB, CA, AU and BR. Details below.
+- **New Task 13** (after Task 12): analytics. Details below.
+- **Task 11.** The API and prerender cover all 7 countries.
+- **Task 12.**
+  - `wrangler.jsonc` gains `main: "worker/site/index.ts"` and `assets.run_worker_first: ["/e"]` (every other path stays free static assets).
+  - It also gains the `EVENTS` Analytics Engine binding, `observability.enabled`, and the Task 13 cron and D1 binding.
+  - CSP in `_headers` allows the Web Analytics beacon.
+
+### Task 0: Series adapters for EA, GB, CA, AU and BR
+
+**Files:**
+- Create: `pipeline/countries/{ea,gb,ca,au,br}/adapter.ts`, `pipeline/transmission/{ea,gb,ca,au,br}.json`
+- Test: `tests/fixtures/{ea,gb,ca,au,br}/*` and `tests/pipeline/series-adapters.test.ts`
+- Modify: `pipeline/countries/registry.ts`
+
+**Interfaces:**
+- Consumes: the Plan 1 adapter contract (`pipeline/types.ts`), `pipeline/lib/http.ts`, `validateRelease`.
+- Produces: one adapter per country. Each fetches the official series, maps change points to `Level` (point) series with `evidence: 'official'`, and emits `CountryRelease` with no decisions, one `policy` era, sources and transmission notes. Sources are the ones `design/prototype/build-data.ts` used:
+  - ECB Data Portal (deposit facility rate);
+  - BoE IADB (Bank Rate);
+  - BoC Valet (overnight target, from 2009);
+  - RBA F1 (cash rate target, from 2011);
+  - BCB SGS 432 (Selic target).
+- No calendars yet, so the dispatcher's daily 06:17 UTC sweep refreshes them.
+
+- [ ] **Step 1:** Write failing tests against captured fixtures. For each country:
+  - change points parse;
+  - the latest level equals the prototype snapshot (EA 2.50%, GB 3.75%, CA 2.25%, AU 4.60%, BR 13.75%);
+  - `validateRelease` passes;
+  - a malformed payload throws `SourceFormatError`.
+- [ ] **Step 2:** Implement and register the adapters. Run `npm run test:pipeline`. Expected: PASS.
+- [ ] **Step 3:** Run `node pipeline/run.ts --countries EA,GB,CA,AU,BR` and then `node pipeline/publish.ts`. Commit the first releases with `feat(pipeline): series adapters for EA, GB, CA, AU and BR`.
+
+### Task 13: Analytics: $0, cookie-less, no personal data
+
+**Files:**
+- Create:
+  - `worker/site/index.ts`, `worker/site/events.ts`, `worker/site/rollup.ts`;
+  - `src/analytics/track.ts`, `src/analytics/beacon.ts`;
+  - `src/pages/PrivacyPage.tsx`;
+  - `scripts/analytics-report.ts`;
+  - `.github/workflows/analytics-weekly.yml`.
+- Test: `tests/app/events.test.ts`, `tests/app/track.test.ts`, `tests/browser/analytics.spec.ts`
+
+**Interfaces:**
+- **Traffic.**
+  - The Cloudflare Web Analytics beacon is a manual snippet. Its token is a public site id, `VITE_CF_BEACON_TOKEN`, provided at build time; there is no beacon when it is unset.
+  - The beacon loads only when `navigator.globalPrivacyControl` is not true and `doNotTrack` is not `"1"`.
+  - It provides page views, visits, referrers, countries and Core Web Vitals, including soft navigations.
+- **Product events.**
+  - `track(name, props)` queues events in memory and flushes with `navigator.sendBeacon('/e', …)` on `pagehide` or `visibilitychange: hidden`, or once 10 events are queued. It does nothing under GPC or DNT.
+  - Allowlisted events:
+    - `page {route, cc}`;
+    - `country_switch {from, to, via: palette|ladder|dock|link|table}`;
+    - `loan_calc {cc, mode}` (no amounts);
+    - `tile_open {cc, tile}`;
+    - `replay {cc}`;
+    - `dday_preview {cc, state}`;
+    - `palette_open {via}`;
+    - `source_click {cc}`;
+    - `theme {to}`;
+    - `decision_window {cc}`, for a visit within 48 h of a decision.
+- **`worker/site/events.ts`: `handleEvents(req, env)`.**
+  - Accepts POST only, at most 2 KB and 20 events, validated with zod against the allowlist. It returns 204 and never echoes input.
+  - It drops events whose user agent matches the bot pattern.
+  - The visitor id is `hmac(env.ANALYTICS_SALT_KEY, utcDate | ip | ua)`, truncated to 16 hex characters. The IP and UA are then discarded.
+  - Each event is written with `env.EVENTS.writeDataPoint({ indexes: [name], blobs: [name, route, cc, a, b, cf.country, visitorId], doubles: [1] })`.
+  - Any other path falls through to `env.ASSETS.fetch(req)`.
+- **Retention.** `rollup.ts` is a daily `scheduled` handler. It queries the Analytics Engine SQL API, using `SUM(_sample_interval)`, with the secret `CF_ANALYTICS_READ_TOKEN`, and upserts yesterday's aggregates into D1 table `daily(date, event, cc, country, count, visitors)`.
+- **Reporting.**
+  - `npm run analytics:report` (a local script, `CLOUDFLARE_ACCOUNT_ID` plus `CLOUDFLARE_ANALYTICS_TOKEN` from the environment) prints, for the last 7, 30 and 90 days:
+    - visits;
+    - unique visitors;
+    - top countries and routes;
+    - the country-switch matrix;
+    - events per country.
+  - The optional weekly workflow writes the same report to the job summary once the owner adds the secrets.
+- **`/privacy`.** No cookies, no browser storage, no personal data, what is counted, how long it is kept (Analytics Engine 3 months, D1 aggregates indefinitely), and that GPC or DNT stops all of it. Linked from the footer.
+- **Owner actions:**
+  - create the Web Analytics site;
+  - `wrangler secret put ANALYTICS_SALT_KEY` and `CF_ANALYTICS_READ_TOKEN`;
+  - `wrangler d1 create atlas-analytics`, with its id pasted into `wrangler.jsonc`.
+
+- [ ] **Step 1:** Write the failing tests:
+  - `handleEvents` returns 405 on GET, 413 over 2 KB, and 400 for an unknown event or a value outside the enums.
+  - Written data points never contain the IP, UA or raw hash input, and the same IP and UA on two dates give different ids.
+  - `track` flushes on `pagehide` and sends nothing under GPC.
+  - Playwright with `navigator.globalPrivacyControl = true` makes no request to `/e` or `cloudflareinsights.com`. Without it, a country switch posts one `country_switch` event.
+- [ ] **Step 2:** Implement and run the suites. Expected: PASS. `npx wrangler deploy --dry-run` validates.
+- [ ] **Step 3:** Commit with `feat(analytics): cookie-less traffic and product events on Cloudflare`.
+
 ## Global Constraints
 
-- **Work branch.** Do all work on `v2-experience`. v1 stays live from `main` until the cutover in Task 12.
+- **Work branch.** Do all work on `v2/experience` (Revision 2). v1 stays live from `main` until the cutover in Task 12.
 - **Type and numbers** (spec §6.6, owner rule):
   - A number inside a sentence is Inter with tabular figures, never Geist Mono.
   - Mono (`.data` class or the `<Num>` component) only for numbers standing alone (table cells, stat values, number-only chips), chart axes and hashes.
@@ -284,6 +448,12 @@ tests/fixtures/v3/{IN,US}.json     copies of Plan 1 releases; synthetic fixtures
   - `navigate(href)` uses the History API. `AppShell` provides the rail, the toolbar with its rolling crumb (spec §6.5 timings) and the country chip.
   - `CountrySwitcher` opens on ⌘K, Ctrl+K or `/`. Arrow keys preview a country (it renders without committing the URL), Enter commits and Esc reverts. It renders as `Sheet` below 720 px.
   - `ThemeToggle` and `PaletteToggle` persist to `localStorage` keys `atlas-theme` and `atlas-palette`, wrapped in try/catch.
+  - **Country switch contract (spec §6.5, "A country is data, not identity").**
+    - Country is a prop, never a key. No `key={cc}` on the page, cards or charts, so a switch never remounts them.
+    - `useSwitchTransaction()` measures rows before the switch, commits every text change on one frame, then FLIPs row heights and in-card blocks.
+    - `<Swap value>` animates only when its value changes.
+    - Charts use `useMorph(target)` on one shared rAF clock. It tweens sampled series and scales from the geometry on screen, so a switch mid-flight never jumps.
+    - Only shapes that differ in kind crossfade.
 
 - [ ] **Step 1:** Write the failing tests in `shell.spec.ts`:
   - `parseRoute` cases, run through the page: visiting `/us/` shows the US heading.
@@ -291,6 +461,12 @@ tests/fixtures/v3/{IN,US}.json     copies of Plan 1 releases; synthetic fixtures
   - ⌘K, typing "fed", then Enter navigates to `/us/`, and browser Back returns to `/in/`.
   - After scrolling to each section and waiting 450 ms, exactly one `.crumb` is visible and its text matches the section.
   - The palette toggle changes `--hawk` on `<html>` from `#dd4124` to `#c14219`.
+  - Switching IN → US (⌘K), IN → BR (peer row) and five rapid ⌘K previews:
+    - keeps every card, chart `<svg>` and axis node (same element identity);
+    - never drops a card, row or shell element below opacity 1;
+    - renders at least 3 distinct record-line paths during the switch;
+    - lands exactly on a fresh static render of the target country.
+    - The prototype's `design/prototype/check.mjs` "switch smoothness" suite is the reference implementation.
 - [ ] **Step 2:** Implement, run the spec, and expect PASS.
 - [ ] **Step 3:** Commit with `feat(shell): rail, rolling crumb, router and country switcher`.
 
@@ -463,7 +639,8 @@ tests/fixtures/v3/{IN,US}.json     copies of Plan 1 releases; synthetic fixtures
 
 ## Done when
 
-- IN and US render through one shell.
+- All seven countries render through one shell, on desktop and in the phone shell.
+- Switching countries passes the switch-smoothness suite, and analytics passes its privacy tests.
 - Every guard passes at 360, 768, 1280 and 1440 px in both themes.
 - Findings match the pinned values.
 - Decision-day states pass on fixtures.

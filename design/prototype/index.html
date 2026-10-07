@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Policy Rate Atlas</title>
+<meta name="description" content="Policy rates for the world's central banks, verified against official sources, with the findings that matter for borrowers and markets.">
+<script>try { const t = localStorage.getItem('atlas-theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch { }</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="frame" id="frame">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-panel">
+      <a class="brand" href="#/world" aria-label="Policy Rate Atlas, world view">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect class="bm-tile" x="2" y="2" width="36" height="36" rx="11"/><path class="bm-step" pathLength="1" d="M9 29 H16 V22 H23 V15 H31"/><circle class="bm-dot" cx="31" cy="11" r="3.2"/></svg>
+        <span class="brand-text"><b>Policy Rate Atlas</b><span>Central banks, verified</span></span>
+      </a>
+      <div class="rail-div"></div>
+      <div id="railNav" class="rail-nav"></div>
+      <div class="rail-spacer"></div>
+      <button type="button" class="rail-btn rail-palette" id="palBtn" data-tip="Palette: Claret"><span class="pal-ico" aria-hidden="true"><i style="background:var(--hawk)"></i><i style="background:var(--dove)"></i><i style="background:var(--gap)"></i><i style="background:var(--accent)"></i></span><span class="rl" id="palLbl">Palette: Claret</span></button>
+      <button type="button" class="rail-btn rail-collapse" id="railBtn" data-tip="Expand" aria-expanded="false"><i data-lucide="panel-left"></i><span class="rl">Collapse</span></button>
+    </div>
+  </nav>
+  <main class="canvas" id="canvas">
+    <header class="toolbar">
+      <div class="tb-l"><div class="crumb-slot" id="crumbSlot" aria-live="polite"></div><span class="crumb-meta" id="crumbMeta"></span></div>
+      <div class="tb-r">
+        <button type="button" class="tb-round" id="themeBtn" aria-label="Switch between light and dark"><span class="ic-moon"><i data-lucide="moon"></i></span><span class="ic-sun"><i data-lucide="sun"></i></span></button>
+        <button type="button" class="switch" id="openPal" aria-haspopup="dialog" aria-label="Switch country">
+          <span class="disc flag" id="chFlag"></span><span class="name" id="chName">India</span><span class="rate" id="chVal"></span><kbd>⌘K</kbd><i data-lucide="chevrons-up-down"></i>
+        </button>
+      </div>
+    </header>
+    <div class="page" id="page"></div>
+  </main>
+</div>
+<!-- Phone shell (720 px and below): floating round buttons, centred title, floating dock. Same anatomy as home.ashwingopalsamy.in. -->
+<header class="m-topbar" id="mTop">
+  <button type="button" class="m-round m-round--mark" id="mMark" aria-label="Back to top">
+    <svg viewBox="0 0 44 44" aria-hidden="true"><circle class="mk-bg" cx="22" cy="22" r="22"/><path class="mk-step" d="M12 29.5H18V23.5H24V17.5H31"/><circle class="mk-dot" cx="31" cy="12.5" r="3"/></svg>
+  </button>
+  <div class="crumb-slot m-title" id="mTitle" aria-live="polite"></div>
+  <button type="button" class="m-round m-round--theme" id="mTheme" aria-label="Switch between light and dark"><span class="ic-moon"><i data-lucide="moon"></i></span><span class="ic-sun"><i data-lucide="sun"></i></span></button>
+  <button type="button" class="m-round m-round--flag" id="mFlag" aria-haspopup="dialog" aria-label="Switch country"></button>
+</header>
+<nav class="m-dock" aria-label="Sections"><div class="m-dock-bar"><div class="m-tabs" id="mTabs"><span class="m-tab-pill" id="mPill" aria-hidden="true"></span></div></div></nav>
+<div class="tip" id="tip" role="tooltip"></div>
+<div class="scrim" id="scrim" hidden>
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Switch country">
+    <input id="palIn" type="text" placeholder="Country, central bank or rate" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="palList">
+    <ul id="palList" role="listbox"></ul>
+    <div class="hint"><span><kbd>↑</kbd> <kbd>↓</kbd> preview</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> back</span></div>
+  </div>
+</div>
+<script src="vendor/lucide.min.js"></script>
+<script src="data.js"></script>
+<script src="lib.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
