@@ -44,3 +44,17 @@ test.describe('interaction states keep the layout', () => {
     expect(await page.evaluate(guards)).toEqual([]);
   });
 });
+
+for (const theme of THEMES) for (const width of [1440, 390]) {
+  test(`theme toggle icon is centred in its round button: ${width} px, ${theme}`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
+    await open(page, 'in');
+    const off = await page.evaluate(() => {
+      const btn = document.getElementById(innerWidth <= 720 ? 'mTheme' : 'themeBtn')!, b = btn.getBoundingClientRect();
+      const svg = [...btn.querySelectorAll('svg')].find(s => s.getClientRects().length)!, r = svg.getBoundingClientRect();
+      return [r.left + r.width / 2 - (b.left + b.width / 2), r.top + r.height / 2 - (b.top + b.height / 2)].map(v => Math.abs(v));
+    });
+    expect(Math.max(...off), `icon offset ${off.join(', ')} px`).toBeLessThanOrEqual(0.5);
+  });
+}
