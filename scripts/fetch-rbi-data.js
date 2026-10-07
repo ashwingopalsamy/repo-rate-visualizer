@@ -362,8 +362,7 @@ async function fetchDbieIfConfigured(fetchImpl) {
   };
 }
 
-export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN } = {}) {
-  const baselineRaw = readJson(BUILD_SNAPSHOT);
+export async function runUpdate({ fetchImpl = globalThis.fetch, dryRun = DRY_RUN, baselineRaw = readJson(BUILD_SNAPSHOT) } = {}) {
   const baseline = mergeSupplementalHistory(migrateSnapshot(baselineRaw));
   const retrievedAt = new Date().toISOString();
   const currentFetched = await fetchText(

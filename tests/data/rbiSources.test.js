@@ -14,6 +14,12 @@ import {
 
 const FIXTURE_DIR = resolve(fileURLToPath(new URL('../fixtures/rbi/', import.meta.url)));
 const readFixture = name => readFileSync(resolve(FIXTURE_DIR, name), 'utf8');
+// Immutable release whose latest decision (2026-08-05, 5.25%) matches the fixtures,
+// so fixture replays do not depend on the live bundled snapshot.
+const FIXTURE_BASELINE = JSON.parse(readFileSync(resolve(
+  fileURLToPath(new URL('../../public/data/snapshots/', import.meta.url)),
+  'snapshot-9e3400e8c06e99d0f766e13f82092256e9848b8a97f4d1867014582580bd251f.json',
+), 'utf8'));
 
 test('parses the RBI current policy repo rate', () => {
   const result = parseCurrentPolicyRates(readFixture('current-rates.html'));
@@ -65,8 +71,8 @@ test('ignores volatile fetch markup when fingerprinting parsed RBI evidence', as
     };
   };
 
-  const first = await runUpdate({ fetchImpl: makeFetch('volatile-a'), dryRun: true });
-  const second = await runUpdate({ fetchImpl: makeFetch('volatile-b'), dryRun: true });
+  const first = await runUpdate({ fetchImpl: makeFetch('volatile-a'), dryRun: true, baselineRaw: FIXTURE_BASELINE });
+  const second = await runUpdate({ fetchImpl: makeFetch('volatile-b'), dryRun: true, baselineRaw: FIXTURE_BASELINE });
 
   assert.equal(first.contentChanged, second.contentChanged);
   assert.equal(first.snapshot.meta.checksum, second.snapshot.meta.checksum);

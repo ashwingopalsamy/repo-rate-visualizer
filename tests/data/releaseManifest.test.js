@@ -24,13 +24,14 @@ test('public, bundled, and Hugging Face artifacts identify the same release byte
   assert.equal(entry.checksum, snapshot.meta.checksum);
   assert.equal(entry.retrievedAt, snapshot.meta.retrievedAt);
   assert.deepEqual(entry.coverage, bundledRelease.coverage);
-  assert.deepEqual(bundledRelease.coverage, {
-    totalRecords: snapshot.decisions.length,
-    directDecisionRecords: 3,
-    officialContextRecords: 0,
-    historicalObservationRecords: 104,
-    mixedRecords: 0,
-  });
+  const coverage = bundledRelease.coverage;
+  assert.equal(coverage.totalRecords, snapshot.decisions.length);
+  assert.equal(coverage.mixedRecords, 0);
+  assert.equal(
+    coverage.directDecisionRecords + coverage.officialContextRecords + coverage.historicalObservationRecords,
+    coverage.totalRecords,
+    'every record must carry exactly one evidence class',
+  );
   assert.equal(hfManifest.source_snapshot_checksum, snapshot.meta.checksum);
   assert.equal(hfManifest.source_release_id, bundledRelease.releaseId);
   assert.equal(hfManifest.source_artifact_sha256, bundledRelease.artifactSha256);

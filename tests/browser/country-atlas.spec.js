@@ -1,4 +1,8 @@
+import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
+
+const bundledIndia = JSON.parse(readFileSync(new URL('../../src/data/snapshot.json', import.meta.url), 'utf8'));
+const indiaRate = `${bundledIndia.current.repoRate.toFixed(2)}%`;
 
 test('@trust country index exposes only published country histories', async ({ page }) => {
   await page.goto('/countries');
@@ -25,7 +29,7 @@ test('@trust US target range, sources, and keyboard readout survive mobile width
 
 test('@trust country selection swaps data in place and history restores the explorer', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.rate-summary h1')).toContainText('5.25%');
+  await expect(page.locator('.rate-summary h1')).toContainText(indiaRate);
   await page.evaluate(() => { window.__countrySwitchSentinel = true; });
 
   await page.getByRole('navigation', { name: 'Country selection' }).locator('select').selectOption('US');
@@ -35,7 +39,7 @@ test('@trust country selection swaps data in place and history restores the expl
   await expect(page.getByRole('tab', { name: /Unchanged|Holds/ })).toHaveCount(0);
 
   await page.goBack();
-  await expect(page.locator('.rate-summary h1')).toContainText('5.25%');
+  await expect(page.locator('.rate-summary h1')).toContainText(indiaRate);
   await page.goForward();
   await expect(page.locator('.rate-summary h1')).toContainText('3.75%–4.00%');
 });
