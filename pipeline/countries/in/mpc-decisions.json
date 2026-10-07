@@ -1,0 +1,850 @@
+{
+  "generatedBy": "pipeline/countries/in/backfill.ts",
+  "entries": [
+    {
+      "date": "2016-10-04",
+      "rateBps": 625,
+      "direction": "cut",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points from 6.5 per cent to 6.25 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38224",
+      "prid": "38224",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2016-12-07",
+      "rateBps": 625,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38818",
+      "prid": "38818",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2017-02-08",
+      "rateBps": 625,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=39505",
+      "prid": "39505",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2017-04-06",
+      "rateBps": 625,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40069",
+      "prid": "40069",
+      "title": "First Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2017-06-07",
+      "rateBps": 625,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40685",
+      "prid": "40685",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2017-08-02",
+      "rateBps": 600,
+      "direction": "cut",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points from 6.25 per cent to 6.0 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41256",
+      "prid": "41256",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2017-10-04",
+      "rateBps": 600,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41852",
+      "prid": "41852",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2017-12-06",
+      "rateBps": 600,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=42476",
+      "prid": "42476",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2018-02-07",
+      "rateBps": 600,
+      "direction": "hold",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Michael Debabrata Patra"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43078",
+      "prid": "43078",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2018-04-05",
+      "rateBps": 600,
+      "direction": "hold",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Michael Debabrata Patra"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43573",
+      "prid": "43573",
+      "title": "First Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2018-06-06",
+      "rateBps": 625,
+      "direction": "hike",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: increase the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.25 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44125",
+      "prid": "44125",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2018-08-01",
+      "rateBps": 650,
+      "direction": "hike",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: increase the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.5 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44636",
+      "prid": "44636",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2018-10-05",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.5 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45152",
+      "prid": "45152",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2018-12-05",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.5 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45656",
+      "prid": "45656",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2019-02-07",
+      "rateBps": 625,
+      "direction": "cut",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points from 6.5 per cent to 6.25 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46235",
+      "prid": "46235",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2019-04-04",
+      "rateBps": 600,
+      "direction": "cut",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Chetan Ghate",
+          "Dr. Viral V. Acharya"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.0 per cent from 6.25 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46722",
+      "prid": "46722",
+      "title": "First Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2019-06-06",
+      "rateBps": 575,
+      "direction": "cut",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 5.75 per cent from 6.0 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47225",
+      "prid": "47225",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2019-08-07",
+      "rateBps": 540,
+      "direction": "cut",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Chetan Ghate",
+          "Dr. Pami Dua"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 35 basis points (bps) from 5.75 per cent to 5.40 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47818",
+      "prid": "47818",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2019-10-04",
+      "rateBps": 515,
+      "direction": "cut",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Ravindra H. Dholakia"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 4, 2019) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 5.15 per cent from 5.40 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48319",
+      "prid": "48319",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2019-12-05",
+      "rateBps": 515,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 5, 2019) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.15 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48802",
+      "prid": "48802",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2020-02-06",
+      "rateBps": 515,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 6, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.15 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49342",
+      "prid": "49342",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": false
+    },
+    {
+      "date": "2020-03-27",
+      "rateBps": 440,
+      "direction": "cut",
+      "vote": null,
+      "excerpt": "Reduce the policy repo rate under the liquidity adjustment facility (LAF) by 75 basis points to 4.40 per cent from 5.15 per cent with immediate effect; accordingly, the marginal standing facility (MSF) rate and the Bank Rate stand reduced to 4.65 per cent from 5.40 per cent; further, consequent upon the widening of the LAF corridor as detailed in the accompanying Statement on Developmental and…",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49581",
+      "prid": "49581",
+      "title": "Seventh Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "offCycle": true
+    },
+    {
+      "date": "2020-05-22",
+      "rateBps": 400,
+      "direction": "cut",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Chetan Ghate"
+        ]
+      },
+      "excerpt": "Reduce the policy repo rate under the liquidity adjustment facility (LAF) by 40 bps to 4.0 per cent from 4.40 per cent with immediate effect; accordingly, the marginal standing facility (MSF) rate and the Bank Rate stand reduced to 4.25 per cent from 4.65 per cent; and the reverse repo rate under the LAF stands reduced to 3.35 per cent from 3.75 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49843",
+      "prid": "49843",
+      "title": "Monetary Policy Statement, 2020-21: Resolution of the Monetary Policy Committee (MPC) May 20 to 22, 2020",
+      "offCycle": true
+    },
+    {
+      "date": "2020-08-06",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 6, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50175",
+      "prid": "50175",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) August 4 to 6, 2020",
+      "offCycle": false
+    },
+    {
+      "date": "2020-10-09",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 9, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50479",
+      "prid": "50479",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) October 7-9, 2020",
+      "offCycle": false
+    },
+    {
+      "date": "2020-12-04",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 4, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50747",
+      "prid": "50747",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) December 2-4, 2020",
+      "offCycle": false
+    },
+    {
+      "date": "2021-02-05",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 5, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51077",
+      "prid": "51077",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) February 3-5, 2021",
+      "offCycle": false
+    },
+    {
+      "date": "2021-04-07",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 7, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51381",
+      "prid": "51381",
+      "title": "Resolution of the Monetary Policy Committee (MPC) April 5-7, 2021",
+      "offCycle": false
+    },
+    {
+      "date": "2021-06-04",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 4, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51683",
+      "prid": "51683",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) June 2-4, 2021",
+      "offCycle": false
+    },
+    {
+      "date": "2021-08-06",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 6, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52011",
+      "prid": "52011",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) August 4-6, 2021",
+      "offCycle": false
+    },
+    {
+      "date": "2021-10-08",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 8, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52366",
+      "prid": "52366",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) October 6-8, 2021",
+      "offCycle": false
+    },
+    {
+      "date": "2021-12-08",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 8, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52687",
+      "prid": "52687",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) December 6-8, 2021",
+      "offCycle": false
+    },
+    {
+      "date": "2022-02-10",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 10, 2022) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53247",
+      "prid": "53247",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) February 8-10, 2022",
+      "offCycle": false
+    },
+    {
+      "date": "2022-04-08",
+      "rateBps": 400,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 8, 2022) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53537",
+      "prid": "53537",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) April 6-8, 2022",
+      "offCycle": false
+    },
+    {
+      "date": "2022-05-04",
+      "rateBps": 440,
+      "direction": "hike",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (May 4, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 40 basis points to 4.40 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53652",
+      "prid": "53652",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) May 2 and 4, 2022",
+      "offCycle": true
+    },
+    {
+      "date": "2022-06-08",
+      "rateBps": 490,
+      "direction": "hike",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 8, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 50 basis points to 4.90 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53832",
+      "prid": "53832",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2022",
+      "offCycle": false
+    },
+    {
+      "date": "2022-08-05",
+      "rateBps": 540,
+      "direction": "hike",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 5, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 50 basis points to 5.40 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54148",
+      "prid": "54148",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) August 3-5, 2022",
+      "offCycle": false
+    },
+    {
+      "date": "2022-09-30",
+      "rateBps": 590,
+      "direction": "hike",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Ashima Goyal"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (September 30, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 50 basis points to 5.90 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54465",
+      "prid": "54465",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) September 28-30, 2022",
+      "offCycle": false
+    },
+    {
+      "date": "2022-12-07",
+      "rateBps": 625,
+      "direction": "hike",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 7, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 35 basis points to 6.25 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54818",
+      "prid": "54818",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) December 5-7, 2022",
+      "offCycle": false
+    },
+    {
+      "date": "2023-02-08",
+      "rateBps": 650,
+      "direction": "hike",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Ashima Goyal",
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 8, 2023) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.50 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55178",
+      "prid": "55178",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) February 6-8, 2023",
+      "offCycle": false
+    },
+    {
+      "date": "2023-04-06",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 6, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55472",
+      "prid": "55472",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) April 3, 5 and 6, 2023",
+      "offCycle": false
+    },
+    {
+      "date": "2023-06-08",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 8, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55814",
+      "prid": "55814",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2023",
+      "offCycle": false
+    },
+    {
+      "date": "2023-08-10",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 10, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56173",
+      "prid": "56173",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) August 8-10, 2023",
+      "offCycle": false
+    },
+    {
+      "date": "2023-10-06",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 6, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56502",
+      "prid": "56502",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) October 4 to 6, 2023",
+      "offCycle": false
+    },
+    {
+      "date": "2023-12-08",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 8, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56888",
+      "prid": "56888",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) December 6 to 8, 2023",
+      "offCycle": false
+    },
+    {
+      "date": "2024-02-08",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 8, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57275",
+      "prid": "57275",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) February 6 to 8, 2024",
+      "offCycle": false
+    },
+    {
+      "date": "2024-04-05",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 5, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57637",
+      "prid": "57637",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) April 3 to 5, 2024",
+      "offCycle": false
+    },
+    {
+      "date": "2024-06-07",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Ashima Goyal",
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 7, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58050",
+      "prid": "58050",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) June 5 to 7, 2024",
+      "offCycle": false
+    },
+    {
+      "date": "2024-08-08",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Ashima Goyal",
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 8, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58447",
+      "prid": "58447",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) August 6 to 8, 2024",
+      "offCycle": false
+    },
+    {
+      "date": "2024-10-09",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 9, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58850",
+      "prid": "58850",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) October 7 to 9, 2024",
+      "offCycle": false
+    },
+    {
+      "date": "2024-12-06",
+      "rateBps": 650,
+      "direction": "hold",
+      "vote": null,
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 6, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59244",
+      "prid": "59244",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee December 4 to 6, 2024",
+      "offCycle": false
+    },
+    {
+      "date": "2025-02-07",
+      "rateBps": 625,
+      "direction": "cut",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "Reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.25 per cent with immediate effect; consequently, the standing deposit facility (SDF) rate shall stand adjusted to 6.00 per cent and the marginal standing facility (MSF) rate and the Bank Rate to 6.50 per cent; continue with the neutral monetary policy stance and remain unambiguously focussed on a…",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59692",
+      "prid": "59692",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee February 5 to 7, 2025",
+      "offCycle": false
+    },
+    {
+      "date": "2025-04-09",
+      "rateBps": 600,
+      "direction": "cut",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The MPC unanimously voted to reduce the policy repo rate by 25 basis points to 6.00 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60176",
+      "prid": "60176",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee April 7 to 9, 2025",
+      "offCycle": false
+    },
+    {
+      "date": "2025-06-06",
+      "rateBps": 550,
+      "direction": "cut",
+      "vote": null,
+      "excerpt": "The MPC voted to reduce the policy repo rate by 50 basis points (bps) to 5.50 per cent with immediate effect.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60604",
+      "prid": "60604",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee June 4 to 6, 2025",
+      "offCycle": false
+    },
+    {
+      "date": "2025-08-06",
+      "rateBps": 550,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The MPC voted to maintain the policy repo rate at 5.50 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60957",
+      "prid": "60957",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee August 4 to 6, 2025",
+      "offCycle": false
+    },
+    {
+      "date": "2025-10-01",
+      "rateBps": 550,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The MPC voted unanimously to keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.50 per cent; consequently, the standing deposit facility (SDF) rate remains at 5.25 per cent while the marginal standing facility (MSF) rate and the Bank Rate remains at 5.75 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61332",
+      "prid": "61332",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee September 29 to October 1, 2025",
+      "offCycle": false
+    },
+    {
+      "date": "2025-12-05",
+      "rateBps": 525,
+      "direction": "cut",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The MPC voted unanimously to reduce the policy repo rate under the liquidity adjustment facility (LAF) to 5.25 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61749",
+      "prid": "61749",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee December 3 to 5, 2025",
+      "offCycle": false
+    },
+    {
+      "date": "2026-02-06",
+      "rateBps": 525,
+      "direction": "hold",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "excerpt": "The MPC voted unanimously to keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.25 per cent.",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62169",
+      "prid": "62169",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee February 4 to 6, 2026",
+      "offCycle": false
+    }
+  ]
+}

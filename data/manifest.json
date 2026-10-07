@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "countries": {
+    "IN": {
+      "status": "available",
+      "release": "6b9bdc02c553c5cdb32c49c1a749a6e7760d2e0adcfe28990fed8b9719739060",
+      "path": "releases/IN/6b9bdc02c553c5cdb32c49c1a749a6e7760d2e0adcfe28990fed8b9719739060.json",
+      "latestRecordDate": "2026-10-07",
+      "lastChangedAt": "2026-10-07T10:30:09.340Z"
+    },
+    "US": {
+      "status": "available",
+      "release": "03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d",
+      "path": "releases/US/03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d.json",
+      "latestRecordDate": "2026-09-17",
+      "lastChangedAt": "2026-10-07T10:30:09.340Z"
+    }
+  }
+}

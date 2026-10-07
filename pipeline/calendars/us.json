@@ -1,0 +1,405 @@
+{
+  "sources": [
+    {
+      "id": "us-fomc-calendar",
+      "type": "calendar",
+      "title": "Federal Reserve: Meeting calendars and information",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    }
+  ],
+  "notes": "Scheduled FOMC meetings from fomccalendars.htm. Notation votes (e.g. 22 Aug 2025) are not rate-setting meetings and are excluded.",
+  "meetings": [
+    {
+      "id": "US-2021-01-27",
+      "date": "2021-01-27",
+      "meetingStart": "2021-01-26",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2021-03-17",
+      "date": "2021-03-17",
+      "meetingStart": "2021-03-16",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2021-04-28",
+      "date": "2021-04-28",
+      "meetingStart": "2021-04-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2021-06-16",
+      "date": "2021-06-16",
+      "meetingStart": "2021-06-15",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2021-07-28",
+      "date": "2021-07-28",
+      "meetingStart": "2021-07-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2021-09-22",
+      "date": "2021-09-22",
+      "meetingStart": "2021-09-21",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2021-11-03",
+      "date": "2021-11-03",
+      "meetingStart": "2021-11-02",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2021-12-15",
+      "date": "2021-12-15",
+      "meetingStart": "2021-12-14",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-01-26",
+      "date": "2022-01-26",
+      "meetingStart": "2022-01-25",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-03-16",
+      "date": "2022-03-16",
+      "meetingStart": "2022-03-15",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-05-04",
+      "date": "2022-05-04",
+      "meetingStart": "2022-05-03",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-06-15",
+      "date": "2022-06-15",
+      "meetingStart": "2022-06-14",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-07-27",
+      "date": "2022-07-27",
+      "meetingStart": "2022-07-26",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-09-21",
+      "date": "2022-09-21",
+      "meetingStart": "2022-09-20",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-11-02",
+      "date": "2022-11-02",
+      "meetingStart": "2022-11-01",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2022-12-14",
+      "date": "2022-12-14",
+      "meetingStart": "2022-12-13",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-02-01",
+      "date": "2023-02-01",
+      "meetingStart": "2023-01-31",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-03-22",
+      "date": "2023-03-22",
+      "meetingStart": "2023-03-21",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-05-03",
+      "date": "2023-05-03",
+      "meetingStart": "2023-05-02",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-06-14",
+      "date": "2023-06-14",
+      "meetingStart": "2023-06-13",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-07-26",
+      "date": "2023-07-26",
+      "meetingStart": "2023-07-25",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-09-20",
+      "date": "2023-09-20",
+      "meetingStart": "2023-09-19",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-11-01",
+      "date": "2023-11-01",
+      "meetingStart": "2023-10-31",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2023-12-13",
+      "date": "2023-12-13",
+      "meetingStart": "2023-12-12",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-01-31",
+      "date": "2024-01-31",
+      "meetingStart": "2024-01-30",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-03-20",
+      "date": "2024-03-20",
+      "meetingStart": "2024-03-19",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-05-01",
+      "date": "2024-05-01",
+      "meetingStart": "2024-04-30",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-06-12",
+      "date": "2024-06-12",
+      "meetingStart": "2024-06-11",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-07-31",
+      "date": "2024-07-31",
+      "meetingStart": "2024-07-30",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-09-18",
+      "date": "2024-09-18",
+      "meetingStart": "2024-09-17",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-11-07",
+      "date": "2024-11-07",
+      "meetingStart": "2024-11-06",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2024-12-18",
+      "date": "2024-12-18",
+      "meetingStart": "2024-12-17",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-01-29",
+      "date": "2025-01-29",
+      "meetingStart": "2025-01-28",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-03-19",
+      "date": "2025-03-19",
+      "meetingStart": "2025-03-18",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-05-07",
+      "date": "2025-05-07",
+      "meetingStart": "2025-05-06",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-06-18",
+      "date": "2025-06-18",
+      "meetingStart": "2025-06-17",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-07-30",
+      "date": "2025-07-30",
+      "meetingStart": "2025-07-29",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-09-17",
+      "date": "2025-09-17",
+      "meetingStart": "2025-09-16",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-10-29",
+      "date": "2025-10-29",
+      "meetingStart": "2025-10-28",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2025-12-10",
+      "date": "2025-12-10",
+      "meetingStart": "2025-12-09",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-01-28",
+      "date": "2026-01-28",
+      "meetingStart": "2026-01-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-03-18",
+      "date": "2026-03-18",
+      "meetingStart": "2026-03-17",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-04-29",
+      "date": "2026-04-29",
+      "meetingStart": "2026-04-28",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-06-17",
+      "date": "2026-06-17",
+      "meetingStart": "2026-06-16",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-07-29",
+      "date": "2026-07-29",
+      "meetingStart": "2026-07-28",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-09-16",
+      "date": "2026-09-16",
+      "meetingStart": "2026-09-15",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-10-28",
+      "date": "2026-10-28",
+      "meetingStart": "2026-10-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2026-12-09",
+      "date": "2026-12-09",
+      "meetingStart": "2026-12-08",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-01-27",
+      "date": "2027-01-27",
+      "meetingStart": "2027-01-26",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-03-17",
+      "date": "2027-03-17",
+      "meetingStart": "2027-03-16",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-04-28",
+      "date": "2027-04-28",
+      "meetingStart": "2027-04-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-06-09",
+      "date": "2027-06-09",
+      "meetingStart": "2027-06-08",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-07-28",
+      "date": "2027-07-28",
+      "meetingStart": "2027-07-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-09-15",
+      "date": "2027-09-15",
+      "meetingStart": "2027-09-14",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-10-27",
+      "date": "2027-10-27",
+      "meetingStart": "2027-10-26",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    },
+    {
+      "id": "US-2027-12-08",
+      "date": "2027-12-08",
+      "meetingStart": "2027-12-07",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar"
+    }
+  ]
+}

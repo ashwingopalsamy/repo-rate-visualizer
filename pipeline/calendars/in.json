@@ -1,0 +1,770 @@
+{
+  "sources": [
+    {
+      "id": "in-mpc-schedule-2026-27",
+      "type": "calendar",
+      "title": "RBI: Schedule of the Monetary Policy Committee for 2026-2027 (23 Mar 2026)",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "id": "in-mpc-38224",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38224"
+    },
+    {
+      "id": "in-mpc-38818",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38818"
+    },
+    {
+      "id": "in-mpc-39505",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=39505"
+    },
+    {
+      "id": "in-mpc-40069",
+      "type": "statement",
+      "title": "First Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40069"
+    },
+    {
+      "id": "in-mpc-40685",
+      "type": "statement",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40685"
+    },
+    {
+      "id": "in-mpc-41256",
+      "type": "statement",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41256"
+    },
+    {
+      "id": "in-mpc-41852",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41852"
+    },
+    {
+      "id": "in-mpc-42476",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=42476"
+    },
+    {
+      "id": "in-mpc-43078",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43078"
+    },
+    {
+      "id": "in-mpc-43573",
+      "type": "statement",
+      "title": "First Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43573"
+    },
+    {
+      "id": "in-mpc-44125",
+      "type": "statement",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44125"
+    },
+    {
+      "id": "in-mpc-44636",
+      "type": "statement",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44636"
+    },
+    {
+      "id": "in-mpc-45152",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45152"
+    },
+    {
+      "id": "in-mpc-45656",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45656"
+    },
+    {
+      "id": "in-mpc-46235",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46235"
+    },
+    {
+      "id": "in-mpc-46722",
+      "type": "statement",
+      "title": "First Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46722"
+    },
+    {
+      "id": "in-mpc-47225",
+      "type": "statement",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47225"
+    },
+    {
+      "id": "in-mpc-47818",
+      "type": "statement",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47818"
+    },
+    {
+      "id": "in-mpc-48319",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48319"
+    },
+    {
+      "id": "in-mpc-48802",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48802"
+    },
+    {
+      "id": "in-mpc-49342",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49342"
+    },
+    {
+      "id": "in-mpc-50175",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) August 4 to 6, 2020",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50175"
+    },
+    {
+      "id": "in-mpc-50479",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) October 7-9, 2020",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50479"
+    },
+    {
+      "id": "in-mpc-50747",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) December 2-4, 2020",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50747"
+    },
+    {
+      "id": "in-mpc-51077",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) February 3-5, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51077"
+    },
+    {
+      "id": "in-mpc-51381",
+      "type": "statement",
+      "title": "Resolution of the Monetary Policy Committee (MPC) April 5-7, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51381"
+    },
+    {
+      "id": "in-mpc-51683",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) June 2-4, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51683"
+    },
+    {
+      "id": "in-mpc-52011",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) August 4-6, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52011"
+    },
+    {
+      "id": "in-mpc-52366",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) October 6-8, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52366"
+    },
+    {
+      "id": "in-mpc-52687",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) December 6-8, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52687"
+    },
+    {
+      "id": "in-mpc-53247",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) February 8-10, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53247"
+    },
+    {
+      "id": "in-mpc-53537",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) April 6-8, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53537"
+    },
+    {
+      "id": "in-mpc-53832",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53832"
+    },
+    {
+      "id": "in-mpc-54148",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) August 3-5, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54148"
+    },
+    {
+      "id": "in-mpc-54465",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) September 28-30, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54465"
+    },
+    {
+      "id": "in-mpc-54818",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) December 5-7, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54818"
+    },
+    {
+      "id": "in-mpc-55178",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) February 6-8, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55178"
+    },
+    {
+      "id": "in-mpc-55472",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) April 3, 5 and 6, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55472"
+    },
+    {
+      "id": "in-mpc-55814",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55814"
+    },
+    {
+      "id": "in-mpc-56173",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) August 8-10, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56173"
+    },
+    {
+      "id": "in-mpc-56502",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) October 4 to 6, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56502"
+    },
+    {
+      "id": "in-mpc-56888",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) December 6 to 8, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56888"
+    },
+    {
+      "id": "in-mpc-57275",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) February 6 to 8, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57275"
+    },
+    {
+      "id": "in-mpc-57637",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) April 3 to 5, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57637"
+    },
+    {
+      "id": "in-mpc-58050",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) June 5 to 7, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58050"
+    },
+    {
+      "id": "in-mpc-58447",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) August 6 to 8, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58447"
+    },
+    {
+      "id": "in-mpc-58850",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) October 7 to 9, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58850"
+    },
+    {
+      "id": "in-mpc-59244",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee December 4 to 6, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59244"
+    },
+    {
+      "id": "in-mpc-59692",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee February 5 to 7, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59692"
+    },
+    {
+      "id": "in-mpc-60176",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee April 7 to 9, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60176"
+    },
+    {
+      "id": "in-mpc-60604",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee June 4 to 6, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60604"
+    },
+    {
+      "id": "in-mpc-60957",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee August 4 to 6, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60957"
+    },
+    {
+      "id": "in-mpc-61332",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee September 29 to October 1, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61332"
+    },
+    {
+      "id": "in-mpc-61749",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee December 3 to 5, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61749"
+    },
+    {
+      "id": "in-mpc-62169",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee February 4 to 6, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62169"
+    }
+  ],
+  "notes": "Decision date is the last day of each MPC meeting. Meetings before FY2026-27 are appended by the MPC backfill (pipeline/countries/in/backfill.json).",
+  "meetings": [
+    {
+      "id": "IN-2016-10-04",
+      "date": "2016-10-04",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-38224"
+    },
+    {
+      "id": "IN-2016-12-07",
+      "date": "2016-12-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-38818"
+    },
+    {
+      "id": "IN-2017-02-08",
+      "date": "2017-02-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-39505"
+    },
+    {
+      "id": "IN-2017-04-06",
+      "date": "2017-04-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-40069"
+    },
+    {
+      "id": "IN-2017-06-07",
+      "date": "2017-06-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-40685"
+    },
+    {
+      "id": "IN-2017-08-02",
+      "date": "2017-08-02",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-41256"
+    },
+    {
+      "id": "IN-2017-10-04",
+      "date": "2017-10-04",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-41852"
+    },
+    {
+      "id": "IN-2017-12-06",
+      "date": "2017-12-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-42476"
+    },
+    {
+      "id": "IN-2018-02-07",
+      "date": "2018-02-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-43078"
+    },
+    {
+      "id": "IN-2018-04-05",
+      "date": "2018-04-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-43573"
+    },
+    {
+      "id": "IN-2018-06-06",
+      "date": "2018-06-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-44125"
+    },
+    {
+      "id": "IN-2018-08-01",
+      "date": "2018-08-01",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-44636"
+    },
+    {
+      "id": "IN-2018-10-05",
+      "date": "2018-10-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-45152"
+    },
+    {
+      "id": "IN-2018-12-05",
+      "date": "2018-12-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-45656"
+    },
+    {
+      "id": "IN-2019-02-07",
+      "date": "2019-02-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-46235"
+    },
+    {
+      "id": "IN-2019-04-04",
+      "date": "2019-04-04",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-46722"
+    },
+    {
+      "id": "IN-2019-06-06",
+      "date": "2019-06-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-47225"
+    },
+    {
+      "id": "IN-2019-08-07",
+      "date": "2019-08-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-47818"
+    },
+    {
+      "id": "IN-2019-10-04",
+      "date": "2019-10-04",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-48319"
+    },
+    {
+      "id": "IN-2019-12-05",
+      "date": "2019-12-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-48802"
+    },
+    {
+      "id": "IN-2020-02-06",
+      "date": "2020-02-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-49342"
+    },
+    {
+      "id": "IN-2020-08-06",
+      "date": "2020-08-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-50175"
+    },
+    {
+      "id": "IN-2020-10-09",
+      "date": "2020-10-09",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-50479"
+    },
+    {
+      "id": "IN-2020-12-04",
+      "date": "2020-12-04",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-50747"
+    },
+    {
+      "id": "IN-2021-02-05",
+      "date": "2021-02-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-51077"
+    },
+    {
+      "id": "IN-2021-04-07",
+      "date": "2021-04-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-51381"
+    },
+    {
+      "id": "IN-2021-06-04",
+      "date": "2021-06-04",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-51683"
+    },
+    {
+      "id": "IN-2021-08-06",
+      "date": "2021-08-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-52011"
+    },
+    {
+      "id": "IN-2021-10-08",
+      "date": "2021-10-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-52366"
+    },
+    {
+      "id": "IN-2021-12-08",
+      "date": "2021-12-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-52687"
+    },
+    {
+      "id": "IN-2022-02-10",
+      "date": "2022-02-10",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-53247"
+    },
+    {
+      "id": "IN-2022-04-08",
+      "date": "2022-04-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-53537"
+    },
+    {
+      "id": "IN-2022-06-08",
+      "date": "2022-06-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-53832"
+    },
+    {
+      "id": "IN-2022-08-05",
+      "date": "2022-08-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-54148"
+    },
+    {
+      "id": "IN-2022-09-30",
+      "date": "2022-09-30",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-54465"
+    },
+    {
+      "id": "IN-2022-12-07",
+      "date": "2022-12-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-54818"
+    },
+    {
+      "id": "IN-2023-02-08",
+      "date": "2023-02-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-55178"
+    },
+    {
+      "id": "IN-2023-04-06",
+      "date": "2023-04-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-55472"
+    },
+    {
+      "id": "IN-2023-06-08",
+      "date": "2023-06-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-55814"
+    },
+    {
+      "id": "IN-2023-08-10",
+      "date": "2023-08-10",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-56173"
+    },
+    {
+      "id": "IN-2023-10-06",
+      "date": "2023-10-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-56502"
+    },
+    {
+      "id": "IN-2023-12-08",
+      "date": "2023-12-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-56888"
+    },
+    {
+      "id": "IN-2024-02-08",
+      "date": "2024-02-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-57275"
+    },
+    {
+      "id": "IN-2024-04-05",
+      "date": "2024-04-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-57637"
+    },
+    {
+      "id": "IN-2024-06-07",
+      "date": "2024-06-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-58050"
+    },
+    {
+      "id": "IN-2024-08-08",
+      "date": "2024-08-08",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-58447"
+    },
+    {
+      "id": "IN-2024-10-09",
+      "date": "2024-10-09",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-58850"
+    },
+    {
+      "id": "IN-2024-12-06",
+      "date": "2024-12-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-59244"
+    },
+    {
+      "id": "IN-2025-02-07",
+      "date": "2025-02-07",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-59692"
+    },
+    {
+      "id": "IN-2025-04-09",
+      "date": "2025-04-09",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-60176"
+    },
+    {
+      "id": "IN-2025-06-06",
+      "date": "2025-06-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-60604"
+    },
+    {
+      "id": "IN-2025-08-06",
+      "date": "2025-08-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-60957"
+    },
+    {
+      "id": "IN-2025-10-01",
+      "date": "2025-10-01",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-61332"
+    },
+    {
+      "id": "IN-2025-12-05",
+      "date": "2025-12-05",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-61749"
+    },
+    {
+      "id": "IN-2026-02-06",
+      "date": "2026-02-06",
+      "meetingStart": null,
+      "status": "scheduled",
+      "sourceId": "in-mpc-62169"
+    },
+    {
+      "id": "IN-2026-04-08",
+      "date": "2026-04-08",
+      "meetingStart": "2026-04-06",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-06-05",
+      "date": "2026-06-05",
+      "meetingStart": "2026-06-03",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-08-05",
+      "date": "2026-08-05",
+      "meetingStart": "2026-08-03",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-10-07",
+      "date": "2026-10-07",
+      "meetingStart": "2026-10-05",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2026-12-04",
+      "date": "2026-12-04",
+      "meetingStart": "2026-12-02",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    },
+    {
+      "id": "IN-2027-02-05",
+      "date": "2027-02-05",
+      "meetingStart": "2027-02-03",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27"
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "notes": "Official RBI press releases carrying each MPC resolution from the first MPC meeting (4 Oct 2016) to Feb 2026, found month by month in RBI's press release archive. Off-cycle meetings are flagged.",
+  "offCycle": [
+    "2020-03-27",
+    "2020-05-22",
+    "2022-05-04"
+  ],
+  "resolutions": [
+    {
+      "prid": "38224",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38224",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India"
+    },
+    {
+      "prid": "38818",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38818",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India"
+    },
+    {
+      "prid": "39505",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=39505",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India"
+    },
+    {
+      "prid": "40069",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40069",
+      "title": "First Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "40685",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40685",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India"
+    },
+    {
+      "prid": "41256",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41256",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "41852",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41852",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "42476",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=42476",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "43078",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43078",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "43573",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43573",
+      "title": "First Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "44125",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44125",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "44636",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44636",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "45152",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45152",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "45656",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45656",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "46235",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46235",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "46722",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46722",
+      "title": "First Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "47225",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47225",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "47818",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47818",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "48319",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48319",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "48802",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48802",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "49342",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49342",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "49581",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49581",
+      "title": "Seventh Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India"
+    },
+    {
+      "prid": "49843",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49843",
+      "title": "Monetary Policy Statement, 2020-21: Resolution of the Monetary Policy Committee (MPC) May 20 to 22, 2020"
+    },
+    {
+      "prid": "50175",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50175",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) August 4 to 6, 2020"
+    },
+    {
+      "prid": "50479",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50479",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) October 7-9, 2020"
+    },
+    {
+      "prid": "50747",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50747",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) December 2-4, 2020"
+    },
+    {
+      "prid": "51077",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51077",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) February 3-5, 2021"
+    },
+    {
+      "prid": "51381",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51381",
+      "title": "Resolution of the Monetary Policy Committee (MPC) April 5-7, 2021"
+    },
+    {
+      "prid": "51683",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51683",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) June 2-4, 2021"
+    },
+    {
+      "prid": "52011",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52011",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) August 4-6, 2021"
+    },
+    {
+      "prid": "52366",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52366",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) October 6-8, 2021"
+    },
+    {
+      "prid": "52687",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52687",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) December 6-8, 2021"
+    },
+    {
+      "prid": "53247",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53247",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) February 8-10, 2022"
+    },
+    {
+      "prid": "53537",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53537",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) April 6-8, 2022"
+    },
+    {
+      "prid": "53652",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53652",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) May 2 and 4, 2022"
+    },
+    {
+      "prid": "53832",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53832",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2022"
+    },
+    {
+      "prid": "54148",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54148",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) August 3-5, 2022"
+    },
+    {
+      "prid": "54465",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54465",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) September 28-30, 2022"
+    },
+    {
+      "prid": "54818",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54818",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) December 5-7, 2022"
+    },
+    {
+      "prid": "55178",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55178",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) February 6-8, 2023"
+    },
+    {
+      "prid": "55472",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55472",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) April 3, 5 and 6, 2023"
+    },
+    {
+      "prid": "55814",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55814",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2023"
+    },
+    {
+      "prid": "56173",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56173",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) August 8-10, 2023"
+    },
+    {
+      "prid": "56502",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56502",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) October 4 to 6, 2023"
+    },
+    {
+      "prid": "56888",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56888",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) December 6 to 8, 2023"
+    },
+    {
+      "prid": "57275",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57275",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) February 6 to 8, 2024"
+    },
+    {
+      "prid": "57637",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57637",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) April 3 to 5, 2024"
+    },
+    {
+      "prid": "58050",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58050",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) June 5 to 7, 2024"
+    },
+    {
+      "prid": "58447",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58447",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) August 6 to 8, 2024"
+    },
+    {
+      "prid": "58850",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58850",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) October 7 to 9, 2024"
+    },
+    {
+      "prid": "59244",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59244",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee December 4 to 6, 2024"
+    },
+    {
+      "prid": "59692",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59692",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee February 5 to 7, 2025"
+    },
+    {
+      "prid": "60176",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60176",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee April 7 to 9, 2025"
+    },
+    {
+      "prid": "60604",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60604",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee June 4 to 6, 2025"
+    },
+    {
+      "prid": "60957",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60957",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee August 4 to 6, 2025"
+    },
+    {
+      "prid": "61332",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61332",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee September 29 to October 1, 2025"
+    },
+    {
+      "prid": "61749",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61749",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee December 3 to 5, 2025"
+    },
+    {
+      "prid": "62169",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62169",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee February 4 to 6, 2026"
+    }
+  ]
+}

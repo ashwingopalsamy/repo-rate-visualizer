@@ -1,0 +1,154 @@
+name: Refresh policy rates
+
+# Dispatched by the Cloudflare cron dispatcher (worker/dispatch) at each central bank's announcement time,
+# plus a weekly backstop. Countries fail independently; whatever validates is published.
+on:
+  workflow_dispatch:
+    inputs:
+      countries:
+        description: Comma-separated country codes, or ALL
+        default: ALL
+      reason:
+        description: Why this run was started
+        default: manual
+  schedule:
+    - cron: '17 3 * * 0'
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      countries: ${{ steps.plan.outputs.countries }}
+      reason: ${{ steps.plan.outputs.reason }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            pipeline
+            schema
+            .node-version
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version-file: .node-version
+      - id: plan
+        env:
+          REQUESTED: ${{ github.event.inputs.countries || 'ALL' }}
+          REASON: ${{ github.event.inputs.reason || 'weekly-backstop' }}
+        run: |
+          all=$(node --input-type=module -e "import { COUNTRIES } from './pipeline/countries/registry.ts'; console.log(Object.keys(COUNTRIES).join(','))")
+          list=$([ "${REQUESTED^^}" = "ALL" ] && echo "$all" || echo "${REQUESTED^^}")
+          for c in ${list//,/ }; do
+            [[ "$c" =~ ^[A-Z]{2}$ && ",$all," == *",$c,"* ]] || { echo "::error::unknown country code '$c'"; exit 1; }
+          done
+          [[ "$REASON" =~ ^[A-Za-z0-9:,._\ -]{1,200}$ ]] || REASON=manual
+          echo "countries=$(node -e "console.log(JSON.stringify(process.argv[1].split(',').map(s => s.trim()).filter(Boolean)))" "$list")" >> "$GITHUB_OUTPUT"
+          echo "reason=$REASON" >> "$GITHUB_OUTPUT"
+
+  fetch:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: ${{ fromJSON(needs.plan.outputs.countries) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Build candidate release
+        env:
+          CC: ${{ matrix.cc }}
+          REASON: ${{ needs.plan.outputs.reason }}
+        run: node pipeline/run.ts --countries "$CC" --reason "$REASON"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: always()
+        with:
+          name: out-${{ matrix.cc }}
+          path: .out/${{ matrix.cc }}
+          if-no-files-found: warn
+          retention-days: 7
+
+  publish:
+    needs: [plan, fetch]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: out-*
+          path: .out
+      - name: Arrange candidates as .out/<CC>
+        run: |
+          shopt -s nullglob
+          for d in .out/out-*; do mv "$d" ".out/${d#.out/out-}"; done
+          ls -R .out | head -40
+      - name: Publish candidates into data/
+        run: node pipeline/publish.ts || echo "::warning::publish reported errors; see the log above"
+      - name: Detect India v2 changes
+        id: v2
+        run: |
+          if [ -n "$(git status --porcelain -- public/data src/data)" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        if: steps.v2.outputs.changed == 'true'
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-hf-dataset.txt
+      - name: Rebuild the Hugging Face dataset
+        if: steps.v2.outputs.changed == 'true'
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements-hf-dataset.txt
+          python scripts/build-hf-dataset.py
+          npm run test:hf-dataset
+      - name: Validate before pushing
+        run: |
+          npm run validate:data
+          npm run test:pipeline
+          npm run test:data
+          npm run build
+          git diff --check
+      - name: Commit and push
+        env:
+          REASON: ${{ needs.plan.outputs.reason }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data public/data src/data hf-dataset
+          if git diff --staged --quiet; then echo "No data change."; exit 0; fi
+          changed=$(git diff --staged --name-only -- data/releases | cut -d/ -f3 | sort -u | paste -sd' ' -)
+          git commit -m "chore(data): ${changed:-health} ${REASON}"
+          for attempt in 1 2 3; do
+            git push && exit 0
+            git pull --rebase origin main || { git rebase --abort; echo "::error::rebase conflict"; exit 1; }
+          done
+          exit 1
+      - name: Sync pipeline issues
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node pipeline/issues.ts

@@ -1,0 +1,36 @@
+{
+  "sources": [
+    {
+      "id": "in-eblr-2019",
+      "type": "regulation",
+      "title": "RBI: External Benchmark Based Lending (4 Sep 2019)",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=11677&Mode=0"
+    },
+    {
+      "id": "in-emi-reset-2023",
+      "type": "regulation",
+      "title": "RBI: Reset of Floating Interest Rate on EMI based Personal Loans (18 Aug 2023)",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12529&Mode=0"
+    }
+  ],
+  "entries": [
+    {
+      "product": "Floating-rate home loan",
+      "benchmark": "External benchmark, usually the repo rate",
+      "reset": "At least once every three months",
+      "adjusts": "both",
+      "passThrough": "direct",
+      "note": "Most new floating-rate retail loans must be linked to an external benchmark, and most banks use the repo rate. When the rate resets, borrowers can choose a higher EMI, a longer tenure, or both.",
+      "sourceId": "in-eblr-2019"
+    },
+    {
+      "product": "Older MCLR-linked loan",
+      "benchmark": "Bank's marginal cost of funds based lending rate",
+      "reset": "On the loan's reset date, often yearly",
+      "adjusts": "both",
+      "passThrough": "lagged",
+      "note": "Loans priced off a bank's internal MCLR follow policy moves later and usually by less.",
+      "sourceId": "in-emi-reset-2023"
+    }
+  ]
+}

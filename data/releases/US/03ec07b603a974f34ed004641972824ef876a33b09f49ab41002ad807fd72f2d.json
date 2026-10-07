@@ -1,0 +1,3104 @@
+{
+  "schemaVersion": 3,
+  "country": {
+    "code": "US",
+    "name": "United States",
+    "currency": "USD",
+    "locale": "en-US",
+    "timeZone": "America/New_York"
+  },
+  "authority": {
+    "name": "Federal Reserve",
+    "short": "Fed",
+    "body": "Federal Open Market Committee",
+    "bodyShort": "FOMC",
+    "url": "https://www.federalreserve.gov/"
+  },
+  "instrument": {
+    "name": "Federal funds target range",
+    "short": "Fed funds target",
+    "explainer": "The federal funds target range is where the Federal Reserve wants the overnight rate between banks to trade. The Federal Open Market Committee sets it eight times a year in pursuit of maximum employment and 2% inflation. Prime-linked borrowing moves with it almost at once."
+  },
+  "eras": [
+    {
+      "id": "us-point",
+      "from": "1982-09-27",
+      "to": "2008-12-15",
+      "instrument": "Federal funds target rate",
+      "kind": "point",
+      "basis": "policy",
+      "note": "A single target rate until 15 Dec 2008.",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "id": "us-range",
+      "from": "2008-12-16",
+      "to": null,
+      "instrument": "Federal funds target range",
+      "kind": "range",
+      "basis": "policy",
+      "note": "A target range with both bounds since 16 Dec 2008.",
+      "sourceId": "us-fred-dfedtaru"
+    }
+  ],
+  "calendar": [
+    {
+      "id": "US-2021-01-27",
+      "date": "2021-01-27",
+      "meetingStart": "2021-01-26",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-01-27T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2021-03-17",
+      "date": "2021-03-17",
+      "meetingStart": "2021-03-16",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-03-17T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2021-04-28",
+      "date": "2021-04-28",
+      "meetingStart": "2021-04-27",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-04-28T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2021-06-16",
+      "date": "2021-06-16",
+      "meetingStart": "2021-06-15",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-06-16T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2021-07-28",
+      "date": "2021-07-28",
+      "meetingStart": "2021-07-27",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-07-28T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2021-09-22",
+      "date": "2021-09-22",
+      "meetingStart": "2021-09-21",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-09-22T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2021-11-03",
+      "date": "2021-11-03",
+      "meetingStart": "2021-11-02",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-11-03T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2021-12-15",
+      "date": "2021-12-15",
+      "meetingStart": "2021-12-14",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2021-12-15T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-01-26",
+      "date": "2022-01-26",
+      "meetingStart": "2022-01-25",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-01-26T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-03-16",
+      "date": "2022-03-16",
+      "meetingStart": "2022-03-15",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-03-16T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-05-04",
+      "date": "2022-05-04",
+      "meetingStart": "2022-05-03",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-05-04T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-06-15",
+      "date": "2022-06-15",
+      "meetingStart": "2022-06-14",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-06-15T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-07-27",
+      "date": "2022-07-27",
+      "meetingStart": "2022-07-26",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-07-27T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-09-21",
+      "date": "2022-09-21",
+      "meetingStart": "2022-09-20",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-09-21T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-11-02",
+      "date": "2022-11-02",
+      "meetingStart": "2022-11-01",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-11-02T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2022-12-14",
+      "date": "2022-12-14",
+      "meetingStart": "2022-12-13",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2022-12-14T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-02-01",
+      "date": "2023-02-01",
+      "meetingStart": "2023-01-31",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-02-01T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-03-22",
+      "date": "2023-03-22",
+      "meetingStart": "2023-03-21",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-03-22T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-05-03",
+      "date": "2023-05-03",
+      "meetingStart": "2023-05-02",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-05-03T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-06-14",
+      "date": "2023-06-14",
+      "meetingStart": "2023-06-13",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-06-14T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-07-26",
+      "date": "2023-07-26",
+      "meetingStart": "2023-07-25",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-07-26T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-09-20",
+      "date": "2023-09-20",
+      "meetingStart": "2023-09-19",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-09-20T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-11-01",
+      "date": "2023-11-01",
+      "meetingStart": "2023-10-31",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-11-01T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2023-12-13",
+      "date": "2023-12-13",
+      "meetingStart": "2023-12-12",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2023-12-13T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-01-31",
+      "date": "2024-01-31",
+      "meetingStart": "2024-01-30",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-01-31T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-03-20",
+      "date": "2024-03-20",
+      "meetingStart": "2024-03-19",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-03-20T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-05-01",
+      "date": "2024-05-01",
+      "meetingStart": "2024-04-30",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-05-01T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-06-12",
+      "date": "2024-06-12",
+      "meetingStart": "2024-06-11",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-06-12T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-07-31",
+      "date": "2024-07-31",
+      "meetingStart": "2024-07-30",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-07-31T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-09-18",
+      "date": "2024-09-18",
+      "meetingStart": "2024-09-17",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-09-18T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-11-07",
+      "date": "2024-11-07",
+      "meetingStart": "2024-11-06",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-11-07T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2024-12-18",
+      "date": "2024-12-18",
+      "meetingStart": "2024-12-17",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2024-12-18T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-01-29",
+      "date": "2025-01-29",
+      "meetingStart": "2025-01-28",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-01-29T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-03-19",
+      "date": "2025-03-19",
+      "meetingStart": "2025-03-18",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-03-19T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-05-07",
+      "date": "2025-05-07",
+      "meetingStart": "2025-05-06",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-05-07T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-06-18",
+      "date": "2025-06-18",
+      "meetingStart": "2025-06-17",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-06-18T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-07-30",
+      "date": "2025-07-30",
+      "meetingStart": "2025-07-29",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-07-30T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-09-17",
+      "date": "2025-09-17",
+      "meetingStart": "2025-09-16",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-09-17T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-10-29",
+      "date": "2025-10-29",
+      "meetingStart": "2025-10-28",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-10-29T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2025-12-10",
+      "date": "2025-12-10",
+      "meetingStart": "2025-12-09",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2025-12-10T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-01-28",
+      "date": "2026-01-28",
+      "meetingStart": "2026-01-27",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-01-28T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-03-18",
+      "date": "2026-03-18",
+      "meetingStart": "2026-03-17",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-03-18T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-04-29",
+      "date": "2026-04-29",
+      "meetingStart": "2026-04-28",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-04-29T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-06-17",
+      "date": "2026-06-17",
+      "meetingStart": "2026-06-16",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-06-17T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-07-29",
+      "date": "2026-07-29",
+      "meetingStart": "2026-07-28",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-07-29T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-09-16",
+      "date": "2026-09-16",
+      "meetingStart": "2026-09-15",
+      "status": "held",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-09-16T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-10-28",
+      "date": "2026-10-28",
+      "meetingStart": "2026-10-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-10-28T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2026-12-09",
+      "date": "2026-12-09",
+      "meetingStart": "2026-12-08",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2026-12-09T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-01-27",
+      "date": "2027-01-27",
+      "meetingStart": "2027-01-26",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-01-27T14:00:00-05:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-03-17",
+      "date": "2027-03-17",
+      "meetingStart": "2027-03-16",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-03-17T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-04-28",
+      "date": "2027-04-28",
+      "meetingStart": "2027-04-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-04-28T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-06-09",
+      "date": "2027-06-09",
+      "meetingStart": "2027-06-08",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-06-09T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-07-28",
+      "date": "2027-07-28",
+      "meetingStart": "2027-07-27",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-07-28T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-09-15",
+      "date": "2027-09-15",
+      "meetingStart": "2027-09-14",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-09-15T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-10-27",
+      "date": "2027-10-27",
+      "meetingStart": "2027-10-26",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-10-27T14:00:00-04:00",
+      "effectiveLagDays": 1
+    },
+    {
+      "id": "US-2027-12-08",
+      "date": "2027-12-08",
+      "meetingStart": "2027-12-07",
+      "status": "scheduled",
+      "sourceId": "us-fomc-calendar",
+      "announceAt": "2027-12-08T14:00:00-05:00",
+      "effectiveLagDays": 1
+    }
+  ],
+  "decisions": [
+    {
+      "id": "US-2021-01-27",
+      "meetingId": "US-2021-01-27",
+      "announcedAt": "2021-01-27T14:00:00-05:00",
+      "effectiveDate": "2021-01-28",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210127a.htm",
+      "excerpt": "The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time.",
+      "sourceIds": [
+        "us-statement-20210127"
+      ]
+    },
+    {
+      "id": "US-2021-03-17",
+      "meetingId": "US-2021-03-17",
+      "announcedAt": "2021-03-17T14:00:00-04:00",
+      "effectiveDate": "2021-03-18",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210317a.htm",
+      "excerpt": "The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time.",
+      "sourceIds": [
+        "us-statement-20210317"
+      ]
+    },
+    {
+      "id": "US-2021-04-28",
+      "meetingId": "US-2021-04-28",
+      "announcedAt": "2021-04-28T14:00:00-04:00",
+      "effectiveDate": "2021-04-29",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210428a.htm",
+      "excerpt": "The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time.",
+      "sourceIds": [
+        "us-statement-20210428"
+      ]
+    },
+    {
+      "id": "US-2021-06-16",
+      "meetingId": "US-2021-06-16",
+      "announcedAt": "2021-06-16T14:00:00-04:00",
+      "effectiveDate": "2021-06-17",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210616a.htm",
+      "excerpt": "The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time.",
+      "sourceIds": [
+        "us-statement-20210616"
+      ]
+    },
+    {
+      "id": "US-2021-07-28",
+      "meetingId": "US-2021-07-28",
+      "announcedAt": "2021-07-28T14:00:00-04:00",
+      "effectiveDate": "2021-07-29",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210728a.htm",
+      "excerpt": "The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time.",
+      "sourceIds": [
+        "us-statement-20210728"
+      ]
+    },
+    {
+      "id": "US-2021-09-22",
+      "meetingId": "US-2021-09-22",
+      "announcedAt": "2021-09-22T14:00:00-04:00",
+      "effectiveDate": "2021-09-23",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210922a.htm",
+      "excerpt": "The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time.",
+      "sourceIds": [
+        "us-statement-20210922"
+      ]
+    },
+    {
+      "id": "US-2021-11-03",
+      "meetingId": "US-2021-11-03",
+      "announcedAt": "2021-11-03T14:00:00-04:00",
+      "effectiveDate": "2021-11-04",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20211103a.htm",
+      "excerpt": "The Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent and expects it will be appropriate to maintain this target range until labor market conditions have reached levels consistent with the Committee's assessments of maximum employment and inflation has risen to 2 percent and is on track to moderately exceed 2 percent for some time.",
+      "sourceIds": [
+        "us-statement-20211103"
+      ]
+    },
+    {
+      "id": "US-2021-12-15",
+      "meetingId": "US-2021-12-15",
+      "announcedAt": "2021-12-15T14:00:00-05:00",
+      "effectiveDate": "2021-12-16",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20211215a.htm",
+      "excerpt": "In support of these goals, the Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent.",
+      "sourceIds": [
+        "us-statement-20211215"
+      ]
+    },
+    {
+      "id": "US-2022-01-26",
+      "meetingId": "US-2022-01-26",
+      "announcedAt": "2022-01-26T14:00:00-05:00",
+      "effectiveDate": "2022-01-27",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 9,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220126a.htm",
+      "excerpt": "In support of these goals, the Committee decided to keep the target range for the federal funds rate at 0 to 1/4 percent.",
+      "sourceIds": [
+        "us-statement-20220126"
+      ]
+    },
+    {
+      "id": "US-2022-03-16",
+      "meetingId": "US-2022-03-16",
+      "announcedAt": "2022-03-16T14:00:00-04:00",
+      "effectiveDate": "2022-03-17",
+      "level": {
+        "kind": "range",
+        "lowBps": 25,
+        "highBps": 50
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 8,
+        "against": 1,
+        "dissents": [
+          "James Bullard"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 1/4 to 1/2 percent and anticipates that ongoing increases in the target range will be appropriate.",
+      "sourceIds": [
+        "us-statement-20220316"
+      ]
+    },
+    {
+      "id": "US-2022-05-04",
+      "meetingId": "US-2022-05-04",
+      "announcedAt": "2022-05-04T14:00:00-04:00",
+      "effectiveDate": "2022-05-05",
+      "level": {
+        "kind": "range",
+        "lowBps": 75,
+        "highBps": 100
+      },
+      "direction": "hike",
+      "changeBps": 50,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 9,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220504a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 3/4 to 1 percent and anticipates that ongoing increases in the target range will be appropriate.",
+      "sourceIds": [
+        "us-statement-20220504"
+      ]
+    },
+    {
+      "id": "US-2022-06-15",
+      "meetingId": "US-2022-06-15",
+      "announcedAt": "2022-06-15T14:00:00-04:00",
+      "effectiveDate": "2022-06-16",
+      "level": {
+        "kind": "range",
+        "lowBps": 150,
+        "highBps": 175
+      },
+      "direction": "hike",
+      "changeBps": 75,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 10,
+        "against": 1,
+        "dissents": [
+          "Esther L. George"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220615a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 1-1/2 to 1-3/4 percent and anticipates that ongoing increases in the target range will be appropriate.",
+      "sourceIds": [
+        "us-statement-20220615"
+      ]
+    },
+    {
+      "id": "US-2022-07-27",
+      "meetingId": "US-2022-07-27",
+      "announcedAt": "2022-07-27T14:00:00-04:00",
+      "effectiveDate": "2022-07-28",
+      "level": {
+        "kind": "range",
+        "lowBps": 225,
+        "highBps": 250
+      },
+      "direction": "hike",
+      "changeBps": 75,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220727a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 2-1/4 to 2-1/2 percent and anticipates that ongoing increases in the target range will be appropriate.",
+      "sourceIds": [
+        "us-statement-20220727"
+      ]
+    },
+    {
+      "id": "US-2022-09-21",
+      "meetingId": "US-2022-09-21",
+      "announcedAt": "2022-09-21T14:00:00-04:00",
+      "effectiveDate": "2022-09-22",
+      "level": {
+        "kind": "range",
+        "lowBps": 300,
+        "highBps": 325
+      },
+      "direction": "hike",
+      "changeBps": 75,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220921a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 3 to 3-1/4 percent and anticipates that ongoing increases in the target range will be appropriate.",
+      "sourceIds": [
+        "us-statement-20220921"
+      ]
+    },
+    {
+      "id": "US-2022-11-02",
+      "meetingId": "US-2022-11-02",
+      "announcedAt": "2022-11-02T14:00:00-04:00",
+      "effectiveDate": "2022-11-03",
+      "level": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "direction": "hike",
+      "changeBps": 75,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20221102a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 3-3/4 to 4 percent.",
+      "sourceIds": [
+        "us-statement-20221102"
+      ]
+    },
+    {
+      "id": "US-2022-12-14",
+      "meetingId": "US-2022-12-14",
+      "announcedAt": "2022-12-14T14:00:00-05:00",
+      "effectiveDate": "2022-12-15",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "direction": "hike",
+      "changeBps": 50,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 4-1/4 to 4-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20221214"
+      ]
+    },
+    {
+      "id": "US-2023-02-01",
+      "meetingId": "US-2023-02-01",
+      "announcedAt": "2023-02-01T14:00:00-05:00",
+      "effectiveDate": "2023-02-02",
+      "level": {
+        "kind": "range",
+        "lowBps": 450,
+        "highBps": 475
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230201a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 4-1/2 to 4-3/4 percent.",
+      "sourceIds": [
+        "us-statement-20230201"
+      ]
+    },
+    {
+      "id": "US-2023-03-22",
+      "meetingId": "US-2023-03-22",
+      "announcedAt": "2023-03-22T14:00:00-04:00",
+      "effectiveDate": "2023-03-23",
+      "level": {
+        "kind": "range",
+        "lowBps": 475,
+        "highBps": 500
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230322a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 4-3/4 to 5 percent.",
+      "sourceIds": [
+        "us-statement-20230322"
+      ]
+    },
+    {
+      "id": "US-2023-05-03",
+      "meetingId": "US-2023-05-03",
+      "announcedAt": "2023-05-03T14:00:00-04:00",
+      "effectiveDate": "2023-05-04",
+      "level": {
+        "kind": "range",
+        "lowBps": 500,
+        "highBps": 525
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230503a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 5 to 5-1/4 percent.",
+      "sourceIds": [
+        "us-statement-20230503"
+      ]
+    },
+    {
+      "id": "US-2023-06-14",
+      "meetingId": "US-2023-06-14",
+      "announcedAt": "2023-06-14T14:00:00-04:00",
+      "effectiveDate": "2023-06-15",
+      "level": {
+        "kind": "range",
+        "lowBps": 500,
+        "highBps": 525
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230614a.htm",
+      "excerpt": "In support of these goals, the Committee decided to maintain the target range for the federal funds rate at 5 to 5-1/4 percent.",
+      "sourceIds": [
+        "us-statement-20230614"
+      ]
+    },
+    {
+      "id": "US-2023-07-26",
+      "meetingId": "US-2023-07-26",
+      "announcedAt": "2023-07-26T14:00:00-04:00",
+      "effectiveDate": "2023-07-27",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230726a.htm",
+      "excerpt": "In support of these goals, the Committee decided to raise the target range for the federal funds rate to 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20230726"
+      ]
+    },
+    {
+      "id": "US-2023-09-20",
+      "meetingId": "US-2023-09-20",
+      "announcedAt": "2023-09-20T14:00:00-04:00",
+      "effectiveDate": "2023-09-21",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230920a.htm",
+      "excerpt": "In support of these goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20230920"
+      ]
+    },
+    {
+      "id": "US-2023-11-01",
+      "meetingId": "US-2023-11-01",
+      "announcedAt": "2023-11-01T14:00:00-04:00",
+      "effectiveDate": "2023-11-02",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20231101a.htm",
+      "excerpt": "In support of these goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20231101"
+      ]
+    },
+    {
+      "id": "US-2023-12-13",
+      "meetingId": "US-2023-12-13",
+      "announcedAt": "2023-12-13T14:00:00-05:00",
+      "effectiveDate": "2023-12-14",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20231213a.htm",
+      "excerpt": "In support of these goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20231213"
+      ]
+    },
+    {
+      "id": "US-2024-01-31",
+      "meetingId": "US-2024-01-31",
+      "announcedAt": "2024-01-31T14:00:00-05:00",
+      "effectiveDate": "2024-02-01",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20240131"
+      ]
+    },
+    {
+      "id": "US-2024-03-20",
+      "meetingId": "US-2024-03-20",
+      "announcedAt": "2024-03-20T14:00:00-04:00",
+      "effectiveDate": "2024-03-21",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240320a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20240320"
+      ]
+    },
+    {
+      "id": "US-2024-05-01",
+      "meetingId": "US-2024-05-01",
+      "announcedAt": "2024-05-01T14:00:00-04:00",
+      "effectiveDate": "2024-05-02",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240501a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20240501"
+      ]
+    },
+    {
+      "id": "US-2024-06-12",
+      "meetingId": "US-2024-06-12",
+      "announcedAt": "2024-06-12T14:00:00-04:00",
+      "effectiveDate": "2024-06-13",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240612a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20240612"
+      ]
+    },
+    {
+      "id": "US-2024-07-31",
+      "meetingId": "US-2024-07-31",
+      "announcedAt": "2024-07-31T14:00:00-04:00",
+      "effectiveDate": "2024-08-01",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240731a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 5-1/4 to 5-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20240731"
+      ]
+    },
+    {
+      "id": "US-2024-09-18",
+      "meetingId": "US-2024-09-18",
+      "announcedAt": "2024-09-18T14:00:00-04:00",
+      "effectiveDate": "2024-09-19",
+      "level": {
+        "kind": "range",
+        "lowBps": 475,
+        "highBps": 500
+      },
+      "direction": "cut",
+      "changeBps": -50,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 1,
+        "dissents": [
+          "Michelle W. Bowman"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240918a.htm",
+      "excerpt": "The Committee decided to lower the target range for the federal funds rate by 1/2 percentage point to 4-3/4 to 5 percent.",
+      "sourceIds": [
+        "us-statement-20240918"
+      ]
+    },
+    {
+      "id": "US-2024-11-07",
+      "meetingId": "US-2024-11-07",
+      "announcedAt": "2024-11-07T14:00:00-05:00",
+      "effectiveDate": "2024-11-08",
+      "level": {
+        "kind": "range",
+        "lowBps": 450,
+        "highBps": 475
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20241107a.htm",
+      "excerpt": "In support of its goals, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 4-1/2 to 4-3/4 percent.",
+      "sourceIds": [
+        "us-statement-20241107"
+      ]
+    },
+    {
+      "id": "US-2024-12-18",
+      "meetingId": "US-2024-12-18",
+      "announcedAt": "2024-12-18T14:00:00-05:00",
+      "effectiveDate": "2024-12-19",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 1,
+        "dissents": [
+          "Beth M. Hammack"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20241218a.htm",
+      "excerpt": "In support of its goals, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 4-1/4 to 4-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20241218"
+      ]
+    },
+    {
+      "id": "US-2025-01-29",
+      "meetingId": "US-2025-01-29",
+      "announcedAt": "2025-01-29T14:00:00-05:00",
+      "effectiveDate": "2025-01-30",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250129a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 4-1/4 to 4-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20250129"
+      ]
+    },
+    {
+      "id": "US-2025-03-19",
+      "meetingId": "US-2025-03-19",
+      "announcedAt": "2025-03-19T14:00:00-04:00",
+      "effectiveDate": "2025-03-20",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 1,
+        "dissents": [
+          "Christopher J. Waller"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250319a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 4-1/4 to 4-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20250319"
+      ]
+    },
+    {
+      "id": "US-2025-05-07",
+      "meetingId": "US-2025-05-07",
+      "announcedAt": "2025-05-07T14:00:00-04:00",
+      "effectiveDate": "2025-05-08",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250507a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 4-1/4 to 4-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20250507"
+      ]
+    },
+    {
+      "id": "US-2025-06-18",
+      "meetingId": "US-2025-06-18",
+      "announcedAt": "2025-06-18T14:00:00-04:00",
+      "effectiveDate": "2025-06-19",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250618a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 4-1/4 to 4-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20250618"
+      ]
+    },
+    {
+      "id": "US-2025-07-30",
+      "meetingId": "US-2025-07-30",
+      "announcedAt": "2025-07-30T14:00:00-04:00",
+      "effectiveDate": "2025-07-31",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 9,
+        "against": 2,
+        "dissents": [
+          "Michelle W. Bowman",
+          "Christopher J. Waller"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250730a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 4-1/4 to 4-1/2 percent.",
+      "sourceIds": [
+        "us-statement-20250730"
+      ]
+    },
+    {
+      "id": "US-2025-09-17",
+      "meetingId": "US-2025-09-17",
+      "announcedAt": "2025-09-17T14:00:00-04:00",
+      "effectiveDate": "2025-09-18",
+      "level": {
+        "kind": "range",
+        "lowBps": 400,
+        "highBps": 425
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 1,
+        "dissents": [
+          "Stephen I. Miran"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250917a.htm",
+      "excerpt": "In support of its goals and in light of the shift in the balance of risks, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 4 to 4-1/4 percent.",
+      "sourceIds": [
+        "us-statement-20250917"
+      ]
+    },
+    {
+      "id": "US-2025-10-29",
+      "meetingId": "US-2025-10-29",
+      "announcedAt": "2025-10-29T14:00:00-04:00",
+      "effectiveDate": "2025-10-30",
+      "level": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 10,
+        "against": 2,
+        "dissents": [
+          "Stephen I. Miran",
+          "Jeffrey R. Schmid"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20251029a.htm",
+      "excerpt": "In support of its goals and in light of the shift in the balance of risks, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 percent.",
+      "sourceIds": [
+        "us-statement-20251029"
+      ]
+    },
+    {
+      "id": "US-2025-12-10",
+      "meetingId": "US-2025-12-10",
+      "announcedAt": "2025-12-10T14:00:00-05:00",
+      "effectiveDate": "2025-12-11",
+      "level": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 9,
+        "against": 3,
+        "dissents": [
+          "Stephen I. Miran",
+          "Austan D. Goolsbee",
+          "Jeffrey R. Schmid"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20251210a.htm",
+      "excerpt": "In support of its goals and in light of the shift in the balance of risks, the Committee decided to lower the target range for the federal funds rate by 1/4 percentage point to 3-1/2 to 3-3/4 percent.",
+      "sourceIds": [
+        "us-statement-20251210"
+      ]
+    },
+    {
+      "id": "US-2026-01-28",
+      "meetingId": "US-2026-01-28",
+      "announcedAt": "2026-01-28T14:00:00-05:00",
+      "effectiveDate": "2026-01-29",
+      "level": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 10,
+        "against": 2,
+        "dissents": [
+          "Stephen I. Miran",
+          "Christopher J. Waller"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 3-1/2 to 3-3/4 percent.",
+      "sourceIds": [
+        "us-statement-20260128"
+      ]
+    },
+    {
+      "id": "US-2026-03-18",
+      "meetingId": "US-2026-03-18",
+      "announcedAt": "2026-03-18T14:00:00-04:00",
+      "effectiveDate": "2026-03-19",
+      "level": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 11,
+        "against": 1,
+        "dissents": [
+          "Stephen I. Miran"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 3-1/2 to 3-3/4 percent.",
+      "sourceIds": [
+        "us-statement-20260318"
+      ]
+    },
+    {
+      "id": "US-2026-04-29",
+      "meetingId": "US-2026-04-29",
+      "announcedAt": "2026-04-29T14:00:00-04:00",
+      "effectiveDate": "2026-04-30",
+      "level": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 8,
+        "against": 4,
+        "dissents": [
+          "Stephen I. Miran",
+          "Beth M. Hammack",
+          "Neel Kashkari",
+          "Lorie K. Logan"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260429a.htm",
+      "excerpt": "In support of its goals, the Committee decided to maintain the target range for the federal funds rate at 3-1/2 to 3-3/4 percent.",
+      "sourceIds": [
+        "us-statement-20260429"
+      ]
+    },
+    {
+      "id": "US-2026-06-17",
+      "meetingId": "US-2026-06-17",
+      "announcedAt": "2026-06-17T14:00:00-04:00",
+      "effectiveDate": "2026-06-18",
+      "level": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm",
+      "excerpt": "The Committee decided to maintain the target range for the federal funds rate at 3-1/2 to 3-3/4 percent, in support of the Federal Reserve's dual mandate.",
+      "sourceIds": [
+        "us-statement-20260617"
+      ]
+    },
+    {
+      "id": "US-2026-07-29",
+      "meetingId": "US-2026-07-29",
+      "announcedAt": "2026-07-29T14:00:00-04:00",
+      "effectiveDate": "2026-07-30",
+      "level": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 9,
+        "against": 3,
+        "dissents": [
+          "Beth M. Hammack",
+          "Neel Kashkari",
+          "Lorie K. Logan"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm",
+      "excerpt": "The Committee decided to maintain the target range for the federal funds rate at 3-1/2 to 3-3/4 percent, in support of the Federal Reserve's dual mandate.",
+      "sourceIds": [
+        "us-statement-20260729"
+      ]
+    },
+    {
+      "id": "US-2026-09-16",
+      "meetingId": "US-2026-09-16",
+      "announcedAt": "2026-09-16T14:00:00-04:00",
+      "effectiveDate": "2026-09-17",
+      "level": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 12,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+      "excerpt": "The Committee decided to raise the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 percent, in support of the Federal Reserve's dual mandate.",
+      "sourceIds": [
+        "us-statement-20260916"
+      ]
+    }
+  ],
+  "series": [
+    {
+      "date": "1999-11-16",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2000-02-02",
+      "level": {
+        "kind": "point",
+        "bps": 575
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2000-03-21",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2000-05-16",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-01-03",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-01-31",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-03-20",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-04-18",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-05-15",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-06-27",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-08-21",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-09-17",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-10-02",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-11-06",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2001-12-11",
+      "level": {
+        "kind": "point",
+        "bps": 175
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2002-11-06",
+      "level": {
+        "kind": "point",
+        "bps": 125
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2003-06-25",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2004-06-30",
+      "level": {
+        "kind": "point",
+        "bps": 125
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2004-08-10",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2004-09-21",
+      "level": {
+        "kind": "point",
+        "bps": 175
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2004-11-10",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2004-12-14",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-02-02",
+      "level": {
+        "kind": "point",
+        "bps": 250
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-03-22",
+      "level": {
+        "kind": "point",
+        "bps": 275
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-05-03",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-06-30",
+      "level": {
+        "kind": "point",
+        "bps": 325
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-08-09",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-09-20",
+      "level": {
+        "kind": "point",
+        "bps": 375
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-11-01",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2005-12-13",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2006-01-31",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2006-03-28",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2006-05-10",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2006-06-29",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2007-09-18",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2007-10-31",
+      "level": {
+        "kind": "point",
+        "bps": 450
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2007-12-11",
+      "level": {
+        "kind": "point",
+        "bps": 425
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2008-01-22",
+      "level": {
+        "kind": "point",
+        "bps": 350
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2008-01-30",
+      "level": {
+        "kind": "point",
+        "bps": 300
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2008-03-18",
+      "level": {
+        "kind": "point",
+        "bps": 225
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2008-04-30",
+      "level": {
+        "kind": "point",
+        "bps": 200
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2008-10-08",
+      "level": {
+        "kind": "point",
+        "bps": 150
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2008-10-29",
+      "level": {
+        "kind": "point",
+        "bps": 100
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtar"
+    },
+    {
+      "date": "2008-12-16",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2015-12-16",
+      "level": {
+        "kind": "range",
+        "lowBps": 25,
+        "highBps": 50
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2016-12-14",
+      "level": {
+        "kind": "range",
+        "lowBps": 50,
+        "highBps": 75
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2017-03-16",
+      "level": {
+        "kind": "range",
+        "lowBps": 75,
+        "highBps": 100
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2017-06-15",
+      "level": {
+        "kind": "range",
+        "lowBps": 100,
+        "highBps": 125
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2017-12-14",
+      "level": {
+        "kind": "range",
+        "lowBps": 125,
+        "highBps": 150
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2018-03-22",
+      "level": {
+        "kind": "range",
+        "lowBps": 150,
+        "highBps": 175
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2018-06-14",
+      "level": {
+        "kind": "range",
+        "lowBps": 175,
+        "highBps": 200
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2018-09-27",
+      "level": {
+        "kind": "range",
+        "lowBps": 200,
+        "highBps": 225
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2018-12-20",
+      "level": {
+        "kind": "range",
+        "lowBps": 225,
+        "highBps": 250
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2019-08-01",
+      "level": {
+        "kind": "range",
+        "lowBps": 200,
+        "highBps": 225
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2019-09-19",
+      "level": {
+        "kind": "range",
+        "lowBps": 175,
+        "highBps": 200
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2019-10-31",
+      "level": {
+        "kind": "range",
+        "lowBps": 150,
+        "highBps": 175
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2020-03-04",
+      "level": {
+        "kind": "range",
+        "lowBps": 100,
+        "highBps": 125
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2020-03-16",
+      "level": {
+        "kind": "range",
+        "lowBps": 0,
+        "highBps": 25
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2022-03-17",
+      "level": {
+        "kind": "range",
+        "lowBps": 25,
+        "highBps": 50
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2022-05-05",
+      "level": {
+        "kind": "range",
+        "lowBps": 75,
+        "highBps": 100
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2022-06-16",
+      "level": {
+        "kind": "range",
+        "lowBps": 150,
+        "highBps": 175
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2022-07-28",
+      "level": {
+        "kind": "range",
+        "lowBps": 225,
+        "highBps": 250
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2022-09-22",
+      "level": {
+        "kind": "range",
+        "lowBps": 300,
+        "highBps": 325
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2022-11-03",
+      "level": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2022-12-15",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2023-02-02",
+      "level": {
+        "kind": "range",
+        "lowBps": 450,
+        "highBps": 475
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2023-03-23",
+      "level": {
+        "kind": "range",
+        "lowBps": 475,
+        "highBps": 500
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2023-05-04",
+      "level": {
+        "kind": "range",
+        "lowBps": 500,
+        "highBps": 525
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2023-07-27",
+      "level": {
+        "kind": "range",
+        "lowBps": 525,
+        "highBps": 550
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2024-09-19",
+      "level": {
+        "kind": "range",
+        "lowBps": 475,
+        "highBps": 500
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2024-11-08",
+      "level": {
+        "kind": "range",
+        "lowBps": 450,
+        "highBps": 475
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2024-12-19",
+      "level": {
+        "kind": "range",
+        "lowBps": 425,
+        "highBps": 450
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2025-09-18",
+      "level": {
+        "kind": "range",
+        "lowBps": 400,
+        "highBps": 425
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2025-10-30",
+      "level": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2025-12-11",
+      "level": {
+        "kind": "range",
+        "lowBps": 350,
+        "highBps": 375
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    },
+    {
+      "date": "2026-09-17",
+      "level": {
+        "kind": "range",
+        "lowBps": 375,
+        "highBps": 400
+      },
+      "evidence": "official",
+      "sourceId": "us-fred-dfedtaru"
+    }
+  ],
+  "transmission": [
+    {
+      "product": "Prime-linked credit line",
+      "benchmark": "Bank prime rate",
+      "spreadBps": 300,
+      "reset": "Within days of a Fed move",
+      "adjusts": "payment",
+      "passThrough": "direct",
+      "note": "Credit cards and home equity lines are priced off the bank prime rate, which has sat 3 points above the target range's upper bound.",
+      "sourceId": "us-dprime"
+    },
+    {
+      "product": "30-year fixed mortgage",
+      "benchmark": "Fixed at origination",
+      "reset": "Never, unless refinanced",
+      "adjusts": "payment",
+      "passThrough": "none",
+      "note": "A fixed-rate mortgage does not change with the Fed. New mortgage rates follow longer-term bond yields rather than the target directly.",
+      "sourceId": "us-mortgage30"
+    }
+  ],
+  "context": [],
+  "sources": [
+    {
+      "id": "us-fred-dfedtar",
+      "type": "series",
+      "title": "FRED: Federal Funds Target Rate (discontinued) (DFEDTAR)",
+      "url": "https://fred.stlouisfed.org/series/DFEDTAR",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "us-fred-dfedtaru",
+      "type": "series",
+      "title": "FRED: Federal Funds Target Range, Upper Limit (DFEDTARU)",
+      "url": "https://fred.stlouisfed.org/series/DFEDTARU",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "us-fred-dfedtarl",
+      "type": "series",
+      "title": "FRED: Federal Funds Target Range, Lower Limit (DFEDTARL)",
+      "url": "https://fred.stlouisfed.org/series/DFEDTARL",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "us-fomc-calendar",
+      "type": "calendar",
+      "title": "Federal Reserve: Meeting calendars and information",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "us-dprime",
+      "type": "series",
+      "title": "FRED: Bank Prime Loan Rate (DPRIME)",
+      "url": "https://fred.stlouisfed.org/series/DPRIME",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "us-mortgage30",
+      "type": "series",
+      "title": "FRED: 30-Year Fixed Rate Mortgage Average (MORTGAGE30US)",
+      "url": "https://fred.stlouisfed.org/series/MORTGAGE30US",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20210127",
+      "type": "statement",
+      "title": "FOMC statement, 2021-01-27",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210127a.htm",
+      "official": true,
+      "publishedAt": "2021-01-27",
+      "retrievedAt": "2026-10-07T10:29:51.998Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20210317",
+      "type": "statement",
+      "title": "FOMC statement, 2021-03-17",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210317a.htm",
+      "official": true,
+      "publishedAt": "2021-03-17",
+      "retrievedAt": "2026-10-07T10:29:52.351Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20210428",
+      "type": "statement",
+      "title": "FOMC statement, 2021-04-28",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210428a.htm",
+      "official": true,
+      "publishedAt": "2021-04-28",
+      "retrievedAt": "2026-10-07T10:29:52.714Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20210616",
+      "type": "statement",
+      "title": "FOMC statement, 2021-06-16",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210616a.htm",
+      "official": true,
+      "publishedAt": "2021-06-16",
+      "retrievedAt": "2026-10-07T10:29:53.050Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20210728",
+      "type": "statement",
+      "title": "FOMC statement, 2021-07-28",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210728a.htm",
+      "official": true,
+      "publishedAt": "2021-07-28",
+      "retrievedAt": "2026-10-07T10:29:53.413Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20210922",
+      "type": "statement",
+      "title": "FOMC statement, 2021-09-22",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210922a.htm",
+      "official": true,
+      "publishedAt": "2021-09-22",
+      "retrievedAt": "2026-10-07T10:29:53.795Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20211103",
+      "type": "statement",
+      "title": "FOMC statement, 2021-11-03",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20211103a.htm",
+      "official": true,
+      "publishedAt": "2021-11-03",
+      "retrievedAt": "2026-10-07T10:29:54.137Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20211215",
+      "type": "statement",
+      "title": "FOMC statement, 2021-12-15",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20211215a.htm",
+      "official": true,
+      "publishedAt": "2021-12-15",
+      "retrievedAt": "2026-10-07T10:29:54.482Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20220126",
+      "type": "statement",
+      "title": "FOMC statement, 2022-01-26",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220126a.htm",
+      "official": true,
+      "publishedAt": "2022-01-26",
+      "retrievedAt": "2026-10-07T10:29:54.828Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20220316",
+      "type": "statement",
+      "title": "FOMC statement, 2022-03-16",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm",
+      "official": true,
+      "publishedAt": "2022-03-16",
+      "retrievedAt": "2026-10-07T10:29:55.170Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20220504",
+      "type": "statement",
+      "title": "FOMC statement, 2022-05-04",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220504a.htm",
+      "official": true,
+      "publishedAt": "2022-05-04",
+      "retrievedAt": "2026-10-07T10:29:55.515Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20220615",
+      "type": "statement",
+      "title": "FOMC statement, 2022-06-15",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220615a.htm",
+      "official": true,
+      "publishedAt": "2022-06-15",
+      "retrievedAt": "2026-10-07T10:29:56.080Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20220727",
+      "type": "statement",
+      "title": "FOMC statement, 2022-07-27",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220727a.htm",
+      "official": true,
+      "publishedAt": "2022-07-27",
+      "retrievedAt": "2026-10-07T10:29:56.716Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20220921",
+      "type": "statement",
+      "title": "FOMC statement, 2022-09-21",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220921a.htm",
+      "official": true,
+      "publishedAt": "2022-09-21",
+      "retrievedAt": "2026-10-07T10:29:57.090Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20221102",
+      "type": "statement",
+      "title": "FOMC statement, 2022-11-02",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20221102a.htm",
+      "official": true,
+      "publishedAt": "2022-11-02",
+      "retrievedAt": "2026-10-07T10:29:57.419Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20221214",
+      "type": "statement",
+      "title": "FOMC statement, 2022-12-14",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm",
+      "official": true,
+      "publishedAt": "2022-12-14",
+      "retrievedAt": "2026-10-07T10:29:57.735Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20230201",
+      "type": "statement",
+      "title": "FOMC statement, 2023-02-01",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230201a.htm",
+      "official": true,
+      "publishedAt": "2023-02-01",
+      "retrievedAt": "2026-10-07T10:29:58.096Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20230322",
+      "type": "statement",
+      "title": "FOMC statement, 2023-03-22",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230322a.htm",
+      "official": true,
+      "publishedAt": "2023-03-22",
+      "retrievedAt": "2026-10-07T10:29:58.464Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20230503",
+      "type": "statement",
+      "title": "FOMC statement, 2023-05-03",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230503a.htm",
+      "official": true,
+      "publishedAt": "2023-05-03",
+      "retrievedAt": "2026-10-07T10:29:58.860Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20230614",
+      "type": "statement",
+      "title": "FOMC statement, 2023-06-14",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230614a.htm",
+      "official": true,
+      "publishedAt": "2023-06-14",
+      "retrievedAt": "2026-10-07T10:29:59.241Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20230726",
+      "type": "statement",
+      "title": "FOMC statement, 2023-07-26",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230726a.htm",
+      "official": true,
+      "publishedAt": "2023-07-26",
+      "retrievedAt": "2026-10-07T10:29:59.629Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20230920",
+      "type": "statement",
+      "title": "FOMC statement, 2023-09-20",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230920a.htm",
+      "official": true,
+      "publishedAt": "2023-09-20",
+      "retrievedAt": "2026-10-07T10:29:59.971Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20231101",
+      "type": "statement",
+      "title": "FOMC statement, 2023-11-01",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20231101a.htm",
+      "official": true,
+      "publishedAt": "2023-11-01",
+      "retrievedAt": "2026-10-07T10:30:00.313Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20231213",
+      "type": "statement",
+      "title": "FOMC statement, 2023-12-13",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20231213a.htm",
+      "official": true,
+      "publishedAt": "2023-12-13",
+      "retrievedAt": "2026-10-07T10:30:00.691Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20240131",
+      "type": "statement",
+      "title": "FOMC statement, 2024-01-31",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm",
+      "official": true,
+      "publishedAt": "2024-01-31",
+      "retrievedAt": "2026-10-07T10:30:01.083Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20240320",
+      "type": "statement",
+      "title": "FOMC statement, 2024-03-20",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240320a.htm",
+      "official": true,
+      "publishedAt": "2024-03-20",
+      "retrievedAt": "2026-10-07T10:30:01.418Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20240501",
+      "type": "statement",
+      "title": "FOMC statement, 2024-05-01",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240501a.htm",
+      "official": true,
+      "publishedAt": "2024-05-01",
+      "retrievedAt": "2026-10-07T10:30:01.785Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20240612",
+      "type": "statement",
+      "title": "FOMC statement, 2024-06-12",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240612a.htm",
+      "official": true,
+      "publishedAt": "2024-06-12",
+      "retrievedAt": "2026-10-07T10:30:02.140Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20240731",
+      "type": "statement",
+      "title": "FOMC statement, 2024-07-31",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240731a.htm",
+      "official": true,
+      "publishedAt": "2024-07-31",
+      "retrievedAt": "2026-10-07T10:30:03.134Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20240918",
+      "type": "statement",
+      "title": "FOMC statement, 2024-09-18",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240918a.htm",
+      "official": true,
+      "publishedAt": "2024-09-18",
+      "retrievedAt": "2026-10-07T10:30:03.489Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20241107",
+      "type": "statement",
+      "title": "FOMC statement, 2024-11-07",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20241107a.htm",
+      "official": true,
+      "publishedAt": "2024-11-07",
+      "retrievedAt": "2026-10-07T10:30:03.822Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20241218",
+      "type": "statement",
+      "title": "FOMC statement, 2024-12-18",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20241218a.htm",
+      "official": true,
+      "publishedAt": "2024-12-18",
+      "retrievedAt": "2026-10-07T10:30:04.212Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20250129",
+      "type": "statement",
+      "title": "FOMC statement, 2025-01-29",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250129a.htm",
+      "official": true,
+      "publishedAt": "2025-01-29",
+      "retrievedAt": "2026-10-07T10:30:04.579Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20250319",
+      "type": "statement",
+      "title": "FOMC statement, 2025-03-19",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250319a.htm",
+      "official": true,
+      "publishedAt": "2025-03-19",
+      "retrievedAt": "2026-10-07T10:30:04.904Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20250507",
+      "type": "statement",
+      "title": "FOMC statement, 2025-05-07",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250507a.htm",
+      "official": true,
+      "publishedAt": "2025-05-07",
+      "retrievedAt": "2026-10-07T10:30:05.282Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20250618",
+      "type": "statement",
+      "title": "FOMC statement, 2025-06-18",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250618a.htm",
+      "official": true,
+      "publishedAt": "2025-06-18",
+      "retrievedAt": "2026-10-07T10:30:05.635Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20250730",
+      "type": "statement",
+      "title": "FOMC statement, 2025-07-30",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250730a.htm",
+      "official": true,
+      "publishedAt": "2025-07-30",
+      "retrievedAt": "2026-10-07T10:30:06.029Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20250917",
+      "type": "statement",
+      "title": "FOMC statement, 2025-09-17",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250917a.htm",
+      "official": true,
+      "publishedAt": "2025-09-17",
+      "retrievedAt": "2026-10-07T10:30:06.393Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20251029",
+      "type": "statement",
+      "title": "FOMC statement, 2025-10-29",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20251029a.htm",
+      "official": true,
+      "publishedAt": "2025-10-29",
+      "retrievedAt": "2026-10-07T10:30:06.753Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20251210",
+      "type": "statement",
+      "title": "FOMC statement, 2025-12-10",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20251210a.htm",
+      "official": true,
+      "publishedAt": "2025-12-10",
+      "retrievedAt": "2026-10-07T10:30:07.086Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20260128",
+      "type": "statement",
+      "title": "FOMC statement, 2026-01-28",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm",
+      "official": true,
+      "publishedAt": "2026-01-28",
+      "retrievedAt": "2026-10-07T10:30:07.439Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20260318",
+      "type": "statement",
+      "title": "FOMC statement, 2026-03-18",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm",
+      "official": true,
+      "publishedAt": "2026-03-18",
+      "retrievedAt": "2026-10-07T10:30:07.782Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20260429",
+      "type": "statement",
+      "title": "FOMC statement, 2026-04-29",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260429a.htm",
+      "official": true,
+      "publishedAt": "2026-04-29",
+      "retrievedAt": "2026-10-07T10:30:08.156Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20260617",
+      "type": "statement",
+      "title": "FOMC statement, 2026-06-17",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm",
+      "official": true,
+      "publishedAt": "2026-06-17",
+      "retrievedAt": "2026-10-07T10:30:08.545Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20260729",
+      "type": "statement",
+      "title": "FOMC statement, 2026-07-29",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm",
+      "official": true,
+      "publishedAt": "2026-07-29",
+      "retrievedAt": "2026-10-07T10:30:08.866Z",
+      "sha256": null
+    },
+    {
+      "id": "us-statement-20260916",
+      "type": "statement",
+      "title": "FOMC statement, 2026-09-16",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+      "official": true,
+      "publishedAt": "2026-09-16",
+      "retrievedAt": "2026-10-07T10:30:09.208Z",
+      "sha256": null
+    }
+  ],
+  "coverage": {
+    "seriesFrom": "1999-11-16",
+    "ledgerFrom": "2021-01-27",
+    "grain": "Every scheduled FOMC meeting from 27 Jan 2021, from its statement; target changes before then from the official FRED series (effective dates)."
+  },
+  "corrections": [],
+  "release": {
+    "hash": "03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d",
+    "generator": "pipeline/countries/us",
+    "observedThrough": "2026-10-06"
+  }
+}

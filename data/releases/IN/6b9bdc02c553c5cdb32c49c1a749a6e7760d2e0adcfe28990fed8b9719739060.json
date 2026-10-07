@@ -1,0 +1,3903 @@
+{
+  "schemaVersion": 3,
+  "country": {
+    "code": "IN",
+    "name": "India",
+    "currency": "INR",
+    "locale": "en-IN",
+    "timeZone": "Asia/Kolkata"
+  },
+  "authority": {
+    "name": "Reserve Bank of India",
+    "short": "RBI",
+    "body": "Monetary Policy Committee",
+    "bodyShort": "MPC",
+    "url": "https://www.rbi.org.in/"
+  },
+  "instrument": {
+    "name": "Policy repo rate",
+    "short": "Repo rate",
+    "explainer": "The repo rate is the rate at which the Reserve Bank of India lends overnight to banks against government securities. The Monetary Policy Committee sets it six times a year to keep inflation close to its 4% target. Most new floating-rate retail loans are priced off it."
+  },
+  "eras": [
+    {
+      "id": "in-auction",
+      "from": "2000-06-05",
+      "to": "2004-10-28",
+      "instrument": "Repo rate (pre-2004 usage: absorption)",
+      "kind": "point",
+      "basis": "observation",
+      "sourceId": "in-laf-2004",
+      "note": "Before 29 Oct 2004, RBI used \"repo\" for operations that absorbed liquidity. These values are kept as observations and left out of findings."
+    },
+    {
+      "id": "in-repo",
+      "from": "2004-10-29",
+      "to": null,
+      "instrument": "Policy repo rate",
+      "kind": "point",
+      "basis": "policy",
+      "sourceId": "in-laf-2004",
+      "note": "The repo rate in its international sense: the rate at which RBI lends to banks. Set by the Monetary Policy Committee since 4 Oct 2016."
+    }
+  ],
+  "calendar": [
+    {
+      "id": "IN-2016-10-04",
+      "date": "2016-10-04",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-38224",
+      "announceAt": "2016-10-04T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2016-12-07",
+      "date": "2016-12-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-38818",
+      "announceAt": "2016-12-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2017-02-08",
+      "date": "2017-02-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-39505",
+      "announceAt": "2017-02-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2017-04-06",
+      "date": "2017-04-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-40069",
+      "announceAt": "2017-04-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2017-06-07",
+      "date": "2017-06-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-40685",
+      "announceAt": "2017-06-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2017-08-02",
+      "date": "2017-08-02",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-41256",
+      "announceAt": "2017-08-02T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2017-10-04",
+      "date": "2017-10-04",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-41852",
+      "announceAt": "2017-10-04T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2017-12-06",
+      "date": "2017-12-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-42476",
+      "announceAt": "2017-12-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2018-02-07",
+      "date": "2018-02-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-43078",
+      "announceAt": "2018-02-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2018-04-05",
+      "date": "2018-04-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-43573",
+      "announceAt": "2018-04-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2018-06-06",
+      "date": "2018-06-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-44125",
+      "announceAt": "2018-06-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2018-08-01",
+      "date": "2018-08-01",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-44636",
+      "announceAt": "2018-08-01T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2018-10-05",
+      "date": "2018-10-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-45152",
+      "announceAt": "2018-10-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2018-12-05",
+      "date": "2018-12-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-45656",
+      "announceAt": "2018-12-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2019-02-07",
+      "date": "2019-02-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-46235",
+      "announceAt": "2019-02-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2019-04-04",
+      "date": "2019-04-04",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-46722",
+      "announceAt": "2019-04-04T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2019-06-06",
+      "date": "2019-06-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-47225",
+      "announceAt": "2019-06-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2019-08-07",
+      "date": "2019-08-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-47818",
+      "announceAt": "2019-08-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2019-10-04",
+      "date": "2019-10-04",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-48319",
+      "announceAt": "2019-10-04T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2019-12-05",
+      "date": "2019-12-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-48802",
+      "announceAt": "2019-12-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2020-02-06",
+      "date": "2020-02-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-49342",
+      "announceAt": "2020-02-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2020-08-06",
+      "date": "2020-08-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-50175",
+      "announceAt": "2020-08-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2020-10-09",
+      "date": "2020-10-09",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-50479",
+      "announceAt": "2020-10-09T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2020-12-04",
+      "date": "2020-12-04",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-50747",
+      "announceAt": "2020-12-04T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2021-02-05",
+      "date": "2021-02-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-51077",
+      "announceAt": "2021-02-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2021-04-07",
+      "date": "2021-04-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-51381",
+      "announceAt": "2021-04-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2021-06-04",
+      "date": "2021-06-04",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-51683",
+      "announceAt": "2021-06-04T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2021-08-06",
+      "date": "2021-08-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-52011",
+      "announceAt": "2021-08-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2021-10-08",
+      "date": "2021-10-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-52366",
+      "announceAt": "2021-10-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2021-12-08",
+      "date": "2021-12-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-52687",
+      "announceAt": "2021-12-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2022-02-10",
+      "date": "2022-02-10",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-53247",
+      "announceAt": "2022-02-10T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2022-04-08",
+      "date": "2022-04-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-53537",
+      "announceAt": "2022-04-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2022-06-08",
+      "date": "2022-06-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-53832",
+      "announceAt": "2022-06-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2022-08-05",
+      "date": "2022-08-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-54148",
+      "announceAt": "2022-08-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2022-09-30",
+      "date": "2022-09-30",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-54465",
+      "announceAt": "2022-09-30T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2022-12-07",
+      "date": "2022-12-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-54818",
+      "announceAt": "2022-12-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2023-02-08",
+      "date": "2023-02-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-55178",
+      "announceAt": "2023-02-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2023-04-06",
+      "date": "2023-04-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-55472",
+      "announceAt": "2023-04-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2023-06-08",
+      "date": "2023-06-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-55814",
+      "announceAt": "2023-06-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2023-08-10",
+      "date": "2023-08-10",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-56173",
+      "announceAt": "2023-08-10T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2023-10-06",
+      "date": "2023-10-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-56502",
+      "announceAt": "2023-10-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2023-12-08",
+      "date": "2023-12-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-56888",
+      "announceAt": "2023-12-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2024-02-08",
+      "date": "2024-02-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-57275",
+      "announceAt": "2024-02-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2024-04-05",
+      "date": "2024-04-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-57637",
+      "announceAt": "2024-04-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2024-06-07",
+      "date": "2024-06-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-58050",
+      "announceAt": "2024-06-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2024-08-08",
+      "date": "2024-08-08",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-58447",
+      "announceAt": "2024-08-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2024-10-09",
+      "date": "2024-10-09",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-58850",
+      "announceAt": "2024-10-09T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2024-12-06",
+      "date": "2024-12-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-59244",
+      "announceAt": "2024-12-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2025-02-07",
+      "date": "2025-02-07",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-59692",
+      "announceAt": "2025-02-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2025-04-09",
+      "date": "2025-04-09",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-60176",
+      "announceAt": "2025-04-09T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2025-06-06",
+      "date": "2025-06-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-60604",
+      "announceAt": "2025-06-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2025-08-06",
+      "date": "2025-08-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-60957",
+      "announceAt": "2025-08-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2025-10-01",
+      "date": "2025-10-01",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-61332",
+      "announceAt": "2025-10-01T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2025-12-05",
+      "date": "2025-12-05",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-61749",
+      "announceAt": "2025-12-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2026-02-06",
+      "date": "2026-02-06",
+      "meetingStart": null,
+      "status": "held",
+      "sourceId": "in-mpc-62169",
+      "announceAt": "2026-02-06T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2026-04-08",
+      "date": "2026-04-08",
+      "meetingStart": "2026-04-06",
+      "status": "held",
+      "sourceId": "in-mpc-schedule-2026-27",
+      "announceAt": "2026-04-08T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2026-06-05",
+      "date": "2026-06-05",
+      "meetingStart": "2026-06-03",
+      "status": "held",
+      "sourceId": "in-mpc-schedule-2026-27",
+      "announceAt": "2026-06-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2026-08-05",
+      "date": "2026-08-05",
+      "meetingStart": "2026-08-03",
+      "status": "held",
+      "sourceId": "in-mpc-schedule-2026-27",
+      "announceAt": "2026-08-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2026-10-07",
+      "date": "2026-10-07",
+      "meetingStart": "2026-10-05",
+      "status": "held",
+      "sourceId": "in-mpc-schedule-2026-27",
+      "announceAt": "2026-10-07T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2026-12-04",
+      "date": "2026-12-04",
+      "meetingStart": "2026-12-02",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27",
+      "announceAt": "2026-12-04T10:00:00+05:30",
+      "effectiveLagDays": 0
+    },
+    {
+      "id": "IN-2027-02-05",
+      "date": "2027-02-05",
+      "meetingStart": "2027-02-03",
+      "status": "scheduled",
+      "sourceId": "in-mpc-schedule-2026-27",
+      "announceAt": "2027-02-05T10:00:00+05:30",
+      "effectiveLagDays": 0
+    }
+  ],
+  "decisions": [
+    {
+      "id": "IN-2016-10-04",
+      "meetingId": "IN-2016-10-04",
+      "announcedAt": "2016-10-04T10:00:00+05:30",
+      "effectiveDate": "2016-10-04",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38224",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points from 6.5 per cent to 6.25 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-38224"
+      ]
+    },
+    {
+      "id": "IN-2016-12-07",
+      "meetingId": "IN-2016-12-07",
+      "announcedAt": "2016-12-07T10:00:00+05:30",
+      "effectiveDate": "2016-12-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38818",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "sourceIds": [
+        "in-mpc-38818"
+      ]
+    },
+    {
+      "id": "IN-2017-02-08",
+      "meetingId": "IN-2017-02-08",
+      "announcedAt": "2017-02-08T10:00:00+05:30",
+      "effectiveDate": "2017-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=39505",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "sourceIds": [
+        "in-mpc-39505"
+      ]
+    },
+    {
+      "id": "IN-2017-04-06",
+      "meetingId": "IN-2017-04-06",
+      "announcedAt": "2017-04-06T10:00:00+05:30",
+      "effectiveDate": "2017-04-06",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40069",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "sourceIds": [
+        "in-mpc-40069"
+      ]
+    },
+    {
+      "id": "IN-2017-06-07",
+      "meetingId": "IN-2017-06-07",
+      "announcedAt": "2017-06-07T10:00:00+05:30",
+      "effectiveDate": "2017-06-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40685",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.25 per cent.",
+      "sourceIds": [
+        "in-mpc-40685"
+      ]
+    },
+    {
+      "id": "IN-2017-08-02",
+      "meetingId": "IN-2017-08-02",
+      "announcedAt": "2017-08-02T10:00:00+05:30",
+      "effectiveDate": "2017-08-02",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41256",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points from 6.25 per cent to 6.0 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-41256"
+      ]
+    },
+    {
+      "id": "IN-2017-10-04",
+      "meetingId": "IN-2017-10-04",
+      "announcedAt": "2017-10-04T10:00:00+05:30",
+      "effectiveDate": "2017-10-04",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41852",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "sourceIds": [
+        "in-mpc-41852"
+      ]
+    },
+    {
+      "id": "IN-2017-12-06",
+      "meetingId": "IN-2017-12-06",
+      "announcedAt": "2017-12-06T10:00:00+05:30",
+      "effectiveDate": "2017-12-06",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=42476",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "sourceIds": [
+        "in-mpc-42476"
+      ]
+    },
+    {
+      "id": "IN-2018-02-07",
+      "meetingId": "IN-2018-02-07",
+      "announcedAt": "2018-02-07T10:00:00+05:30",
+      "effectiveDate": "2018-02-07",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Michael Debabrata Patra"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43078",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "sourceIds": [
+        "in-mpc-43078"
+      ]
+    },
+    {
+      "id": "IN-2018-04-05",
+      "meetingId": "IN-2018-04-05",
+      "announcedAt": "2018-04-05T10:00:00+05:30",
+      "effectiveDate": "2018-04-05",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Michael Debabrata Patra"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43573",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.0 per cent.",
+      "sourceIds": [
+        "in-mpc-43573"
+      ]
+    },
+    {
+      "id": "IN-2018-06-06",
+      "meetingId": "IN-2018-06-06",
+      "announcedAt": "2018-06-06T10:00:00+05:30",
+      "effectiveDate": "2018-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44125",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: increase the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.25 per cent.",
+      "sourceIds": [
+        "in-mpc-44125"
+      ]
+    },
+    {
+      "id": "IN-2018-08-01",
+      "meetingId": "IN-2018-08-01",
+      "announcedAt": "2018-08-01T10:00:00+05:30",
+      "effectiveDate": "2018-08-01",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44636",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: increase the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.5 per cent.",
+      "sourceIds": [
+        "in-mpc-44636"
+      ]
+    },
+    {
+      "id": "IN-2018-10-05",
+      "meetingId": "IN-2018-10-05",
+      "announcedAt": "2018-10-05T10:00:00+05:30",
+      "effectiveDate": "2018-10-05",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45152",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.5 per cent.",
+      "sourceIds": [
+        "in-mpc-45152"
+      ]
+    },
+    {
+      "id": "IN-2018-12-05",
+      "meetingId": "IN-2018-12-05",
+      "announcedAt": "2018-12-05T10:00:00+05:30",
+      "effectiveDate": "2018-12-05",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45656",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.5 per cent.",
+      "sourceIds": [
+        "in-mpc-45656"
+      ]
+    },
+    {
+      "id": "IN-2019-02-07",
+      "meetingId": "IN-2019-02-07",
+      "announcedAt": "2019-02-07T10:00:00+05:30",
+      "effectiveDate": "2019-02-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46235",
+      "excerpt": "The Monetary Policy Committee (MPC) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points from 6.5 per cent to 6.25 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-46235"
+      ]
+    },
+    {
+      "id": "IN-2019-04-04",
+      "meetingId": "IN-2019-04-04",
+      "announcedAt": "2019-04-04T10:00:00+05:30",
+      "effectiveDate": "2019-04-04",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Chetan Ghate",
+          "Dr. Viral V. Acharya"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46722",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.0 per cent from 6.25 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-46722"
+      ]
+    },
+    {
+      "id": "IN-2019-06-06",
+      "meetingId": "IN-2019-06-06",
+      "announcedAt": "2019-06-06T10:00:00+05:30",
+      "effectiveDate": "2019-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 575
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47225",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 5.75 per cent from 6.0 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-47225"
+      ]
+    },
+    {
+      "id": "IN-2019-08-07",
+      "meetingId": "IN-2019-08-07",
+      "announcedAt": "2019-08-07T10:00:00+05:30",
+      "effectiveDate": "2019-08-07",
+      "level": {
+        "kind": "point",
+        "bps": 540
+      },
+      "direction": "cut",
+      "changeBps": -35,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Chetan Ghate",
+          "Dr. Pami Dua"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47818",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 35 basis points (bps) from 5.75 per cent to 5.40 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-47818"
+      ]
+    },
+    {
+      "id": "IN-2019-10-04",
+      "meetingId": "IN-2019-10-04",
+      "announcedAt": "2019-10-04T10:00:00+05:30",
+      "effectiveDate": "2019-10-04",
+      "level": {
+        "kind": "point",
+        "bps": 515
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Ravindra H. Dholakia"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48319",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 4, 2019) decided to: reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 5.15 per cent from 5.40 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-48319"
+      ]
+    },
+    {
+      "id": "IN-2019-12-05",
+      "meetingId": "IN-2019-12-05",
+      "announcedAt": "2019-12-05T10:00:00+05:30",
+      "effectiveDate": "2019-12-05",
+      "level": {
+        "kind": "point",
+        "bps": 515
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48802",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 5, 2019) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.15 per cent.",
+      "sourceIds": [
+        "in-mpc-48802"
+      ]
+    },
+    {
+      "id": "IN-2020-02-06",
+      "meetingId": "IN-2020-02-06",
+      "announcedAt": "2020-02-06T10:00:00+05:30",
+      "effectiveDate": "2020-02-06",
+      "level": {
+        "kind": "point",
+        "bps": 515
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49342",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 6, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.15 per cent.",
+      "sourceIds": [
+        "in-mpc-49342"
+      ]
+    },
+    {
+      "id": "IN-2020-03-27",
+      "meetingId": null,
+      "announcedAt": "2020-03-27T10:00:00+05:30",
+      "effectiveDate": "2020-03-27",
+      "level": {
+        "kind": "point",
+        "bps": 440
+      },
+      "direction": "cut",
+      "changeBps": -75,
+      "eraChange": false,
+      "offCycle": true,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49581",
+      "excerpt": "Reduce the policy repo rate under the liquidity adjustment facility (LAF) by 75 basis points to 4.40 per cent from 5.15 per cent with immediate effect; accordingly, the marginal standing facility (MSF) rate and the Bank Rate stand reduced to 4.65 per cent from 5.40 per cent; further, consequent upon the widening of the LAF corridor as detailed in the accompanying Statement on Developmental and…",
+      "sourceIds": [
+        "in-mpc-49581"
+      ]
+    },
+    {
+      "id": "IN-2020-05-22",
+      "meetingId": null,
+      "announcedAt": "2020-05-22T10:00:00+05:30",
+      "effectiveDate": "2020-05-22",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "cut",
+      "changeBps": -40,
+      "eraChange": false,
+      "offCycle": true,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Chetan Ghate"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49843",
+      "excerpt": "Reduce the policy repo rate under the liquidity adjustment facility (LAF) by 40 bps to 4.0 per cent from 4.40 per cent with immediate effect; accordingly, the marginal standing facility (MSF) rate and the Bank Rate stand reduced to 4.25 per cent from 4.65 per cent; and the reverse repo rate under the LAF stands reduced to 3.35 per cent from 3.75 per cent.",
+      "sourceIds": [
+        "in-mpc-49843"
+      ]
+    },
+    {
+      "id": "IN-2020-08-06",
+      "meetingId": "IN-2020-08-06",
+      "announcedAt": "2020-08-06T10:00:00+05:30",
+      "effectiveDate": "2020-08-06",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50175",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 6, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-50175"
+      ]
+    },
+    {
+      "id": "IN-2020-10-09",
+      "meetingId": "IN-2020-10-09",
+      "announcedAt": "2020-10-09T10:00:00+05:30",
+      "effectiveDate": "2020-10-09",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50479",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 9, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-50479"
+      ]
+    },
+    {
+      "id": "IN-2020-12-04",
+      "meetingId": "IN-2020-12-04",
+      "announcedAt": "2020-12-04T10:00:00+05:30",
+      "effectiveDate": "2020-12-04",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50747",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 4, 2020) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-50747"
+      ]
+    },
+    {
+      "id": "IN-2021-02-05",
+      "meetingId": "IN-2021-02-05",
+      "announcedAt": "2021-02-05T10:00:00+05:30",
+      "effectiveDate": "2021-02-05",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51077",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 5, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-51077"
+      ]
+    },
+    {
+      "id": "IN-2021-04-07",
+      "meetingId": "IN-2021-04-07",
+      "announcedAt": "2021-04-07T10:00:00+05:30",
+      "effectiveDate": "2021-04-07",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51381",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 7, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-51381"
+      ]
+    },
+    {
+      "id": "IN-2021-06-04",
+      "meetingId": "IN-2021-06-04",
+      "announcedAt": "2021-06-04T10:00:00+05:30",
+      "effectiveDate": "2021-06-04",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51683",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 4, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-51683"
+      ]
+    },
+    {
+      "id": "IN-2021-08-06",
+      "meetingId": "IN-2021-08-06",
+      "announcedAt": "2021-08-06T10:00:00+05:30",
+      "effectiveDate": "2021-08-06",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52011",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 6, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-52011"
+      ]
+    },
+    {
+      "id": "IN-2021-10-08",
+      "meetingId": "IN-2021-10-08",
+      "announcedAt": "2021-10-08T10:00:00+05:30",
+      "effectiveDate": "2021-10-08",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52366",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 8, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-52366"
+      ]
+    },
+    {
+      "id": "IN-2021-12-08",
+      "meetingId": "IN-2021-12-08",
+      "announcedAt": "2021-12-08T10:00:00+05:30",
+      "effectiveDate": "2021-12-08",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52687",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 8, 2021) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-52687"
+      ]
+    },
+    {
+      "id": "IN-2022-02-10",
+      "meetingId": "IN-2022-02-10",
+      "announcedAt": "2022-02-10T10:00:00+05:30",
+      "effectiveDate": "2022-02-10",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53247",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 10, 2022) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-53247"
+      ]
+    },
+    {
+      "id": "IN-2022-04-08",
+      "meetingId": "IN-2022-04-08",
+      "announcedAt": "2022-04-08T10:00:00+05:30",
+      "effectiveDate": "2022-04-08",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53537",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 8, 2022) decided to: keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 4.0 per cent.",
+      "sourceIds": [
+        "in-mpc-53537"
+      ]
+    },
+    {
+      "id": "IN-2022-05-04",
+      "meetingId": null,
+      "announcedAt": "2022-05-04T10:00:00+05:30",
+      "effectiveDate": "2022-05-04",
+      "level": {
+        "kind": "point",
+        "bps": 440
+      },
+      "direction": "hike",
+      "changeBps": 40,
+      "eraChange": false,
+      "offCycle": true,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53652",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (May 4, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 40 basis points to 4.40 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-53652"
+      ]
+    },
+    {
+      "id": "IN-2022-06-08",
+      "meetingId": "IN-2022-06-08",
+      "announcedAt": "2022-06-08T10:00:00+05:30",
+      "effectiveDate": "2022-06-08",
+      "level": {
+        "kind": "point",
+        "bps": 490
+      },
+      "direction": "hike",
+      "changeBps": 50,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53832",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 8, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 50 basis points to 4.90 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-53832"
+      ]
+    },
+    {
+      "id": "IN-2022-08-05",
+      "meetingId": "IN-2022-08-05",
+      "announcedAt": "2022-08-05T10:00:00+05:30",
+      "effectiveDate": "2022-08-05",
+      "level": {
+        "kind": "point",
+        "bps": 540
+      },
+      "direction": "hike",
+      "changeBps": 50,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54148",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 5, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 50 basis points to 5.40 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-54148"
+      ]
+    },
+    {
+      "id": "IN-2022-09-30",
+      "meetingId": "IN-2022-09-30",
+      "announcedAt": "2022-09-30T10:00:00+05:30",
+      "effectiveDate": "2022-09-30",
+      "level": {
+        "kind": "point",
+        "bps": 590
+      },
+      "direction": "hike",
+      "changeBps": 50,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Dr. Ashima Goyal"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54465",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (September 30, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 50 basis points to 5.90 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-54465"
+      ]
+    },
+    {
+      "id": "IN-2022-12-07",
+      "meetingId": "IN-2022-12-07",
+      "announcedAt": "2022-12-07T10:00:00+05:30",
+      "effectiveDate": "2022-12-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "hike",
+      "changeBps": 35,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54818",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 7, 2022) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 35 basis points to 6.25 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-54818"
+      ]
+    },
+    {
+      "id": "IN-2023-02-08",
+      "meetingId": "IN-2023-02-08",
+      "announcedAt": "2023-02-08T10:00:00+05:30",
+      "effectiveDate": "2023-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Ashima Goyal",
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55178",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 8, 2023) decided to: Increase the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.50 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-55178"
+      ]
+    },
+    {
+      "id": "IN-2023-04-06",
+      "meetingId": "IN-2023-04-06",
+      "announcedAt": "2023-04-06T10:00:00+05:30",
+      "effectiveDate": "2023-04-06",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55472",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 6, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-55472"
+      ]
+    },
+    {
+      "id": "IN-2023-06-08",
+      "meetingId": "IN-2023-06-08",
+      "announcedAt": "2023-06-08T10:00:00+05:30",
+      "effectiveDate": "2023-06-08",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55814",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 8, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-55814"
+      ]
+    },
+    {
+      "id": "IN-2023-08-10",
+      "meetingId": "IN-2023-08-10",
+      "announcedAt": "2023-08-10T10:00:00+05:30",
+      "effectiveDate": "2023-08-10",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56173",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 10, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-56173"
+      ]
+    },
+    {
+      "id": "IN-2023-10-06",
+      "meetingId": "IN-2023-10-06",
+      "announcedAt": "2023-10-06T10:00:00+05:30",
+      "effectiveDate": "2023-10-06",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56502",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 6, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-56502"
+      ]
+    },
+    {
+      "id": "IN-2023-12-08",
+      "meetingId": "IN-2023-12-08",
+      "announcedAt": "2023-12-08T10:00:00+05:30",
+      "effectiveDate": "2023-12-08",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56888",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 8, 2023) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-56888"
+      ]
+    },
+    {
+      "id": "IN-2024-02-08",
+      "meetingId": "IN-2024-02-08",
+      "announcedAt": "2024-02-08T10:00:00+05:30",
+      "effectiveDate": "2024-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57275",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (February 8, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-57275"
+      ]
+    },
+    {
+      "id": "IN-2024-04-05",
+      "meetingId": "IN-2024-04-05",
+      "announcedAt": "2024-04-05T10:00:00+05:30",
+      "effectiveDate": "2024-04-05",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 5,
+        "against": 1,
+        "dissents": [
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57637",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (April 5, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-57637"
+      ]
+    },
+    {
+      "id": "IN-2024-06-07",
+      "meetingId": "IN-2024-06-07",
+      "announcedAt": "2024-06-07T10:00:00+05:30",
+      "effectiveDate": "2024-06-07",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Ashima Goyal",
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58050",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (June 7, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-58050"
+      ]
+    },
+    {
+      "id": "IN-2024-08-08",
+      "meetingId": "IN-2024-08-08",
+      "announcedAt": "2024-08-08T10:00:00+05:30",
+      "effectiveDate": "2024-08-08",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 4,
+        "against": 2,
+        "dissents": [
+          "Dr. Ashima Goyal",
+          "Prof. Jayanth R. Varma"
+        ]
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58447",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (August 8, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-58447"
+      ]
+    },
+    {
+      "id": "IN-2024-10-09",
+      "meetingId": "IN-2024-10-09",
+      "announcedAt": "2024-10-09T10:00:00+05:30",
+      "effectiveDate": "2024-10-09",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58850",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (October 9, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-58850"
+      ]
+    },
+    {
+      "id": "IN-2024-12-06",
+      "meetingId": "IN-2024-12-06",
+      "announcedAt": "2024-12-06T10:00:00+05:30",
+      "effectiveDate": "2024-12-06",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59244",
+      "excerpt": "The Monetary Policy Committee (MPC) at its meeting today (December 6, 2024) decided to: Keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 6.50 per cent.",
+      "sourceIds": [
+        "in-mpc-59244"
+      ]
+    },
+    {
+      "id": "IN-2025-02-07",
+      "meetingId": "IN-2025-02-07",
+      "announcedAt": "2025-02-07T10:00:00+05:30",
+      "effectiveDate": "2025-02-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59692",
+      "excerpt": "Reduce the policy repo rate under the liquidity adjustment facility (LAF) by 25 basis points to 6.25 per cent with immediate effect; consequently, the standing deposit facility (SDF) rate shall stand adjusted to 6.00 per cent and the marginal standing facility (MSF) rate and the Bank Rate to 6.50 per cent; continue with the neutral monetary policy stance and remain unambiguously focussed on a…",
+      "sourceIds": [
+        "in-mpc-59692"
+      ]
+    },
+    {
+      "id": "IN-2025-04-09",
+      "meetingId": "IN-2025-04-09",
+      "announcedAt": "2025-04-09T10:00:00+05:30",
+      "effectiveDate": "2025-04-09",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60176",
+      "excerpt": "The MPC unanimously voted to reduce the policy repo rate by 25 basis points to 6.00 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-60176"
+      ]
+    },
+    {
+      "id": "IN-2025-06-06",
+      "meetingId": "IN-2025-06-06",
+      "announcedAt": "2025-06-06T10:00:00+05:30",
+      "effectiveDate": "2025-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "direction": "cut",
+      "changeBps": -50,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": null,
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60604",
+      "excerpt": "The MPC voted to reduce the policy repo rate by 50 basis points (bps) to 5.50 per cent with immediate effect.",
+      "sourceIds": [
+        "in-mpc-60604"
+      ]
+    },
+    {
+      "id": "IN-2025-08-06",
+      "meetingId": "IN-2025-08-06",
+      "announcedAt": "2025-08-06T10:00:00+05:30",
+      "effectiveDate": "2025-08-06",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60957",
+      "excerpt": "The MPC voted to maintain the policy repo rate at 5.50 per cent.",
+      "sourceIds": [
+        "in-mpc-60957"
+      ]
+    },
+    {
+      "id": "IN-2025-10-01",
+      "meetingId": "IN-2025-10-01",
+      "announcedAt": "2025-10-01T10:00:00+05:30",
+      "effectiveDate": "2025-10-01",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61332",
+      "excerpt": "The MPC voted unanimously to keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.50 per cent; consequently, the standing deposit facility (SDF) rate remains at 5.25 per cent while the marginal standing facility (MSF) rate and the Bank Rate remains at 5.75 per cent.",
+      "sourceIds": [
+        "in-mpc-61332"
+      ]
+    },
+    {
+      "id": "IN-2025-12-05",
+      "meetingId": "IN-2025-12-05",
+      "announcedAt": "2025-12-05T10:00:00+05:30",
+      "effectiveDate": "2025-12-05",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "direction": "cut",
+      "changeBps": -25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61749",
+      "excerpt": "The MPC voted unanimously to reduce the policy repo rate under the liquidity adjustment facility (LAF) to 5.25 per cent.",
+      "sourceIds": [
+        "in-mpc-61749"
+      ]
+    },
+    {
+      "id": "IN-2026-02-06",
+      "meetingId": "IN-2026-02-06",
+      "announcedAt": "2026-02-06T10:00:00+05:30",
+      "effectiveDate": "2026-02-06",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": null,
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62169",
+      "excerpt": "The MPC voted unanimously to keep the policy repo rate under the liquidity adjustment facility (LAF) unchanged at 5.25 per cent.",
+      "sourceIds": [
+        "in-mpc-62169"
+      ]
+    },
+    {
+      "id": "IN-2026-04-08",
+      "meetingId": "IN-2026-04-08",
+      "announcedAt": "2026-04-08T10:00:00+05:30",
+      "effectiveDate": "2026-04-08",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": "neutral",
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62514",
+      "excerpt": null,
+      "sourceIds": [
+        "source-3270380f0b7d"
+      ]
+    },
+    {
+      "id": "IN-2026-06-05",
+      "meetingId": "IN-2026-06-05",
+      "announcedAt": "2026-06-05T10:00:00+05:30",
+      "effectiveDate": "2026-06-05",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": "neutral",
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62863",
+      "excerpt": null,
+      "sourceIds": [
+        "source-5c261f230add"
+      ]
+    },
+    {
+      "id": "IN-2026-08-05",
+      "meetingId": "IN-2026-08-05",
+      "announcedAt": "2026-08-05T10:00:00+05:30",
+      "effectiveDate": "2026-08-05",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "direction": "hold",
+      "changeBps": 0,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": "neutral",
+      "statementUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63287",
+      "excerpt": null,
+      "sourceIds": [
+        "source-b6c29da8f60a"
+      ]
+    },
+    {
+      "id": "IN-2026-10-07",
+      "meetingId": "IN-2026-10-07",
+      "announcedAt": "2026-10-07T10:00:00+05:30",
+      "effectiveDate": "2026-10-07",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "direction": "hike",
+      "changeBps": 25,
+      "eraChange": false,
+      "offCycle": false,
+      "evidence": "statement",
+      "vote": {
+        "for": 6,
+        "against": 0,
+        "dissents": []
+      },
+      "stance": "calibrated tightening",
+      "statementUrl": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63742",
+      "excerpt": null,
+      "sourceIds": [
+        "source-8eb3f54fb9e1"
+      ]
+    }
+  ],
+  "series": [
+    {
+      "date": "2000-06-05",
+      "level": {
+        "kind": "point",
+        "bps": 905
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-07",
+      "level": {
+        "kind": "point",
+        "bps": 900
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-09",
+      "level": {
+        "kind": "point",
+        "bps": 905
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-12",
+      "level": {
+        "kind": "point",
+        "bps": 925
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-13",
+      "level": {
+        "kind": "point",
+        "bps": 955
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-14",
+      "level": {
+        "kind": "point",
+        "bps": 1085
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-19",
+      "level": {
+        "kind": "point",
+        "bps": 1350
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-20",
+      "level": {
+        "kind": "point",
+        "bps": 1400
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-21",
+      "level": {
+        "kind": "point",
+        "bps": 1350
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-22",
+      "level": {
+        "kind": "point",
+        "bps": 1300
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-23",
+      "level": {
+        "kind": "point",
+        "bps": 1305
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-27",
+      "level": {
+        "kind": "point",
+        "bps": 1260
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-06-28",
+      "level": {
+        "kind": "point",
+        "bps": 1225
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-07-13",
+      "level": {
+        "kind": "point",
+        "bps": 900
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-07-21",
+      "level": {
+        "kind": "point",
+        "bps": 1000
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-08-09",
+      "level": {
+        "kind": "point",
+        "bps": 1600
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-08-30",
+      "level": {
+        "kind": "point",
+        "bps": 1500
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-09-06",
+      "level": {
+        "kind": "point",
+        "bps": 1350
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-10-13",
+      "level": {
+        "kind": "point",
+        "bps": 1025
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2000-11-06",
+      "level": {
+        "kind": "point",
+        "bps": 1000
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2001-03-09",
+      "level": {
+        "kind": "point",
+        "bps": 900
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2001-04-30",
+      "level": {
+        "kind": "point",
+        "bps": 875
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2001-06-07",
+      "level": {
+        "kind": "point",
+        "bps": 850
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2002-03-28",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2002-11-12",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2003-03-07",
+      "level": {
+        "kind": "point",
+        "bps": 710
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2003-03-19",
+      "level": {
+        "kind": "point",
+        "bps": 700
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2004-03-31",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2005-10-26",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2006-01-24",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2006-06-08",
+      "level": {
+        "kind": "point",
+        "bps": 675
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2006-07-25",
+      "level": {
+        "kind": "point",
+        "bps": 700
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2006-10-30",
+      "level": {
+        "kind": "point",
+        "bps": 725
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2007-01-31",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2007-03-30",
+      "level": {
+        "kind": "point",
+        "bps": 775
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2008-06-11",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2008-06-24",
+      "level": {
+        "kind": "point",
+        "bps": 850
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2008-07-29",
+      "level": {
+        "kind": "point",
+        "bps": 900
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2008-10-20",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2008-11-03",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2008-12-08",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2009-01-02",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2009-03-04",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2009-04-21",
+      "level": {
+        "kind": "point",
+        "bps": 475
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2010-03-19",
+      "level": {
+        "kind": "point",
+        "bps": 500
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2010-04-20",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2010-07-02",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2010-07-27",
+      "level": {
+        "kind": "point",
+        "bps": 575
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2010-09-16",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2010-11-02",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2011-01-25",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2011-03-17",
+      "level": {
+        "kind": "point",
+        "bps": 675
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2011-05-03",
+      "level": {
+        "kind": "point",
+        "bps": 725
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2011-06-16",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2011-07-26",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2011-09-16",
+      "level": {
+        "kind": "point",
+        "bps": 825
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2011-10-25",
+      "level": {
+        "kind": "point",
+        "bps": 850
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2012-04-17",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2013-01-29",
+      "level": {
+        "kind": "point",
+        "bps": 775
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2013-03-19",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2013-05-03",
+      "level": {
+        "kind": "point",
+        "bps": 725
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2013-09-20",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2013-10-29",
+      "level": {
+        "kind": "point",
+        "bps": 775
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2014-01-28",
+      "level": {
+        "kind": "point",
+        "bps": 800
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2015-01-15",
+      "level": {
+        "kind": "point",
+        "bps": 775
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2015-03-04",
+      "level": {
+        "kind": "point",
+        "bps": 750
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2015-06-02",
+      "level": {
+        "kind": "point",
+        "bps": 725
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2015-09-29",
+      "level": {
+        "kind": "point",
+        "bps": 675
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2016-04-05",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "secondary",
+      "sourceId": "source-reuters-historical-2025"
+    },
+    {
+      "date": "2016-10-04",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-38224"
+    },
+    {
+      "date": "2017-08-02",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-41256"
+    },
+    {
+      "date": "2018-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-44125"
+    },
+    {
+      "date": "2018-08-01",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-44636"
+    },
+    {
+      "date": "2019-02-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-46235"
+    },
+    {
+      "date": "2019-04-04",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-46722"
+    },
+    {
+      "date": "2019-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 575
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-47225"
+    },
+    {
+      "date": "2019-08-07",
+      "level": {
+        "kind": "point",
+        "bps": 540
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-47818"
+    },
+    {
+      "date": "2019-10-04",
+      "level": {
+        "kind": "point",
+        "bps": 515
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-48319"
+    },
+    {
+      "date": "2020-03-27",
+      "level": {
+        "kind": "point",
+        "bps": 440
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-49581"
+    },
+    {
+      "date": "2020-05-22",
+      "level": {
+        "kind": "point",
+        "bps": 400
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-49843"
+    },
+    {
+      "date": "2022-05-04",
+      "level": {
+        "kind": "point",
+        "bps": 440
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-53652"
+    },
+    {
+      "date": "2022-06-08",
+      "level": {
+        "kind": "point",
+        "bps": 490
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-53832"
+    },
+    {
+      "date": "2022-08-05",
+      "level": {
+        "kind": "point",
+        "bps": 540
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-54148"
+    },
+    {
+      "date": "2022-09-30",
+      "level": {
+        "kind": "point",
+        "bps": 590
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-54465"
+    },
+    {
+      "date": "2022-12-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-54818"
+    },
+    {
+      "date": "2023-02-08",
+      "level": {
+        "kind": "point",
+        "bps": 650
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-55178"
+    },
+    {
+      "date": "2025-02-07",
+      "level": {
+        "kind": "point",
+        "bps": 625
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-59692"
+    },
+    {
+      "date": "2025-04-09",
+      "level": {
+        "kind": "point",
+        "bps": 600
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-60176"
+    },
+    {
+      "date": "2025-06-06",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-60604"
+    },
+    {
+      "date": "2025-12-05",
+      "level": {
+        "kind": "point",
+        "bps": 525
+      },
+      "evidence": "official",
+      "sourceId": "in-mpc-61749"
+    },
+    {
+      "date": "2026-10-07",
+      "level": {
+        "kind": "point",
+        "bps": 550
+      },
+      "evidence": "official",
+      "sourceId": "source-8eb3f54fb9e1"
+    }
+  ],
+  "transmission": [
+    {
+      "product": "Floating-rate home loan",
+      "benchmark": "External benchmark, usually the repo rate",
+      "reset": "At least once every three months",
+      "adjusts": "both",
+      "passThrough": "direct",
+      "note": "Most new floating-rate retail loans must be linked to an external benchmark, and most banks use the repo rate. When the rate resets, borrowers can choose a higher EMI, a longer tenure, or both.",
+      "sourceId": "in-eblr-2019"
+    },
+    {
+      "product": "Older MCLR-linked loan",
+      "benchmark": "Bank's marginal cost of funds based lending rate",
+      "reset": "On the loan's reset date, often yearly",
+      "adjusts": "both",
+      "passThrough": "lagged",
+      "note": "Loans priced off a bank's internal MCLR follow policy moves later and usually by less.",
+      "sourceId": "in-emi-reset-2023"
+    }
+  ],
+  "context": [
+    {
+      "date": "2008-09-15",
+      "label": "Global financial crisis",
+      "description": "RBI records the September 2008 global financial crisis as a sharp external shock that changed India’s monetary-policy challenge.",
+      "sourceId": "in-event-event-001-2008-09-15"
+    },
+    {
+      "date": "2013-05-22",
+      "label": "Tapering shock",
+      "description": "RBI records US Federal Reserve tapering signals, capital outflows, and sharp pressure on the rupee in 2013.",
+      "sourceId": "in-event-event-002-2013-05-22"
+    },
+    {
+      "date": "2016-11-08",
+      "label": "Currency withdrawal",
+      "description": "RBI recorded the 8 Nov 2016 withdrawal of legal-tender status for the ₹500 and ₹1,000 notes.",
+      "sourceId": "in-event-event-003-2016-11-08"
+    },
+    {
+      "date": "2017-07-01",
+      "label": "GST rollout",
+      "description": "CBIC records the Goods and Services Tax rollout on 1 Jul 2017 as a major structural tax reform.",
+      "sourceId": "in-event-event-004-2017-07-01"
+    },
+    {
+      "date": "2020-03-24",
+      "label": "National lockdown",
+      "description": "The Ministry of Home Affairs order of 24 Mar 2020 established a 21-day nationwide lockdown from 25 Mar.",
+      "sourceId": "in-event-event-005-2020-03-24"
+    },
+    {
+      "date": "2022-02-24",
+      "label": "War in Ukraine",
+      "description": "RBI linked the conflict to higher global food, energy, and commodity prices and sustained inflation pressure in 2022.",
+      "sourceId": "in-event-event-006-2022-02-24"
+    },
+    {
+      "date": "2022-05-04",
+      "label": "Off-cycle tightening",
+      "description": "The RBI raised the policy repo rate by 40 bps to 4.40% on 4 May 2022 amid elevated inflation pressures.",
+      "sourceId": "in-event-event-007-2022-05-04"
+    },
+    {
+      "date": "2025-02-07",
+      "label": "Easing cycle begins",
+      "description": "The MPC cut the policy repo rate by 25 bps to 6.25% on 7 Feb 2025 and retained a neutral stance.",
+      "sourceId": "in-event-event-008-2025-02-07"
+    }
+  ],
+  "sources": [
+    {
+      "id": "in-eblr-2019",
+      "type": "regulation",
+      "title": "RBI: External Benchmark Based Lending (4 Sep 2019)",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=11677&Mode=0",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-emi-reset-2023",
+      "type": "regulation",
+      "title": "RBI: Reset of Floating Interest Rate on EMI based Personal Loans (18 Aug 2023)",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12529&Mode=0",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-001-2008-09-15",
+      "type": "context",
+      "title": "Global financial crisis",
+      "url": "https://rbi.org.in/scripts/AnnualReportPublications.aspx?Id=896",
+      "official": true,
+      "publishedAt": "2008-09-15",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-002-2013-05-22",
+      "type": "context",
+      "title": "Tapering shock",
+      "url": "https://systemhealth.rbi.org.in/Scripts/PublicationsView.aspx_id%3D15709.html",
+      "official": true,
+      "publishedAt": "2013-05-22",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-003-2016-11-08",
+      "type": "context",
+      "title": "Currency withdrawal",
+      "url": "https://www.rbi.org.in/commonman/english/Scripts/Notification.aspx?Id=1938",
+      "official": true,
+      "publishedAt": "2016-11-08",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-004-2017-07-01",
+      "type": "context",
+      "title": "GST rollout",
+      "url": "https://cbic-gst.gov.in/pdf/press-release/press-relese-gst-02092017.pdf",
+      "official": false,
+      "publishedAt": "2017-07-01",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-005-2020-03-24",
+      "type": "context",
+      "title": "National lockdown",
+      "url": "https://www.mha.gov.in/sites/default/files/PR_NationalLockdown_26032020.pdf",
+      "official": false,
+      "publishedAt": "2020-03-24",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-006-2022-02-24",
+      "type": "context",
+      "title": "War in Ukraine",
+      "url": "https://www.rbi.org.in/scripts/AnnualReportPublications.aspx?Id=1373",
+      "official": true,
+      "publishedAt": "2022-02-24",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-007-2022-05-04",
+      "type": "context",
+      "title": "Off-cycle tightening",
+      "url": "https://www.rbi.org.in/scripts/FS_Notification.aspx?Id=12311",
+      "official": true,
+      "publishedAt": "2022-05-04",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-event-event-008-2025-02-07",
+      "type": "context",
+      "title": "Easing cycle begins",
+      "url": "https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR2094189B0DF105514A28A2FA834330E94B26.PDF",
+      "official": true,
+      "publishedAt": "2025-02-07",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-laf-2004",
+      "type": "reference",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null,
+      "title": "RBI Handbook of Statistics, Table 44: Major monetary policy rates (repo and reverse repo nomenclature interchanged from 29 Oct 2004)",
+      "url": "https://rbidocs.rbi.org.in/rdocs/Publications/PDFs/TABLE4481AA634C0907458C91DC0497720652F4.PDF"
+    },
+    {
+      "id": "in-mpc-38224",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38224",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-38818",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38818",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-39505",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=39505",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-40069",
+      "type": "statement",
+      "title": "First Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40069",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-40685",
+      "type": "statement",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40685",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-41256",
+      "type": "statement",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41256",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-41852",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41852",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-42476",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=42476",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-43078",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43078",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-43573",
+      "type": "statement",
+      "title": "First Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43573",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-44125",
+      "type": "statement",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44125",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-44636",
+      "type": "statement",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44636",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-45152",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45152",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-45656",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45656",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-46235",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46235",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-46722",
+      "type": "statement",
+      "title": "First Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46722",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-47225",
+      "type": "statement",
+      "title": "Second Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47225",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-47818",
+      "type": "statement",
+      "title": "Third Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47818",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-48319",
+      "type": "statement",
+      "title": "Fourth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48319",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-48802",
+      "type": "statement",
+      "title": "Fifth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48802",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-49342",
+      "type": "statement",
+      "title": "Sixth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49342",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-49581",
+      "type": "statement",
+      "title": "Seventh Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49581",
+      "official": true,
+      "publishedAt": "2020-03-27",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-49843",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21: Resolution of the Monetary Policy Committee (MPC) May 20 to 22, 2020",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49843",
+      "official": true,
+      "publishedAt": "2020-05-22",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-50175",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) August 4 to 6, 2020",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50175",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-50479",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) October 7-9, 2020",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50479",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-50747",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) December 2-4, 2020",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50747",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-51077",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) February 3-5, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51077",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-51381",
+      "type": "statement",
+      "title": "Resolution of the Monetary Policy Committee (MPC) April 5-7, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51381",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-51683",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) June 2-4, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51683",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-52011",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) August 4-6, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52011",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-52366",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) October 6-8, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52366",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-52687",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) December 6-8, 2021",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52687",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-53247",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) February 8-10, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53247",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-53537",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) April 6-8, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53537",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-53652",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) May 2 and 4, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53652",
+      "official": true,
+      "publishedAt": "2022-05-04",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-53832",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53832",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-54148",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) August 3-5, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54148",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-54465",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) September 28-30, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54465",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-54818",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) December 5-7, 2022",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54818",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-55178",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) February 6-8, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55178",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-55472",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) April 3, 5 and 6, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55472",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-55814",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55814",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-56173",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) August 8-10, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56173",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-56502",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) October 4 to 6, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56502",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-56888",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) December 6 to 8, 2023",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56888",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-57275",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) February 6 to 8, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57275",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-57637",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) April 3 to 5, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57637",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-58050",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) June 5 to 7, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58050",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-58447",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) August 6 to 8, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58447",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-58850",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) October 7 to 9, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58850",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-59244",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee December 4 to 6, 2024",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59244",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-59692",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee February 5 to 7, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59692",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-60176",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee April 7 to 9, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60176",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-60604",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee June 4 to 6, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60604",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-60957",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee August 4 to 6, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60957",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-61332",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee September 29 to October 1, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61332",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-61749",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee December 3 to 5, 2025",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61749",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-62169",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee February 4 to 6, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62169",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "in-mpc-schedule-2026-27",
+      "type": "calendar",
+      "title": "RBI: Schedule of the Monetary Policy Committee for 2026-2027 (23 Mar 2026)",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-3270380f0b7d",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee April 6 to 8, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62514",
+      "official": true,
+      "publishedAt": "2026-04-08T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-5c261f230add",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee June 3 to 5, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62863",
+      "official": true,
+      "publishedAt": "2026-06-05T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-8834bb93a0f0",
+      "type": "archive",
+      "title": "RBI Monetary Policy archive",
+      "url": "https://www.rbi.org.in/scripts/Annualpolicy.aspx",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-8eb3f54fb9e1",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee October 5 to 7, 2026",
+      "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63742",
+      "official": true,
+      "publishedAt": "2026-10-07T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-9f153108642d",
+      "type": "minutes",
+      "title": "Minutes of the Monetary Policy Committee Meeting, August 3 to 5, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63403",
+      "official": true,
+      "publishedAt": "2026-08-19T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-a03e7549af0f",
+      "type": "current-rates",
+      "title": "RBI Current Policy Rates",
+      "url": "https://www.rbi.org.in/",
+      "official": true,
+      "publishedAt": null,
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-b6c29da8f60a",
+      "type": "statement",
+      "title": "Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee August 3 to 5, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63287",
+      "official": true,
+      "publishedAt": "2026-08-05T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-b90d0dee26ee",
+      "type": "minutes",
+      "title": "Minutes of the Monetary Policy Committee Meeting, June 3 to 5, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62974",
+      "official": true,
+      "publishedAt": "2026-06-19T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-cdb8e605e1d7",
+      "type": "minutes",
+      "title": "Minutes of the Monetary Policy Committee Meeting, April 6 to 8, 2026",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62599",
+      "official": true,
+      "publishedAt": "2026-04-22T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-reuters-historical-2025",
+      "type": "secondary-series",
+      "title": "Reuters — Changes to India's repo rate since June 2000",
+      "url": "https://www.reuters.com/world/india/changes-indias-repo-rate-since-june-2000-2025-12-05/",
+      "official": false,
+      "publishedAt": "2025-12-05T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    },
+    {
+      "id": "source-shriram-historical-2025",
+      "type": "secondary-reference",
+      "title": "Shriram Finance — Detailed Historical Repo Rate Trends (2010–2025)",
+      "url": "https://www.shriramfinance.in/fixed-deposit/articles/detailed-historical-repo-rate-trends-in-india",
+      "official": false,
+      "publishedAt": "2025-12-10T00:00:00.000Z",
+      "retrievedAt": null,
+      "sha256": null
+    }
+  ],
+  "coverage": {
+    "seriesFrom": "2000-06-05",
+    "ledgerFrom": "2016-10-04",
+    "grain": "Every MPC decision from 4 Oct 2016 from its official resolution; earlier rate changes from the v2 record, with secondary sources labelled. Historical announcement times use 10:00 IST as a convention."
+  },
+  "corrections": [],
+  "release": {
+    "hash": "6b9bdc02c553c5cdb32c49c1a749a6e7760d2e0adcfe28990fed8b9719739060",
+    "generator": "pipeline/countries/in",
+    "observedThrough": "2026-10-07",
+    "upstream": {
+      "kind": "rbi-snapshot-v2",
+      "id": "snapshot-498d4e1254548cbb51e3ababf17e53508e77a3160562023a855c7653bc114e61",
+      "sha256": "3f9e2897c30c76f1bda2b981134272cb331a358de5ad4872aafa82cd8d2200c4"
+    }
+  }
+}
