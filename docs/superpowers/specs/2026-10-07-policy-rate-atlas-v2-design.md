@@ -456,7 +456,7 @@ The policy stripes and the rates-by-year heat matrix are **dropped**. The owner 
   - Touch targets ≥ 44 px, and no information depends on hover.
 
 ### 6.8 Rendering, performance, SEO
-- **Prerendering.** Every route is prerendered with React 19 `renderToString` and then hydrated. Prerendered HTML contains absolute dates only. Countdowns, relative times and decision-day state appear after mount.
+- **Prerendering.** Every route is prerendered by running the same typed page modules against a server-side DOM (linkedom). On load the client fills the charts and wires the page; nothing already rendered is replaced. Text is computed as of the build date and recomputed on load, so a cached page is never wrong for longer than it takes the script to run.
 - **Dates.** Dates are plain dates formatted in UTC, so no time zone can shift them.
 - **Release ids.** HTML embeds its release ids. The client fetches the immutable `/api/v1/releases/{cc}/{hash}.json` and `latest.json` (revalidated) to detect anything newer.
 - **Bundle.**
@@ -520,8 +520,8 @@ The policy stripes and the rates-by-year heat matrix are **dropped**. The owner 
 schema/      v3 types + validator (shared)
 pipeline/    run, adapters/<cc>/{decision,series}.ts, calendars/<cc>.json, transmission/<cc>.json, fixtures/
 data/        manifest.json, schedule.json, health.json, releases/<cc>/<hash>.json
-src/         React 19 app (views, components, lib, styles, agent/webmcp.ts, prerender.tsx)
-worker/      site.ts (mcp + scheduled dispatcher)
+src/         typed vanilla TypeScript app (lib, charts, app pages and shell, analytics, styles)
+worker/      site/ (POST /e collector, daily rollup; /mcp in Phase 4), dispatch/ (cron dispatcher)
 scripts/     existing RBI fetcher + HF build (kept); build-api.ts, prerender.ts, og.ts
 public/      _headers, _redirects, robots.txt, fonts
 ```

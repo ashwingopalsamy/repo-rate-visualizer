@@ -161,3 +161,6 @@ design/prototype/shots/
 public/atlas.json
 public/api/
 public/_redirects
+
+# Wrangler local state
+.wrangler/

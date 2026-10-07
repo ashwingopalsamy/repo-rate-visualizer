@@ -21,6 +21,10 @@
 
 **Depends on:** Plan 1 completed. `data/` holds IN and US v3 releases, `data/schedule.json` and `schema/`.
 
+## Revision 3 (7 Oct 2026): typed vanilla TypeScript instead of React
+
+The approved prototype is framework-free, and its switch contract (queued text swaps committed on one frame, in-card FLIP, keyed tweens on one rAF clock) works on DOM nodes directly. Porting it to React would mean re-deriving that contract around reconciliation. The production site is therefore the prototype's code, typed, in `src/lib` (findings, motion, formatting), `src/charts`, `src/app` (pages, shell, routing) and `src/analytics`, with one global stylesheet ported from `design/prototype/styles.css`. Where a task below names a React component, hook or `.tsx` file, read it as the corresponding typed module. Prerendering runs the same modules against linkedom (`scripts/prerender.ts`). Results: 36 KB JS and 10 KB CSS gzip, against budgets of 90 and 25.
+
 ## Revision 2 (7 Oct 2026): what the approved prototype changes
 
 The owner approved the HTML prototype in `design/prototype/`. It is the reference implementation. Port its logic and measurements; do not re-derive them:
