@@ -284,6 +284,12 @@ tests/fixtures/v3/{IN,US}.json     copies of Plan 1 releases; synthetic fixtures
   - `navigate(href)` uses the History API. `AppShell` provides the rail, the toolbar with its rolling crumb (spec §6.5 timings) and the country chip.
   - `CountrySwitcher` opens on ⌘K, Ctrl+K or `/`. Arrow keys preview a country (it renders without committing the URL), Enter commits and Esc reverts. It renders as `Sheet` below 720 px.
   - `ThemeToggle` and `PaletteToggle` persist to `localStorage` keys `atlas-theme` and `atlas-palette`, wrapped in try/catch.
+  - **Country switch contract (spec §6.5, "A country is data, not identity").**
+    - Country is a prop, never a key. No `key={cc}` on the page, cards or charts, so a switch never remounts them.
+    - `useSwitchTransaction()` measures rows before the switch, commits every text change on one frame, then FLIPs row heights and in-card blocks.
+    - `<Swap value>` animates only when its value changes.
+    - Charts use `useMorph(target)` on one shared rAF clock. It tweens sampled series and scales from the geometry on screen, so a switch mid-flight never jumps.
+    - Only shapes that differ in kind crossfade.
 
 - [ ] **Step 1:** Write the failing tests in `shell.spec.ts`:
   - `parseRoute` cases, run through the page: visiting `/us/` shows the US heading.
@@ -291,6 +297,12 @@ tests/fixtures/v3/{IN,US}.json     copies of Plan 1 releases; synthetic fixtures
   - ⌘K, typing "fed", then Enter navigates to `/us/`, and browser Back returns to `/in/`.
   - After scrolling to each section and waiting 450 ms, exactly one `.crumb` is visible and its text matches the section.
   - The palette toggle changes `--hawk` on `<html>` from `#dd4124` to `#c14219`.
+  - Switching IN → US (⌘K), IN → BR (peer row) and five rapid ⌘K previews:
+    - keeps every card, chart `<svg>` and axis node (same element identity);
+    - never drops a card, row or shell element below opacity 1;
+    - renders at least 3 distinct record-line paths during the switch;
+    - lands exactly on a fresh static render of the target country.
+    - The prototype's `design/prototype/check.mjs` "switch smoothness" suite is the reference implementation.
 - [ ] **Step 2:** Implement, run the spec, and expect PASS.
 - [ ] **Step 3:** Commit with `feat(shell): rail, rolling crumb, router and country switcher`.
 
