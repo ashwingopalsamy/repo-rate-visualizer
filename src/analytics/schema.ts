@@ -25,5 +25,7 @@ export type WireEvent = { n: EventName; p: Record<string, string> };
 /** The batch the client posts to /e. */
 export type WireBatch = { v: 1; path: string; e: WireEvent[] };
 
+/** The Analytics Engine dataset the collector writes to (wrangler.jsonc). */
+export const DATASET = 'atlas_events';
 export const MAX_EVENTS = 20;
 export const MAX_BYTES = 2048;

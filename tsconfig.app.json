@@ -39,6 +39,10 @@
     "scripts/build-atlas.ts",
     "scripts/build-api.ts",
     "scripts/prerender.ts",
-    "scripts/check-bundle.ts"
+    "scripts/check-bundle.ts",
+    "scripts/analytics-report.ts"
+  ],
+  "exclude": [
+    "tests/app/events.test.ts"
   ]
 }
