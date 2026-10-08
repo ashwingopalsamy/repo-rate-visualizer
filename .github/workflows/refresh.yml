@@ -109,21 +109,21 @@ jobs:
           ls -R .out | head -40
       - name: Publish candidates into data/
         run: node pipeline/publish.ts || echo "::warning::publish reported errors; see the log above"
-      - name: Detect India v2 changes
+      - name: Detect data changes
         id: v2
         run: |
-          if [ -n "$(git status --porcelain -- public/data data/legacy)" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
+          if [ -n "$(git status --porcelain -- data/releases data/manifest.json public/data data/legacy)" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         if: steps.v2.outputs.changed == 'true'
         with:
           python-version: '3.12'
           cache: pip
           cache-dependency-path: requirements-hf-dataset.txt
-      - name: Rebuild the Hugging Face dataset
+      - name: Rebuild the Hugging Face datasets
         if: steps.v2.outputs.changed == 'true'
         run: |
           python -m pip install --disable-pip-version-check -r requirements-hf-dataset.txt
-          python scripts/build-hf-dataset.py
+          npm run build:hf
           npm run test:hf-dataset
       - name: Validate before pushing
         run: |
@@ -138,7 +138,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data public/data hf-dataset
+          git add data public/data hf
           if git diff --staged --quiet; then echo "No data change."; exit 0; fi
           changed=$(git diff --staged --name-only -- data/releases | cut -d/ -f3 | sort -u | paste -sd' ' -)
           git commit -m "chore(data): ${changed:-health} ${REASON}"
@@ -147,6 +147,12 @@ jobs:
             git pull --rebase origin main || { git rebase --abort; echo "::error::rebase conflict"; exit 1; }
           done
           exit 1
+      # Pushes made with the workflow token do not trigger hf-publish.yml, so data updates publish here.
+      - name: Publish the Hugging Face datasets
+        if: steps.v2.outputs.changed == 'true'
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/publish-hf.py >> "$GITHUB_STEP_SUMMARY"
       - name: Sync pipeline issues
         if: always()
         env:
