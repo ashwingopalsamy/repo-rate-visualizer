@@ -1,0 +1,3 @@
+country_code,product,benchmark,spread_bps,reset,adjusts,pass_through,note,source_id
+US,Prime-linked credit line,Bank prime rate,300,Within days of a Fed move,payment,direct,"Credit cards and home equity lines are priced off the bank prime rate, which has sat 3 points above the target range's upper bound.",us-dprime
+US,30-year fixed mortgage,Fixed at origination,,"Never, unless refinanced",payment,none,A fixed-rate mortgage does not change with the Fed. New mortgage rates follow longer-term bond yields rather than the target directly.,us-mortgage30

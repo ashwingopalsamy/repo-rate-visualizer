@@ -1,0 +1,81 @@
+{
+  "repo_id": "ashwingopalsamy/australia-cash-rate-dataset",
+  "version": "1.0.0",
+  "generated_at": "2026-10-06",
+  "generator": "scripts/build-hf-datasets.py",
+  "generator_version": "2.0.0",
+  "country_codes": [
+    "AU"
+  ],
+  "releases": [
+    {
+      "country_code": "AU",
+      "hash": "fd81f8557e007c68c78b0ef835dd5464cb7313612afd0e3bdd3f7f3ce319324a",
+      "file": "data/releases/AU/fd81f8557e007c68c78b0ef835dd5464cb7313612afd0e3bdd3f7f3ce319324a.json",
+      "sha256": "892efd493f358e8ddfeb1ff061d6c6cd40dbf7ab7b28cc2f43790b677f03eec9",
+      "observed_through": "2026-10-06"
+    }
+  ],
+  "record_counts_by_config": {
+    "rates": 39,
+    "daily": 5755,
+    "cycles": 4,
+    "annual": 16,
+    "countries": 1,
+    "eras": 1,
+    "sources": 2,
+    "transmission": 2
+  },
+  "coverage": {
+    "rates_from": "2011-01-04",
+    "rates_to": "2026-09-30",
+    "daily_from": "2011-01-04",
+    "daily_to": "2026-10-06"
+  },
+  "rights": {
+    "dataset_license": null,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "statement": "No dataset licence is asserted. Each publisher’s own terms apply to its data; see NOTICE.md.",
+    "publishers": [
+      {
+        "country_code": "AU",
+        "name": "Reserve Bank of Australia",
+        "terms_url": "https://www.rba.gov.au/copyright/",
+        "attribution": "Source: Reserve Bank of Australia"
+      }
+    ]
+  },
+  "output_checksums": {
+    "CHANGELOG.md": "725d083f12f4252450cea4f9f5a88bd51bb8509491d4029e653fc06a00be014e",
+    "NOTICE.md": "e1f1d54227bb81ea237fdbefb56d5f37d584466b0ef0560d15e06b38348321cc",
+    "README.md": "671097e8d500caded54e7d4eb3771fab45c708258344536b36ca57b255e1b6d7",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+    "data/annual.parquet": "9e5669c7e19df52d0bdcdbbd88354d390e2b1f818d69503999fab1d76d01cf22",
+    "data/countries.parquet": "16febe644135412ed412ff6a8713952b7141f849cb0507ebfcf4437d70af8cb8",
+    "data/cycles.parquet": "556b55e76b85eb5ddc73891eba8dcaf8bc52853337ce0e09379e78f8713e7a2f",
+    "data/daily.parquet": "1e951fd15aa2103970fba453aa2de92cbf83e3700353826d3af2ed286a8eb822",
+    "data/eras.parquet": "aeb1c5238531c344c1e5cf1883acdd9ab05cd82b0dd39cda49983f334ac0ed74",
+    "data/rates.parquet": "5b20a2b0f9b4a1a716aab64c11794bed4eca3a4b25632a0d14aa08885cbeb3b9",
+    "data/sources.parquet": "5363ee97d9745294fbca90837bce131abcca9af5c8824817197e9462ef8db6ea",
+    "data/transmission.parquet": "daace902ed38cb434119f7fd8adf0be393790964c1b54fe46de46008afc19baf",
+    "exports/annual.csv": "16e460fdb39f60afffe694f802b859def6eb87479542600185cbb6834d53d2f7",
+    "exports/countries.csv": "ab41ec875ac1e790c41b8811ce90d21db5f9a6622d5b3548d227ae1e447253f6",
+    "exports/cycles.csv": "d34fb4be7999684e90b222b32b9c02392770f7d7842e9da8270370f38fd0ab71",
+    "exports/daily.csv": "ccd110051b60c798e41a60bb1edb824e3c51fe2abe0d5c1b209a483b460b1860",
+    "exports/eras.csv": "64edfd7c941cbae24a79a6911c4ee912291c522d2574456ac3e1b4a4afcb9d57",
+    "exports/rates.csv": "f9f8095aebf28e95a83b1bbbd58438260c2ee13a24dcd20aaceda66d115fff93",
+    "exports/rates.jsonl": "31d49855eafca17f58bf7bb40d364af915d0b8c9cb13d5be470f063000f1f237",
+    "exports/sources.csv": "224a89d04101eae0d75e4ca9ea9439f5cd807062868c648e1bc2c9eb20bd0672",
+    "exports/transmission.csv": "e03f364bbea57a4941d710372b9b47900314fd1a58cc476efeab69c516cf06c3",
+    "schema/annual.schema.json": "a810f7d5137c15dea6c18ed3947487776ab8807ee36ce6f4b21e13c73010e385",
+    "schema/countries.schema.json": "4a6493581b819e8ab3716a185d7118b16f0d77717f76d56edc8bd0a1c3abacde",
+    "schema/cycles.schema.json": "c072d3385065940be108e3c8d11d0f74acba9bc12195eeae99465aac1532cd20",
+    "schema/daily.schema.json": "20510cec093703faa5b8726ae566dca72a4279a2ce78075da995b595f8eb0b18",
+    "schema/data-dictionary.json": "5c168ea52715fcbf37cd13195d0580b679d3c7cff3fd758cbaf6dfb34567b7d3",
+    "schema/eras.schema.json": "9684b6eca009c1fde310259dc8ebca3d10d56f1ea97adab1a52deb6a46bdbfbe",
+    "schema/rates.schema.json": "44df1f2d0472c6565a58010f68334234f9d6cead83656da133f828f3b6ca0d55",
+    "schema/sources.schema.json": "90a1d53b2e15143b4fc827ade67e8eb20a79f4c291e3df2d4078564632585376",
+    "schema/transmission.schema.json": "4ea7bdf4d2ec0c796a8fe294a62e33b45d205ff0b7d1a91c1c7b30d65523425d"
+  }
+}

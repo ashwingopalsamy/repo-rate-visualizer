@@ -1,0 +1,2 @@
+era_id,country_code,from_date,to_date,instrument,level_kind,basis,note,source_id
+ca-overnight-target,CA,2009-04-21,,Target for the overnight rate,point,policy,The Bank of Canada policy rate; the daily Valet series starts in April 2009.,ca-boc-v39079

@@ -1,0 +1,664 @@
+{
+  "repo_id": "ashwingopalsamy/brazil-selic-rate-dataset",
+  "version": "1.0.0",
+  "configs": [
+    {
+      "name": "rates",
+      "description": "Every change point of the policy rate, with the level before and after, its era and its source.",
+      "grain": "One row per change in the rate",
+      "row_count": 151,
+      "columns": [
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "country",
+          "type": "string",
+          "nullable": false,
+          "description": "Jurisdiction name."
+        },
+        {
+          "name": "central_bank",
+          "type": "string",
+          "nullable": false,
+          "description": "Central bank that sets the rate."
+        },
+        {
+          "name": "instrument",
+          "type": "string",
+          "nullable": false,
+          "description": "The policy instrument in force on this date."
+        },
+        {
+          "name": "effective_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Date the new rate took effect (the bank’s local date)."
+        },
+        {
+          "name": "level_kind",
+          "type": "string",
+          "nullable": false,
+          "description": "`point` for a single rate, `range` for a target range (the US since 16 Dec 2008)."
+        },
+        {
+          "name": "rate_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "The rate in percent: the point, or the upper bound of a range. Never a midpoint."
+        },
+        {
+          "name": "rate_bps",
+          "type": "int32",
+          "nullable": false,
+          "description": "The same rate as an exact integer number of basis points."
+        },
+        {
+          "name": "rate_low_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "Lower bound of a range in percent; equals `rate_pct` for a point rate."
+        },
+        {
+          "name": "rate_high_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "Upper bound of a range in percent; equals `rate_pct`."
+        },
+        {
+          "name": "previous_rate_pct",
+          "type": "float64",
+          "nullable": true,
+          "description": "The rate in force before this change, in percent (upper bound for a range). Null for the first point."
+        },
+        {
+          "name": "change_bps",
+          "type": "int32",
+          "nullable": true,
+          "description": "Signed change in basis points against the previous upper bound. Null for the first point and when the instrument or its basis changes (an era boundary), where the two rates are not comparable."
+        },
+        {
+          "name": "direction",
+          "type": "string",
+          "nullable": false,
+          "description": "`hike`, `cut`, `initial` (first point) or `era_change` (a new instrument or basis)."
+        },
+        {
+          "name": "era_id",
+          "type": "string",
+          "nullable": false,
+          "description": "The period of one rate basis this row belongs to; joins to `eras`."
+        },
+        {
+          "name": "era_basis",
+          "type": "string",
+          "nullable": false,
+          "description": "`policy` for the policy rate itself, `observation` for an earlier proxy rate kept for history."
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "nullable": false,
+          "description": "`official` when the point comes from the central bank’s own series or statement, `secondary` when from a cited secondary source."
+        },
+        {
+          "name": "source_id",
+          "type": "string",
+          "nullable": false,
+          "description": "The source of this point; joins to `sources`."
+        },
+        {
+          "name": "source_url",
+          "type": "string",
+          "nullable": false,
+          "description": "URL of that source."
+        },
+        {
+          "name": "decision_id",
+          "type": "string",
+          "nullable": true,
+          "description": "The announced decision that set this rate, when the decision ledger has it; joins to `decisions`."
+        },
+        {
+          "name": "release_hash",
+          "type": "string",
+          "nullable": false,
+          "description": "SHA-256 content hash of the release this row was built from."
+        },
+        {
+          "name": "record_text",
+          "type": "string",
+          "nullable": false,
+          "description": "One deterministic sentence describing the row, for search and retrieval. Generated from the fields, not written by a model."
+        }
+      ]
+    },
+    {
+      "name": "daily",
+      "description": "The rate in force on every calendar day, from 1 Jan 2000 (or the first point of the series, if later) to the date the official series was last observed. Ready to join to any daily or monthly data.",
+      "grain": "One row per calendar day per country",
+      "row_count": 9777,
+      "columns": [
+        {
+          "name": "date",
+          "type": "date",
+          "nullable": false,
+          "description": "Calendar date."
+        },
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "level_kind",
+          "type": "string",
+          "nullable": false,
+          "description": "`point` for a single rate, `range` for a target range (the US since 16 Dec 2008)."
+        },
+        {
+          "name": "rate_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "The rate in percent: the point, or the upper bound of a range. Never a midpoint."
+        },
+        {
+          "name": "rate_bps",
+          "type": "int32",
+          "nullable": false,
+          "description": "The same rate as an exact integer number of basis points."
+        },
+        {
+          "name": "rate_low_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "Lower bound of a range in percent; equals `rate_pct` for a point rate."
+        },
+        {
+          "name": "rate_high_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "Upper bound of a range in percent; equals `rate_pct`."
+        },
+        {
+          "name": "era_id",
+          "type": "string",
+          "nullable": false,
+          "description": "The period of one rate basis this row belongs to; joins to `eras`."
+        },
+        {
+          "name": "era_basis",
+          "type": "string",
+          "nullable": false,
+          "description": "`policy` for the policy rate itself, `observation` for an earlier proxy rate kept for history."
+        },
+        {
+          "name": "is_change",
+          "type": "bool",
+          "nullable": false,
+          "description": "True on the day a new rate took effect."
+        }
+      ]
+    },
+    {
+      "name": "cycles",
+      "description": "Each run of consecutive moves in one direction since the policy-rate era began, computed exactly as on the site: a cycle starts with the first move after a move the other way.",
+      "grain": "One row per tightening or easing cycle",
+      "row_count": 17,
+      "columns": [
+        {
+          "name": "cycle_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Stable identifier, `{country}-{direction}-{start date}`."
+        },
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "direction",
+          "type": "string",
+          "nullable": false,
+          "description": "`tightening` (hikes) or `easing` (cuts)."
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Effective date of the first move."
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Effective date of the last move so far."
+        },
+        {
+          "name": "moves",
+          "type": "int32",
+          "nullable": false,
+          "description": "Number of moves in the cycle."
+        },
+        {
+          "name": "total_bps",
+          "type": "int32",
+          "nullable": false,
+          "description": "Signed total change from the rate before the cycle to its last move, in basis points."
+        },
+        {
+          "name": "days",
+          "type": "int32",
+          "nullable": false,
+          "description": "Days from the first to the last move."
+        },
+        {
+          "name": "from_rate_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "The rate before the cycle began (upper bound for a range)."
+        },
+        {
+          "name": "to_rate_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "The rate after the cycle’s last move."
+        },
+        {
+          "name": "is_current",
+          "type": "bool",
+          "nullable": false,
+          "description": "True for the most recent cycle, which may still be running."
+        }
+      ]
+    },
+    {
+      "name": "annual",
+      "description": "Yearly summaries computed from `rates` and `decisions`: the rate at each end of the year, its range, the net and gross change, and how many hikes, cuts and holds there were.",
+      "grain": "One row per country per calendar year",
+      "row_count": 27,
+      "columns": [
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "year",
+          "type": "int32",
+          "nullable": false,
+          "description": "Calendar year."
+        },
+        {
+          "name": "start_rate_pct",
+          "type": "float64",
+          "nullable": true,
+          "description": "The rate in force on 1 January (the latest change effective before it). Null when the series starts later in the year."
+        },
+        {
+          "name": "end_rate_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "The rate in force on 31 December, or on the last observed date for the current year."
+        },
+        {
+          "name": "min_rate_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "Lowest rate in force during the year."
+        },
+        {
+          "name": "max_rate_pct",
+          "type": "float64",
+          "nullable": false,
+          "description": "Highest rate in force during the year."
+        },
+        {
+          "name": "net_change_bps",
+          "type": "int32",
+          "nullable": true,
+          "description": "End minus start, in basis points. Null when the start is unknown."
+        },
+        {
+          "name": "gross_hikes_bps",
+          "type": "int32",
+          "nullable": false,
+          "description": "Sum of hikes in the year, in basis points."
+        },
+        {
+          "name": "gross_cuts_bps",
+          "type": "int32",
+          "nullable": false,
+          "description": "Sum of cuts in the year, in basis points (a positive number)."
+        },
+        {
+          "name": "hike_count",
+          "type": "int32",
+          "nullable": false,
+          "description": "Number of hikes."
+        },
+        {
+          "name": "cut_count",
+          "type": "int32",
+          "nullable": false,
+          "description": "Number of cuts."
+        },
+        {
+          "name": "hold_count",
+          "type": "int32",
+          "nullable": true,
+          "description": "Number of announced holds. Null where the decision ledger does not cover the whole year."
+        },
+        {
+          "name": "decision_count",
+          "type": "int32",
+          "nullable": true,
+          "description": "Number of announced decisions. Null where the decision ledger does not cover the whole year."
+        },
+        {
+          "name": "is_partial_year",
+          "type": "bool",
+          "nullable": false,
+          "description": "True for a year the data does not fully cover: the first year of the series or the current year."
+        },
+        {
+          "name": "record_text",
+          "type": "string",
+          "nullable": false,
+          "description": "One deterministic sentence summarising the year, for search and retrieval. Generated from the fields, not written by a model."
+        }
+      ]
+    },
+    {
+      "name": "countries",
+      "description": "What each country’s data covers: the bank, the instrument, the dates covered and the release it was built from.",
+      "grain": "One row per country",
+      "row_count": 1,
+      "columns": [
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "country",
+          "type": "string",
+          "nullable": false,
+          "description": "Jurisdiction name."
+        },
+        {
+          "name": "central_bank",
+          "type": "string",
+          "nullable": false,
+          "description": "Central bank that sets the rate."
+        },
+        {
+          "name": "central_bank_short",
+          "type": "string",
+          "nullable": false,
+          "description": "Short name of the central bank."
+        },
+        {
+          "name": "decision_body",
+          "type": "string",
+          "nullable": false,
+          "description": "The committee that sets the rate."
+        },
+        {
+          "name": "instrument",
+          "type": "string",
+          "nullable": false,
+          "description": "The current policy instrument."
+        },
+        {
+          "name": "instrument_explainer",
+          "type": "string",
+          "nullable": false,
+          "description": "What the instrument is, in plain words."
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 4217 currency code."
+        },
+        {
+          "name": "time_zone",
+          "type": "string",
+          "nullable": false,
+          "description": "IANA time zone of the bank’s announcements."
+        },
+        {
+          "name": "series_from",
+          "type": "date",
+          "nullable": false,
+          "description": "First point of the rate series."
+        },
+        {
+          "name": "ledger_from",
+          "type": "date",
+          "nullable": true,
+          "description": "First decision in the decision ledger; null where the ledger is still being added."
+        },
+        {
+          "name": "observed_through",
+          "type": "date",
+          "nullable": false,
+          "description": "Date the official series was last observed."
+        },
+        {
+          "name": "coverage_note",
+          "type": "string",
+          "nullable": false,
+          "description": "How the data was assembled, in the release’s own words."
+        },
+        {
+          "name": "series_points",
+          "type": "int32",
+          "nullable": false,
+          "description": "Rows in `rates` for this country."
+        },
+        {
+          "name": "decisions",
+          "type": "int32",
+          "nullable": false,
+          "description": "Rows in `decisions` for this country."
+        },
+        {
+          "name": "central_bank_url",
+          "type": "string",
+          "nullable": false,
+          "description": "The bank’s website."
+        },
+        {
+          "name": "release_hash",
+          "type": "string",
+          "nullable": false,
+          "description": "SHA-256 content hash of the release."
+        }
+      ]
+    },
+    {
+      "name": "eras",
+      "description": "The periods in which one instrument and basis applied. A change of era is why `change_bps` is null at its first point.",
+      "grain": "One row per instrument period",
+      "row_count": 1,
+      "columns": [
+        {
+          "name": "era_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Era identifier."
+        },
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "from_date",
+          "type": "date",
+          "nullable": false,
+          "description": "First date of the era."
+        },
+        {
+          "name": "to_date",
+          "type": "date",
+          "nullable": true,
+          "description": "Last date of the era; null while it continues."
+        },
+        {
+          "name": "instrument",
+          "type": "string",
+          "nullable": false,
+          "description": "The instrument in this era."
+        },
+        {
+          "name": "level_kind",
+          "type": "string",
+          "nullable": false,
+          "description": "`point` or `range`."
+        },
+        {
+          "name": "basis",
+          "type": "string",
+          "nullable": false,
+          "description": "`policy` or `observation`."
+        },
+        {
+          "name": "note",
+          "type": "string",
+          "nullable": false,
+          "description": "Why the era is drawn here."
+        },
+        {
+          "name": "source_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Joins to `sources`."
+        }
+      ]
+    },
+    {
+      "name": "sources",
+      "description": "Every source the rows cite: official series, statements, calendars and labelled secondary sources.",
+      "grain": "One row per source",
+      "row_count": 2,
+      "columns": [
+        {
+          "name": "source_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Source identifier."
+        },
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "source_type",
+          "type": "string",
+          "nullable": false,
+          "description": "Kind of source, for example `series`, `statement`, `calendar`, `secondary-series`."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "description": "Title as published."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "nullable": false,
+          "description": "Where to verify it."
+        },
+        {
+          "name": "official",
+          "type": "bool",
+          "nullable": false,
+          "description": "True when published by the central bank itself (or the official statistical series it maintains)."
+        },
+        {
+          "name": "published_at",
+          "type": "string",
+          "nullable": true,
+          "description": "Publication date or time, when known."
+        }
+      ]
+    },
+    {
+      "name": "transmission",
+      "description": "How the policy rate reaches common loans: the benchmark each is priced off, how often it resets and how directly a change passes through. Curated reference notes.",
+      "grain": "One row per loan product per country",
+      "row_count": 2,
+      "columns": [
+        {
+          "name": "country_code",
+          "type": "string",
+          "nullable": false,
+          "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+        },
+        {
+          "name": "product",
+          "type": "string",
+          "nullable": false,
+          "description": "Loan product."
+        },
+        {
+          "name": "benchmark",
+          "type": "string",
+          "nullable": false,
+          "description": "What the rate is priced off."
+        },
+        {
+          "name": "spread_bps",
+          "type": "int32",
+          "nullable": true,
+          "description": "Typical spread over the benchmark, where given."
+        },
+        {
+          "name": "reset",
+          "type": "string",
+          "nullable": false,
+          "description": "How often the rate resets."
+        },
+        {
+          "name": "adjusts",
+          "type": "string",
+          "nullable": false,
+          "description": "`payment`, `tenure` or `both`: what changes when the rate does."
+        },
+        {
+          "name": "pass_through",
+          "type": "string",
+          "nullable": false,
+          "description": "`direct`, `lagged`, `weak` or `none`."
+        },
+        {
+          "name": "note",
+          "type": "string",
+          "nullable": false,
+          "description": "Plain-language note."
+        },
+        {
+          "name": "source_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Joins to `sources`."
+        }
+      ]
+    }
+  ]
+}

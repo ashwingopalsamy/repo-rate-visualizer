@@ -1,0 +1,3 @@
+country_code,product,benchmark,spread_bps,reset,adjusts,pass_through,note,source_id
+AU,Variable-rate home loan,Lender's standard variable rate,,Usually within weeks,payment,direct,"Most Australian home loans are variable, one of the most direct channels to household budgets.",au-transmission
+AU,Fixed-rate home loan,Fixed for one to five years,,Rolls to variable when the fix ends,payment,none,Fixed loans meet the cash rate when they roll off.,au-transmission

@@ -1,0 +1,7 @@
+cycle_id,country_code,direction,start_date,end_date,moves,total_bps,days,from_rate_pct,to_rate_pct,is_current
+CA-tightening-2010-06-01,CA,tightening,2010-06-01,2010-09-08,3,75,99,0.25,1.0,false
+CA-easing-2015-01-21,CA,easing,2015-01-21,2015-07-15,2,-50,175,1.0,0.5,false
+CA-tightening-2017-07-12,CA,tightening,2017-07-12,2018-10-24,5,125,469,0.5,1.75,false
+CA-easing-2020-03-04,CA,easing,2020-03-04,2020-03-27,3,-150,23,1.75,0.25,false
+CA-tightening-2022-03-03,CA,tightening,2022-03-03,2023-07-13,10,475,497,0.25,5.0,false
+CA-easing-2024-06-06,CA,easing,2024-06-06,2025-10-30,9,-275,511,5.0,2.25,true

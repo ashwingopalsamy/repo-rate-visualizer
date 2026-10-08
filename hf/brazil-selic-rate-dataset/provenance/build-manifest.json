@@ -1,0 +1,81 @@
+{
+  "repo_id": "ashwingopalsamy/brazil-selic-rate-dataset",
+  "version": "1.0.0",
+  "generated_at": "2026-10-07",
+  "generator": "scripts/build-hf-datasets.py",
+  "generator_version": "2.0.0",
+  "country_codes": [
+    "BR"
+  ],
+  "releases": [
+    {
+      "country_code": "BR",
+      "hash": "59c6949350fb38008d952ac1510c310429ae0f266d9f4524660a0ba9ff53155a",
+      "file": "data/releases/BR/59c6949350fb38008d952ac1510c310429ae0f266d9f4524660a0ba9ff53155a.json",
+      "sha256": "856b3d948f585e8564d1c4fdf52e6a162b6bd4f1b8e60419315a5ce863fcb7c2",
+      "observed_through": "2026-10-07"
+    }
+  ],
+  "record_counts_by_config": {
+    "rates": 151,
+    "daily": 9777,
+    "cycles": 17,
+    "annual": 27,
+    "countries": 1,
+    "eras": 1,
+    "sources": 2,
+    "transmission": 2
+  },
+  "coverage": {
+    "rates_from": "2000-01-01",
+    "rates_to": "2026-09-17",
+    "daily_from": "2000-01-01",
+    "daily_to": "2026-10-07"
+  },
+  "rights": {
+    "dataset_license": "odbl",
+    "license_status": "publisher_licence_applies",
+    "official_status": "independent_non_official",
+    "statement": "The Banco Central do Brasil publishes SGS series 432 under the ODbL 1.0; this derived database is offered under the same licence.",
+    "publishers": [
+      {
+        "country_code": "BR",
+        "name": "Banco Central do Brasil",
+        "terms_url": "https://dadosabertos.bcb.gov.br/dataset/432-taxa-de-juros---meta-selic-definida-pelo-copom",
+        "attribution": "Source: Banco Central do Brasil, SGS 432, under the ODbL 1.0"
+      }
+    ]
+  },
+  "output_checksums": {
+    "CHANGELOG.md": "725d083f12f4252450cea4f9f5a88bd51bb8509491d4029e653fc06a00be014e",
+    "NOTICE.md": "3897ac2c3fcb9642f48661f59668c53e9437b89278a183d2734c19729f4451a6",
+    "README.md": "80e52cc88844138c409e371ac3575e895043564cbb1bb3a2176eb996bd8a2f48",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+    "data/annual.parquet": "054d0bab5d82bd81979cb16bba703b84ecbacd8555576e2930a7cde80890c078",
+    "data/countries.parquet": "a539d99b95eac2e6959e1b984599096ebb49315ab56ffea258a8e8bb3ac38d81",
+    "data/cycles.parquet": "f58b2ed759c0217bcf732636124586bfd55ae1e20d9533627d7769554c7f7d40",
+    "data/daily.parquet": "0a69fb559138ec62739ce13826dc02201dde0ba0ac4a613bbc2a9af7602152a7",
+    "data/eras.parquet": "9e7a94504053af75698b6c8e84a241c4557a1a21dd98eb440bdfe1f1f2b1c692",
+    "data/rates.parquet": "f010c6c301087c295e2a3bbae7b565b8928bbb52a5dd0ae3c0d09f9583c56edb",
+    "data/sources.parquet": "9b375fa62f27c59ff6319794330071a7f99af12b7e7437df473f5b2b767d1444",
+    "data/transmission.parquet": "02665fe7c6eecaadd24cf91e80d928cb3d293ef0c61c6a9c2107dd8bb257557e",
+    "exports/annual.csv": "2fd189d48af6b107b46f3241a4689945c7aca56888aef899ceea18f13b824ca8",
+    "exports/countries.csv": "115822c85109f0f91c13b34bce3c525a302a950db086766cd3962ab527e550b4",
+    "exports/cycles.csv": "8f0e03a7570774bea3c9b26b54cde718fb65a38320b49da18938b871e33c0b7c",
+    "exports/daily.csv": "9ac480297de902d7de01db2a26313e63babac5899e19e6134b1270afbfa2809c",
+    "exports/eras.csv": "1fd80875cf529a08e5caee14439fb574b8c2d7f5b8001d5345dc5ba6515614a4",
+    "exports/rates.csv": "073a8be82fdc8b332fbf81b2158ea1e61e88baf900455488ee9511fa2d44b7bc",
+    "exports/rates.jsonl": "2818919b32da6fe2b3ea20d74332a8e204a600205626783bc44fd673f8b63ec2",
+    "exports/sources.csv": "e73ec6188a590d1f07d2ed923e8344f171cd4a100dcde70d009c532b39f30859",
+    "exports/transmission.csv": "9188240cd6e9c0d20f3bddec5350afd7f079f013d2c30944237ad78d7b429908",
+    "schema/annual.schema.json": "d3cb7c620e09b6f5479ddd322cba03a4f855712760bca18807554eeca81241b2",
+    "schema/countries.schema.json": "34090bb7c0b6bc78e94b3048fe80fd6691751ab002e3deb80a58b99f39af1716",
+    "schema/cycles.schema.json": "715880b4bfb7ab0fb655c4dc93dcc2e46bb17447b4027bed0ac1c0d5528f9e32",
+    "schema/daily.schema.json": "8752e68be4042ce3de72a434316ef382e777534e2bffe11ac03c9e13248945cd",
+    "schema/data-dictionary.json": "d297ccf29ddd3e5b92a34b704d7b68dff3a9c5c99808225279f4d277cc06f63d",
+    "schema/eras.schema.json": "e02bf871edcdbdba780c887294f8fc4e7a7ff40ebf90da88d671181d566338fc",
+    "schema/rates.schema.json": "48e941982a3f266eecdba27254f5016b584a0a1e28130430fdfb639e78ae66ba",
+    "schema/sources.schema.json": "c7238e7ece0895ad4990dbff0ada4e30d1b1fdb595cebb3a6dcf9d6a24335c91",
+    "schema/transmission.schema.json": "36464c9be23e77ac1f24bcb7595fac7d0349307825fb3a0b17012afa8c4ca41c"
+  }
+}

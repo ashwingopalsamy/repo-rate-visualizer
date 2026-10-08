@@ -1,0 +1,2 @@
+era_id,country_code,from_date,to_date,instrument,level_kind,basis,note,source_id
+ea-dfr,EA,1999-11-05,,Deposit facility rate,point,policy,"The rate on overnight deposits with the Eurosystem, the rate through which the ECB steers policy.",ea-ecb-dfr

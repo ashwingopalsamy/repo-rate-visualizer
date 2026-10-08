@@ -1,0 +1,3 @@
+era_id,country_code,from_date,to_date,instrument,level_kind,basis,note,source_id
+in-auction,IN,2000-06-05,2004-10-28,Repo rate (pre-2004 usage: absorption),point,observation,"Before 29 Oct 2004, RBI used ""repo"" for operations that absorbed liquidity. These values are kept as observations and left out of findings.",in-laf-2004
+in-repo,IN,2004-10-29,,Policy repo rate,point,policy,The repo rate in its international sense: the rate at which RBI lends to banks. Set by the Monetary Policy Committee since 4 Oct 2016.,in-laf-2004

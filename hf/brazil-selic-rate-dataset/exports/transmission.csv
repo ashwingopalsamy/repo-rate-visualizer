@@ -1,0 +1,3 @@
+country_code,product,benchmark,spread_bps,reset,adjusts,pass_through,note,source_id
+BR,Floating-rate credit,Selic or CDI,,Quickly,payment,direct,"Overdrafts, floating loans and CDB yields move closely with the Selic.",br-selic
+BR,Home loan,Often TR or IPCA plus a spread,,Depends on the index,payment,lagged,"Many home loans follow other indices, so mortgage pass-through is weaker.",br-selic

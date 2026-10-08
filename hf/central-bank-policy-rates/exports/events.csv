@@ -1,0 +1,9 @@
+country_code,date,label,description,source_id
+IN,2008-09-15,Global financial crisis,RBI records the September 2008 global financial crisis as a sharp external shock that changed India’s monetary-policy challenge.,in-event-event-001-2008-09-15
+IN,2013-05-22,Tapering shock,"RBI records US Federal Reserve tapering signals, capital outflows, and sharp pressure on the rupee in 2013.",in-event-event-002-2013-05-22
+IN,2016-11-08,Currency withdrawal,"RBI recorded the 8 Nov 2016 withdrawal of legal-tender status for the ₹500 and ₹1,000 notes.",in-event-event-003-2016-11-08
+IN,2017-07-01,GST rollout,CBIC records the Goods and Services Tax rollout on 1 Jul 2017 as a major structural tax reform.,in-event-event-004-2017-07-01
+IN,2020-03-24,National lockdown,The Ministry of Home Affairs order of 24 Mar 2020 established a 21-day nationwide lockdown from 25 Mar.,in-event-event-005-2020-03-24
+IN,2022-02-24,War in Ukraine,"RBI linked the conflict to higher global food, energy, and commodity prices and sustained inflation pressure in 2022.",in-event-event-006-2022-02-24
+IN,2022-05-04,Off-cycle tightening,The RBI raised the policy repo rate by 40 bps to 4.40% on 4 May 2022 amid elevated inflation pressures.,in-event-event-007-2022-05-04
+IN,2025-02-07,Easing cycle begins,The MPC cut the policy repo rate by 25 bps to 6.25% on 7 Feb 2025 and retained a neutral stance.,in-event-event-008-2025-02-07

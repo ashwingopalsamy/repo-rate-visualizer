@@ -1,0 +1,4 @@
+source_id,country_code,source_type,title,url,official,published_at
+ea-ecb-dfr,EA,series,ECB Data Portal: Deposit facility rate (FM.D.U2.EUR.4F.KR.DFR.LEV),https://data.ecb.europa.eu/data/datasets/FM/FM.D.U2.EUR.4F.KR.DFR.LEV,true,
+ea-transmission,EA,explainer,ECB: Transmission mechanism of monetary policy,https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html,true,
+ea-key-rates,EA,page,ECB: Official interest rates,https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html,true,

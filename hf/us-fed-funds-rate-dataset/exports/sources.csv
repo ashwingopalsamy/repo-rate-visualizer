@@ -1,0 +1,53 @@
+source_id,country_code,source_type,title,url,official,published_at
+us-fred-dfedtar,US,series,FRED: Federal Funds Target Rate (discontinued) (DFEDTAR),https://fred.stlouisfed.org/series/DFEDTAR,true,
+us-fred-dfedtaru,US,series,"FRED: Federal Funds Target Range, Upper Limit (DFEDTARU)",https://fred.stlouisfed.org/series/DFEDTARU,true,
+us-fred-dfedtarl,US,series,"FRED: Federal Funds Target Range, Lower Limit (DFEDTARL)",https://fred.stlouisfed.org/series/DFEDTARL,true,
+us-fomc-calendar,US,calendar,Federal Reserve: Meeting calendars and information,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm,true,
+us-dprime,US,series,FRED: Bank Prime Loan Rate (DPRIME),https://fred.stlouisfed.org/series/DPRIME,true,
+us-mortgage30,US,series,FRED: 30-Year Fixed Rate Mortgage Average (MORTGAGE30US),https://fred.stlouisfed.org/series/MORTGAGE30US,true,
+us-statement-20210127,US,statement,"FOMC statement, 2021-01-27",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210127a.htm,true,2021-01-27
+us-statement-20210317,US,statement,"FOMC statement, 2021-03-17",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210317a.htm,true,2021-03-17
+us-statement-20210428,US,statement,"FOMC statement, 2021-04-28",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210428a.htm,true,2021-04-28
+us-statement-20210616,US,statement,"FOMC statement, 2021-06-16",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210616a.htm,true,2021-06-16
+us-statement-20210728,US,statement,"FOMC statement, 2021-07-28",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210728a.htm,true,2021-07-28
+us-statement-20210922,US,statement,"FOMC statement, 2021-09-22",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210922a.htm,true,2021-09-22
+us-statement-20211103,US,statement,"FOMC statement, 2021-11-03",https://www.federalreserve.gov/newsevents/pressreleases/monetary20211103a.htm,true,2021-11-03
+us-statement-20211215,US,statement,"FOMC statement, 2021-12-15",https://www.federalreserve.gov/newsevents/pressreleases/monetary20211215a.htm,true,2021-12-15
+us-statement-20220126,US,statement,"FOMC statement, 2022-01-26",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220126a.htm,true,2022-01-26
+us-statement-20220316,US,statement,"FOMC statement, 2022-03-16",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm,true,2022-03-16
+us-statement-20220504,US,statement,"FOMC statement, 2022-05-04",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220504a.htm,true,2022-05-04
+us-statement-20220615,US,statement,"FOMC statement, 2022-06-15",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220615a.htm,true,2022-06-15
+us-statement-20220727,US,statement,"FOMC statement, 2022-07-27",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220727a.htm,true,2022-07-27
+us-statement-20220921,US,statement,"FOMC statement, 2022-09-21",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220921a.htm,true,2022-09-21
+us-statement-20221102,US,statement,"FOMC statement, 2022-11-02",https://www.federalreserve.gov/newsevents/pressreleases/monetary20221102a.htm,true,2022-11-02
+us-statement-20221214,US,statement,"FOMC statement, 2022-12-14",https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm,true,2022-12-14
+us-statement-20230201,US,statement,"FOMC statement, 2023-02-01",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230201a.htm,true,2023-02-01
+us-statement-20230322,US,statement,"FOMC statement, 2023-03-22",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230322a.htm,true,2023-03-22
+us-statement-20230503,US,statement,"FOMC statement, 2023-05-03",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230503a.htm,true,2023-05-03
+us-statement-20230614,US,statement,"FOMC statement, 2023-06-14",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230614a.htm,true,2023-06-14
+us-statement-20230726,US,statement,"FOMC statement, 2023-07-26",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230726a.htm,true,2023-07-26
+us-statement-20230920,US,statement,"FOMC statement, 2023-09-20",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230920a.htm,true,2023-09-20
+us-statement-20231101,US,statement,"FOMC statement, 2023-11-01",https://www.federalreserve.gov/newsevents/pressreleases/monetary20231101a.htm,true,2023-11-01
+us-statement-20231213,US,statement,"FOMC statement, 2023-12-13",https://www.federalreserve.gov/newsevents/pressreleases/monetary20231213a.htm,true,2023-12-13
+us-statement-20240131,US,statement,"FOMC statement, 2024-01-31",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm,true,2024-01-31
+us-statement-20240320,US,statement,"FOMC statement, 2024-03-20",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240320a.htm,true,2024-03-20
+us-statement-20240501,US,statement,"FOMC statement, 2024-05-01",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240501a.htm,true,2024-05-01
+us-statement-20240612,US,statement,"FOMC statement, 2024-06-12",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240612a.htm,true,2024-06-12
+us-statement-20240731,US,statement,"FOMC statement, 2024-07-31",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240731a.htm,true,2024-07-31
+us-statement-20240918,US,statement,"FOMC statement, 2024-09-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240918a.htm,true,2024-09-18
+us-statement-20241107,US,statement,"FOMC statement, 2024-11-07",https://www.federalreserve.gov/newsevents/pressreleases/monetary20241107a.htm,true,2024-11-07
+us-statement-20241218,US,statement,"FOMC statement, 2024-12-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20241218a.htm,true,2024-12-18
+us-statement-20250129,US,statement,"FOMC statement, 2025-01-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250129a.htm,true,2025-01-29
+us-statement-20250319,US,statement,"FOMC statement, 2025-03-19",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250319a.htm,true,2025-03-19
+us-statement-20250507,US,statement,"FOMC statement, 2025-05-07",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250507a.htm,true,2025-05-07
+us-statement-20250618,US,statement,"FOMC statement, 2025-06-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250618a.htm,true,2025-06-18
+us-statement-20250730,US,statement,"FOMC statement, 2025-07-30",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250730a.htm,true,2025-07-30
+us-statement-20250917,US,statement,"FOMC statement, 2025-09-17",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250917a.htm,true,2025-09-17
+us-statement-20251029,US,statement,"FOMC statement, 2025-10-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20251029a.htm,true,2025-10-29
+us-statement-20251210,US,statement,"FOMC statement, 2025-12-10",https://www.federalreserve.gov/newsevents/pressreleases/monetary20251210a.htm,true,2025-12-10
+us-statement-20260128,US,statement,"FOMC statement, 2026-01-28",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm,true,2026-01-28
+us-statement-20260318,US,statement,"FOMC statement, 2026-03-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm,true,2026-03-18
+us-statement-20260429,US,statement,"FOMC statement, 2026-04-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260429a.htm,true,2026-04-29
+us-statement-20260617,US,statement,"FOMC statement, 2026-06-17",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm,true,2026-06-17
+us-statement-20260729,US,statement,"FOMC statement, 2026-07-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm,true,2026-07-29
+us-statement-20260916,US,statement,"FOMC statement, 2026-09-16",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm,true,2026-09-16

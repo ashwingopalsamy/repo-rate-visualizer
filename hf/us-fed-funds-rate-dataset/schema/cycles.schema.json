@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/us-fed-funds-rate-dataset / cycles",
+  "description": "Each run of consecutive moves in one direction since the policy-rate era began, computed exactly as on the site: a cycle starts with the first move after a move the other way.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cycle_id": {
+      "type": "string",
+      "description": "Stable identifier, `{country}-{direction}-{start date}`."
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "direction": {
+      "type": "string",
+      "description": "`tightening` (hikes) or `easing` (cuts)."
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date of the first move."
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date of the last move so far."
+    },
+    "moves": {
+      "type": "integer",
+      "description": "Number of moves in the cycle."
+    },
+    "total_bps": {
+      "type": "integer",
+      "description": "Signed total change from the rate before the cycle to its last move, in basis points."
+    },
+    "days": {
+      "type": "integer",
+      "description": "Days from the first to the last move."
+    },
+    "from_rate_pct": {
+      "type": "number",
+      "description": "The rate before the cycle began (upper bound for a range)."
+    },
+    "to_rate_pct": {
+      "type": "number",
+      "description": "The rate after the cycle’s last move."
+    },
+    "is_current": {
+      "type": "boolean",
+      "description": "True for the most recent cycle, which may still be running."
+    }
+  },
+  "required": [
+    "cycle_id",
+    "country_code",
+    "direction",
+    "start_date",
+    "end_date",
+    "moves",
+    "total_bps",
+    "days",
+    "from_rate_pct",
+    "to_rate_pct",
+    "is_current"
+  ]
+}

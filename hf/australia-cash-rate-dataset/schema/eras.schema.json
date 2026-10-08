@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/australia-cash-rate-dataset / eras",
+  "description": "The periods in which one instrument and basis applied. A change of era is why `change_bps` is null at its first point.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "era_id": {
+      "type": "string",
+      "description": "Era identifier."
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "from_date": {
+      "type": "string",
+      "format": "date",
+      "description": "First date of the era."
+    },
+    "to_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Last date of the era; null while it continues."
+    },
+    "instrument": {
+      "type": "string",
+      "description": "The instrument in this era."
+    },
+    "level_kind": {
+      "type": "string",
+      "description": "`point` or `range`."
+    },
+    "basis": {
+      "type": "string",
+      "description": "`policy` or `observation`."
+    },
+    "note": {
+      "type": "string",
+      "description": "Why the era is drawn here."
+    },
+    "source_id": {
+      "type": "string",
+      "description": "Joins to `sources`."
+    }
+  },
+  "required": [
+    "era_id",
+    "country_code",
+    "from_date",
+    "to_date",
+    "instrument",
+    "level_kind",
+    "basis",
+    "note",
+    "source_id"
+  ]
+}

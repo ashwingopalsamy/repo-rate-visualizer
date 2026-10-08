@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/euro-area-deposit-facility-rate-dataset / transmission",
+  "description": "How the policy rate reaches common loans: the benchmark each is priced off, how often it resets and how directly a change passes through. Curated reference notes.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "product": {
+      "type": "string",
+      "description": "Loan product."
+    },
+    "benchmark": {
+      "type": "string",
+      "description": "What the rate is priced off."
+    },
+    "spread_bps": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Typical spread over the benchmark, where given."
+    },
+    "reset": {
+      "type": "string",
+      "description": "How often the rate resets."
+    },
+    "adjusts": {
+      "type": "string",
+      "description": "`payment`, `tenure` or `both`: what changes when the rate does."
+    },
+    "pass_through": {
+      "type": "string",
+      "description": "`direct`, `lagged`, `weak` or `none`."
+    },
+    "note": {
+      "type": "string",
+      "description": "Plain-language note."
+    },
+    "source_id": {
+      "type": "string",
+      "description": "Joins to `sources`."
+    }
+  },
+  "required": [
+    "country_code",
+    "product",
+    "benchmark",
+    "spread_bps",
+    "reset",
+    "adjusts",
+    "pass_through",
+    "note",
+    "source_id"
+  ]
+}
