@@ -90,7 +90,7 @@ export function countryHTML(): string {
   </div>
   <div class="row">
     ${card('peers', 'span-12', 'Among peers', 'globe',
-      `${kick('globe', `Among ${CODES.length} central banks`)}<div class="actions"><a class="btn" href="/" data-link>World view<i data-lucide="arrow-right"></i></a></div><p class="finding" id="peerFinding" data-prose></p>`,
+      `${kick('globe', `Among ${CODES.length} central banks`)}<div class="actions"><a class="btn" href="/world/" data-link>World view<i data-lucide="arrow-right"></i></a></div><p class="finding" id="peerFinding" data-prose></p>`,
       '<div class="ladder" id="ladder"></div>')}
   </div>
   ${footerHTML()}`;

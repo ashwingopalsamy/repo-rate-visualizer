@@ -1,6 +1,8 @@
 import { test as base, expect } from '@playwright/test';
 
 const test = base;
+// A returning visitor: the first-visit country prompt stays out of these batches.
+test.beforeEach(async ({ page }) => { await page.addInitScript(() => localStorage.setItem('atlas-country', 'IN')); });
 const track = (page: import('@playwright/test').Page) => {
   const posts: { url: string; body: string }[] = [], beacon: string[] = [];
   page.on('request', r => {
@@ -42,6 +44,6 @@ test('a country switch posts one batch with page and country_switch, flushed on 
   expect(seen.posts).toHaveLength(1);
   const batch = JSON.parse(seen.posts[0].body) as { v: number; e: { n: string; p: Record<string, string> }[] };
   expect(batch.v).toBe(1);
-  expect(batch.e.filter(e => e.n !== 'decision_window')).toEqual([{ n: 'page', p: { route: 'country', cc: 'IN' } }, { n: 'country_switch', p: { from: 'IN', to: 'US', via: 'ladder' } }]);
+  expect(batch.e.filter(e => e.n === 'page' || e.n === 'country_switch')).toEqual([{ n: 'page', p: { route: 'country', cc: 'IN' } }, { n: 'country_switch', p: { from: 'IN', to: 'US', via: 'ladder' } }]);
   expect(seen.posts[0].body).not.toMatch(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|Mozilla/);
 });

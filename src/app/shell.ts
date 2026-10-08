@@ -12,15 +12,20 @@ import { commitCountry, countryHTML, leaveCountry, redrawCountry, renderChip, re
 import { renderPulse, renderWorld, worldHTML } from './world.ts';
 import { privacyHTML, renderPrivacy } from './privacy.ts';
 import { notFoundHTML, renderNotFound } from './notfound.ts';
+import { closePrompt, schedulePrompt } from './prompt.ts';
 
 type Via = (typeof VIA)[number];
 type Page = 'country' | 'world' | 'privacy' | 'notfound';
 export type Route = { page: Page; cc: Code | null };
 
-/** Maps a pathname to a page. */
+/** The country / opens on until a visitor picks their own (src/app/prompt.ts). */
+export const DEFAULT_CC: Code = 'IN';
+
+/** Maps a pathname to a page. / is the default country's page; the world view is /world/. */
 export function parsePath(path: string): Route {
   const seg = path.replace(/^\/+|\/+$/g, '').replace(/\/index\.html$|^index\.html$/, '').toLowerCase();
-  if (seg === '') return { page: 'world', cc: null };
+  if (seg === '') return MODEL[DEFAULT_CC] ? { page: 'country', cc: DEFAULT_CC } : { page: 'world', cc: null };
+  if (seg === 'world') return { page: 'world', cc: null };
   if (seg === 'privacy') return { page: 'privacy', cc: null };
   const cc = seg.toUpperCase();
   if (isCode(cc) && MODEL[cc]) return { page: 'country', cc };
@@ -31,10 +36,10 @@ export const pageHTML = (p: Page) => (p === 'world' ? worldHTML() : p === 'priva
 
 /* ---------- rail and crumb ---------- */
 const RAIL: Record<Page, [string, string, string][]> = {
-  country: [['decision', 'landmark', 'The decision'], ['loan', 'wallet', 'Your loan'], ['cycle', 'repeat', 'The cycle'], ['gap', 'arrow-left-right', 'Against the Fed'], ['record', 'chart-line', 'The record'], ['/', 'globe', 'World view']],
+  country: [['decision', 'landmark', 'The decision'], ['loan', 'wallet', 'Your loan'], ['cycle', 'repeat', 'The cycle'], ['gap', 'arrow-left-right', 'Against the Fed'], ['record', 'chart-line', 'The record'], ['/world/', 'globe', 'World view']],
   world: [['pulse', 'activity', 'The pulse'], ['board', 'table-2', 'Every bank'], ['upcoming', 'calendar-clock', 'Upcoming'], ['/country', 'landmark', 'Country view']],
-  privacy: [['counted', 'activity', 'What is counted'], ['kept', 'history', 'How long'], ['off', 'shield-check', 'Switching it off'], ['/', 'globe', 'World view']],
-  notfound: [['banks', 'globe', 'Every central bank'], ['/', 'globe', 'World view']],
+  privacy: [['counted', 'activity', 'What is counted'], ['kept', 'history', 'How long'], ['off', 'shield-check', 'Switching it off'], ['/world/', 'globe', 'World view']],
+  notfound: [['banks', 'globe', 'Every central bank'], ['/world/', 'globe', 'World view']],
 };
 export function setRail(): void {
   const page = state.page ?? 'world';
@@ -77,7 +82,7 @@ function buildDock() {
   makeIcons(tabs);
   tabs.addEventListener('click', e => {
     const b = (e.target as Element).closest<HTMLElement>('.m-tab'); if (!b) return; const id = b.dataset.tab!;
-    if (id === 'world') { if (state.page !== 'world') { pendingVia = 'dock'; navigate('/'); } else scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' }); return; }
+    if (id === 'world') { if (state.page !== 'world') { pendingVia = 'dock'; navigate(pathFor('world')); } else scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' }); return; }
     if (state.page !== 'country') { pendingJump = id === 'decision' ? null : id; pendingVia = 'dock'; navigate(pathFor(state.code)); return; }
     jump(id);
   });
@@ -98,6 +103,7 @@ function placePill() {
 let firstRoute = true, pendingVia: Via | null = null;
 function route() {
   const r = parsePath(location.pathname), via = pendingVia ?? 'link'; pendingVia = null;
+  if (!firstRoute) closePrompt();
   if (r.page === 'country' && state.page === 'country' && r.cc) { if (r.cc !== state.code) setCountry(r.cc, { via }); return; }
   const from = state.code;
   if (r.cc) state.code = r.cc;
@@ -107,7 +113,8 @@ function route() {
   if (!hydrate) { host.innerHTML = pageHTML(r.page); host.dataset.route = key; }
   makeIcons(host);
   renderChip();
-  if (r.page === 'country') { renderCountry(); store.set('atlas-country', state.code); if (!firstRoute && from !== state.code) track('country_switch', { from, to: state.code, via }); }
+  // Landing on a country page is not a choice; following a link to one is.
+  if (r.page === 'country') { renderCountry(); if (!firstRoute) { store.set('atlas-country', state.code); if (from !== state.code) track('country_switch', { from, to: state.code, via }); } }
   else if (r.page === 'world') renderWorld(firstRoute && !hydrate);
   else if (r.page === 'privacy') renderPrivacy();
   else renderNotFound();
@@ -118,6 +125,7 @@ function route() {
   if (firstRoute) { if (!hydrate) stagger(document.querySelectorAll('#page .card, #page .tiles, #page .page-head'), 0); }
   else if (!reduced()) host.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: EASE });
   track('page', r.cc ? { route: r.page, cc: r.cc } : { route: r.page });
+  if (firstRoute && r.page === 'country') schedulePrompt();
   if (r.page === 'country' && r.cc) { const d = MODEL[r.cc].decisions, last = d[d.length - 1]; if (last && T_TODAY - last.t <= 2 * DAY) track('decision_window', { cc: r.cc }); }
   firstRoute = false;
 }
@@ -132,6 +140,7 @@ function renderPal(q = '') {
   $('palIn').setAttribute('aria-activedescendant', palItems[palSel] ? `opt-${palItems[palSel]}` : '');
 }
 function openPal(from: 'keyboard' | 'button') {
+  closePrompt();
   palOrigin = state.code; palSel = Math.max(0, CODES.indexOf(state.code));
   const sc = $('scrim'); sc.hidden = false; $<HTMLInputElement>('palIn').value = ''; renderPal(''); stagger($('palList').children);
   requestAnimationFrame(() => { sc.classList.add('on'); $('palIn').focus(); });

@@ -2,7 +2,7 @@
    Every event and every property value is allowlisted; anything else is rejected by the collector. */
 export const CODES = ['IN', 'US', 'EA', 'GB', 'CA', 'AU', 'BR'] as const;
 export const ROUTES = ['world', 'country', 'privacy', 'notfound'] as const;
-export const VIA = ['palette', 'ladder', 'latest', 'league', 'dock', 'link', 'history'] as const;
+export const VIA = ['palette', 'ladder', 'latest', 'league', 'dock', 'link', 'history', 'prompt'] as const;
 
 export type CodeValue = (typeof CODES)[number];
 /** Event name → the property names it carries and the values each may take. */
@@ -17,6 +17,8 @@ export const EVENTS = {
   source_click: { cc: CODES },
   theme: { to: ['light', 'dark'] },
   decision_window: { cc: CODES },
+  /** The first-visit country prompt: cc is the suggestion when shown, or the bank picked. */
+  prompt: { action: ['shown', 'pick', 'keep', 'close'], cc: CODES },
 } as const satisfies Record<string, Record<string, readonly string[]>>;
 
 export type EventName = keyof typeof EVENTS;

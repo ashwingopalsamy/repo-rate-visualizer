@@ -33,4 +33,4 @@ export function showTip(html: string, x: number, y: number): void {
 export const hideTip = () => { (tip ?? $('tip'))?.classList.remove('on'); };
 export const sw = (v: string) => `<i class="sw" style="background:${v}"></i>`;
 export const mobile = () => innerWidth <= 720;
-export const pathFor = (c: Code | 'world') => (c === 'world' ? '/' : `/${c.toLowerCase()}/`);
+export const pathFor = (c: Code | 'world') => (c === 'world' ? '/world/' : `/${c.toLowerCase()}/`);
