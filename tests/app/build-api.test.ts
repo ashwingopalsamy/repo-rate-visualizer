@@ -36,6 +36,6 @@ test('buildApi writes every country, its CSVs and the immutable release', () => 
 test('redirects keep v1 links working', () => {
   const r = redirects();
   assert.match(r, /^\/decision\/\* \/in\/ 302$/m);
-  assert.match(r, /^\/countries \/ 301$/m);
+  assert.match(r, /^\/countries \/world\/ 301$/m);
   assert.match(r, /^\/country\/us \/us\/ 301$/m);
 });

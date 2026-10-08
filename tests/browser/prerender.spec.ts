@@ -7,12 +7,17 @@ const html = (p: string) => readFileSync(new URL(`../../dist/${p}`, import.meta.
 test('every route is prerendered with its title, description, canonical and embedded state', () => {
   const page = html('in/index.html');
   expect(page).toMatch(/<title>RBI policy repo rate: 5\.50%, raised 7 Oct 2026 · Policy Rate Atlas<\/title>/);
-  expect(page).toContain('<link rel="canonical" href="https://rates.ashwingopalsamy.in/in/" />');
   expect(page).toContain('"@type":"Dataset"');
   expect(page).toContain('<script type="application/json" id="atlas-state">');
   expect(page).toMatch(/id="big">5\.50<small>%<\/small>/);
-  for (const p of ['index.html', 'us/index.html', 'ea/index.html', 'gb/index.html', 'ca/index.html', 'au/index.html', 'br/index.html', 'privacy/index.html', '404.html']) expect(html(p)).toContain('data-route=');
+  for (const p of ['index.html', 'world/index.html', 'us/index.html', 'ea/index.html', 'gb/index.html', 'ca/index.html', 'au/index.html', 'br/index.html', 'privacy/index.html', '404.html']) expect(html(p)).toContain('data-route=');
   expect(html('sitemap.xml')).toContain('<loc>https://rates.ashwingopalsamy.in/br/</loc>');
+  expect(html('sitemap.xml')).toContain('<loc>https://rates.ashwingopalsamy.in/world/</loc>');
+  expect(html('sitemap.xml')).not.toContain('<loc>https://rates.ashwingopalsamy.in/in/</loc>');
+  // / is the India page; /in/ is the same page and points search engines at /.
+  expect(html('index.html')).toMatch(/<title>RBI policy repo rate: /);
+  expect(html('index.html')).toContain('<link rel="canonical" href="https://rates.ashwingopalsamy.in/" />');
+  expect(page).toContain('<link rel="canonical" href="https://rates.ashwingopalsamy.in/" />');
 });
 
 test('the client boots on the prerendered page without replacing it, three days after the build', async ({ page }) => {
@@ -38,9 +43,9 @@ test('an unknown address shows the not-found page with every country', async ({ 
 
 test('every page runs under the production Content-Security-Policy without a violation', async ({ page }) => {
   const csp = /Content-Security-Policy: (.+)/.exec(html('_headers'))![1].replace('; upgrade-insecure-requests', '');
-  for (const p of ['index.html', 'in/index.html', 'privacy/index.html', '404.html']) {
+  for (const p of ['index.html', 'world/index.html', 'in/index.html', 'privacy/index.html', '404.html']) {
     for (const [, body] of html(p).matchAll(/<script>([\s\S]*?)<\/script>/g)) expect(csp).toContain(`'sha256-${createHash('sha256').update(body).digest('base64')}'`);
   }
-  await page.route(/\/(|[a-z]{2}\/|privacy\/)$/, async r => { const res = await r.fetch(); await r.fulfill({ response: res, headers: { ...res.headers(), 'content-security-policy': csp } }); });
-  for (const p of ['/', '/in/', '/privacy/']) { await page.goto(p, { waitUntil: 'networkidle' }); await page.locator('#ladder .rung, #league, #counted').first().waitFor(); }
+  await page.route(/\/(|[a-z]{2}\/|privacy\/|world\/)$/, async r => { const res = await r.fetch(); await r.fulfill({ response: res, headers: { ...res.headers(), 'content-security-policy': csp } }); });
+  for (const p of ['/', '/world/', '/in/', '/privacy/']) { await page.goto(p, { waitUntil: 'networkidle' }); await page.locator('#ladder .rung, #league, #counted').first().waitFor(); }
 });

@@ -11,7 +11,7 @@ export function privacyHTML(): string {
       `${kick('activity', 'What is counted')}<p class="finding" data-prose>Two counters, both without cookies</p>`,
       `<div class="prose-block" data-prose>
         ${P('<b>Page traffic.</b> Cloudflare Web Analytics counts page views, referrers, the visitor’s country and page-load speed. It sets no cookies and does not fingerprint visitors.')}
-        ${P('<b>Product events.</b> This site sends a short list of anonymous events to its own server: which page was opened, which country was switched to and how (the switcher, a link or the dock), whether the loan calculator was used, and whether a chart replay or decision-day preview was played. Loan amounts, rates and dates you type never leave your browser.')}
+        ${P('<b>Product events.</b> This site sends a short list of anonymous events to its own server: which page was opened, which country was switched to and how (the switcher, a link or the dock), whether the loan calculator was used, whether a chart replay or decision-day preview was played, and how the country prompt was answered. Loan amounts, rates and dates you type never leave your browser.')}
         ${P('<b>Daily visitor count.</b> To count unique visitors without a cookie, the server combines the day’s date, your IP address and your browser’s user agent with a secret key, and keeps only a short one-way hash of the result. The key makes the hash impossible to reverse, and the date makes it change every day, so a visitor cannot be followed from one day to the next. The IP address and user agent themselves are discarded and never stored.')}
         ${P('Requests from known crawlers and bots are dropped before anything is counted.')}
       </div>`)}
@@ -30,7 +30,7 @@ export function privacyHTML(): string {
       `${kick('shield-check', 'Switching it off')}<p class="finding" data-prose>Global Privacy Control or Do Not Track turns off all counting</p>`,
       `<div class="prose-block" data-prose>
         ${P('If your browser sends Global Privacy Control or Do Not Track, this site loads no analytics script and sends no events at all. Everything else works the same.')}
-        ${P('Your browser’s local storage holds three conveniences for you alone: your theme, your colour palette and the last country you viewed. They never leave your device, and the site works without them.')}
+        ${P('Your browser’s local storage holds three conveniences for you alone: your theme, your colour palette and the central bank you chose, so the site opens there next time. The bank the country prompt suggests is worked out on your device from your time zone and language, and is never sent. None of this leaves your device, and the site works without it.')}
       </div>`)}
   </div>
   ${footerHTML()}`;

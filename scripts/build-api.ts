@@ -39,7 +39,7 @@ export function seriesCsv(r: CountryRelease): string {
 
 /** v1 links: decisions had their own page; the country and limitations pages folded into the new site. */
 export function redirects(): string {
-  return ['/decision/* /in/ 302', '/countries / 301', '/country/in /in/ 301', '/country/us /us/ 301', '/limitations / 302', ''].join('\n');
+  return ['/decision/* /in/ 302', '/countries /world/ 301', '/country/in /in/ 301', '/country/us /us/ 301', '/limitations / 302', ''].join('\n');
 }
 
 export function buildApi(out: string): { files: number } {

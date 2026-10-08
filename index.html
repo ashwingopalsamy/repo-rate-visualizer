@@ -7,14 +7,14 @@
     <title>Policy Rate Atlas</title>
     <meta name="description" content="Policy rates for the world’s central banks, verified against official sources, with the findings that matter for borrowers and markets." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script>try { const t = localStorage.getItem('atlas-theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; const p = localStorage.getItem('atlas-palette'); if (p === 'clay') document.documentElement.dataset.palette = p; } catch { }</script>
+    <script>try { const s = localStorage, t = s.getItem('atlas-theme'), p = s.getItem('atlas-palette'), c = s.getItem('atlas-country'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; if (p === 'clay') document.documentElement.dataset.palette = p; if (location.pathname === '/' && !location.search && c && '__HOME_CODES__'.split(',').includes(c)) location.replace('/' + c.toLowerCase() + '/'); } catch { }</script>
     <!--app-head-->
   </head>
   <body>
     <div class="frame" id="frame">
       <nav class="rail" aria-label="Sections">
         <div class="rail-panel">
-          <a class="brand" href="/" data-link aria-label="Policy Rate Atlas, world view">
+          <a class="brand" href="/" data-link aria-label="Policy Rate Atlas, home">
             <svg viewBox="0 0 40 40" aria-hidden="true"><rect class="bm-tile" x="2" y="2" width="36" height="36" rx="11"/><path class="bm-step" pathLength="1" d="M9 29 H16 V22 H23 V15 H31"/><circle class="bm-dot" cx="31" cy="11" r="3.2"/></svg>
             <span class="brand-text"><b>Policy Rate Atlas</b><span>Central banks, verified</span></span>
           </a>

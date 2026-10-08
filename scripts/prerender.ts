@@ -10,6 +10,7 @@ import { dirname, join } from 'node:path';
 import { parseHTML } from 'linkedom';
 import { buildAtlas } from './build-atlas.ts';
 import { CODES, META, MODEL, initAtlas, lede } from '../src/lib/atlas.ts';
+import { DEFAULT_CC } from '../src/app/shell.ts';
 import type { Code } from '../src/lib/atlas.ts';
 
 export const SITE = 'https://rates.ashwingopalsamy.in';
@@ -21,8 +22,11 @@ const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').rep
 /** JSON safe inside a <script> element: no "</script" or "<!--" can be formed. */
 export const scriptJson = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c');
 
+/** The default country's page lives at /, so /in/ points search engines there. */
+const canonicalOf = (r: Route) => SITE + (r.page === 'country' && r.cc === DEFAULT_CC ? '/' : r.path);
+
 function head(r: Route, title: string): string {
-  const url = SITE + r.path;
+  const url = canonicalOf(r);
   const description = r.page === 'country' && r.cc ? strip(lede(r.cc))
     : r.page === 'privacy' ? 'What Policy Rate Atlas counts, how long it is kept and how to switch it off. No cookies and no personal data.'
     : `Policy rates for ${CODES.length} central banks, every move since 2000, checked against official sources, with the findings that matter for borrowers and markets.`;
@@ -119,20 +123,25 @@ async function main() {
   const data = buildAtlas(), today = new Date().toISOString().slice(0, 10);
   initAtlas(data, today);
   const state = scriptJson(data);
+  // The inline head script sends / to a returning visitor's chosen country; it needs the codes other than the default.
+  const page = shell.replace('__HOME_CODES__', CODES.filter(c => c !== DEFAULT_CC).join(','));
   const routes: Route[] = [
-    { path: '/', page: 'world', cc: null, file: 'index.html' },
+    { path: '/', page: 'country', cc: DEFAULT_CC, file: 'index.html' },
+    { path: '/world/', page: 'world', cc: null, file: 'world/index.html' },
     ...CODES.map(cc => ({ path: `/${cc.toLowerCase()}/`, page: 'country' as const, cc, file: `${cc.toLowerCase()}/index.html` })),
     { path: '/privacy/', page: 'privacy', cc: null, file: 'privacy/index.html' },
     { path: '/404', page: 'notfound', cc: null, file: '404.html' },
   ];
+  const inline = new Set<string>();
   for (const r of routes) {
     const out = join(DIST, r.file);
     mkdirSync(dirname(out), { recursive: true });
-    writeFileSync(out, await render(shell, r, state));
+    const html = await render(page, r, state);
+    for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) inline.add(m[1]);
+    writeFileSync(out, html);
   }
-  const inline = [...shell.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
-  writeFileSync(join(DIST, '_headers'), headers(inline));
-  writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.filter(r => r.page !== 'notfound').map(r => `  <url><loc>${SITE}${r.path}</loc><lastmod>${data.generatedAt}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+  writeFileSync(join(DIST, '_headers'), headers([...inline]));
+  writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.filter(r => r.page !== 'notfound' && canonicalOf(r) === SITE + r.path).map(r => `  <url><loc>${SITE}${r.path}</loc><lastmod>${data.generatedAt}</lastmod></url>`).join('\n')}\n</urlset>\n`);
   writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
   console.log(`prerendered ${routes.length} routes as of ${today}`);
 }

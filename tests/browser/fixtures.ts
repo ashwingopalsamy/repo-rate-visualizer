@@ -3,8 +3,12 @@
 import { test as base, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
-export const test = base.extend<{ errors: string[] }>({
-  errors: [async ({ page }, use) => {
+/** `home` is the visitor's saved country. Most specs act as a returning visitor (India saved) so the first-visit country
+ *  prompt stays out of the way; the prompt spec sets it to null. */
+export const test = base.extend<{ errors: string[]; home: string | null }>({
+  home: ['IN', { option: true }],
+  errors: [async ({ page, home }, use) => {
+    if (home) await page.addInitScript(cc => { try { localStorage.setItem('atlas-country', cc); } catch { /* storage blocked */ } }, home);
     const errors: string[] = [];
     page.on('pageerror', e => errors.push(e.message));
     page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
@@ -15,7 +19,7 @@ export const test = base.extend<{ errors: string[] }>({
 });
 export { expect };
 
-export const PATHS = { in: '/in/', us: '/us/', ea: '/ea/', gb: '/gb/', ca: '/ca/', au: '/au/', br: '/br/', world: '/', privacy: '/privacy/' } as const;
+export const PATHS = { in: '/in/', us: '/us/', ea: '/ea/', gb: '/gb/', ca: '/ca/', au: '/au/', br: '/br/', world: '/world/', privacy: '/privacy/', home: '/' } as const;
 export type RouteName = keyof typeof PATHS;
 
 /** Opens a route and waits for fonts and the first paint to settle. */

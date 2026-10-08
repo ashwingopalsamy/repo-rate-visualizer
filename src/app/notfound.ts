@@ -5,7 +5,7 @@ import { card, footerHTML, kick } from './templates.ts';
 
 export function notFoundHTML(): string {
   return `
-  <div class="page-head"><div><h1>Page not found</h1><p data-prose>Nothing lives at this address. Every central bank on the site is below, or open the <a href="/" data-link>world view</a>.</p></div></div>
+  <div class="page-head"><div><h1>Page not found</h1><p data-prose>Nothing lives at this address. Every central bank on the site is below, or open the <a href="/world/" data-link>world view</a>.</p></div></div>
   <div class="row">
     ${card('banks', 'span-12', 'Every central bank', 'globe',
       `${kick('globe', `All ${CODES.length} central banks`)}<p class="finding" data-prose>Pick a country to see its policy rate</p>`,
