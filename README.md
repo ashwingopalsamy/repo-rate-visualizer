@@ -24,13 +24,12 @@ The atlas preserves each country's native instrument and evidence boundary. The 
 
 ## Open Dataset
 
-Machine-readable data artifacts are versioned in `hf-dataset/` and published to Hugging Face:
+Machine-readable datasets are built from the same releases as the site, versioned in `hf/` and published to Hugging Face:
 
-- `decisions`: Canonical rate records with dates, rates, recorded changes, evidence status, and source URLs where available.
-- `annual`: Year-by-year summary of rate changes, holds, and net policy movement.
-- `regimes`: Classified easing, tightening, and neutral policy cycles.
-- `events`: Contextual macro events with verified citations.
-- `sources`: Source provenance registry with SHA-256 validation checksums.
+- [`central-bank-policy-rates`](https://huggingface.co/datasets/ashwingopalsamy/central-bank-policy-rates): all seven banks in one schema.
+- One dataset per bank: [India](https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset), [United States](https://huggingface.co/datasets/ashwingopalsamy/us-fed-funds-rate-dataset), [Euro area](https://huggingface.co/datasets/ashwingopalsamy/euro-area-deposit-facility-rate-dataset), [United Kingdom](https://huggingface.co/datasets/ashwingopalsamy/uk-bank-rate-dataset), [Canada](https://huggingface.co/datasets/ashwingopalsamy/canada-overnight-rate-dataset), [Australia](https://huggingface.co/datasets/ashwingopalsamy/australia-cash-rate-dataset) and [Brazil](https://huggingface.co/datasets/ashwingopalsamy/brazil-selic-rate-dataset).
+
+Each has `rates` (every change), `daily` (the rate in force each day), `decisions` (announced decisions with votes, where available), `meetings`, `cycles`, `annual`, `countries`, `eras`, `sources` and `transmission`. Build them with `npm run build:hf`.
 
 Available in Parquet, CSV, and JSONL formats.
 
@@ -90,4 +89,4 @@ Scheduled refreshes also produce a reviewable release change report as a GitHub 
 
 This project is an independent educational tool and is not affiliated with, authorised by, or endorsed by the Reserve Bank of India. Records identify their evidence class and link to the declared source; historical observations should not be read as direct RBI resolution citations. Read the [data limitations](https://ashwingopalsamy.github.io/repo-rate-visualizer/limitations) page and always verify figures against primary source publications before using them in research or reporting.
 
-Code is licensed under MIT. Dataset and third-party source rights are described in [`DATA-LICENSE.md`](DATA-LICENSE.md) and `hf-dataset/NOTICE.md`.
+Code is licensed under MIT. Dataset and third-party source rights are described in [`DATA-LICENSE.md`](DATA-LICENSE.md) and each dataset's `NOTICE.md` under `hf/`.

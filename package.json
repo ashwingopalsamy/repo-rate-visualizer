@@ -10,11 +10,12 @@
     "test:app": "node --test \"tests/app/**/*.test.ts\"",
     "test:browser": "playwright test",
     "test:data": "node --test tests/data/snapshotV2.test.js tests/data/rbiSources.test.js tests/data/supplementalHistory.test.js tests/data/releaseManifest.test.js",
-    "test:hf-dataset": "python3 -m unittest tests/data/test_hf_dataset.py",
+    "test:hf-dataset": "python3 -m unittest tests/data/test_hf_datasets.py",
     "test:pipeline": "node --test \"tests/pipeline/**/*.test.ts\"",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.app.json",
     "validate:data": "node pipeline/publish.ts --check",
-    "analytics:report": "node scripts/analytics-report.ts"
+    "analytics:report": "node scripts/analytics-report.ts",
+    "build:hf": "node scripts/build-hf-tables.ts && python3 scripts/build-hf-datasets.py"
   },
   "dependencies": {
     "@fontsource-variable/geist-mono": "5.3.0",

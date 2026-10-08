@@ -1,0 +1,81 @@
+{
+  "repo_id": "ashwingopalsamy/uk-bank-rate-dataset",
+  "version": "1.0.0",
+  "generated_at": "2026-10-06",
+  "generator": "scripts/build-hf-datasets.py",
+  "generator_version": "2.0.0",
+  "country_codes": [
+    "GB"
+  ],
+  "releases": [
+    {
+      "country_code": "GB",
+      "hash": "38d45b4be6a03ceca1a86a766772e94f807c1b0db7ca30408eed922982835ff1",
+      "file": "data/releases/GB/38d45b4be6a03ceca1a86a766772e94f807c1b0db7ca30408eed922982835ff1.json",
+      "sha256": "a932d3c1f2c56b0ca2947590180fb4c8099ce3a0bd1d996a4923780405493815",
+      "observed_through": "2026-10-06"
+    }
+  ],
+  "record_counts_by_config": {
+    "rates": 57,
+    "daily": 9776,
+    "cycles": 10,
+    "annual": 27,
+    "countries": 1,
+    "eras": 1,
+    "sources": 2,
+    "transmission": 2
+  },
+  "coverage": {
+    "rates_from": "1999-11-04",
+    "rates_to": "2025-12-18",
+    "daily_from": "2000-01-01",
+    "daily_to": "2026-10-06"
+  },
+  "rights": {
+    "dataset_license": null,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "statement": "No dataset licence is asserted. Each publisher’s own terms apply to its data; see NOTICE.md.",
+    "publishers": [
+      {
+        "country_code": "GB",
+        "name": "Bank of England",
+        "terms_url": "https://www.bankofengland.co.uk/legal",
+        "attribution": "Source: Bank of England, under the Open Government Licence v3.0"
+      }
+    ]
+  },
+  "output_checksums": {
+    "CHANGELOG.md": "725d083f12f4252450cea4f9f5a88bd51bb8509491d4029e653fc06a00be014e",
+    "NOTICE.md": "eafff976e84b3b5272b100966c512dd06cf53763f4eab09bd9480008e31ea00f",
+    "README.md": "9cb1e7e39aa793722881bcc2f88401003fc79da7c3ab8cace6ed3cc710b5f8f4",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+    "data/annual.parquet": "7ab3e2468d0241808a1ed0b487c1591fcc997d9313be599109108b8100e470f5",
+    "data/countries.parquet": "e8b2329f9beb8bc880ec8a974294ae17166513616f45f5a4a99baa4fefc440a7",
+    "data/cycles.parquet": "4425df7a953fc214bd1b48a047b886c614d6e27524436402986ca762b24fc906",
+    "data/daily.parquet": "81a4c3b551eaa106ec6220d849e49d6b41d8399d9a8dbfb0e0c602e4069d466d",
+    "data/eras.parquet": "3846b014040ae5f8248f250c489b0487e62aaeaa5bbc245a832bf8cee72715c1",
+    "data/rates.parquet": "8acb81df9ebd76ed3c06301323e2c049975e5d123504ef161212b2fe06c09132",
+    "data/sources.parquet": "2aecfcbe58b7be30056ca9863e8493b39ece8a0124328b28ea117262be27f868",
+    "data/transmission.parquet": "8511c4a7b13ce1679c0a79a395dc4ff823015185d457584869e4446308440512",
+    "exports/annual.csv": "42cfece9c20d2dae7c345760d939adee095c0cc73a4c67a4f1b4d9cfd424e9d2",
+    "exports/countries.csv": "e8d809a1f5c0611105b3d544ae40bccce82d299a5a934f566a2be94651b3c6d9",
+    "exports/cycles.csv": "23ec31afffdc2d22e6e920dc7e66adbd7b418604664866be9b010c51f5182ef5",
+    "exports/daily.csv": "e2428e6793363ca4b8ec464f0d8f091fdc7f0d05315e60b6aee905d54e6ce9ea",
+    "exports/eras.csv": "692d4b17915c19816c471ba545d1d22d20703ae35019d260d500f9e581f499e3",
+    "exports/rates.csv": "fcebca83509df981c379aa1e6e5133bf22237592db49ca69d23bf92c4f440cda",
+    "exports/rates.jsonl": "fad5b544bd98b818167d4069963514e719919812a932ccc7d96655cd64fb2445",
+    "exports/sources.csv": "ea2007126da7cb1872691eec44eeb4640abf342769dfae27843f9152bbe302ce",
+    "exports/transmission.csv": "a4eaeb186e88c5097b565aee0b4760b3c52bac0b60966ecf0b1b79ac8c811735",
+    "schema/annual.schema.json": "cad6c7a41b1dd784fe10296d03d362e62c47d24764dabccab737678b64a48a3e",
+    "schema/countries.schema.json": "f0c818c72f9f479880d8873e6f32f86019bf86fd15e1eaed195103d492ffa34c",
+    "schema/cycles.schema.json": "6012eb509f1e5731c1cfcb7e919d1ed8dbb3eb582e7e8eaf671ed61c0679510e",
+    "schema/daily.schema.json": "10f03a6b639c6c9e7022b13065d05fa0e0c388443b40ceb83f483bc7160df351",
+    "schema/data-dictionary.json": "0435b65489fa0890662e6a8b6699e01afb7bef65a356104801071364b5b0a914",
+    "schema/eras.schema.json": "d982a980c045f4cb6233308c97931abef38944ed06650383ff3f4e4f96631680",
+    "schema/rates.schema.json": "5c9526043361d42dbd7b8f6b1055d05d37d6c33f597aa7f605e4ccb51fdd64cf",
+    "schema/sources.schema.json": "7ae93e65f9317e28c2bc0efb4eb495197d6a19a7767702fcaa87e7f4c33f5ce4",
+    "schema/transmission.schema.json": "29b64d006d760b56c3c7ad38f7c25a08878cdd7074228445351cc0085d7b61d3"
+  }
+}

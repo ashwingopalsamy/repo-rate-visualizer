@@ -1,0 +1,39 @@
+name: Publish Hugging Face datasets
+
+# Uploads hf/<dataset>/ to the Hub when its checksums differ from the published copy. Runs on merges that change the
+# datasets and on demand; the refresh pipeline publishes its own data updates. Needs the HF_TOKEN secret (a Hugging Face
+# write token); without it the job reports and exits.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Report what would change without uploading
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ['hf/**']
+
+concurrency:
+  group: hf-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-hf-dataset.txt
+      - run: python -m pip install --disable-pip-version-check -r requirements-hf-dataset.txt
+      - name: Publish
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/publish-hf.py ${{ inputs.dry_run && '--dry-run' || '' }} >> "$GITHUB_STEP_SUMMARY"

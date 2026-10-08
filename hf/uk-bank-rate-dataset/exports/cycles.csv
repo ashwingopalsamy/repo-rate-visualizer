@@ -1,0 +1,11 @@
+cycle_id,country_code,direction,start_date,end_date,moves,total_bps,days,from_rate_pct,to_rate_pct,is_current
+GB-tightening-2000-01-13,GB,tightening,2000-01-13,2000-02-10,2,50,28,5.5,6.0,false
+GB-easing-2001-02-08,GB,easing,2001-02-08,2003-07-10,9,-250,882,6.0,3.5,false
+GB-tightening-2003-11-06,GB,tightening,2003-11-06,2004-08-05,5,125,273,3.5,4.75,false
+GB-easing-2005-08-04,GB,easing,2005-08-04,2005-08-04,1,-25,0,4.75,4.5,false
+GB-tightening-2006-08-03,GB,tightening,2006-08-03,2007-07-05,5,125,336,4.5,5.75,false
+GB-easing-2007-12-06,GB,easing,2007-12-06,2016-08-04,10,-550,3164,5.75,0.25,false
+GB-tightening-2017-11-02,GB,tightening,2017-11-02,2018-08-02,2,50,273,0.25,0.75,false
+GB-easing-2020-03-11,GB,easing,2020-03-11,2020-03-19,2,-65,8,0.75,0.1,false
+GB-tightening-2021-12-16,GB,tightening,2021-12-16,2023-08-03,14,515,595,0.1,5.25,false
+GB-easing-2024-08-01,GB,easing,2024-08-01,2025-12-18,6,-150,504,5.25,3.75,true

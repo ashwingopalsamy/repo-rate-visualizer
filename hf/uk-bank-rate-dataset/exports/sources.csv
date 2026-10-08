@@ -1,0 +1,3 @@
+source_id,country_code,source_type,title,url,official,published_at
+gb-boe-iudbedr,GB,series,Bank of England database: Official Bank Rate (IUDBEDR),https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp,true,
+gb-bank-rate,GB,page,Bank of England: Interest rates and Bank Rate,https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate,true,

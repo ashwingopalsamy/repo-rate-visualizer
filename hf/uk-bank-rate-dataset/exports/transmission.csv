@@ -1,0 +1,3 @@
+country_code,product,benchmark,spread_bps,reset,adjusts,pass_through,note,source_id
+GB,Tracker mortgage,Bank Rate plus a margin,,Usually from the next monthly payment,payment,direct,A tracker follows Bank Rate one for one.,gb-bank-rate
+GB,Fixed-rate mortgage,Fixed for two to five years,,When the deal ends,payment,none,Most UK borrowers are on fixed deals and feel Bank Rate when they remortgage.,gb-bank-rate

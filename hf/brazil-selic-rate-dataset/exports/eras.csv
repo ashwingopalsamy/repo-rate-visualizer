@@ -1,0 +1,2 @@
+era_id,country_code,from_date,to_date,instrument,level_kind,basis,note,source_id
+br-selic-target,BR,2000-01-01,,Selic target,point,policy,The Copom target for the overnight Selic rate.,br-bcb-sgs432

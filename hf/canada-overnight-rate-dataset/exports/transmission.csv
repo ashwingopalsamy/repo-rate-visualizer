@@ -1,0 +1,3 @@
+country_code,product,benchmark,spread_bps,reset,adjusts,pass_through,note,source_id
+CA,Variable-rate mortgage,Lender's prime rate,,Within days of a decision,both,direct,On many variable mortgages the payment stays fixed and the share going to interest changes instead.,ca-policy-rate
+CA,Fixed-rate mortgage,"Fixed for the term, often five years",,At renewal,payment,none,Fixed terms reprice when they renew.,ca-policy-rate

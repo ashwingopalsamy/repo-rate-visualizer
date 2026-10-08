@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/uk-bank-rate-dataset / sources",
+  "description": "Every source the rows cite: official series, statements, calendars and labelled secondary sources.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "Source identifier."
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Kind of source, for example `series`, `statement`, `calendar`, `secondary-series`."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title as published."
+    },
+    "url": {
+      "type": "string",
+      "description": "Where to verify it."
+    },
+    "official": {
+      "type": "boolean",
+      "description": "True when published by the central bank itself (or the official statistical series it maintains)."
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Publication date or time, when known."
+    }
+  },
+  "required": [
+    "source_id",
+    "country_code",
+    "source_type",
+    "title",
+    "url",
+    "official",
+    "published_at"
+  ]
+}

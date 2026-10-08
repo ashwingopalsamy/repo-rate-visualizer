@@ -1,0 +1,190 @@
+{
+  "repo_id": "ashwingopalsamy/central-bank-policy-rates",
+  "version": "1.0.0",
+  "generated_at": "2026-10-07",
+  "generator": "scripts/build-hf-datasets.py",
+  "generator_version": "2.0.0",
+  "country_codes": [
+    "IN",
+    "US",
+    "EA",
+    "GB",
+    "CA",
+    "AU",
+    "BR"
+  ],
+  "releases": [
+    {
+      "country_code": "IN",
+      "hash": "6b9bdc02c553c5cdb32c49c1a749a6e7760d2e0adcfe28990fed8b9719739060",
+      "file": "data/releases/IN/6b9bdc02c553c5cdb32c49c1a749a6e7760d2e0adcfe28990fed8b9719739060.json",
+      "sha256": "e61b533e1290f5446b51a49efd6f962b98b63ad7609f40b114caab4ced1789af",
+      "observed_through": "2026-10-07"
+    },
+    {
+      "country_code": "US",
+      "hash": "03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d",
+      "file": "data/releases/US/03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d.json",
+      "sha256": "ed1da24fa653dfd494fbf2fe7c4b1feb05964d2af6f374ada00f3f5489282933",
+      "observed_through": "2026-10-06"
+    },
+    {
+      "country_code": "EA",
+      "hash": "499b2f064dfe033ce9bc5d0dabb98ef8e48b2db44d66ff48a02ec929e91acb1b",
+      "file": "data/releases/EA/499b2f064dfe033ce9bc5d0dabb98ef8e48b2db44d66ff48a02ec929e91acb1b.json",
+      "sha256": "207b462f4621e8dad6d0a57708db31c2aefba5d11ca3bbc97782ceb783cf46a9",
+      "observed_through": "2026-10-07"
+    },
+    {
+      "country_code": "GB",
+      "hash": "38d45b4be6a03ceca1a86a766772e94f807c1b0db7ca30408eed922982835ff1",
+      "file": "data/releases/GB/38d45b4be6a03ceca1a86a766772e94f807c1b0db7ca30408eed922982835ff1.json",
+      "sha256": "a932d3c1f2c56b0ca2947590180fb4c8099ce3a0bd1d996a4923780405493815",
+      "observed_through": "2026-10-06"
+    },
+    {
+      "country_code": "CA",
+      "hash": "5c0b58687989dd75230cd64f7ab6d37381e4eddaece2a82bb73a8d3ba6c41cf5",
+      "file": "data/releases/CA/5c0b58687989dd75230cd64f7ab6d37381e4eddaece2a82bb73a8d3ba6c41cf5.json",
+      "sha256": "34a0a20bb76573c227ad51d065a52021aa1fb71bae2aa3096b7aae348a8e8551",
+      "observed_through": "2026-10-06"
+    },
+    {
+      "country_code": "AU",
+      "hash": "fd81f8557e007c68c78b0ef835dd5464cb7313612afd0e3bdd3f7f3ce319324a",
+      "file": "data/releases/AU/fd81f8557e007c68c78b0ef835dd5464cb7313612afd0e3bdd3f7f3ce319324a.json",
+      "sha256": "892efd493f358e8ddfeb1ff061d6c6cd40dbf7ab7b28cc2f43790b677f03eec9",
+      "observed_through": "2026-10-06"
+    },
+    {
+      "country_code": "BR",
+      "hash": "59c6949350fb38008d952ac1510c310429ae0f266d9f4524660a0ba9ff53155a",
+      "file": "data/releases/BR/59c6949350fb38008d952ac1510c310429ae0f266d9f4524660a0ba9ff53155a.json",
+      "sha256": "856b3d948f585e8564d1c4fdf52e6a162b6bd4f1b8e60419315a5ce863fcb7c2",
+      "observed_through": "2026-10-07"
+    }
+  ],
+  "record_counts_by_config": {
+    "rates": 507,
+    "daily": 60860,
+    "decisions": 108,
+    "meetings": 117,
+    "cycles": 68,
+    "annual": 169,
+    "countries": 7,
+    "eras": 9,
+    "events": 8,
+    "sources": 144,
+    "transmission": 14
+  },
+  "coverage": {
+    "rates_from": "1999-11-04",
+    "rates_to": "2026-10-07",
+    "daily_from": "2000-01-01",
+    "daily_to": "2026-10-07"
+  },
+  "rights": {
+    "dataset_license": null,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "statement": "No dataset licence is asserted. Each publisher’s own terms apply to its data; see NOTICE.md.",
+    "publishers": [
+      {
+        "country_code": "IN",
+        "name": "Reserve Bank of India",
+        "terms_url": "https://www.rbi.org.in/Scripts/Disclaimer.aspx",
+        "attribution": "Source: Reserve Bank of India, with a link to the document"
+      },
+      {
+        "country_code": "IN",
+        "name": "Reuters and Shriram Finance",
+        "terms_url": "https://www.reuters.com/",
+        "attribution": "Cite the linked article"
+      },
+      {
+        "country_code": "US",
+        "name": "Board of Governors of the Federal Reserve System",
+        "terms_url": "https://www.federalreserve.gov/disclaimer.htm",
+        "attribution": "Source: Board of Governors of the Federal Reserve System"
+      },
+      {
+        "country_code": "US",
+        "name": "FRED, Federal Reserve Bank of St. Louis",
+        "terms_url": "https://fred.stlouisfed.org/legal/",
+        "attribution": "Source: Board of Governors of the Federal Reserve System, retrieved from FRED"
+      },
+      {
+        "country_code": "EA",
+        "name": "European Central Bank",
+        "terms_url": "https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html",
+        "attribution": "Source: ECB statistics"
+      },
+      {
+        "country_code": "GB",
+        "name": "Bank of England",
+        "terms_url": "https://www.bankofengland.co.uk/legal",
+        "attribution": "Source: Bank of England, under the Open Government Licence v3.0"
+      },
+      {
+        "country_code": "CA",
+        "name": "Bank of Canada",
+        "terms_url": "https://www.bankofcanada.ca/terms/",
+        "attribution": "Source: Bank of Canada"
+      },
+      {
+        "country_code": "AU",
+        "name": "Reserve Bank of Australia",
+        "terms_url": "https://www.rba.gov.au/copyright/",
+        "attribution": "Source: Reserve Bank of Australia"
+      },
+      {
+        "country_code": "BR",
+        "name": "Banco Central do Brasil",
+        "terms_url": "https://dadosabertos.bcb.gov.br/dataset/432-taxa-de-juros---meta-selic-definida-pelo-copom",
+        "attribution": "Source: Banco Central do Brasil, SGS 432, under the ODbL 1.0"
+      }
+    ]
+  },
+  "output_checksums": {
+    "CHANGELOG.md": "e2e15be415fcdb1b58aa3885aacff0d7ae27fcc3cf4da8c138cb0bac98616b32",
+    "NOTICE.md": "31508e19649d727c54d065c3999d5ec5409b3f9a699271aa070afacd1372fc15",
+    "README.md": "e2ec4b5823bfc7b80b4e92697a38f44ca858b6aa755b80917f456d8700fd05c0",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+    "data/annual.parquet": "c307d164bfebd54b42ddf6847b06e6231e64fc6cf024edcec6a0f8c87b31ad50",
+    "data/countries.parquet": "b0f2625f9b987a414a649a0ddd912e725c4edd07186686bf74ad4fb44663c505",
+    "data/cycles.parquet": "32097f8f5457e427d80ec6f3edcf09bea28019addcfff599715d3cddf33c4e43",
+    "data/daily.parquet": "a206fd7159d7530fcdd5a06b7a6d00111644c59578c99ca848700f8e690215ef",
+    "data/decisions.parquet": "7f98a3207899df849c369117f5a3696f6ed1664c36f12dda5fa1abe0cd2b715e",
+    "data/eras.parquet": "38a9e2e59fb5b108cbd37a236857c71c2b18235a329aed938307b9f894d46c1e",
+    "data/events.parquet": "7807d36187fbb7135995c10bd3fc255f61cbef3c6fa4852e66627e92e24b6384",
+    "data/meetings.parquet": "c7fd98ff7a00178f705ec94f0fec4b0843cf7cb5881b32d0bf3cc226324bd631",
+    "data/rates.parquet": "a3be808e42295caa033abfe05f55366d2be4d9cc20867d9da7ef0af67784f66c",
+    "data/sources.parquet": "06a2190047c339b7ee32c7609bcaf2dd46854c260f88634fd29582642f1780b5",
+    "data/transmission.parquet": "fbc2cf6ba8f14df1cd9550e1cc23df30b873e18d76f99d06b53385565a57409d",
+    "exports/annual.csv": "957236362be90414b18b4c48c63e1004b854d2816f48b9a263ecfc52a1dfb0ca",
+    "exports/countries.csv": "e648f6881b3e6fdb94f8b9a36cbc531f1d8ed7a15924fa886b5270595c8f2317",
+    "exports/cycles.csv": "a9c7f023e682132ae71de1b22f66d8d54d297190fc218b2d7fdd409d7ec761b2",
+    "exports/daily.csv": "d78e10f4334893957348ad648428319f60a15c58b335a949f35eb6ccc14a9743",
+    "exports/decisions.csv": "9df59ab4c7f0bc1fbe5e09caf6af6ad2dae4ff0cc575793b5019c7fdb46621a5",
+    "exports/decisions.jsonl": "0acc1add56d4c990754bbf356c0ec4f8911a2384b0172972abb895e9062420ed",
+    "exports/eras.csv": "5ca5659388d85b65940be53cf33f77fa40d5b6c515117c39bd703de1ed9baec1",
+    "exports/events.csv": "87682f09d36071812f76c14b74b540f16a44e392297febc9e063c6e169424449",
+    "exports/meetings.csv": "6b1517b2e3343fe330590fd63af87e1a1a5b933c1c07f11dc8eca9c08d4df332",
+    "exports/rates.csv": "817852cabf030401e1d3496095312cfc830d9ac472db11ed567242ced3e040ea",
+    "exports/rates.jsonl": "bff2bdd6dabfa082ee20450588d8e14edb1bed228ee676d38dae5c3c76374854",
+    "exports/sources.csv": "f55f413e30755daa765af917841ca12028a34d0a541e399f6d8ba0c5d0605788",
+    "exports/transmission.csv": "e48c45f116e51235264675517a869e7d52328efcd5cc8105d4495e27416d6a44",
+    "schema/annual.schema.json": "a08f800ba7c5a65855f876b58d5488720f7f0ea318799c6c2997645bbb47cd94",
+    "schema/countries.schema.json": "3d8a8c6542719504d0e149b08ecaf9b848feea08b88fce9dbdcca7040bb576c5",
+    "schema/cycles.schema.json": "edb1d5ab5be54bc1a47f939dfd16b93b32105437f65b97bbbf60bd86c30d721e",
+    "schema/daily.schema.json": "01b4ff33196db62e0b40d1a387bec30a14786999e526465ed75872641ba232fb",
+    "schema/data-dictionary.json": "e572550f994e0514d58f1e6e32510a3218fa092f9b261911c9183a21cd4a2c38",
+    "schema/decisions.schema.json": "8fc780af64fa871a14a96d601d75b76fb6aa07a503198dd1d509011490e7d0ff",
+    "schema/eras.schema.json": "36d7ef8be9bea44e282e1c38eed79a8d72512bbde8d2b520aa171df86a088193",
+    "schema/events.schema.json": "d1d3dcfbff3d13494a060fccb5795366f8fc3c3e99c6d3ae6f33c66912a990ea",
+    "schema/meetings.schema.json": "eb0a034cc6c07ac590baf642328468b15aad46ce9bcf180bec94669615d3fab8",
+    "schema/rates.schema.json": "cf4a78318ddbe3554f68379f37f462a54ef54c1d69afc28c14b8a07f664f9416",
+    "schema/sources.schema.json": "2d318f4618a2a2cfc954804d6daeed609ab1b9df0064275ac5c30391805f1a8f",
+    "schema/transmission.schema.json": "bf6a3d427b53a1291f4433fe546e7dc7d752f211120ddfde5e67f8659413006d"
+  }
+}

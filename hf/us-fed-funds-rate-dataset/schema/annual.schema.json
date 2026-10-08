@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/us-fed-funds-rate-dataset / annual",
+  "description": "Yearly summaries computed from `rates` and `decisions`: the rate at each end of the year, its range, the net and gross change, and how many hikes, cuts and holds there were.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "year": {
+      "type": "integer",
+      "description": "Calendar year."
+    },
+    "start_rate_pct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "The rate in force on 1 January (the latest change effective before it). Null when the series starts later in the year."
+    },
+    "end_rate_pct": {
+      "type": "number",
+      "description": "The rate in force on 31 December, or on the last observed date for the current year."
+    },
+    "min_rate_pct": {
+      "type": "number",
+      "description": "Lowest rate in force during the year."
+    },
+    "max_rate_pct": {
+      "type": "number",
+      "description": "Highest rate in force during the year."
+    },
+    "net_change_bps": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "End minus start, in basis points. Null when the start is unknown."
+    },
+    "gross_hikes_bps": {
+      "type": "integer",
+      "description": "Sum of hikes in the year, in basis points."
+    },
+    "gross_cuts_bps": {
+      "type": "integer",
+      "description": "Sum of cuts in the year, in basis points (a positive number)."
+    },
+    "hike_count": {
+      "type": "integer",
+      "description": "Number of hikes."
+    },
+    "cut_count": {
+      "type": "integer",
+      "description": "Number of cuts."
+    },
+    "hold_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Number of announced holds. Null where the decision ledger does not cover the whole year."
+    },
+    "decision_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Number of announced decisions. Null where the decision ledger does not cover the whole year."
+    },
+    "is_partial_year": {
+      "type": "boolean",
+      "description": "True for a year the data does not fully cover: the first year of the series or the current year."
+    },
+    "record_text": {
+      "type": "string",
+      "description": "One deterministic sentence summarising the year, for search and retrieval. Generated from the fields, not written by a model."
+    }
+  },
+  "required": [
+    "country_code",
+    "year",
+    "start_rate_pct",
+    "end_rate_pct",
+    "min_rate_pct",
+    "max_rate_pct",
+    "net_change_bps",
+    "gross_hikes_bps",
+    "gross_cuts_bps",
+    "hike_count",
+    "cut_count",
+    "hold_count",
+    "decision_count",
+    "is_partial_year",
+    "record_text"
+  ]
+}

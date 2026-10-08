@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/australia-cash-rate-dataset / countries",
+  "description": "What each country’s data covers: the bank, the instrument, the dates covered and the release it was built from.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "country": {
+      "type": "string",
+      "description": "Jurisdiction name."
+    },
+    "central_bank": {
+      "type": "string",
+      "description": "Central bank that sets the rate."
+    },
+    "central_bank_short": {
+      "type": "string",
+      "description": "Short name of the central bank."
+    },
+    "decision_body": {
+      "type": "string",
+      "description": "The committee that sets the rate."
+    },
+    "instrument": {
+      "type": "string",
+      "description": "The current policy instrument."
+    },
+    "instrument_explainer": {
+      "type": "string",
+      "description": "What the instrument is, in plain words."
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code."
+    },
+    "time_zone": {
+      "type": "string",
+      "description": "IANA time zone of the bank’s announcements."
+    },
+    "series_from": {
+      "type": "string",
+      "format": "date",
+      "description": "First point of the rate series."
+    },
+    "ledger_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "First decision in the decision ledger; null where the ledger is still being added."
+    },
+    "observed_through": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the official series was last observed."
+    },
+    "coverage_note": {
+      "type": "string",
+      "description": "How the data was assembled, in the release’s own words."
+    },
+    "series_points": {
+      "type": "integer",
+      "description": "Rows in `rates` for this country."
+    },
+    "decisions": {
+      "type": "integer",
+      "description": "Rows in `decisions` for this country."
+    },
+    "central_bank_url": {
+      "type": "string",
+      "description": "The bank’s website."
+    },
+    "release_hash": {
+      "type": "string",
+      "description": "SHA-256 content hash of the release."
+    }
+  },
+  "required": [
+    "country_code",
+    "country",
+    "central_bank",
+    "central_bank_short",
+    "decision_body",
+    "instrument",
+    "instrument_explainer",
+    "currency",
+    "time_zone",
+    "series_from",
+    "ledger_from",
+    "observed_through",
+    "coverage_note",
+    "series_points",
+    "decisions",
+    "central_bank_url",
+    "release_hash"
+  ]
+}

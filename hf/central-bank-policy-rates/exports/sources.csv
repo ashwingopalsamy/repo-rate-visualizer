@@ -1,0 +1,145 @@
+source_id,country_code,source_type,title,url,official,published_at
+in-eblr-2019,IN,regulation,RBI: External Benchmark Based Lending (4 Sep 2019),https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=11677&Mode=0,true,
+in-emi-reset-2023,IN,regulation,RBI: Reset of Floating Interest Rate on EMI based Personal Loans (18 Aug 2023),https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12529&Mode=0,true,
+in-event-event-001-2008-09-15,IN,context,Global financial crisis,https://rbi.org.in/scripts/AnnualReportPublications.aspx?Id=896,true,2008-09-15
+in-event-event-002-2013-05-22,IN,context,Tapering shock,https://systemhealth.rbi.org.in/Scripts/PublicationsView.aspx_id%3D15709.html,true,2013-05-22
+in-event-event-003-2016-11-08,IN,context,Currency withdrawal,https://www.rbi.org.in/commonman/english/Scripts/Notification.aspx?Id=1938,true,2016-11-08
+in-event-event-004-2017-07-01,IN,context,GST rollout,https://cbic-gst.gov.in/pdf/press-release/press-relese-gst-02092017.pdf,false,2017-07-01
+in-event-event-005-2020-03-24,IN,context,National lockdown,https://www.mha.gov.in/sites/default/files/PR_NationalLockdown_26032020.pdf,false,2020-03-24
+in-event-event-006-2022-02-24,IN,context,War in Ukraine,https://www.rbi.org.in/scripts/AnnualReportPublications.aspx?Id=1373,true,2022-02-24
+in-event-event-007-2022-05-04,IN,context,Off-cycle tightening,https://www.rbi.org.in/scripts/FS_Notification.aspx?Id=12311,true,2022-05-04
+in-event-event-008-2025-02-07,IN,context,Easing cycle begins,https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR2094189B0DF105514A28A2FA834330E94B26.PDF,true,2025-02-07
+in-laf-2004,IN,reference,"RBI Handbook of Statistics, Table 44: Major monetary policy rates (repo and reverse repo nomenclature interchanged from 29 Oct 2004)",https://rbidocs.rbi.org.in/rdocs/Publications/PDFs/TABLE4481AA634C0907458C91DC0497720652F4.PDF,true,
+in-mpc-38224,IN,statement,"Fourth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38224,true,
+in-mpc-38818,IN,statement,"Fifth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=38818,true,
+in-mpc-39505,IN,statement,"Sixth Bi-monthly Monetary Policy Statement, 2016-17 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=39505,true,
+in-mpc-40069,IN,statement,"First Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40069,true,
+in-mpc-40685,IN,statement,"Second Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC), Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=40685,true,
+in-mpc-41256,IN,statement,"Third Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41256,true,
+in-mpc-41852,IN,statement,"Fourth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=41852,true,
+in-mpc-42476,IN,statement,"Fifth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=42476,true,
+in-mpc-43078,IN,statement,"Sixth Bi-monthly Monetary Policy Statement, 2017-18 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43078,true,
+in-mpc-43573,IN,statement,"First Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=43573,true,
+in-mpc-44125,IN,statement,"Second Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44125,true,
+in-mpc-44636,IN,statement,"Third Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=44636,true,
+in-mpc-45152,IN,statement,"Fourth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45152,true,
+in-mpc-45656,IN,statement,"Fifth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=45656,true,
+in-mpc-46235,IN,statement,"Sixth Bi-monthly Monetary Policy Statement, 2018-19 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46235,true,
+in-mpc-46722,IN,statement,"First Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=46722,true,
+in-mpc-47225,IN,statement,"Second Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47225,true,
+in-mpc-47818,IN,statement,"Third Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=47818,true,
+in-mpc-48319,IN,statement,"Fourth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48319,true,
+in-mpc-48802,IN,statement,"Fifth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=48802,true,
+in-mpc-49342,IN,statement,"Sixth Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49342,true,
+in-mpc-49581,IN,statement,"Seventh Bi-monthly Monetary Policy Statement, 2019-20 Resolution of the Monetary Policy Committee (MPC) Reserve Bank of India",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49581,true,2020-03-27
+in-mpc-49843,IN,statement,"Monetary Policy Statement, 2020-21: Resolution of the Monetary Policy Committee (MPC) May 20 to 22, 2020",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=49843,true,2020-05-22
+in-mpc-50175,IN,statement,"Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) August 4 to 6, 2020",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50175,true,
+in-mpc-50479,IN,statement,"Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) October 7-9, 2020",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50479,true,
+in-mpc-50747,IN,statement,"Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) December 2-4, 2020",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50747,true,
+in-mpc-51077,IN,statement,"Monetary Policy Statement, 2020-21 Resolution of the Monetary Policy Committee (MPC) February 3-5, 2021",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51077,true,
+in-mpc-51381,IN,statement,"Resolution of the Monetary Policy Committee (MPC) April 5-7, 2021",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51381,true,
+in-mpc-51683,IN,statement,"Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) June 2-4, 2021",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=51683,true,
+in-mpc-52011,IN,statement,"Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) August 4-6, 2021",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52011,true,
+in-mpc-52366,IN,statement,"Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) October 6-8, 2021",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52366,true,
+in-mpc-52687,IN,statement,"Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) December 6-8, 2021",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=52687,true,
+in-mpc-53247,IN,statement,"Monetary Policy Statement, 2021-22 Resolution of the Monetary Policy Committee (MPC) February 8-10, 2022",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53247,true,
+in-mpc-53537,IN,statement,"Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) April 6-8, 2022",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53537,true,
+in-mpc-53652,IN,statement,"Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) May 2 and 4, 2022",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53652,true,2022-05-04
+in-mpc-53832,IN,statement,"Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2022",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=53832,true,
+in-mpc-54148,IN,statement,"Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) August 3-5, 2022",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54148,true,
+in-mpc-54465,IN,statement,"Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) September 28-30, 2022",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54465,true,
+in-mpc-54818,IN,statement,"Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) December 5-7, 2022",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54818,true,
+in-mpc-55178,IN,statement,"Monetary Policy Statement, 2022-23 Resolution of the Monetary Policy Committee (MPC) February 6-8, 2023",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55178,true,
+in-mpc-55472,IN,statement,"Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) April 3, 5 and 6, 2023",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55472,true,
+in-mpc-55814,IN,statement,"Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) June 6-8, 2023",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=55814,true,
+in-mpc-56173,IN,statement,"Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) August 8-10, 2023",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56173,true,
+in-mpc-56502,IN,statement,"Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) October 4 to 6, 2023",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56502,true,
+in-mpc-56888,IN,statement,"Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) December 6 to 8, 2023",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56888,true,
+in-mpc-57275,IN,statement,"Monetary Policy Statement, 2023-24 Resolution of the Monetary Policy Committee (MPC) February 6 to 8, 2024",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57275,true,
+in-mpc-57637,IN,statement,"Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) April 3 to 5, 2024",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=57637,true,
+in-mpc-58050,IN,statement,"Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) June 5 to 7, 2024",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58050,true,
+in-mpc-58447,IN,statement,"Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) August 6 to 8, 2024",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58447,true,
+in-mpc-58850,IN,statement,"Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee (MPC) October 7 to 9, 2024",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=58850,true,
+in-mpc-59244,IN,statement,"Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee December 4 to 6, 2024",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59244,true,
+in-mpc-59692,IN,statement,"Monetary Policy Statement, 2024-25 Resolution of the Monetary Policy Committee February 5 to 7, 2025",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=59692,true,
+in-mpc-60176,IN,statement,"Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee April 7 to 9, 2025",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60176,true,
+in-mpc-60604,IN,statement,"Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee June 4 to 6, 2025",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60604,true,
+in-mpc-60957,IN,statement,"Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee August 4 to 6, 2025",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=60957,true,
+in-mpc-61332,IN,statement,"Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee September 29 to October 1, 2025",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61332,true,
+in-mpc-61749,IN,statement,"Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee December 3 to 5, 2025",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=61749,true,
+in-mpc-62169,IN,statement,"Monetary Policy Statement, 2025-26 Resolution of the Monetary Policy Committee February 4 to 6, 2026",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62169,true,
+in-mpc-schedule-2026-27,IN,calendar,RBI: Schedule of the Monetary Policy Committee for 2026-2027 (23 Mar 2026),https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422,true,
+source-3270380f0b7d,IN,statement,"Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee April 6 to 8, 2026",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62514,true,2026-04-08T00:00:00.000Z
+source-5c261f230add,IN,statement,"Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee June 3 to 5, 2026",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62863,true,2026-06-05T00:00:00.000Z
+source-8834bb93a0f0,IN,archive,RBI Monetary Policy archive,https://www.rbi.org.in/scripts/Annualpolicy.aspx,true,
+source-8eb3f54fb9e1,IN,statement,"Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee October 5 to 7, 2026",https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63742,true,2026-10-07T00:00:00.000Z
+source-9f153108642d,IN,minutes,"Minutes of the Monetary Policy Committee Meeting, August 3 to 5, 2026",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63403,true,2026-08-19T00:00:00.000Z
+source-a03e7549af0f,IN,current-rates,RBI Current Policy Rates,https://www.rbi.org.in/,true,
+source-b6c29da8f60a,IN,statement,"Monetary Policy Statement, 2026-27 Resolution of the Monetary Policy Committee August 3 to 5, 2026",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63287,true,2026-08-05T00:00:00.000Z
+source-b90d0dee26ee,IN,minutes,"Minutes of the Monetary Policy Committee Meeting, June 3 to 5, 2026",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62974,true,2026-06-19T00:00:00.000Z
+source-cdb8e605e1d7,IN,minutes,"Minutes of the Monetary Policy Committee Meeting, April 6 to 8, 2026",https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62599,true,2026-04-22T00:00:00.000Z
+source-reuters-historical-2025,IN,secondary-series,Reuters — Changes to India's repo rate since June 2000,https://www.reuters.com/world/india/changes-indias-repo-rate-since-june-2000-2025-12-05/,false,2025-12-05T00:00:00.000Z
+source-shriram-historical-2025,IN,secondary-reference,Shriram Finance — Detailed Historical Repo Rate Trends (2010–2025),https://www.shriramfinance.in/fixed-deposit/articles/detailed-historical-repo-rate-trends-in-india,false,2025-12-10T00:00:00.000Z
+us-fred-dfedtar,US,series,FRED: Federal Funds Target Rate (discontinued) (DFEDTAR),https://fred.stlouisfed.org/series/DFEDTAR,true,
+us-fred-dfedtaru,US,series,"FRED: Federal Funds Target Range, Upper Limit (DFEDTARU)",https://fred.stlouisfed.org/series/DFEDTARU,true,
+us-fred-dfedtarl,US,series,"FRED: Federal Funds Target Range, Lower Limit (DFEDTARL)",https://fred.stlouisfed.org/series/DFEDTARL,true,
+us-fomc-calendar,US,calendar,Federal Reserve: Meeting calendars and information,https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm,true,
+us-dprime,US,series,FRED: Bank Prime Loan Rate (DPRIME),https://fred.stlouisfed.org/series/DPRIME,true,
+us-mortgage30,US,series,FRED: 30-Year Fixed Rate Mortgage Average (MORTGAGE30US),https://fred.stlouisfed.org/series/MORTGAGE30US,true,
+us-statement-20210127,US,statement,"FOMC statement, 2021-01-27",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210127a.htm,true,2021-01-27
+us-statement-20210317,US,statement,"FOMC statement, 2021-03-17",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210317a.htm,true,2021-03-17
+us-statement-20210428,US,statement,"FOMC statement, 2021-04-28",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210428a.htm,true,2021-04-28
+us-statement-20210616,US,statement,"FOMC statement, 2021-06-16",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210616a.htm,true,2021-06-16
+us-statement-20210728,US,statement,"FOMC statement, 2021-07-28",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210728a.htm,true,2021-07-28
+us-statement-20210922,US,statement,"FOMC statement, 2021-09-22",https://www.federalreserve.gov/newsevents/pressreleases/monetary20210922a.htm,true,2021-09-22
+us-statement-20211103,US,statement,"FOMC statement, 2021-11-03",https://www.federalreserve.gov/newsevents/pressreleases/monetary20211103a.htm,true,2021-11-03
+us-statement-20211215,US,statement,"FOMC statement, 2021-12-15",https://www.federalreserve.gov/newsevents/pressreleases/monetary20211215a.htm,true,2021-12-15
+us-statement-20220126,US,statement,"FOMC statement, 2022-01-26",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220126a.htm,true,2022-01-26
+us-statement-20220316,US,statement,"FOMC statement, 2022-03-16",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm,true,2022-03-16
+us-statement-20220504,US,statement,"FOMC statement, 2022-05-04",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220504a.htm,true,2022-05-04
+us-statement-20220615,US,statement,"FOMC statement, 2022-06-15",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220615a.htm,true,2022-06-15
+us-statement-20220727,US,statement,"FOMC statement, 2022-07-27",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220727a.htm,true,2022-07-27
+us-statement-20220921,US,statement,"FOMC statement, 2022-09-21",https://www.federalreserve.gov/newsevents/pressreleases/monetary20220921a.htm,true,2022-09-21
+us-statement-20221102,US,statement,"FOMC statement, 2022-11-02",https://www.federalreserve.gov/newsevents/pressreleases/monetary20221102a.htm,true,2022-11-02
+us-statement-20221214,US,statement,"FOMC statement, 2022-12-14",https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm,true,2022-12-14
+us-statement-20230201,US,statement,"FOMC statement, 2023-02-01",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230201a.htm,true,2023-02-01
+us-statement-20230322,US,statement,"FOMC statement, 2023-03-22",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230322a.htm,true,2023-03-22
+us-statement-20230503,US,statement,"FOMC statement, 2023-05-03",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230503a.htm,true,2023-05-03
+us-statement-20230614,US,statement,"FOMC statement, 2023-06-14",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230614a.htm,true,2023-06-14
+us-statement-20230726,US,statement,"FOMC statement, 2023-07-26",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230726a.htm,true,2023-07-26
+us-statement-20230920,US,statement,"FOMC statement, 2023-09-20",https://www.federalreserve.gov/newsevents/pressreleases/monetary20230920a.htm,true,2023-09-20
+us-statement-20231101,US,statement,"FOMC statement, 2023-11-01",https://www.federalreserve.gov/newsevents/pressreleases/monetary20231101a.htm,true,2023-11-01
+us-statement-20231213,US,statement,"FOMC statement, 2023-12-13",https://www.federalreserve.gov/newsevents/pressreleases/monetary20231213a.htm,true,2023-12-13
+us-statement-20240131,US,statement,"FOMC statement, 2024-01-31",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm,true,2024-01-31
+us-statement-20240320,US,statement,"FOMC statement, 2024-03-20",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240320a.htm,true,2024-03-20
+us-statement-20240501,US,statement,"FOMC statement, 2024-05-01",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240501a.htm,true,2024-05-01
+us-statement-20240612,US,statement,"FOMC statement, 2024-06-12",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240612a.htm,true,2024-06-12
+us-statement-20240731,US,statement,"FOMC statement, 2024-07-31",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240731a.htm,true,2024-07-31
+us-statement-20240918,US,statement,"FOMC statement, 2024-09-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20240918a.htm,true,2024-09-18
+us-statement-20241107,US,statement,"FOMC statement, 2024-11-07",https://www.federalreserve.gov/newsevents/pressreleases/monetary20241107a.htm,true,2024-11-07
+us-statement-20241218,US,statement,"FOMC statement, 2024-12-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20241218a.htm,true,2024-12-18
+us-statement-20250129,US,statement,"FOMC statement, 2025-01-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250129a.htm,true,2025-01-29
+us-statement-20250319,US,statement,"FOMC statement, 2025-03-19",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250319a.htm,true,2025-03-19
+us-statement-20250507,US,statement,"FOMC statement, 2025-05-07",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250507a.htm,true,2025-05-07
+us-statement-20250618,US,statement,"FOMC statement, 2025-06-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250618a.htm,true,2025-06-18
+us-statement-20250730,US,statement,"FOMC statement, 2025-07-30",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250730a.htm,true,2025-07-30
+us-statement-20250917,US,statement,"FOMC statement, 2025-09-17",https://www.federalreserve.gov/newsevents/pressreleases/monetary20250917a.htm,true,2025-09-17
+us-statement-20251029,US,statement,"FOMC statement, 2025-10-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20251029a.htm,true,2025-10-29
+us-statement-20251210,US,statement,"FOMC statement, 2025-12-10",https://www.federalreserve.gov/newsevents/pressreleases/monetary20251210a.htm,true,2025-12-10
+us-statement-20260128,US,statement,"FOMC statement, 2026-01-28",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm,true,2026-01-28
+us-statement-20260318,US,statement,"FOMC statement, 2026-03-18",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm,true,2026-03-18
+us-statement-20260429,US,statement,"FOMC statement, 2026-04-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260429a.htm,true,2026-04-29
+us-statement-20260617,US,statement,"FOMC statement, 2026-06-17",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm,true,2026-06-17
+us-statement-20260729,US,statement,"FOMC statement, 2026-07-29",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm,true,2026-07-29
+us-statement-20260916,US,statement,"FOMC statement, 2026-09-16",https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm,true,2026-09-16
+ea-ecb-dfr,EA,series,ECB Data Portal: Deposit facility rate (FM.D.U2.EUR.4F.KR.DFR.LEV),https://data.ecb.europa.eu/data/datasets/FM/FM.D.U2.EUR.4F.KR.DFR.LEV,true,
+ea-transmission,EA,explainer,ECB: Transmission mechanism of monetary policy,https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html,true,
+ea-key-rates,EA,page,ECB: Official interest rates,https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html,true,
+gb-boe-iudbedr,GB,series,Bank of England database: Official Bank Rate (IUDBEDR),https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp,true,
+gb-bank-rate,GB,page,Bank of England: Interest rates and Bank Rate,https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate,true,
+ca-boc-v39079,CA,series,Bank of Canada Valet: Target for the overnight rate (V39079),https://www.bankofcanada.ca/valet/observations/V39079,true,
+ca-policy-rate,CA,page,Bank of Canada: Policy interest rate,https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/,true,
+au-rba-f1,AU,series,RBA statistical table F1: Cash Rate Target (FIRMMCRTD),https://www.rba.gov.au/statistics/tables/csv/f1-data.csv,true,
+au-transmission,AU,explainer,RBA: The Transmission of Monetary Policy (explainer),https://www.rba.gov.au/education/resources/explainers/the-transmission-of-monetary-policy.html,true,
+br-bcb-sgs432,BR,series,Banco Central do Brasil SGS: Selic target (series 432),https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json,true,
+br-selic,BR,page,Banco Central do Brasil: Selic rate,https://www.bcb.gov.br/en/monetarypolicy/selicrate,true,

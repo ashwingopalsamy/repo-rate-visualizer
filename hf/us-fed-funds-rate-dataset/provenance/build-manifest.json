@@ -1,0 +1,96 @@
+{
+  "repo_id": "ashwingopalsamy/us-fed-funds-rate-dataset",
+  "version": "1.0.0",
+  "generated_at": "2026-10-06",
+  "generator": "scripts/build-hf-datasets.py",
+  "generator_version": "2.0.0",
+  "country_codes": [
+    "US"
+  ],
+  "releases": [
+    {
+      "country_code": "US",
+      "hash": "03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d",
+      "file": "data/releases/US/03ec07b603a974f34ed004641972824ef876a33b09f49ab41002ad807fd72f2d.json",
+      "sha256": "ed1da24fa653dfd494fbf2fe7c4b1feb05964d2af6f374ada00f3f5489282933",
+      "observed_through": "2026-10-06"
+    }
+  ],
+  "record_counts_by_config": {
+    "rates": 76,
+    "daily": 9776,
+    "decisions": 46,
+    "meetings": 56,
+    "cycles": 9,
+    "annual": 27,
+    "countries": 1,
+    "eras": 2,
+    "sources": 52,
+    "transmission": 2
+  },
+  "coverage": {
+    "rates_from": "1999-11-16",
+    "rates_to": "2026-09-17",
+    "daily_from": "2000-01-01",
+    "daily_to": "2026-10-06"
+  },
+  "rights": {
+    "dataset_license": null,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "statement": "No dataset licence is asserted. Each publisher’s own terms apply to its data; see NOTICE.md.",
+    "publishers": [
+      {
+        "country_code": "US",
+        "name": "Board of Governors of the Federal Reserve System",
+        "terms_url": "https://www.federalreserve.gov/disclaimer.htm",
+        "attribution": "Source: Board of Governors of the Federal Reserve System"
+      },
+      {
+        "country_code": "US",
+        "name": "FRED, Federal Reserve Bank of St. Louis",
+        "terms_url": "https://fred.stlouisfed.org/legal/",
+        "attribution": "Source: Board of Governors of the Federal Reserve System, retrieved from FRED"
+      }
+    ]
+  },
+  "output_checksums": {
+    "CHANGELOG.md": "c8bf5c49b0a1cb7c4d56ddddaa6fc76914792d88303827719f215c81c94dab68",
+    "NOTICE.md": "fd396972873fc71f7cada68314ec2918c692791453b253dbde628db772e42567",
+    "README.md": "7a26d6fccb596702513baa3bffbdb600b8387519de6bef3a1a4142f406feca17",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+    "data/annual.parquet": "4cc8b5f941c00145f273d1452c71055ef291477600636cffa78bc82959ab3b8b",
+    "data/countries.parquet": "67e7071059323224ffdd1b556b6ad786591b5b1e8e4819bb5fbd66d8c38a31f3",
+    "data/cycles.parquet": "4a9e43968831b35759d735deceb033bbb04752b0d351c91fee83f23c1fbb8e66",
+    "data/daily.parquet": "13013f2f1433c45a802f0ee6c10cee88552cf3cba3b1598d1cd4bb57a7f1ea0e",
+    "data/decisions.parquet": "c108b5343eed2e4ff487721cf878daf73c96a6dd527fe6f6c4bb4fb5b8ba3c42",
+    "data/eras.parquet": "4815484cfca3162609b42897efa82402f4a85847d2236fc23760d00ef3128af7",
+    "data/meetings.parquet": "f433dbf2a60426c1fb2aea3a73c616f3efdea46c909a12ba61daf6efb953e846",
+    "data/rates.parquet": "e099d0495d8d86521df77d44d18a120559e6847d714b383d9dff4bddca41a069",
+    "data/sources.parquet": "5a333999b8e221ced022fc660407aa88ece5810e40ac1653d1e2090ef8ad7d98",
+    "data/transmission.parquet": "2717ca615039515b5b6eb746da6171a907c5fdb89186fb16f12070c47b4daabe",
+    "exports/annual.csv": "9d81cd757fae409da0da9bb9a084358bc87b0571e7ea20cb315f5d79dc9eba62",
+    "exports/countries.csv": "d377ff5dbc7c98c53e33b055a8db4c505b935137be2efc46aed75f86e7674db0",
+    "exports/cycles.csv": "e09e6a01b3ff248d513c1f4d564f43e125cf0bb9e866a4f68d0338983f645d22",
+    "exports/daily.csv": "9c33d115a9a496e4978366a9355cdc363754170209b01092dce648882ff71428",
+    "exports/decisions.csv": "84d7a3512de34cbadc593ba757e9e5ca6c146c0c4781fa6831dc3a166ccf967e",
+    "exports/decisions.jsonl": "d38bc31225a0fb037541345c6b86e5f34b24814464de7e98be2c678d0c52379e",
+    "exports/eras.csv": "f68e0ff9854c0a73d4751d2b4bb5add2fa7e16376ab5e371d5748232013edf7e",
+    "exports/meetings.csv": "03c019ef88d80ebdcdfabbf92c1771f84549046ec2805a4f3fff3b8e58cc20b7",
+    "exports/rates.csv": "0cc6caab72f5ba1fb6ef2fe9e99c12b69d054d360cd6a50cffea22f08ce9f32b",
+    "exports/rates.jsonl": "2e8af51f337dc17271f73968f48d6df876ab7ccd4f4092bf64c7d2eaad28cdbb",
+    "exports/sources.csv": "33adb786613c95bc310e8dfd4d037e1e634ac6bc7eb6810651a069f9c9cef74d",
+    "exports/transmission.csv": "1f3920e3c1b36eeef786ecf4aec15f8722e050ffc6e7768bb915ba9cc57903c3",
+    "schema/annual.schema.json": "d7338ce6f9a7ef9ca00ab60ac127912e15fadbfcf465667b03bff05c7d071780",
+    "schema/countries.schema.json": "d33bba864f98f94c2865a071fe91d74baa021da296b5baf526f0de729925761a",
+    "schema/cycles.schema.json": "f65f306395bc8878069052d0c1b1c39657e6969d685af26ec6905c5ec524dc11",
+    "schema/daily.schema.json": "6d9bbc8aa90ab3a02a43bfbf42ce68b63c845763fe6329ab41728ea229a2c74a",
+    "schema/data-dictionary.json": "41551d1d0ab3ac5c4514ce1210ba81470b178eb4dae31d4949a5d831d52b60b8",
+    "schema/decisions.schema.json": "7b738d7ed6ff34745f03ac0727196fb0d9fb512ec3974537f50c0c5d2c23bff9",
+    "schema/eras.schema.json": "a19da599e646e22fde36506f75868e342e0f32816286f60d7696eb083ef25375",
+    "schema/meetings.schema.json": "e9c3be150fc5acd995d3170c15faf5ddfa0c00f3e6f3f0048ac69e94f81ba3f3",
+    "schema/rates.schema.json": "60a0db783ead6e4e411a4f61a7d44f24eb0371cefc1f26394d937672949c9814",
+    "schema/sources.schema.json": "90d48e7fb37ad81573acc3e7f801fea6c8435a753f760b976b5bdd53a075c9a2",
+    "schema/transmission.schema.json": "16ad88674aecc1fb544260b06df16039b4bc0ba27af5fe817f4682bb78b22fea"
+  }
+}

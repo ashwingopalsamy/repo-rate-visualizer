@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/canada-overnight-rate-dataset / daily",
+  "description": "The rate in force on every calendar day, from 1 Jan 2000 (or the first point of the series, if later) to the date the official series was last observed. Ready to join to any daily or monthly data.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Calendar date."
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "level_kind": {
+      "type": "string",
+      "description": "`point` for a single rate, `range` for a target range (the US since 16 Dec 2008)."
+    },
+    "rate_pct": {
+      "type": "number",
+      "description": "The rate in percent: the point, or the upper bound of a range. Never a midpoint."
+    },
+    "rate_bps": {
+      "type": "integer",
+      "description": "The same rate as an exact integer number of basis points."
+    },
+    "rate_low_pct": {
+      "type": "number",
+      "description": "Lower bound of a range in percent; equals `rate_pct` for a point rate."
+    },
+    "rate_high_pct": {
+      "type": "number",
+      "description": "Upper bound of a range in percent; equals `rate_pct`."
+    },
+    "era_id": {
+      "type": "string",
+      "description": "The period of one rate basis this row belongs to; joins to `eras`."
+    },
+    "era_basis": {
+      "type": "string",
+      "description": "`policy` for the policy rate itself, `observation` for an earlier proxy rate kept for history."
+    },
+    "is_change": {
+      "type": "boolean",
+      "description": "True on the day a new rate took effect."
+    }
+  },
+  "required": [
+    "date",
+    "country_code",
+    "level_kind",
+    "rate_pct",
+    "rate_bps",
+    "rate_low_pct",
+    "rate_high_pct",
+    "era_id",
+    "era_basis",
+    "is_change"
+  ]
+}

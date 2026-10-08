@@ -1,0 +1,12 @@
+cycle_id,country_code,direction,start_date,end_date,moves,total_bps,days,from_rate_pct,to_rate_pct,is_current
+EA-tightening-2000-02-04,EA,tightening,2000-02-04,2000-10-06,6,175,245,2.0,3.75,false
+EA-easing-2001-05-11,EA,easing,2001-05-11,2003-06-06,7,-275,756,3.75,1.0,false
+EA-tightening-2005-12-06,EA,tightening,2005-12-06,2008-07-09,9,225,946,1.0,3.25,false
+EA-easing-2008-10-08,EA,easing,2008-10-08,2008-10-08,1,-50,0,3.25,2.75,false
+EA-tightening-2008-10-09,EA,tightening,2008-10-09,2008-10-09,1,50,0,2.75,3.25,false
+EA-easing-2008-11-12,EA,easing,2008-11-12,2009-04-08,5,-300,147,3.25,0.25,false
+EA-tightening-2011-04-13,EA,tightening,2011-04-13,2011-07-13,2,50,91,0.25,0.75,false
+EA-easing-2011-11-09,EA,easing,2011-11-09,2019-09-18,8,-125,2870,0.75,-0.5,false
+EA-tightening-2022-07-27,EA,tightening,2022-07-27,2023-09-20,10,450,420,-0.5,4.0,false
+EA-easing-2024-06-12,EA,easing,2024-06-12,2025-06-11,8,-200,364,4.0,2.0,false
+EA-tightening-2026-06-17,EA,tightening,2026-06-17,2026-09-16,2,50,91,2.0,2.5,true

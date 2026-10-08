@@ -1,0 +1,2 @@
+era_id,country_code,from_date,to_date,instrument,level_kind,basis,note,source_id
+au-cash-rate,AU,2011-01-04,,Cash rate target,point,policy,The RBA target for overnight interbank loans; table F1 carries the daily series from January 2011.,au-rba-f1

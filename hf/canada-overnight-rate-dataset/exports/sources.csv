@@ -1,0 +1,3 @@
+source_id,country_code,source_type,title,url,official,published_at
+ca-boc-v39079,CA,series,Bank of Canada Valet: Target for the overnight rate (V39079),https://www.bankofcanada.ca/valet/observations/V39079,true,
+ca-policy-rate,CA,page,Bank of Canada: Policy interest rate,https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/,true,

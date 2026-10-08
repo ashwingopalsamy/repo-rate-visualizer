@@ -1,0 +1,2 @@
+era_id,country_code,from_date,to_date,instrument,level_kind,basis,note,source_id
+gb-bank-rate,GB,1999-11-04,,Bank Rate,point,policy,The rate the Bank of England pays on commercial bank reserves.,gb-boe-iudbedr

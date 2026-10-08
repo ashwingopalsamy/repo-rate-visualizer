@@ -1,0 +1,3 @@
+country_code,product,benchmark,spread_bps,reset,adjusts,pass_through,note,source_id
+IN,Floating-rate home loan,"External benchmark, usually the repo rate",,At least once every three months,both,direct,"Most new floating-rate retail loans must be linked to an external benchmark, and most banks use the repo rate. When the rate resets, borrowers can choose a higher EMI, a longer tenure, or both.",in-eblr-2019
+IN,Older MCLR-linked loan,Bank's marginal cost of funds based lending rate,,"On the loan's reset date, often yearly",both,lagged,Loans priced off a bank's internal MCLR follow policy moves later and usually by less.,in-emi-reset-2023

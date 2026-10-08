@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ashwingopalsamy/central-bank-policy-rates / meetings",
+  "description": "The meeting calendar, including meetings still to come, with the decision each held meeting produced.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "meeting_id": {
+      "type": "string",
+      "description": "Stable meeting identifier, `{country}-{decision date}`."
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the jurisdiction (EA for the euro area)."
+    },
+    "meeting_start": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "First day of a multi-day meeting."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Decision day."
+    },
+    "announce_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled announcement time in UTC."
+    },
+    "announce_at_local": {
+      "type": "string",
+      "description": "Scheduled announcement time with the bank’s UTC offset (ISO 8601)."
+    },
+    "status": {
+      "type": "string",
+      "description": "`held`, `scheduled`, `cancelled` or `moved`."
+    },
+    "effective_lag_days": {
+      "type": "integer",
+      "description": "Days between the announcement and the date a new rate takes effect."
+    },
+    "decision_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The decision this meeting produced; joins to `decisions`."
+    },
+    "source_id": {
+      "type": "string",
+      "description": "The calendar source; joins to `sources`."
+    }
+  },
+  "required": [
+    "meeting_id",
+    "country_code",
+    "meeting_start",
+    "date",
+    "announce_at",
+    "announce_at_local",
+    "status",
+    "effective_lag_days",
+    "decision_id",
+    "source_id"
+  ]
+}

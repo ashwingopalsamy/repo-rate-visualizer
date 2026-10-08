@@ -1,0 +1,3 @@
+source_id,country_code,source_type,title,url,official,published_at
+au-rba-f1,AU,series,RBA statistical table F1: Cash Rate Target (FIRMMCRTD),https://www.rba.gov.au/statistics/tables/csv/f1-data.csv,true,
+au-transmission,AU,explainer,RBA: The Transmission of Monetary Policy (explainer),https://www.rba.gov.au/education/resources/explainers/the-transmission-of-monetary-policy.html,true,

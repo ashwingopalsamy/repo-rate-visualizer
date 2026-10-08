@@ -40,7 +40,9 @@
     "scripts/build-api.ts",
     "scripts/prerender.ts",
     "scripts/check-bundle.ts",
-    "scripts/analytics-report.ts"
+    "scripts/analytics-report.ts",
+    "scripts/build-hf-tables.ts",
+    "scripts/hf"
   ],
   "exclude": [
     "tests/app/events.test.ts"

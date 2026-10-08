@@ -1,0 +1,12 @@
+cycle_id,country_code,direction,start_date,end_date,moves,total_bps,days,from_rate_pct,to_rate_pct,is_current
+IN-tightening-2005-10-26,IN,tightening,2005-10-26,2008-07-29,10,300,1007,6.0,9.0,false
+IN-easing-2008-10-20,IN,easing,2008-10-20,2009-04-21,6,-425,183,9.0,4.75,false
+IN-tightening-2010-03-19,IN,tightening,2010-03-19,2011-10-25,13,375,585,4.75,8.5,false
+IN-easing-2012-04-17,IN,easing,2012-04-17,2013-05-03,4,-125,381,8.5,7.25,false
+IN-tightening-2013-09-20,IN,tightening,2013-09-20,2014-01-28,3,75,130,7.25,8.0,false
+IN-easing-2015-01-15,IN,easing,2015-01-15,2017-08-02,7,-200,930,8.0,6.0,false
+IN-tightening-2018-06-06,IN,tightening,2018-06-06,2018-08-01,2,50,56,6.0,6.5,false
+IN-easing-2019-02-07,IN,easing,2019-02-07,2020-05-22,7,-250,470,6.5,4.0,false
+IN-tightening-2022-05-04,IN,tightening,2022-05-04,2023-02-08,6,250,280,4.0,6.5,false
+IN-easing-2025-02-07,IN,easing,2025-02-07,2025-12-05,4,-125,301,6.5,5.25,false
+IN-tightening-2026-10-07,IN,tightening,2026-10-07,2026-10-07,1,25,0,5.25,5.5,true

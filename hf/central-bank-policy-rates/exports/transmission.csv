@@ -1,0 +1,15 @@
+country_code,product,benchmark,spread_bps,reset,adjusts,pass_through,note,source_id
+IN,Floating-rate home loan,"External benchmark, usually the repo rate",,At least once every three months,both,direct,"Most new floating-rate retail loans must be linked to an external benchmark, and most banks use the repo rate. When the rate resets, borrowers can choose a higher EMI, a longer tenure, or both.",in-eblr-2019
+IN,Older MCLR-linked loan,Bank's marginal cost of funds based lending rate,,"On the loan's reset date, often yearly",both,lagged,Loans priced off a bank's internal MCLR follow policy moves later and usually by less.,in-emi-reset-2023
+US,Prime-linked credit line,Bank prime rate,300,Within days of a Fed move,payment,direct,"Credit cards and home equity lines are priced off the bank prime rate, which has sat 3 points above the target range's upper bound.",us-dprime
+US,30-year fixed mortgage,Fixed at origination,,"Never, unless refinanced",payment,none,A fixed-rate mortgage does not change with the Fed. New mortgage rates follow longer-term bond yields rather than the target directly.,us-mortgage30
+EA,Variable-rate mortgage,"Euribor, usually 3 or 12 months",,Every 3 to 12 months,payment,direct,"Euribor moves on expectations for ECB policy, so it often shifts before the decision itself.",ea-transmission
+EA,Fixed-rate mortgage,Fixed at origination,,At the end of the fixed period,payment,none,"Germany and France lean fixed; Spain, Portugal and Finland lean variable.",ea-transmission
+GB,Tracker mortgage,Bank Rate plus a margin,,Usually from the next monthly payment,payment,direct,A tracker follows Bank Rate one for one.,gb-bank-rate
+GB,Fixed-rate mortgage,Fixed for two to five years,,When the deal ends,payment,none,Most UK borrowers are on fixed deals and feel Bank Rate when they remortgage.,gb-bank-rate
+CA,Variable-rate mortgage,Lender's prime rate,,Within days of a decision,both,direct,On many variable mortgages the payment stays fixed and the share going to interest changes instead.,ca-policy-rate
+CA,Fixed-rate mortgage,"Fixed for the term, often five years",,At renewal,payment,none,Fixed terms reprice when they renew.,ca-policy-rate
+AU,Variable-rate home loan,Lender's standard variable rate,,Usually within weeks,payment,direct,"Most Australian home loans are variable, one of the most direct channels to household budgets.",au-transmission
+AU,Fixed-rate home loan,Fixed for one to five years,,Rolls to variable when the fix ends,payment,none,Fixed loans meet the cash rate when they roll off.,au-transmission
+BR,Floating-rate credit,Selic or CDI,,Quickly,payment,direct,"Overdrafts, floating loans and CDB yields move closely with the Selic.",br-selic
+BR,Home loan,Often TR or IPCA plus a spread,,Depends on the index,payment,lagged,"Many home loans follow other indices, so mortgage pass-through is weaker.",br-selic

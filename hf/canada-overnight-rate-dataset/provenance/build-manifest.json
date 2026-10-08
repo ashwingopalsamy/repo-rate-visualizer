@@ -1,0 +1,81 @@
+{
+  "repo_id": "ashwingopalsamy/canada-overnight-rate-dataset",
+  "version": "1.0.0",
+  "generated_at": "2026-10-06",
+  "generator": "scripts/build-hf-datasets.py",
+  "generator_version": "2.0.0",
+  "country_codes": [
+    "CA"
+  ],
+  "releases": [
+    {
+      "country_code": "CA",
+      "hash": "5c0b58687989dd75230cd64f7ab6d37381e4eddaece2a82bb73a8d3ba6c41cf5",
+      "file": "data/releases/CA/5c0b58687989dd75230cd64f7ab6d37381e4eddaece2a82bb73a8d3ba6c41cf5.json",
+      "sha256": "34a0a20bb76573c227ad51d065a52021aa1fb71bae2aa3096b7aae348a8e8551",
+      "observed_through": "2026-10-06"
+    }
+  ],
+  "record_counts_by_config": {
+    "rates": 33,
+    "daily": 6378,
+    "cycles": 6,
+    "annual": 18,
+    "countries": 1,
+    "eras": 1,
+    "sources": 2,
+    "transmission": 2
+  },
+  "coverage": {
+    "rates_from": "2009-04-21",
+    "rates_to": "2025-10-30",
+    "daily_from": "2009-04-21",
+    "daily_to": "2026-10-06"
+  },
+  "rights": {
+    "dataset_license": null,
+    "license_status": "not_asserted",
+    "official_status": "independent_non_official",
+    "statement": "No dataset licence is asserted. Each publisher’s own terms apply to its data; see NOTICE.md.",
+    "publishers": [
+      {
+        "country_code": "CA",
+        "name": "Bank of Canada",
+        "terms_url": "https://www.bankofcanada.ca/terms/",
+        "attribution": "Source: Bank of Canada"
+      }
+    ]
+  },
+  "output_checksums": {
+    "CHANGELOG.md": "725d083f12f4252450cea4f9f5a88bd51bb8509491d4029e653fc06a00be014e",
+    "NOTICE.md": "069120fd1c330b8647070117a3c22c4a678aadd76c05024139b5f7058a8c29db",
+    "README.md": "a376382a9c4223cf10935bea8056b4b3dbe93eb6ceaf29ba95e89799e3b2f7df",
+    "VERSION": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+    "data/annual.parquet": "1d3a271814057dcbb06e703e30faaf6a7e3e60d569d575e0ccccf8a7f107e86f",
+    "data/countries.parquet": "f85cf3b6de981387f5b74e7f4f05de467f0c5f150ac2f633ed2cd3dba81b1ac1",
+    "data/cycles.parquet": "7f01612e3f552ab91cd8c09d0882ef0c453a2fbf87e1f60c248107418e1ec4aa",
+    "data/daily.parquet": "48f9d5b14ed7147d1b7a1e805ed5534e80cf7bb6c5ffe9bdd302e24c26d70a4b",
+    "data/eras.parquet": "1d6777057fca82915ebc5f88148eafeeed5a4ae26f490937303ad0d795611011",
+    "data/rates.parquet": "31528a8b75b6080887a8e1b1096d6809b2ee7a6748ffafb02d59c7d1f4984cc7",
+    "data/sources.parquet": "d7ed2efbf74d1fd02ed1985394d428d3b8aa4a723bc06b2d98e316fd11ab9002",
+    "data/transmission.parquet": "3efb3119a10213e67ee92052148e6533e084223630436c905c08fcb46dba0295",
+    "exports/annual.csv": "990fd2f9d0ec66f7cca8cb097d3b53b1e3e6b0dc232ea98b615683ea05358ab6",
+    "exports/countries.csv": "10ef302cd8041f212326262791c7bc8f034885ede688ee009d3023ac328bb0c7",
+    "exports/cycles.csv": "96b3332d772ecd87d773e6d995a317c52f63be2103cf86cecf557b0472b78a9c",
+    "exports/daily.csv": "15a417527b63a321432bacc0702c9435515261a5f0fa31e036b078cfeedf2955",
+    "exports/eras.csv": "c6ce785b45fa960e65b3750591a8b7fd9ea9b129b587f06b6eae5e72ac62ffc8",
+    "exports/rates.csv": "a672cf54d356ec586831313d69a6f17b4769da43157dd6e438b6d611385f82ed",
+    "exports/rates.jsonl": "419885feec82ea4ad9bbc1c41d97de24cf212151c1178573b4f42a4adcee468f",
+    "exports/sources.csv": "8c52b5efcca714d77ddf8ffab70fc5f534fb564f75fd8b3acb694ab7bfda1fe9",
+    "exports/transmission.csv": "a42a2d7350418f3e4e24161c99b8768b46f8ab442271ee8881135e5618779794",
+    "schema/annual.schema.json": "c7d69c7fc5e7dd29be5a682fb05d919af68b63cbcbe2d3b3d35e0b6e2ddb8232",
+    "schema/countries.schema.json": "9164ee41a5c8f1d98b8ef400ca85bce5f0ff5ae38dfaef33046b40435ddf8d4c",
+    "schema/cycles.schema.json": "063629b334e1f4f98ceb0bccc09dfa3871e922d519233d7c42d7336b6d5376bd",
+    "schema/daily.schema.json": "780e2f100118f0cda9c39d4bf1e2430e039374bee784c9efefbb2f323a12bbfb",
+    "schema/data-dictionary.json": "7c44555cba184224420ef5ab5558892cab1db164944f104e3621a3689a5a3643",
+    "schema/eras.schema.json": "b08ea3d5340fcd71426e42cadb20c6647f34a525aa24ff7e58248d3935dc98f8",
+    "schema/rates.schema.json": "b4541f8fe5078919ded2763b42294b51b31ff04419b6faf251ad416074164c1f",
+    "schema/sources.schema.json": "fa5c958278bc7b8e0514c03059b8dee598eee6779b820e7c8737015f91bcb731",
+    "schema/transmission.schema.json": "c6697ff9fb62a1284ea882856c1d4f4f17542cc5cb5959bd89204c2f91f1dac9"
+  }
+}

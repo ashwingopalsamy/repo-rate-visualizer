@@ -50,10 +50,12 @@ jobs:
           cache-dependency-path: requirements-hf-dataset.txt
       - run: npm ci --no-audit --no-fund
       - run: python -m pip install --disable-pip-version-check -r requirements-hf-dataset.txt
-      - name: RBI v2 data and Hugging Face dataset
+      - name: RBI v2 data and Hugging Face datasets
         run: |
           npm run test:data
           npm run test:hf-dataset
+          npm run build:hf
+          git diff --exit-code -- hf || { echo "::error::hf/ is out of date with data/; run npm run build:hf and commit"; exit 1; }
           git diff --check
 
   app:

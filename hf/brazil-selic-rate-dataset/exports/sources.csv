@@ -1,0 +1,3 @@
+source_id,country_code,source_type,title,url,official,published_at
+br-bcb-sgs432,BR,series,Banco Central do Brasil SGS: Selic target (series 432),https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json,true,
+br-selic,BR,page,Banco Central do Brasil: Selic rate,https://www.bcb.gov.br/en/monetarypolicy/selicrate,true,

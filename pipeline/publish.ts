@@ -21,7 +21,7 @@ const writeJson = (path: string, value: unknown) => { mkdirSync(dirname(path), {
 const allowlistFor = (code: string) => COUNTRIES[code as CountryCode]?.allowlist;
 const latestRecordDate = (r: CountryRelease) => [...r.decisions.map(d => d.announcedAt.slice(0, 10)), ...r.series.map(p => p.date)].sort().at(-1) ?? r.coverage.seriesFrom;
 const HEALTH_REFRESH_MS = 7 * 86_400_000;
-const V2_PATHS = ['public/data', 'data/legacy', 'hf-dataset'];
+const V2_PATHS = ['public/data', 'data/legacy'];
 
 export function publish({ outDir, dataDir, now }: { outDir: string; dataDir: string; now: string }): { changed: string[]; errors: string[] } {
   const manifestPath = join(dataDir, 'manifest.json');

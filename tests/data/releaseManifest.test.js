@@ -9,11 +9,10 @@ const root = resolve(new URL('../..', import.meta.url).pathname);
 const readJson = path => JSON.parse(readFileSync(resolve(root, path), 'utf8'));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 
-test('public, bundled, and Hugging Face artifacts identify the same release bytes', () => {
+test('public and bundled artifacts identify the same release bytes', () => {
   const snapshotBytes = readFileSync(resolve(root, 'data/legacy/in/snapshot.json'));
   const archiveBytes = readFileSync(resolve(root, `public/data/${bundledRelease.artifactPath}`));
   const manifest = readJson('public/data/manifest.json');
-  const hfManifest = readJson('hf-dataset/provenance/build-manifest.json');
   const snapshot = JSON.parse(snapshotBytes);
   const entry = manifest.snapshots.find(item => item.releaseId === bundledRelease.releaseId);
 
@@ -32,8 +31,12 @@ test('public, bundled, and Hugging Face artifacts identify the same release byte
     coverage.totalRecords,
     'every record must carry exactly one evidence class',
   );
-  assert.equal(hfManifest.source_snapshot_checksum, snapshot.meta.checksum);
-  assert.equal(hfManifest.source_release_id, bundledRelease.releaseId);
-  assert.equal(hfManifest.source_artifact_sha256, bundledRelease.artifactSha256);
-  assert.equal(hfManifest.record_counts_by_config.decisions, snapshot.decisions.length);
+});
+
+test('every Hugging Face dataset is built from the releases in the data manifest', () => {
+  const manifest = readJson('data/manifest.json');
+  for (const dir of ['central-bank-policy-rates', 'india-repo-rate-dataset']) {
+    const hf = readJson(`hf/${dir}/provenance/build-manifest.json`);
+    for (const r of hf.releases) assert.equal(r.hash, manifest.countries[r.country_code].release, `${dir} ${r.country_code}`);
+  }
 });

@@ -1,0 +1,10 @@
+era_id,country_code,from_date,to_date,instrument,level_kind,basis,note,source_id
+in-auction,IN,2000-06-05,2004-10-28,Repo rate (pre-2004 usage: absorption),point,observation,"Before 29 Oct 2004, RBI used ""repo"" for operations that absorbed liquidity. These values are kept as observations and left out of findings.",in-laf-2004
+in-repo,IN,2004-10-29,,Policy repo rate,point,policy,The repo rate in its international sense: the rate at which RBI lends to banks. Set by the Monetary Policy Committee since 4 Oct 2016.,in-laf-2004
+us-point,US,1982-09-27,2008-12-15,Federal funds target rate,point,policy,A single target rate until 15 Dec 2008.,us-fred-dfedtar
+us-range,US,2008-12-16,,Federal funds target range,range,policy,A target range with both bounds since 16 Dec 2008.,us-fred-dfedtaru
+ea-dfr,EA,1999-11-05,,Deposit facility rate,point,policy,"The rate on overnight deposits with the Eurosystem, the rate through which the ECB steers policy.",ea-ecb-dfr
+gb-bank-rate,GB,1999-11-04,,Bank Rate,point,policy,The rate the Bank of England pays on commercial bank reserves.,gb-boe-iudbedr
+ca-overnight-target,CA,2009-04-21,,Target for the overnight rate,point,policy,The Bank of Canada policy rate; the daily Valet series starts in April 2009.,ca-boc-v39079
+au-cash-rate,AU,2011-01-04,,Cash rate target,point,policy,The RBA target for overnight interbank loans; table F1 carries the daily series from January 2011.,au-rba-f1
+br-selic-target,BR,2000-01-01,,Selic target,point,policy,The Copom target for the overnight Selic rate.,br-bcb-sgs432

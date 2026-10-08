@@ -1,0 +1,5 @@
+cycle_id,country_code,direction,start_date,end_date,moves,total_bps,days,from_rate_pct,to_rate_pct,is_current
+AU-easing-2011-11-02,AU,easing,2011-11-02,2020-11-04,18,-465,3290,4.75,0.1,false
+AU-tightening-2022-05-04,AU,tightening,2022-05-04,2023-11-08,13,425,553,0.1,4.35,false
+AU-easing-2025-02-19,AU,easing,2025-02-19,2025-08-13,3,-75,175,4.35,3.6,false
+AU-tightening-2026-02-04,AU,tightening,2026-02-04,2026-09-30,4,100,238,3.6,4.6,true
