@@ -33,6 +33,12 @@ git pull
 npm run build
 ```
 
+To include the Web Analytics beacon in a manual deploy, build with its token instead (the token is a public site identifier, not a secret):
+
+```bash
+VITE_CF_BEACON_TOKEN=<site token> npm run build
+```
+
 ```bash
 npx wrangler deploy
 ```
@@ -58,7 +64,7 @@ Set `GITHUB_DISPATCH_TOKEN` first (see Secrets and variables). Then deploy `atla
 npx wrangler deploy --config worker/dispatch/wrangler.jsonc
 ```
 
-### Analytics D1 (optional)
+### Analytics D1 (needed for the privacy page to be accurate)
 
 The daily rollup writes to D1. Without D1 and the rollup secrets, events older than three months are lost. The collector and rollup are described in [analytics.md](analytics.md).
 
@@ -80,7 +86,11 @@ Add your account id as a variable in `wrangler.jsonc` (an account id is an ident
 "vars": { "CF_ACCOUNT_ID": "<your account id>" }
 ```
 
-Set `CF_ANALYTICS_READ_TOKEN` (see Secrets and variables), then deploy `policy-rate-atlas` again. `npx wrangler whoami` prints the account id.
+`d1_databases` is the last property, so add a comma after it before adding `vars`. `npx wrangler whoami` prints the account id.
+
+Set `CF_ANALYTICS_READ_TOKEN` (see Secrets and variables), then deploy `policy-rate-atlas` again.
+
+Commit these `wrangler.jsonc` edits to `main`. Workers Builds deploys from the committed file, so a binding or variable that exists only in a local edit is dropped on the next deploy and the rollup silently stops.
 
 ### Vercel v1 host
 
@@ -93,7 +103,7 @@ Store each value only in Cloudflare or GitHub, never in a file in the repository
 | Name | Where it is set | What it does | Without it |
 |---|---|---|---|
 | `HF_TOKEN` | GitHub repository secret | Hugging Face write token used to publish the datasets | Publishing is skipped |
-| `ANALYTICS_SALT_KEY` | Wrangler secret on `policy-rate-atlas` | Key for the daily anonymous visitor id | Events are counted but unique visitors are not |
+| `ANALYTICS_SALT_KEY` | Wrangler secret on `policy-rate-atlas` | Key for the daily anonymous visitor id | Events are counted, but every visitor shares one blank id, so reports show one visitor a day |
 | `CF_ANALYTICS_READ_TOKEN` | Wrangler secret on `policy-rate-atlas` | Account Analytics read token for the daily rollup into D1 | Rollup does nothing |
 | `CF_ACCOUNT_ID` | Wrangler variable on `policy-rate-atlas` | Cloudflare account id for the rollup | Rollup does nothing |
 | `VITE_CF_BEACON_TOKEN` | Build environment (Workers Builds) | Public site token for the Cloudflare Web Analytics beacon | No beacon is loaded |
@@ -109,6 +119,12 @@ The secret commands below prompt for the value, so it stays out of shell history
 npx wrangler secret put ANALYTICS_SALT_KEY
 ```
 
+Set the rollup's read token the same way:
+
+```bash
+npx wrangler secret put CF_ANALYTICS_READ_TOKEN
+```
+
 Set the dispatcher's Wrangler secret by adding its config file:
 
 ```bash
@@ -119,6 +135,16 @@ Set the GitHub secret:
 
 ```bash
 gh secret set HF_TOKEN --repo ashwingopalsamy/repo-rate-visualizer
+```
+
+The weekly report's GitHub secrets are set the same way:
+
+```bash
+gh secret set CLOUDFLARE_ACCOUNT_ID --repo ashwingopalsamy/repo-rate-visualizer
+```
+
+```bash
+gh secret set CLOUDFLARE_ANALYTICS_TOKEN --repo ashwingopalsamy/repo-rate-visualizer
 ```
 
 `SITE_LIVE` is not a secret, so its value goes on the command line:
@@ -148,7 +174,7 @@ Most routine work runs in GitHub Actions. Refresh runs start from the dispatcher
 
 ### Data refresh
 
-`.github/workflows/refresh.yml` runs when the dispatcher starts it, weekly on Sundays (`17 3 * * 0`), or by hand. Its inputs are `countries` (for example `ALL` or `IN,US`) and `reason`. The jobs are plan, fetch (one job per country), publish, and verify-live. The publish job writes `data/`, rebuilds and tests the Hugging Face datasets when the data changed, then commits to `main` as `github-actions[bot]`, publishes to Hugging Face, and syncs the pipeline issues.
+`.github/workflows/refresh.yml` runs when the dispatcher starts it, weekly on Sundays (`17 3 * * 0`), or by hand. Its inputs are `countries` (for example `ALL` or `IN,US`) and `reason`. The jobs are plan, fetch (one job per country), publish, and verify-live. The publish job writes `data/`, rebuilds and tests the Hugging Face datasets when the data changed, then validates and builds (`validate:data`, `test:pipeline`, `test:data`, `npm run build`, `git diff --check`). If any check fails, nothing is committed or published. Otherwise it commits to `main` as `github-actions[bot]` and publishes to Hugging Face. It syncs the pipeline issues either way.
 
 Start a run by hand:
 
@@ -158,7 +184,7 @@ gh workflow run refresh.yml -f countries=ALL -f reason=manual
 
 ### Verify-live
 
-Five minutes after a data push, the verify-live job compares the live `/api/v1/latest.json` with `data/manifest.json`. On a mismatch, it opens one issue titled "Pipeline: live site behind manifest", which closes automatically on recovery. The job needs `SITE_LIVE` set to `true`. Enable it only after Workers Builds is connected, because until then the live site lags behind each data push.
+After every successful publish job (whether or not it pushed new data), the verify-live job waits five minutes, then compares the live `/api/v1/latest.json` with `data/manifest.json`. On a mismatch, it opens one issue titled "Pipeline: live site behind manifest", which closes automatically on recovery. The job needs `SITE_LIVE` set to `true`. Enable it only after Workers Builds is connected, because until then the live site lags behind each data push.
 
 ### Pipeline issues
 
@@ -176,7 +202,7 @@ Details are in [datasets.md](datasets.md).
 
 ### CI
 
-`.github/workflows/validate.yml` runs on every pull request and on every push to `main`.
+`.github/workflows/validate.yml` runs on every pull request and on every push to `main` made by a person. It does not run on the bot's data commits, because pushes made with the workflow token do not trigger other workflows; the refresh publish job runs its own checks instead.
 
 ## Troubleshooting
 
@@ -202,4 +228,4 @@ The `HF_TOKEN` secret holds a read-only token. Create a Write token at https://h
 
 ### Workers Builds or `wrangler deploy` fails the bundle budget
 
-`scripts/check-bundle.ts` fails the build when gzipped JavaScript is over 90 KB or gzipped CSS is over 25 KB. It runs last in `npm run build`, so the same failure shows up locally.
+`scripts/check-bundle.ts` fails the build when gzipped JavaScript is over 90 KB or gzipped CSS is over 25 KB. It also fails when `dist/` has more than 19,000 files, the static-asset cap. It runs last in `npm run build`, so the same failure shows up locally.

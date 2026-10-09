@@ -53,7 +53,7 @@ Each dataset folder also contains the following.
 
 ## Local setup
 
-The build needs the packages pinned in `requirements-hf-dataset.txt`: pyarrow, datasets, PyYAML and huggingface_hub. The pins are for Python 3.12. macOS has no `python` command, and its `python3` does not have these packages, so use a virtual environment. If `python3` is not 3.12, create the environment with a 3.12 interpreter instead.
+The packages pinned in `requirements-hf-dataset.txt` cover the build (pyarrow, PyYAML), the tests (datasets) and publishing (huggingface_hub). The pins are for Python 3.12. macOS has no `python` command, and its `python3` does not have these packages, so use a virtual environment. If `python3` is not 3.12, create the environment with a 3.12 interpreter instead.
 
 ```bash
 python3 -m venv .venv
@@ -119,13 +119,17 @@ npm run test:app
 .venv/bin/python scripts/publish-hf.py --dry-run
 ```
 
-Then publish with a Hugging Face write token in `HF_TOKEN`. Do not paste the token into a chat or commit it.
+Then publish with a Hugging Face write token in `HF_TOKEN`. Do not paste the token into a chat or commit it, and do not type it on the command line, where it lands in shell history. Read it from a prompt instead (the input is hidden):
 
 ```bash
-HF_TOKEN=<your write token> .venv/bin/python scripts/publish-hf.py
+read -rs HF_TOKEN && export HF_TOKEN
 ```
 
-Add `--only <folder>` to limit a run to one dataset, for example `--only india-repo-rate-dataset`. A 403 error means the token is read-only.
+```bash
+.venv/bin/python scripts/publish-hf.py
+```
+
+Add `--only <folder>` to limit a run to one dataset, for example `--only india-repo-rate-dataset`. A 403 usually means the token is read-only or lacks write access to `ashwingopalsamy/`.
 
 ## Versions and changelogs
 

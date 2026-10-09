@@ -20,7 +20,7 @@ The site opens on India. First-time visitors can pick their own central bank. Ea
 | Australia | Reserve Bank of Australia | Cash rate target | Every change since 2011 |
 | Brazil | Banco Central do Brasil | Selic target | Every change since 2000 |
 
-A scheduled pipeline refreshes the data at each bank's announcement time; for the euro area, UK, Canada, Australia and Brazil, decision records with votes are still being added.
+A scheduled pipeline refreshes India and the United States at each announcement time, and every country once a day. For the euro area, UK, Canada, Australia and Brazil, decision records with votes are still being added.
 
 ## Open data
 
@@ -58,6 +58,12 @@ Install dependencies from the lockfile.
 
 ```bash
 npm ci
+```
+
+Generate the data file the development server reads (`public/atlas.json`, git-ignored). Run it again after data changes.
+
+```bash
+node scripts/build-atlas.ts
 ```
 
 Start the development server at http://localhost:5180.

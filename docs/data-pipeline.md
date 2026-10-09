@@ -28,9 +28,9 @@ A release holds eras, series points, calendar entries, decisions, transmission n
 |---|---|
 | `data/manifest.json` | The current release for each country |
 | `data/schedule.json` | Announcement times for upcoming meetings |
-| `data/health.json` | The last refresh of each country |
+| `data/health.json` | The latest health check per country (ok, pending or failed), rewritten when the state changes or after seven days |
 
-Releases are append-only. History changes only through an explicit `corrections` entry.
+Releases are append-only. History changes only through an explicit `corrections` entry (`recordId`, `reason`, `sourceId`), which a country's adapter must emit. No adapter emits one yet, so a correction to history needs a code change in that adapter. Never edit a file under `data/releases/` by hand.
 
 ## The refresh workflow
 
@@ -105,14 +105,14 @@ That script runs `node pipeline/publish.ts --check`.
 
 `pipeline/run.ts` exits 0 even when a country fails, so the other countries still publish. Failures are reported through pipeline issues.
 
-`pipeline/issues.ts` keeps one GitHub issue for each country and failure class, labelled `pipeline`. The publish job syncs these issues, editing each one in place and closing it on recovery. The verify-live job adds one more issue, titled "Pipeline: live site behind manifest".
+`pipeline/issues.ts` keeps one GitHub issue for each country and failure class, labelled `pipeline`: "Pipeline: XX source failure" and "Pipeline: XX decision pending over 6 hours". They come from the statuses `pipeline/run.ts` writes. The publish job syncs these issues, editing each one in place and closing it on recovery. The verify-live job adds one more issue, titled "Pipeline: live site behind manifest". Errors raised by `pipeline/publish.ts` itself appear only in the job log.
 
 ## Adding a country
 
 Work through these steps in order. Step 4 is optional.
 
 1. Add the code to the `CountryCode` union in `pipeline/countries/registry.ts`, then add a profile. `COUNTRIES` is typed as a record over the union, so the type checker requires the profile. The profile holds the official source hosts (the allowlist), the time zone and the announcement time, which turn each calendar date into an announcement instant. Set `independentSeries` to true only when an official level series exists apart from the decision statements, since an unchanged meeting can be inferred only from such a series.
-2. Write `pipeline/countries/<cc>/adapter.ts`, using the lowercase code as the existing directories do. A series-only country can reuse `seriesAdapter` from `pipeline/countries/series.ts` and supply a parser for its official series.
+2. Write `pipeline/countries/<cc>/adapter.ts`, using the lowercase code as the existing directories do. A series-only country can reuse `seriesAdapter` from `pipeline/countries/series.ts` and supply a parser for its official series. Register the adapter: series-only adapters go in `SERIES_ADAPTERS` (`pipeline/countries/series.ts`), others in `DEFAULT_ADAPTERS` (`pipeline/run.ts`). Without this, `run.ts` reports "No adapter" for the country.
 3. Add transmission notes in `pipeline/transmission/<cc>.json`. The registry reads this file for every country, so the step is required even for series-only countries.
 4. Optionally add a meeting calendar at `pipeline/calendars/<cc>.json`. Without one, the country has no meetings and cites no calendar source.
 5. Add tests under `tests/pipeline/` and recorded fixtures under `tests/fixtures/<cc>/`. India's fixtures sit in `tests/fixtures/rbi/`, not `in/`.
@@ -120,7 +120,10 @@ Work through these steps in order. Step 4 is optional.
    - the `Code` union in `src/lib/types.ts`;
    - `ORDER`, `META`, `PLURAL` and `FLAGS` in `src/lib/atlas.ts`;
    - `CODES` in `src/analytics/schema.ts`, or the analytics collector rejects its events;
-   - `ORDER` in `scripts/hf/tables.ts`.
+   - `ORDER` in `scripts/hf/tables.ts`;
+   - the time-zone patterns and `REGIONS` in `src/lib/locale.ts`, used to suggest a country to first-time visitors.
+
+   Check the currency wording in the gap note in `src/app/country.ts`, which special-cases Brazil's real.
 
    Add a circular flag to `public/flags/` and point `FLAGS` at it. The euro area flag is `european_union.svg`.
 7. Add the dataset entries (`DATASETS` and `PUBLISHERS`) in `scripts/hf/cards.ts`, and a hand-written `hf/<repo>/CHANGELOG.md`, for example `hf/india-repo-rate-dataset/CHANGELOG.md`.
@@ -136,4 +139,18 @@ Work through these steps in order. Step 4 is optional.
 
    ```bash
    npm run validate:data
+   ```
+
+   ```bash
+   npm run test:app
+   ```
+
+   The multi-country dataset changes too, so rebuild and test the datasets (see [datasets.md](datasets.md)):
+
+   ```bash
+   npm run build:hf
+   ```
+
+   ```bash
+   npm run test:hf-dataset
    ```
