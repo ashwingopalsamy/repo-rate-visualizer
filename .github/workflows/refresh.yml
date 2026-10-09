@@ -153,6 +153,13 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: python scripts/publish-hf.py >> "$GITHUB_STEP_SUMMARY"
+      # Same reason as the Hub step: workflow-token pushes do not trigger hf-publish.yml.
+      - name: Release the datasets on GitHub
+        if: steps.v2.outputs.changed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/release-datasets.py --target "$(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
       - name: Sync pipeline issues
         if: always()
         env:

@@ -54,6 +54,7 @@ jobs:
         run: |
           npm run test:data
           npm run test:hf-dataset
+          npm run test:release-datasets
           npm run build:hf
           git diff --exit-code -- hf || { echo "::error::hf/ is out of date with data/; run npm run build:hf and commit"; exit 1; }
           git diff --check
