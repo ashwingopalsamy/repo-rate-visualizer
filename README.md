@@ -1,92 +1,133 @@
-# Policy Rate Atlas & RBI Open Dataset
+# Policy Rate Atlas
 
-An independent public chartbook of central-bank policy-rate histories. The first atlas release covers India's RBI repo rate and the United States federal funds target rate or range. The separately published open dataset remains RBI-specific.
+Central bank policy rates for seven economies: every change in each official rate series and, where available, every decision with its vote, checked against each bank's own publications.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](tests/)
+[![Validate](https://github.com/ashwingopalsamy/repo-rate-visualizer/actions/workflows/validate.yml/badge.svg)](https://github.com/ashwingopalsamy/repo-rate-visualizer/actions/workflows/validate.yml) [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
 
-[Live Demo](https://ashwingopalsamy.github.io/repo-rate-visualizer/) • [Hugging Face Dataset](https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset)
+Live at **https://rates.ashwingopalsamy.in**
 
-## What it does
+The site opens on India. First-time visitors can pick their own central bank. Each country page shows the latest decision, what it means for a loan, where the rate sits in its cycle, the gap to the Fed, the full record and how it compares with peers. `/world/` compares all seven banks.
 
-The atlas preserves each country's native instrument and evidence boundary. The India visualizer keeps rate observations and directly evidenced Monetary Policy Committee (MPC) decisions as distinct, citable records. The US explorer shows the Federal Reserve's published target changes, with both endpoints of the target range.
+## What it covers
 
-- **Country index**: `/countries` shows available histories and the research queue. `/` remains the India explorer; `/country/us` is the US explorer.
-- **US target history**: 75 published changes from February 2000 through September 2026, sourced from Federal Reserve change tables. Unchanged meetings are not inferred.
+| Country | Central bank | Rate | Records |
+| --- | --- | --- | --- |
+| India | Reserve Bank of India | Policy repo rate | Every MPC decision since Oct 2016 with votes; changes since 2000 |
+| United States | Federal Reserve | Federal funds target range | Every FOMC decision since 2021 with votes; changes since 1999 |
+| Euro area | European Central Bank | Deposit facility rate | Every change since 1999 |
+| United Kingdom | Bank of England | Bank Rate | Every change since 1999 |
+| Canada | Bank of Canada | Target for the overnight rate | Every change since 2009 |
+| Australia | Reserve Bank of Australia | Cash rate target | Every change since 2011 |
+| Brazil | Banco Central do Brasil | Selic target | Every change since 2000 |
 
-- **Decision Timeline**: Step-rate trajectory overlaid with rate records, identified policy actions, and macro events.
-- **Regime Breakdown**: Recorded unchanged-rate to move ratios, regime durations, and cumulative basis points; historical observations are not counted as verified holds.
-- **Cycle Comparison**: Side-by-side easing and tightening cycle trajectories indexed from cycle start.
-- **Rate Change Distribution**: Histogram and calendar ledger of policy moves.
-- **Source Transparency**: Evidence labels and source cards distinguish direct RBI resolutions, official context, and historical observations.
-- **Data Export**: Export charts and records as provenance-rich SVG, PNG, CSV, JSON, and copyable citations.
-- **Research workflows**: Look up the nearest recorded rate for a date, compare two windows, compare immutable releases, and save local analysis states.
+A scheduled pipeline refreshes the data at each bank's announcement time; for the euro area, UK, Canada, Australia and Brazil, decision records with votes are still being added.
 
-## Open Dataset
+## Open data
 
-Machine-readable datasets are built from the same releases as the site, versioned in `hf/` and published to Hugging Face:
+The site serves a static JSON and CSV API under `https://rates.ashwingopalsamy.in/api/v1/`. Paths below are relative to that base.
 
-- [`central-bank-policy-rates`](https://huggingface.co/datasets/ashwingopalsamy/central-bank-policy-rates): all seven banks in one schema.
-- One dataset per bank: [India](https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset), [United States](https://huggingface.co/datasets/ashwingopalsamy/us-fed-funds-rate-dataset), [Euro area](https://huggingface.co/datasets/ashwingopalsamy/euro-area-deposit-facility-rate-dataset), [United Kingdom](https://huggingface.co/datasets/ashwingopalsamy/uk-bank-rate-dataset), [Canada](https://huggingface.co/datasets/ashwingopalsamy/canada-overnight-rate-dataset), [Australia](https://huggingface.co/datasets/ashwingopalsamy/australia-cash-rate-dataset) and [Brazil](https://huggingface.co/datasets/ashwingopalsamy/brazil-selic-rate-dataset).
+| Path | Contents |
+| --- | --- |
+| `countries.json` | Each country with its current rate, release hash and links |
+| `latest.json` | The rate in force in each country and its last decision |
+| `schedule.json` | Upcoming announcement times |
+| `countries/<cc>.json` | The full current release for one country |
+| `countries/<cc>/decisions.csv` | Decision records for one country |
+| `countries/<cc>/series.csv` | Rate series for one country |
+| `releases/<CC>/<hash>.json` | Immutable release for one country, identified by hash |
 
-Each has `rates` (every change), `daily` (the rate in force each day), `decisions` (announced decisions with votes, where available), `meetings`, `cycles`, `annual`, `countries`, `eras`, `sources` and `transmission`. Build them with `npm run build:hf`.
+Hugging Face datasets are also available. [central-bank-policy-rates](https://huggingface.co/datasets/ashwingopalsamy/central-bank-policy-rates) covers all seven banks in one schema. Each bank has its own dataset:
 
-Available in Parquet, CSV, and JSONL formats.
+| Country | Dataset |
+| --- | --- |
+| India | [india-repo-rate-dataset](https://huggingface.co/datasets/ashwingopalsamy/india-repo-rate-dataset) |
+| United States | [us-fed-funds-rate-dataset](https://huggingface.co/datasets/ashwingopalsamy/us-fed-funds-rate-dataset) |
+| Euro area | [euro-area-deposit-facility-rate-dataset](https://huggingface.co/datasets/ashwingopalsamy/euro-area-deposit-facility-rate-dataset) |
+| United Kingdom | [uk-bank-rate-dataset](https://huggingface.co/datasets/ashwingopalsamy/uk-bank-rate-dataset) |
+| Canada | [canada-overnight-rate-dataset](https://huggingface.co/datasets/ashwingopalsamy/canada-overnight-rate-dataset) |
+| Australia | [australia-cash-rate-dataset](https://huggingface.co/datasets/ashwingopalsamy/australia-cash-rate-dataset) |
+| Brazil | [brazil-selic-rate-dataset](https://huggingface.co/datasets/ashwingopalsamy/brazil-selic-rate-dataset) |
+
+Tables include `rates`, `daily`, `decisions`, `meetings`, `cycles` and `annual`. Details are in [docs/datasets.md](docs/datasets.md).
 
 ## Quickstart
 
-### Prerequisites
-- Node.js 18+
-- npm or yarn
+Requires Node 24 (see `.node-version`). Run the commands from the repository root.
 
-### Install and Run
+Install dependencies from the lockfile.
+
 ```bash
-# Clone repository
-git clone https://github.com/ashwingopalsamy/repo-rate-visualizer.git
-cd repo-rate-visualizer
+npm ci
+```
 
-# Install dependencies
-npm install
+Start the development server at http://localhost:5180.
 
-# Start local development server
+```bash
 npm run dev
 ```
 
-### Build for Production
+Build the data bundle, static API, prerendered pages and production site.
+
 ```bash
 npm run build
+```
+
+After building, serve the production build at http://localhost:4180.
+
+```bash
 npm run preview
 ```
 
-### Run Tests
-```bash
-# Run data pipeline and validation tests
-npm run test:data
-npm run test:app
-npm run test:browser
-npm run validate:countries
-```
+The Hugging Face dataset build also needs Python 3.12; see [docs/datasets.md](docs/datasets.md).
 
-## Research routes
+## Scripts
 
-- `/as-of?date=2026-08-05` looks up the nearest recorded rate and creates a pinned citation.
-- `/releases` compares two verified content-addressed snapshot releases.
-- `/limitations` documents coverage boundaries, evidence classes, record grain, and derived-value limits.
-- The **Compare** workspace compares two date windows using the active release and filters.
-- **Notebook** saves analysis state locally in the browser; it does not upload data or create an account.
+All scripts are defined in `package.json`.
 
-## Data Pipeline
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Data bundle, static API, production build, prerendered pages and the bundle-size check |
+| `npm run preview` | Serve the production build |
+| `npm run typecheck` | Type-check the pipeline, Workers and app |
+| `npm run test:app` | Unit tests for the site's findings, API build, analytics collector and dataset tables |
+| `npm run test:pipeline` | Data pipeline tests |
+| `npm run test:data` | Checks on the India v2 data |
+| `npm run test:browser` | Playwright browser tests (layout, motion, accessibility, analytics) |
+| `npm run test:hf-dataset` | Hugging Face dataset tests (Python) |
+| `npm run validate:data` | Validate the committed releases |
+| `npm run build:hf` | Build the Hugging Face datasets into `hf/` |
+| `npm run analytics:report` | Print the first-party analytics report |
 
-1. **Ingestion**: `scripts/fetch-rbi-data.js` checks the RBI bulletin, current rates page, and policy archives.
-2. **Validation**: `src/data/snapshotV2.js` verifies date ordering, rate-change derivation, record schemas, and trusted source domains.
-3. **Snapshots**: Append-only, content-addressed releases are archived under `public/data/snapshots/` and registered in `public/data/manifest.json`.
+## Repository map
 
-The US release is generated by `python3 scripts/fetch-fed-data.py` from the [Federal Reserve's current change table](https://www.federalreserve.gov/monetarypolicy/openmarket.htm) and [historical archive](https://www.federalreserve.gov/monetarypolicy/openmarket_archive.htm). The country manifest at `public/data/countries/manifest.json` identifies the immutable US artifact and its digest. Its GDP reference is the IMF World Economic Outlook April 2026 vintage, 2025 nominal GDP (NGDPD), used for research prioritization rather than comparing policy-rate levels. UK, Japan, and Taiwan are listed as planned, without invented rate records.
+| Path | What it holds |
+| --- | --- |
+| `src/` | The site: typed TypeScript pages, charts, motion and styles |
+| `scripts/` | Build steps: data bundle, static API, prerender, bundle check, Hugging Face datasets, analytics report |
+| `pipeline/` | Fetching, validating and publishing each country's data |
+| `schema/` | The release schema and its invariants |
+| `data/` | Published releases, manifest, schedule and health |
+| `worker/` | Cloudflare Workers: the site (`site/`) and the refresh dispatcher (`dispatch/`) |
+| `hf/` | The Hugging Face datasets, generated and committed |
+| `tests/` | Unit, pipeline, data and browser tests |
+| `design/` | The approved design prototype |
+| `docs/` | Operations, pipeline, datasets and analytics guides, plus design specs and plans |
 
-Scheduled refreshes also produce a reviewable release change report as a GitHub Actions artifact before generated files are committed.
+The site is typed TypeScript without a UI framework, built with Vite, prerendered at build time, and served by Cloudflare Workers.
 
-## Attribution & Disclaimer
+## Documentation
 
-This project is an independent educational tool and is not affiliated with, authorised by, or endorsed by the Reserve Bank of India. Records identify their evidence class and link to the declared source; historical observations should not be read as direct RBI resolution citations. Read the [data limitations](https://ashwingopalsamy.github.io/repo-rate-visualizer/limitations) page and always verify figures against primary source publications before using them in research or reporting.
+- [Operations](docs/operations.md): deploying, secrets, one-time setup and troubleshooting.
+- [Data pipeline](docs/data-pipeline.md): how data is fetched, validated and published, and how to add a country.
+- [Hugging Face datasets](docs/datasets.md): tables, columns and how the datasets are built.
+- [Analytics](docs/analytics.md): what is counted and how it stays private.
+- [Design notes](DESIGN.md): visual and interaction design decisions.
+- [Contributing](CONTRIBUTING.md): contribution guidelines.
+- [Data licence](DATA-LICENSE.md): terms for the published data.
 
-Code is licensed under MIT. Dataset and third-party source rights are described in [`DATA-LICENSE.md`](DATA-LICENSE.md) and each dataset's `NOTICE.md` under `hf/`.
+## Attribution and disclaimer
+
+This project is an independent educational tool. It is not affiliated with, authorised by, or endorsed by any central bank. Every record identifies its evidence class and links to its source; historical observations should not be read as direct central-bank resolutions. Always verify figures against the original publications before using them in research or reporting. Nothing here is financial advice.
+
+Code is licensed under MIT. Data rights are described in [DATA-LICENSE.md](DATA-LICENSE.md) and in each dataset's `NOTICE.md` under `hf/`.
