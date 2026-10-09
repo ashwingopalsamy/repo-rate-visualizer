@@ -131,6 +131,25 @@ read -rs HF_TOKEN && export HF_TOKEN
 
 Add `--only <folder>` to limit a run to one dataset, for example `--only india-repo-rate-dataset`. A 403 usually means the token is read-only or lacks write access to `ashwingopalsamy/`.
 
+## GitHub Releases
+
+Each data snapshot is also a [GitHub release](https://github.com/ashwingopalsamy/repo-rate-visualizer/releases), so you can download the datasets without cloning. One release covers all eight datasets. Its tag is `datasets-<YYYY-MM-DD>`, the newest `generated_at` in the manifests.
+
+| Asset | Contents |
+| --- | --- |
+| `<repo>-v<version>.zip` | One dataset folder, under a top-level `<repo>/` directory |
+| `SHA256SUMS` | Checksums of the zips |
+
+The zips are reproducible: the same input gives the same bytes. Verify downloads with `sha256sum -c --ignore-missing SHA256SUMS`. On macOS, download every zip and run `shasum -a 256 -c SHA256SUMS`.
+
+`scripts/release-datasets.py` builds the zips and creates the release with the `gh` CLI. It does nothing when the newest `datasets-*` release already has identical zips, and replaces the assets when the content changes on the same day. It needs no new secret. A dry run lists what it would do and changes nothing:
+
+```bash
+python3 scripts/release-datasets.py --dry-run
+```
+
+To release by hand, sign in with `gh auth login` (write access to the repository) and run it without `--dry-run`.
+
 ## Versions and changelogs
 
 Each dataset's version is set in `DATASETS` in `scripts/hf/cards.ts`. Each `hf/<repo>/CHANGELOG.md` is written by hand. Its first `## ` heading must start with that version, or the build fails.
@@ -155,8 +174,8 @@ See also [DATA-LICENSE.md](../DATA-LICENSE.md).
 
 ## Automatic updates
 
-When the refresh workflow (`.github/workflows/refresh.yml`) publishes new data, it rebuilds `hf/`, runs the tests, commits the result, and publishes to Hugging Face, all in the same job. Pushes made by the workflow do not trigger other workflows.
+When the refresh workflow (`.github/workflows/refresh.yml`) publishes new data, it rebuilds `hf/`, runs the tests, commits the result, publishes to Hugging Face and creates the GitHub release, all in the same job. Pushes made by the workflow do not trigger other workflows.
 
 `.github/workflows/hf-publish.yml` publishes changes that people merge. It runs on pushes to `main` that touch `hf/**`, and it can be run by hand with a `dry_run` option.
 
-Both workflows need the `HF_TOKEN` repository secret. See [operations.md](operations.md).
+Both workflows need the `HF_TOKEN` repository secret. See [operations.md](operations.md). Both workflows also create the GitHub release, using the workflow token; no extra secret is needed.

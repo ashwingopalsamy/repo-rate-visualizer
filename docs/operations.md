@@ -160,6 +160,7 @@ Status as of 9 Oct 2026. Update the marks as items are done.
 - ☑ Site deployed to Cloudflare with the custom domain
 - ☑ `HF_TOKEN` set and the Hugging Face datasets published
 - ☐ Connect Workers Builds (see Deploy)
+- ☐ Run `hf-publish.yml` once without `dry_run` to create the first dataset release (see Hugging Face and GitHub Releases)
 - ☐ Web Analytics: in the Cloudflare dashboard, set the site to the JavaScript snippet (a manual step) and turn automatic injection off for `rates.ashwingopalsamy.in`. Then set `VITE_CF_BEACON_TOKEN` (see Secrets and variables). Reason: automatic injection ignores Global Privacy Control and Do Not Track, which the privacy page promises to respect.
 - ☐ Set `ANALYTICS_SALT_KEY` (see Secrets and variables)
 - ☐ D1 and the rollup secrets, optional (see Analytics D1). Without them, events older than three months are lost.
@@ -174,7 +175,7 @@ Most routine work runs in GitHub Actions. Refresh runs start from the dispatcher
 
 ### Data refresh
 
-`.github/workflows/refresh.yml` runs when the dispatcher starts it, weekly on Sundays (`17 3 * * 0`), or by hand. Its inputs are `countries` (for example `ALL` or `IN,US`) and `reason`. The jobs are plan, fetch (one job per country), publish, and verify-live. The publish job writes `data/`, rebuilds and tests the Hugging Face datasets when the data changed, then validates and builds (`validate:data`, `test:pipeline`, `test:data`, `npm run build`, `git diff --check`). If any check fails, nothing is committed or published. Otherwise it commits to `main` as `github-actions[bot]` and publishes to Hugging Face. It syncs the pipeline issues either way.
+`.github/workflows/refresh.yml` runs when the dispatcher starts it, weekly on Sundays (`17 3 * * 0`), or by hand. Its inputs are `countries` (for example `ALL` or `IN,US`) and `reason`. The jobs are plan, fetch (one job per country), publish, and verify-live. The publish job writes `data/`, rebuilds and tests the Hugging Face datasets when the data changed, then validates and builds (`validate:data`, `test:pipeline`, `test:data`, `npm run build`, `git diff --check`). If any check fails, nothing is committed or published. Otherwise it commits to `main` as `github-actions[bot]` and publishes to Hugging Face and GitHub Releases. It syncs the pipeline issues either way.
 
 Start a run by hand:
 
@@ -190,13 +191,15 @@ After every successful publish job (whether or not it pushed new data), the veri
 
 The pipeline keeps one GitHub issue per country and failure class, with the label `pipeline`. It edits that issue in place and closes it on recovery.
 
-### Hugging Face publishing
+### Hugging Face and GitHub Releases
 
 `.github/workflows/hf-publish.yml` runs on pushes to `main` that change `hf/**`. To run it by hand, use the Actions tab, or check what it would publish first:
 
 ```bash
 gh workflow run hf-publish.yml -f dry_run=true
 ```
+
+The same workflow then creates a GitHub release, `datasets-<date>`, with one zip per dataset and a `SHA256SUMS` file. It skips the release when nothing changed, and the dry run reports what it would do. The refresh publish job does the same after its Hub upload.
 
 Details are in [datasets.md](datasets.md).
 

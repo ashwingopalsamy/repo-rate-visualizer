@@ -50,6 +50,8 @@ Hugging Face datasets are also available. [central-bank-policy-rates](https://hu
 
 Tables include `rates`, `daily`, `decisions`, `meetings`, `cycles` and `annual`. Details are in [docs/datasets.md](docs/datasets.md).
 
+Each data snapshot is also a [GitHub release](https://github.com/ashwingopalsamy/repo-rate-visualizer/releases) with one zip per dataset, so you can download them without cloning.
+
 ## Quickstart
 
 Requires Node 24 (see `.node-version`). Run the commands from the repository root.
