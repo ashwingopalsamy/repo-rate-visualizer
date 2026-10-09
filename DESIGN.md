@@ -1,7 +1,9 @@
 # Policy Rate Atlas — Design System & Engineering Notes
 
 > **Internal Reference & Design Colophon**  
-> A living specification of the visual principles, semantic tokens, component geometry, data-visualization language, and interaction patterns behind the Policy Rate Atlas. The `/design` page is its rendered component reference.
+> A living specification of the visual principles, semantic tokens, component geometry, data-visualization language, and interaction patterns behind the Policy Rate Atlas.
+>
+> **Status:** The current site (v2) follows the approved prototype in [`design/prototype/`](design/prototype/) and the design spec in [`docs/superpowers/specs/`](docs/superpowers/specs/); its tokens live in `src/styles/atlas.css`. Sections below that describe v1 views (timeline, breakdown, regime bands, the `/design` page) are kept as history.
 
 ---
 
