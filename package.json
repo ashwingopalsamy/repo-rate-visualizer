@@ -11,6 +11,7 @@
     "test:browser": "playwright test",
     "test:data": "node --test tests/data/snapshotV2.test.js tests/data/rbiSources.test.js tests/data/supplementalHistory.test.js tests/data/releaseManifest.test.js",
     "test:hf-dataset": "python3 -m unittest tests/data/test_hf_datasets.py",
+    "test:release-datasets": "python3 -m unittest tests/data/test_release_datasets.py",
     "test:pipeline": "node --test \"tests/pipeline/**/*.test.ts\"",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.worker.json && tsc -p tsconfig.app.json",
     "validate:data": "node pipeline/publish.ts --check",
