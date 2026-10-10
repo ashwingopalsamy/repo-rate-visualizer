@@ -50,8 +50,9 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Python build/test caches
+# Python build/test caches and the local virtual environment
 __pycache__/
+.venv/
 *.py[cod]
 
 # Snowpack dependency directory (https://snowpack.dev/)
