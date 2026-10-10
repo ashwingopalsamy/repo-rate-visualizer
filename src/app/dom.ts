@@ -7,7 +7,7 @@ export const $svg = (id: string) => document.getElementById(id) as unknown as SV
 
 export const state = {
   code: 'IN' as Code,
-  page: null as null | 'country' | 'world' | 'privacy' | 'notfound',
+  page: null as null | 'country' | 'world' | 'privacy' | 'design' | 'notfound',
   /** True while prerendering in Node: text is filled, charts and motion are skipped. */
   ssr: false,
   loanMode: 'decision' as 'decision' | 'since',

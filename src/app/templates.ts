@@ -12,6 +12,6 @@ export function footerHTML(): string {
   return `<footer class="site-foot" data-prose>
     <div><b>Policy Rate Atlas</b><p>Policy rates for ${CODES.length} central banks, checked against each bank’s own releases. Every finding is computed from the record on the page. Nothing here is a forecast.</p></div>
     <div><b>Sources</b><p>RBI resolutions and press releases, Federal Reserve statements and FRED, the ECB Data Portal, the Bank of England database, Bank of Canada Valet, RBA table F1 and BCB series 432.</p></div>
-    <div><b>Data</b><p>As of ${fmtD(GENERATED, 'GB')}. Every release is content-addressed and published as open JSON at <a href="/api/v1/countries.json">/api/v1</a>. <a href="/privacy/">Privacy</a>: no cookies, no personal data.</p></div>
+    <div><b>Data</b><p>As of ${fmtD(GENERATED, 'GB')}. Every release is content-addressed and published as open JSON at <a href="/api/v1/countries.json">/api/v1</a>. <a href="/privacy/">Privacy</a>: no cookies, no personal data. <a href="/design/">Design system</a>.</p></div>
   </footer>`;
 }

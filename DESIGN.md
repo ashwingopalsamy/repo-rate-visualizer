@@ -1,340 +1,164 @@
-# Policy Rate Atlas — Design System & Engineering Notes
-
-> **Internal Reference & Design Colophon**  
-> A living specification of the visual principles, semantic tokens, component geometry, data-visualization language, and interaction patterns behind the Policy Rate Atlas.
->
-> **Status:** The current site (v2) follows the approved prototype in [`design/prototype/`](design/prototype/) and the design spec in [`docs/superpowers/specs/`](docs/superpowers/specs/); its tokens live in `src/styles/atlas.css`. Sections below that describe v1 views (timeline, breakdown, regime bands, the `/design` page) are kept as history.
-
----
-
-## 1. Product Intent & Aesthetic Character
-
-The Policy Rate Atlas is an open-access monetary policy observatory. The India explorer retains the RBI repo-rate history and its separate observation and decision evidence. The United States explorer records published Federal Reserve target changes as a point target or range. Country pages do not assume their instruments have the same economic meaning.
-
-### Country-wise rules
-- Country selection sits in the page identity area, outside the analytical control rail. The index uses a typographic table, without flags or country color themes.
-- A single-rate instrument has one value. A target range displays both endpoints as numbers and two stepped paths with a restrained band between them. Never calculate a midpoint for presentation.
-- Every record retains a record date, optional decision and effective dates, evidence type, policy framework, source link, and release identity. Unknown dates stay unknown.
-- Only directly supported decisions are called decisions; observations do not imply holds. Federal Reserve change tables omit unchanged meetings, so the US chart is a history of published changes, not a full meeting ledger.
-- Primary source freshness and coverage are visible. Country snapshots are immutable and identified by a SHA-256 digest in the manifest.
-- Country pages share the India explorer's composition: compact navigation and country identity, a three-column Overview card, an integrated Timeline card with its controls, chart, and rate record, then a separate evidence card. Country-specific instruments and evidence determine the content of each section.
-- The US workspace uses published target changes for its chart, summaries, filters, and exports. Its filters distinguish cuts, hikes, and the point-to-range framework change; no hold count, meeting ledger, or unsupported macro-event annotation is shown.
-- The homepage mounts one country-aware explorer. Country selection changes its verified snapshot in place and updates a shareable `country` query parameter; back and forward restore the selected country. The header, search, evidence panel, export controls, and footer keep the same geometry for every instrument.
-- Action filters lead with cuts, hikes, verified holds when present, and framework changes when relevant. Evidence type is separate metadata. A country can add sourced context or instrument-specific analytics without duplicating the page shell.
-
-The visual interface is deliberately designed at the intersection of two distinct disciplines:
-
-1. **Central Bank / Financial Research Publications**: The typographic restraint, tabular precision, and editorial authority of institutions like the Bank for International Settlements (BIS), the St. Louis Fed (FRED), and the Financial Times.
-2. **Modern Software Engineering Craft**: The tactile micro-feedback, high-density layout, keyboard shortcuts, and crisp hairline geometry pioneered by modern technical tools (Linear, shadcn/ui, Radix).
-
-### The Core Feeling
-- **Authoritative, not decorative**: Every visual element communicates empirical data. There are no ornamental gradients, meaningless background blobs, or arbitrary floating shapes.
-- **Calm, neutral canvas**: The interface uses a near-monochrome foundation (`oklch` slates) so that the semantic monetary policy colors (easing, tightening, pause) immediately command visual attention.
-- **Provenance first**: Data is never anonymous. Each record exposes its evidence class and source metadata; direct RBI resolution links are shown where they exist, while historical observations remain explicitly labelled as such.
-- **High information density without claustrophobia**: Spacing is calibrated so that dozens of historical decisions can be scanned rapidly while retaining generous touch targets and comfortable reading lines.
-
----
-
-## 2. Core Visual Principles
-
-### 1. Form Follows Policy Mechanics
-Policy-rate histories are **discrete step functions**, not continuous analog curves. A step begins at the documented source date. Decision and effective dates can differ from that date, and are never inferred when unavailable.
-- Charts *must* render using stepped interpolation (`d3.curveStepAfter`). Smooth bezier splines or linear point-to-point diagonals misrepresent the legal reality of monetary policy.
-- Every rate inflection point features an interactive record marker that binds directly to the canonical source-backed record. Only directly evidenced policy decisions are described as decisions.
-
-### 2. Semantic Monetary Policy Grammar
-Color is strictly semantic, derived from monetary policy dynamics rather than general UI tropes:
-- **Easing / Rate Cuts**: Emerald green (`oklch(0.60 0.19 148)` light / `oklch(0.74 0.16 148)` dark). Represents monetary accommodation, liquidity injection, and economic stimulus.
-- **Tightening / Rate Hikes**: Crimson / Rose-amber (`oklch(0.58 0.22 25)` light / `oklch(0.74 0.18 25)` dark). Represents monetary restriction, inflation cooling, and policy tightening.
-- **Pause / Holds**: Cobalt indigo (`oklch(0.56 0.19 255)` light / `oklch(0.74 0.16 255)` dark). Reserved for directly evidenced holds; an unchanged historical observation is labelled as an unchanged record.
-- **Data Provenance**: Slate steel (`oklch(0.34 0.010 240)` light / `oklch(0.84 0.006 240)` dark). Represents official citations, resolution PDFs, and integrity records.
-
-### 3. Hairline Architecture Over Shadow Soup
-Depth is established primarily through **hairline borders** (`1px solid oklch(0.962 0.001 240)` in light mode, `1px solid oklch(1 0 0 / 5.5%)` in dark mode) and **inset background wells** (`--muted/20` to `--muted/40`), rather than heavy, blurry drop shadows. Shadows are reserved solely for floating modal overlays and tooltips.
-
-### 4. Tabular Numeracy Everywhere
-All numerical data—including interest rates, basis point changes, dates, calendar years, and axis labels—*must* use tabular figures (`tabular-nums` / `font-variant-numeric: tabular-nums`). This prevents jitter during hover interactions, aligns decimal points across tables, and ensures clean vertical scanning.
-
-### 5. Multi-Surface Synchronization
-Interactions are coordinated across representations. Hovering or clicking a policy marker in the D3 chart simultaneously:
-- Focuses and highlights the corresponding row in the desktop decision table / mobile card feed.
-- Spawns a collision-aware chart readout positioned dynamically to never obscure data points.
-- Updates the active decision status bar.
-
----
-
-## 3. Typography & Numerical Hierarchy
-
-The typography system is built on two variable fonts loaded locally via `@fontsource-variable`:
-
-- **Primary Sans**: `Inter Variable` (`--font-sans`) — used for all editorial copy, headings, controls, labels, and table cells.
-- **Data & Monospace**: `JetBrains Mono Variable` (`--font-mono`) — used for keyboard shortcuts (`<kbd>`), technical hashes, checksum strings, and machine-readable citations.
-
-### Type Scale & Hierarchy
-
-| Role | Classes / CSS | Size | Weight | Tracking | Case / Alignment |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Hero Current Rate** | `text-5xl lg:text-[4rem] xl:text-[4.25rem]` | 48px – 68px | Bold (700) | `-0.04em` | Tabular, leading-none |
-| **Hero Secondary Stat** | `text-3xl sm:text-4xl lg:text-[2.75rem]` | 30px – 44px | Semibold (600) | `-0.03em` | Tabular, leading-none |
-| **Page / Card Heading** | `text-base sm:text-lg` | 16px – 18px | Bold (700) | `-0.02em` | Sentence case |
-| **Section Title** | `text-sm sm:text-base` | 14px – 16px | Bold (700) | `-0.015em` | Sentence case |
-| **Subheadings / Copy** | `text-xs sm:text-sm` | 12px – 14px | Normal (400) | `-0.006em` | Relaxed (1.5–1.6) |
-| **Kickers & Overlines** | `text-[10px]` / `text-[11px]` | 10px – 11px | Semibold (600) | `+0.08em` to `+0.14em` | UPPERCASE |
-| **Table Headings** | `text-[11px]` | 11px | Semibold (600) | `+0.10em` | UPPERCASE |
-| **Table Cells / Data** | `text-xs sm:text-sm` | 12px – 14px | Medium (500) | `normal` | Tabular nums |
-| **Chart Axis Labels** | SVG `axis text` | 10px – 11px | Medium (500) | `normal` | Tabular nums |
-| **Chart Micro Labels** | SVG `annotation-label` | 8px – 9px | Semibold (600) | `+0.035em` | UPPERCASE |
-| **Integrity Hashes** | `font-mono text-[11px]` | 11px | Normal (400) | `0` | Monospace, break-all |
-
-### Letter-Spacing Rules
-- The application root sets `letter-spacing: -0.006em` for crisp text rendering on modern displays.
-- Large numerical headlines tighten tracking to `-0.03em` / `-0.05em` to prevent loose glyph spacing.
-- All uppercase metadata labels, kickers, and table headers apply positive letter-spacing (`+0.08em` to `+0.14em`) to ensure legibility at micro sizes.
-
----
-
-## 4. Color Palette & Semantic System
-
-Colors are authored in native modern CSS using the **OKLCH** color space (with `oklab` color mixing). OKLCH provides uniform perceived lightness across hues, ensuring seamless light/dark mode parity without muddy contrast shifts.
-
-### 1. Canvas & Structural Neutrals
-
-```css
-/* Light Mode */
---background:        oklch(0.985 0.001 240);  /* Soft cool off-white canvas */
---foreground:        oklch(0.18 0.004 240);   /* High-contrast ink text */
---card:              oklch(1 0 0);            /* Pure white elevated cards */
---card-foreground:   oklch(0.18 0.004 240);
---muted:             oklch(0.955 0.002 240);  /* Inset well backgrounds */
---muted-foreground:  oklch(0.48 0.006 240);   /* Secondary metadata */
---border:            oklch(0.962 0.001 240);  /* Hairline borders */
---border-strong:     oklch(0.90 0.002 240);   /* Hover / active borders */
---ring:              oklch(0.50 0.14 240);    /* Focus ring */
-
-/* Dark Mode */
---background:        oklch(0.165 0.004 240);  /* Deep slate zinc canvas */
---foreground:        oklch(0.99 0.002 240);   /* Pure crisp white text */
---card:              oklch(0.18 0.004 240);   /* Lifted dark card surface */
---card-foreground:   oklch(0.99 0.002 240);
---muted:             oklch(0.22 0.004 240);   /* Inset well surface */
---muted-foreground:  oklch(0.68 0.005 240);   /* Legible dark metadata */
---border:            oklch(1 0 0 / 5.5%);     /* Ultra-subtle translucent hairline */
---border-strong:     oklch(1 0 0 / 12%);      /* Emphasized divider */
---ring:              oklch(0.72 0.12 240);    /* Luminous dark focus ring */
-```
-
-### 2. Monetary Policy Semantic Palette
-
-```css
-/* Light Mode */
---cut:               oklch(0.60 0.19 148);    /* Easing / Rate Cut (Emerald) */
---cut-foreground:    oklch(0.99 0.01 148);
---hike:              oklch(0.58 0.22 25);     /* Tightening / Rate Hike (Crimson) */
---hike-foreground:   oklch(0.99 0.008 25);
---hold:              oklch(0.56 0.19 255);    /* Pause / Status Quo (Cobalt) */
---hold-foreground:   oklch(0.99 0.008 255);
---source:            oklch(0.34 0.010 240);   /* Official RBI Provenance (Slate) */
---source-foreground: oklch(0.99 0.001 240);
-
-/* Dark Mode */
---cut:               oklch(0.74 0.16 148);    /* Boosted luminance for dark theme */
---cut-foreground:    oklch(0.16 0.02 148);
---hike:              oklch(0.74 0.18 25);
---hike-foreground:   oklch(0.16 0.02 25);
---hold:              oklch(0.74 0.16 255);
---hold-foreground:   oklch(0.16 0.02 255);
---source:            oklch(0.84 0.006 240);
---source-foreground: oklch(0.16 0.005 240);
-```
-
-### 3. Alpha Mixes & Chart Overlays
-- **Regime Bands**: `color-mix(in oklab, var(--cut) 14%, transparent)` (Easing), `color-mix(in oklab, var(--hike) 14%, transparent)` (Tightening), `color-mix(in oklab, var(--hold) 14%, transparent)` (Pause).
-- **Grid Lines**: `color-mix(in oklab, var(--border) 60%, transparent)` (Light), `color-mix(in oklab, var(--border) 70%, transparent)` (Dark).
-- **Step Line Fill Gradient**: `linearGradient` fading from 20% stroke opacity at top to 0.0% opacity at baseline.
-
-### 4. Macro Event Categorization
-- **Fiscal / Structural Reform**: Amber badge (`bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20`).
-- **External Shock / Crisis / Pandemic**: Rose badge (`bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/20`).
-- **Monetary Policy Framework**: Blue badge (`bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/20`).
-
----
-
-## 5. Surfaces, Borders, Shadows & Spatial Depth
-
-The interface builds visual depth through a 4-tier spatial hierarchy:
-
-| Layer | Surface Name | Styling Tokens & Geometry |
-| :--- | :--- | :--- |
-| **Layer 3** | Floating Popovers, Command Dialog & Tooltips | `bg-popover`, `--shadow-popover`, `rounded-xl`, `border-border` |
-| **Layer 2** | Inset Wells & Sub-panels | `bg-muted/20` to `/40`, `divide-x divide-border/50`, `rounded-xl` |
-| **Layer 1** | Structural Cards & Navigation Bar | `bg-card`, 1px `border-border/70`, `rounded-2xl` / `rounded-xl` |
-| **Layer 0** | Canvas Background | `bg-background` |
-
-### Radii & Component Geometry
-
-The design system is governed by a base radius of `0.875rem` (14px):
-
-```css
---radius:     0.875rem;                 /* 14px base */
---radius-sm:  calc(var(--radius) * 0.6); /* ~8.4px  (mini badges, inner controls) */
---radius-md:  calc(var(--radius) * 0.8); /* ~11.2px (buttons, tabs, inputs) */
---radius-lg:  var(--radius);             /* 14px    (navbars, dropdowns, controls) */
---radius-xl:  calc(var(--radius) * 1.4); /* ~19.6px (cards, workspace containers) */
---radius-2xl: calc(var(--radius) * 1.8); /* ~25.2px (hero containers) */
---radius-3xl: calc(var(--radius) * 2.2); /* ~30.8px (outer wrappers) */
-```
-
-### Shadow Specifications
-- **Cards & Hero Surface**: `box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.02), 0 1px 3px 0 rgba(0, 0, 0, 0.015)` (Subtle ambient lift, zero heavy black edges).
-- **Scrolled Navbar**: `0 8px 24px -4px rgba(0, 0, 0, 0.035), 0 2px 6px -1px rgba(0, 0, 0, 0.015)` (Light) / `0 10px 28px -4px rgba(0, 0, 0, 0.28)` (Dark).
-- **Tooltips & Popovers**: `--shadow-popover: 0 6px 20px color-mix(in oklch, var(--foreground) 5%, transparent)` (Light) / `0 10px 24px rgb(0 0 0 / 0.20)` (Dark).
-- **Segmented Track Inset**: `box-shadow: inset 0 1px 1.5px rgba(0,0,0,0.05)` (Light) / `inset 0 1px 2px rgba(0,0,0,0.3)` (Dark).
-
----
-
-## 6. Controls & Interaction Patterns
-
-### 1. The 36px Standard Control Rail
-On desktop viewports, all primary controls conform strictly to `--control-height: 2.25rem` (36px, `h-9`):
-- Segmented View Tabs (`Timeline`, `Breakdown`, `Rate changes`, `Cycles`)
-- Time Range Presets (`1Y`, `5Y`, `10Y`, `Max`)
-- Custom Date Trigger Popover
-- Layers Multi-select Dropdown
-- Export Menu (SVG, PNG, CSV) and Share URL button
-- Command Palette Search Trigger (`⌘K`)
-- Theme Toggle Button
-
-This creates an uninterrupted, unified horizontal baseline across the entire analytical control bar.
-
-### 2. Segmented Tabs / View Switchers
-- **Track**: Inset muted track (`bg-muted/80 border border-border/80 p-1`) with an inner shadow.
-- **Active Trigger**: Elevated card pill (`bg-background text-foreground font-semibold shadow-xs border border-border/80`).
-- **Inactive Trigger**: `text-muted-foreground hover:text-foreground hover:bg-background/40`.
-
-### 3. Tactile Micro-Press Feedback
-All interactive buttons and cards implement a physics-inspired active state:
-```css
-transition: all 150ms ease-out;
-active:scale-[0.98];
-```
-This gives controls an immediate mechanical response when clicked or tapped.
-
-### 4. Dynamic Collision-Avoiding Readout (`positionReadout`)
-Tooltips in data-dense D3 charts frequently obscure adjacent data points or active markers. The visualizer employs a bespoke collision-avoidance positioning engine ([`chartReadout.js`](file:///Users/ashwin/Desktop/projects/finance/repo-rate-visualizer/src/lib/chartReadout.js)):
-- Calculates bounding boxes for all visible chart points, decision markers, and macro event labels.
-- Evaluates four directional candidate placements (`top`, `bottom`, `left`, `right`) with pixel scoring.
-- Selects the placement that maintains clear visibility of all nearby points while preventing viewport clipping.
-- Readouts lock in place when a decision marker is clicked (`persistent=true`), allowing keyboard navigation via `Escape` to dismiss.
-
-### 5. Keyboard Navigation & Command Menu
-- Pressing `⌘K` or `/` opens a fuzzy search Command Dialog powered by `cmdk`.
-- Key navigation across the chart decision markers supports `Tab`, `Enter`, `Space`, and `Escape`.
-- Full focus rings (`focus-visible:ring-[3px] focus-visible:ring-ring/50`) ensure complete accessibility compliance.
-
----
-
-## 7. Data Visualization Language
-
-The shared explorer provides five analytical view positions. India retains its existing regime and source-backed context. US views are derived only from published target changes: yearly action breakdowns, numeric rate moves, consecutive same-direction published-move runs, and two-window comparisons with both range endpoints. These runs do not claim a continuous policy stance:
-
-| View | Analytical Question & Visual Representation |
-| :--- | :--- |
-| **1. Timeline** | *"How has the policy rate evolved over time?"*<br>Step function (`curveStepAfter`) with 20% vertical gradient fill, terminal pulse callout, peak annotation, translucent regime bands, and macro-event vertical pins. |
-| **2. Breakdown** | *"What is the policy composition across regimes & years?"*<br>Stacked bar charts decomposing decisions into Holds, Cuts, and Hikes with hold-to-move ratio badges and bps volume metrics. |
-| **3. Rate Changes** | *"What was the magnitude and distribution of moves?"*<br>Diverging zero-line bar chart showing basis-point shifts with border highlights on extreme moves ($\ge 50\text{ bps}$). |
-| **4. Cycles** | *"How do historical easing & tightening phases compare?"*<br>Normalized trajectory overlay starting at $t=0$ to compare recorded rate changes, adjustment pace (bps/mo), and terminal levels. |
-| **5. Compare** | *"How do two selected windows differ?"*<br>Counts and endpoint-aware values for each window; a target range keeps both bounds rather than a midpoint. |
-
-### Chart Styling Tokens & Details
-- **Step Line**: `stroke: var(--color-line)`, `stroke-width: 2.25`, `stroke-linecap: square`, `stroke-linejoin: round`.
-- **Inflection Dots**: `circle.rate-dot` with radius `2.5px`, fill `--background`, stroke `--color-line`, stroke-width `1.25px`.
-- **Live Terminal Callout**: Pulsing outer halo (`animation: calloutPulse 2.4s ease-in-out infinite`) with solid center dot.
-- **Diverging Bars**: `rx: 2px`, positive hikes filled with `--color-hike` (opacity 0.82 $\rightarrow$ 1.0 on hover), negative cuts filled with `--color-cut`.
-- **Grid Lines**: Dashed lines (`stroke-dasharray: 4 6`), `stroke-opacity: 0.5`.
-
----
-
-## 8. Light / Dark Theme Behavior
-
-### Seamless View Transition Architecture
-Theme switching does not cause sudden flashes of unstyled content or jarring color pops:
-- Leverages the browser **View Transition API** (`document.startViewTransition`) paired with a GPU-accelerated 160ms cubic-bezier crossfade:
-```css
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 160ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-```
-- The theme toggle button features a morphing Sun/Moon icon pair that smoothly rotates and scales through 45 degrees.
-- SVG chart elements (axes, gridlines, step paths, annotations, readouts) react instantaneously to CSS custom variable updates without requiring D3 DOM reconstructions.
-
----
-
-## 9. Responsive & Mobile Philosophy
-
-The mobile experience is not a stripped-down afterthought; it is a full-featured, touch-optimized adaptation of the desktop observatory:
-
-| Desktop Pattern ($\ge 1024\text{px}$) | Mobile Adaptation ($< 768\text{px}$) |
-| :--- | :--- |
-| **3-column horizontal Hero Summary** with vertical hairline dividers. | **Stacked Hero card** with 2-column metric sub-grid and inline provenance pill. |
-| **Single-row 36px Control Rail** with inline tabs, range, & exports. | **Floating hamburger** opening right slide-over Drawer (`vaul`) with grouped tools. |
-| **6-column Decision Spine Table** displaying complete historical data. | **Sleek 2-row Decision Cards** with expandable "Show More" feed. |
-| **Chart aspect ratio**: `clamp(280px, 36vw, 460px)` with full macro labels. | **Chart aspect ratio**: `clamp(240px, 74vw, 340px)` with simplified compact axis ticks. |
-| **36px control click targets** (`h-9`). | **Expanded 40px–44px touch targets** for mobile fingertips. |
-
-### Mobile Layout Safeguards
-- **Safe Area Inset Support**: All headers, drawers, and footers incorporate `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.
-- **Zero Horizontal Overflow**: Strict `overflow-x: hidden` and `max-width: 100vw` prevent unwanted lateral shifts.
-- **Touch-optimized Decision Cards**: Tap a card to select the decision in the chart, with an isolated external source link button that avoids accidental link-triggering.
-
----
-
-## 10. Motion & Micro-Interactions
-
-| Interaction | Duration | Easing Curve | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Button / Tab Press** | `150ms` | `cubic-bezier(0.22, 1, 0.36, 1)` | Tactile scale depression (`scale-[0.98]`) |
-| **Theme Crossfade** | `160ms` | `cubic-bezier(0.16, 1, 0.3, 1)` | Flawless view transition between themes |
-| **Collapsible Drawer / Sources** | `180ms` | `cubic-bezier(0.22, 1, 0.36, 1)` | Smooth accordion expansion |
-| **Terminal Rate Pulse** | `2.4s` | `ease-in-out infinite` | Draws eye to latest live policy stance |
-| **Chart Hover Halo** | `120ms` | `ease-out` | Smooth tracking of mouse cursor over step curve |
-| **Decision Row Selection** | `150ms` | `ease-out` | Instant background highlight on active decision |
-
-### Accessibility & Reduced Motion
-All animations, transitions, and pulsing dots are strictly disabled when `prefers-reduced-motion: reduce` is detected:
-```css
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-```
-
----
-
-## 11. Design Rules & Guardrails for Contributors
-
-When extending the site or building new features, adhere to these explicit design judgment rules:
-
-### What Patterns to Follow (The "DO's")
-1. **Always use step functions (`curveStepAfter`)** for interest rate representations.
-2. **Always enable `tabular-nums`** on any element rendering a number, rate, bps count, or date.
-3. **Preserve the semantic triad**: Cut = Emerald (`--cut`), Hike = Rose (`--hike`), Hold = Cobalt (`--hold`).
-4. **Anchor all controls to the 36px baseline (`h-9`)** on desktop.
-5. **Always attach data provenance**: Every metric must be source-backed with a declared evidence class and source citation.
-6. **Use hairline borders and muted inset wells** rather than heavy drop shadows.
-7. **Ensure zero layout shifts** across theme toggles and responsive breakpoints.
-
-### What Visually Feels WRONG (The "DON'Ts")
-1. **NO smooth bezier curves or spline interpolations** for policy rates.
-2. **NO generic stock-market green/red inversion** (treating rate cuts as universally "good" or hikes as "bad"; use semantic easing/tightening colors).
-3. **NO heavy glossy gradients, glassmorphism blurs, or glow effects** behind cards.
-4. **NO bubbly, oversized consumer-app buttons** with excessive padding or playful rounding.
-5. **NO proportional/wobbly numbers** in data tables, metric cards, or chart axes.
-6. **NO unsourced or speculative commentary** in official data panels.
-7. **NO horizontal scrolling on mobile viewports**.
-8. **NO triple-stacked headers** (overline kicker + title + decorative subtitle). Keep headings direct, clean, and unpadded.
-9. **NO card-inside-card nesting**. Use single-tier structural cards with flat internal dividers or unbordered metric strips, never bordered card boxes nested inside another card.
+# Policy Rate Atlas Design Language
+
+The source of truth is `src/styles/atlas.css`. The rendered reference is the `/design` page, which uses the live stylesheet and current data, so it cannot drift from the site. This file is the same system in a form an agent can read. Where this file and `atlas.css` disagree, `atlas.css` wins. Rationale and history: the design spec in `docs/superpowers/specs/2026-10-07-policy-rate-atlas-v2-design.md` and the approved prototype in `design/prototype/`.
+
+## Visual Theme
+
+**Calm, cool, exact, alive.** A near-black frame holds one rounded canvas of cool greys, with colour reserved for meaning: one job per colour, carried by small marks, never by whole cards.
+
+The shell and palettes are the owner's own language from home.ashwingopalsamy.in: a dark frame with an icon rail on desktop, a grey page with white floating cards and a pill dock on phones. The product reads like a financial research publication that was built by an engineer: a finding first, the chart as its evidence, numbers that never wobble.
+
+## Color Palette
+
+Themes are `light`, `dark` (follows `prefers-color-scheme` unless `data-theme` is set) and two palettes, `claret` (default) and `clay` (`data-palette="clay"`).
+
+### Neutrals (cool greys; no warm or beige panels)
+
+| Token | Light | Dark | Role |
+|---|---|---|---|
+| `frame` | `#1c1b1a` | `#070708` | Outer frame behind rail and canvas |
+| `rail-ink` / `rail-ink-hi` | `#9b9791` / `#f4f3f1` | `#8c9094` / `#eef0f1` | Rail icons idle / active |
+| `rail-hover` / `rail-tile` | `#292826` / `#3a3835` | `#16181a` / `#222528` | Rail hover / current fill |
+| `canvas` | `#ffffff` | `#111314` | Page ground, toolbar |
+| `surface` | `#ffffff` | `#161819` | Cards, inputs, popovers |
+| `wash` | `#f4f5f7` | `#1b1e20` | Quiet fills, hover, results |
+| `wash-2` | `#eceef1` | `#212527` | Tracks, pressed, selected row |
+| `ink` | `#15171a` | `#e9ebec` | Primary text and lines |
+| `ink-2` | `#4d535b` | `#a9aeb2` | Secondary text |
+| `ink-3` | `#5f656d` | `#8a9095` | Captions, axes, idle icons (4.5:1 or better) |
+| `hair` | `#e9ebee` | `#24282b` | Card borders, rules |
+| `hair-2` | `#dadde2` | `#30353a` | Control borders (decorative, 1.4:1) |
+| `other` | `#c8ccd2` | `#3d4246` | De-emphasised marks only, never text |
+| `tip-bg` / `tip-ink` / `tip-ink-2` / `tip-hair` | `#15171a` / `#f3f4f6` / `#a9aeb5` / `#2e3237` | `#eef0f1` / `#15171a` / `#4d535b` / `#d6d8da` | Inverted tooltip |
+| `focus` | `#15171a` | `#eef0f1` | 2px outline, 2px offset |
+
+### Palette (category colours and roles)
+
+| Token | Claret light / dark | Clay light / dark | Role alias and job |
+|---|---|---|---|
+| `cat-masonry` | `#dd4124` / `#e6593f` | `#c14219` / `#cd534a` | `hawk`: hikes, tightening |
+| `cat-steel` | `#009473` / `#28a180` | `#216296` / `#3b7aaf` | `dove`: cuts, easing |
+| `cat-site` | `#5654a2` / `#7271cb` | `#1ba09c` / `#239f94` | `gap`: benchmark gap, framework change |
+| `cat-cement` | `#3e9c9c` / `#33a7a7` | `#ad9216` / `#ae9200` | `level`: level fills, range bands |
+| `cat-earth` | `#a47864` / `#b87251` | `#7c4002` / `#94550f` | `obs`: observation eras |
+| `cat-labour` | `#7f1734` / `#b03d57` | `#9c3568` / `#964c72` | Off-cycle and emergency badges |
+| `accent` | `#a556d0` / `#d193f6` | `#e2790f` / `#faaf40` | You and now: your level, selected row, pending step, input focus |
+| `live` | `#548f27` / `#7bbb44` | `#408341` / `#69bc71` | The live dot only |
+
+Use the role alias (`hawk`, `dove`, `gap`, `level`, `obs`), not the category name. Clay maps hawk and dove to orange and blue, the safest pair for colour-vision deficiency. Hike and cut also differ by glyph, sign and bar direction, so colour is never the only cue. Do not invent hues outside these palettes.
+
+## Typography
+
+**Families:** Inter Variable (optical size) for all words and for numbers inside sentences; Geist Mono Variable only for numbers that stand alone, chart axes and hashes. Fallbacks: `ui-sans-serif, system-ui` and `ui-monospace, SFMono-Regular, Menlo`. Root: 14px on 20px, letter spacing −0.006em, `-webkit-font-smoothing: antialiased`.
+
+| Style | Size / line | Weight | Tracking | Family and use |
+|---|---|---|---|---|
+| Value | 76 / 80 (phone 56 / 60) | 650 | −0.05em | Inter, tabular. The decision rate |
+| Result delta | 40 / 46 | 650 | −0.035em | Inter. Payment change |
+| Page title (h1) | 28 / 34 (phone 24 / 30) | 650 | −0.022em | Inter |
+| Finding | 17 / 25 (phone 16 / 23) | 600 | −0.012em | Inter, max 62ch. One computed sentence per card |
+| Lede | 17 / 27 | 400 | 0 | Inter, `ink`, max 64ch |
+| Crumb | 16 / 24 | 600 | −0.01em | Inter |
+| Tile heading | 15 / 21 | 600 | −0.01em | Inter |
+| Body (`.prose`) | 14 / 22 | 400 | 0 | Inter, `ink-2` |
+| Label, kicker | 12 / 16 to 18 | 500 | 0 | Inter, `ink-3` |
+| Caption | 12 / 17 | 400 | 0 | Inter, `ink-3` |
+| Stat figure | 18 / 24 | 500 | −0.02em | Geist Mono, a number standing alone |
+| Figure | 14 / 20 | 500 | 0 | Geist Mono, table and ladder cells, right aligned |
+| Axis | 11 | 500 | 0 | Geist Mono, `ink-3` |
+
+Rules: a number inside a sentence is set in the sentence's own font (Inter, tabular figures), never Geist Mono (`[data-prose] .num` inherits). Money in prose uses the full locale format (`₹50,00,000`, `R$ 300.000`), never compact forms such as "R$ 300 mil". Uppercase only for era tags (10px, +0.04em). Sentence case everywhere else. No en or em dashes in copy.
+
+## Components
+
+One `Card` for every section: `radius` 16px, 1px `hair`, `shadow-card`, head anatomy kick (the visitor's question), finding, optional actions, body, optional footer.
+
+| Component | Classes | Purpose and key variants |
+|---|---|---|
+| Card | `.card`, `.card-head`, `.kick`, `.finding`, `.card-body`, `.card-foot` | The only section container. Spans 4, 5, 7, 8, 12 in a 12-column `.row` |
+| Insight tile | `.tiles > .tile` | Question, finding, small visual, caption; a link to its section. Snap row on phones |
+| Movement mark | `.mark.hike/.cut/.hold/.framework`, `.move` | Filled disc with glyph (▲ ▽ bar ◆); 14 to 22px. Only place direction colour appears |
+| Decision value | `.value-row`, `.value`, `.change`, `.lede`, `.facts` | Hero rate, move pill, lede, four facts |
+| Stat strip | `.stats` | Four standalone mono figures between hairlines; hidden on phones |
+| Ledger | `.list > .item`, `.ladder > .rung` | Decision rows and country ladder; hover washes, flag lifts, name nudges 3px, arrow slides in |
+| Data table | `table.data` | Fixed layout, 58px rows, sortable header, right-aligned mono figures; becomes a ladder below 1000px |
+| Segmented | `.seg > .thumb + button` | 2 to 4 modes; thumb slides 200ms |
+| Buttons | `.btn`, `.ib`, `.presets`, `.badge`, `.pill`, `kbd` | Pills; one filled `ink` pill per prompt |
+| Loan | `.loan`, `.field`, `.input`, `.result` | Inputs with locale prefixes and the payment-change result |
+| Country switch | `.switch`, `.palette`, `.cprompt`, `.disc.flag` | Chip, search palette, first-visit prompt; real circular flags |
+| Rail | `.frame`, `.rail`, `.rail-btn`, `.toolbar`, `.crumb` | Desktop shell, 64px collapsing to 212px; rolling crumb |
+| Phone shell | `.m-topbar`, `.m-round`, `.m-dock`, `.m-tab` | 720px and below: round buttons, centred title, pill dock |
+| Tooltip | `.tip` | Inverted readout with swatches and mono figures |
+| Step chart | `.chart.rec`, `.mk`, `.halo`, `.tenure`, `.pending` | Stepped line, markers, hovered tenure, latest halo |
+
+States: hover is required on every interactive row; press is a darker fill or scale .96, never a lift; focus is a 2px `focus` outline.
+
+## Layout
+
+**Grid:** 12-column rows of cards, `align-items: stretch`. Footers sit on the same grid.
+**Spacing:** gap 16px (`--space`), page gutter 28px, card padding 24px (20px top); phone 14, 16 and 18px.
+**Controls:** input 44, switch chip 38, icon button 34, pill button 32, segmented button 28; touch targets 44px or more on phones.
+**Chrome:** rail 64px (212px open), toolbar 60px, phone header 68px, dock 56px with 44px tabs.
+**Canvas:** `radius` 20px inside the dark frame.
+
+## Depth
+
+| Level | Value | Used for |
+|---|---|---|
+| Hairline | `1px solid hair` | Cards, tables, footers |
+| Rest | light `0 1px 2px rgba(16,24,40,.04), 0 1px 1px rgba(16,24,40,.02)`; dark `0 0 0 1px rgba(0,0,0,.2)` | Cards and tiles |
+| Popover | light `0 18px 48px rgba(16,24,40,.18), 0 0 0 1px rgba(16,24,40,.06)`; dark `0 18px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06)` | Palette, prompt, decision stamp |
+| Tooltip | `0 10px 30px rgba(0,0,0,.22)` | Chart readout |
+| Phone float | `0 0 0 1px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.06), 0 8px 24px rgba(16,24,40,.1)` | Round buttons and dock |
+
+Layers, bottom to top: frame, canvas, card, popover. Radii by role: 16 cards, 20 canvas and phone cards, 18 palette and prompt, 14 results and tooltips, 12 inputs and rows, 6 key caps, 999 controls.
+
+## Motion
+
+The interface eases; the data steps. Tokens: `--ease: cubic-bezier(.22,.61,.36,1)` (enter, move), `--ease-in: cubic-bezier(.4,0,1,1)` (exit), `--spring: cubic-bezier(.3,1.35,.5,1)` (brand mark, stamps, flag lift, markers only).
+
+| What | Behaviour |
+|---|---|
+| Data cursors, scrubbing, keyboard stepping, filters | Instant, never eased |
+| Hover, press, toggles | 100 to 150ms ease |
+| Sliding thumbs | 200ms translate and width |
+| Value changes | Out 70ms ease-in, in 160ms ease, 9px shift in the direction of change |
+| Lists | 4px rise over 180ms, 8ms stagger up to 64ms |
+| Country switch | Data changes in place over about 420ms; the page never flashes or re-keys |
+| Reduced motion | Final states only |
+
+## Do's and Don'ts
+
+### Do
+- Draw policy rates as steps. A range keeps both endpoints; never show a midpoint.
+- Start every card with the visitor's question and a computed finding; show the chart as evidence.
+- Keep one finding and one visual per card on phones.
+- Use real circular flags for countries and the full locale format for money.
+- Give every interactive row a visible hover response.
+
+### Don't
+- Tint a card, row or heading by direction. Direction colour sits on small marks.
+- Add status or trust pills such as "Verified against RBI". Provenance is a footnote.
+- Nest a card in a card, or leave a dead area beside a taller neighbour.
+- Use gradients, glows or glass, or a shadow on anything that does not float.
+- Set a number inside a sentence in Geist Mono, or use en or em dashes in copy.
+- Flash or re-mount the page on a country switch.
+
+## Responsive
+
+| Breakpoint | Change |
+|---|---|
+| 1180px and below | Spans collapse to one column; tiles go single row; upcoming strip two columns |
+| 1000px and below | Data table is replaced by the small ladder; toolbar meta hides |
+| 720px and below | Phone shell: grey page (`#f2f3f5` light, `#0b0c0d` dark), white floating cards, round buttons, pill dock; legends, captions, footnotes, quotes and stat strips hide; tiles swipe sideways; the switcher is a bottom sheet |
+
+Phone layouts are a deliberate reduction of desktop, not a reflow. No horizontal page scroll at any width; layouts are checked at 360, 768, 1280 and 1440px in both themes.
+
+## Agent Prompt Guide
+
+- Reuse the production classes in `src/styles/atlas.css`; add a class only when no existing one fits, and put colour in tokens, never literals.
+- Colour by role: `hawk`, `dove`, `gap`, `level`, `obs`, `accent`, `live`. Direction colour only on marks, pills, lines and bars.
+- Numbers: Inter with tabular figures inside sentences, Geist Mono only for numbers that stand alone.
+- Every section is a `Card` with kick, finding, body and optional footer. No nested cards, no status pills.
+- Draw rates as steps; verify each finding against real data and suppress trivial claims.
+- After any visual change, check `/design` and the layouts at 360, 768, 1280 and 1440px in both themes and both palettes.
