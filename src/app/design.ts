@@ -179,7 +179,7 @@ export function designHTML(): string {
            <li><span>Flash the page on a country switch. Only the data changes.</span></li>
          </ul></div>
        </div>`,
-      '<span>The same rules, in a file an agent can read.</span><a href="https://github.com/ashwingopalsamy/repo-rate-visualizer/blob/main/DESIGN.md" target="_blank" rel="noopener">DESIGN.md <i data-lucide="arrow-up-right"></i></a>')}
+      '<span>The same rules, in a file an agent can read.</span><a href="/design.md">design.md <i data-lucide="arrow-up-right"></i></a>')}
   </div>
   ${footerHTML()}`;
 }

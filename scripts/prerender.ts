@@ -5,7 +5,7 @@
  * the inline theme script). Usage: node scripts/prerender.ts
  */
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { parseHTML } from 'linkedom';
 import { buildAtlas } from './build-atlas.ts';
@@ -107,6 +107,9 @@ export function headers(inlineScripts: string[]): string {
   ! Cache-Control
   Cache-Control: public, max-age=604800
 
+/design.md
+  Content-Type: text/markdown; charset=utf-8
+
 /api/*
   Access-Control-Allow-Origin: *
 
@@ -143,6 +146,7 @@ async function main() {
     for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) inline.add(m[1]);
     writeFileSync(out, html);
   }
+  copyFileSync(new URL('../DESIGN.md', import.meta.url), join(DIST, 'design.md'));
   writeFileSync(join(DIST, '_headers'), headers([...inline]));
   writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.filter(r => r.page !== 'notfound' && canonicalOf(r) === SITE + r.path).map(r => `  <url><loc>${SITE}${r.path}</loc><lastmod>${data.generatedAt}</lastmod></url>`).join('\n')}\n</urlset>\n`);
   writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);

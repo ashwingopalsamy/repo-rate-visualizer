@@ -1,6 +1,6 @@
 # Policy Rate Atlas Design Language
 
-The source of truth is `src/styles/atlas.css`. The rendered reference is the `/design` page, which uses the live stylesheet and current data, so it cannot drift from the site. This file is the same system in a form an agent can read. Where this file and `atlas.css` disagree, `atlas.css` wins. Rationale and history: the design spec in `docs/superpowers/specs/2026-10-07-policy-rate-atlas-v2-design.md` and the approved prototype in `design/prototype/`.
+The source of truth is `src/styles/atlas.css`. The rendered reference is the `/design` page, which uses the live stylesheet and current data, so it cannot drift from the site. This file is the same system in a form an agent can read, served as-is at `/design.md`. Where this file and `atlas.css` disagree, `atlas.css` wins. Rationale and history: the design spec in `docs/superpowers/specs/2026-10-07-policy-rate-atlas-v2-design.md` and the approved prototype in `design/prototype/`.
 
 ## Visual Theme
 
