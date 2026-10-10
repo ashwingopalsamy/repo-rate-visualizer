@@ -16,7 +16,7 @@ import type { Code } from '../src/lib/atlas.ts';
 export const SITE = 'https://rates.ashwingopalsamy.in';
 const DIST = new URL('../dist/', import.meta.url).pathname;
 
-type Route = { path: string; page: 'world' | 'country' | 'privacy' | 'notfound'; cc: Code | null; file: string };
+type Route = { path: string; page: 'world' | 'country' | 'privacy' | 'design' | 'notfound'; cc: Code | null; file: string };
 const strip = (html: string) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 /** JSON safe inside a <script> element: no "</script" or "<!--" can be formed. */
@@ -29,6 +29,7 @@ function head(r: Route, title: string): string {
   const url = canonicalOf(r);
   const description = r.page === 'country' && r.cc ? strip(lede(r.cc))
     : r.page === 'privacy' ? 'What Policy Rate Atlas counts, how long it is kept and how to switch it off. No cookies and no personal data.'
+    : r.page === 'design' ? 'The colours, type, components and rules Policy Rate Atlas is built from, rendered with the live stylesheet.'
     : `Policy rates for ${CODES.length} central banks, every move since 2000, checked against official sources, with the findings that matter for borrowers and markets.`;
   const ld = r.page === 'country' && r.cc ? {
     '@context': 'https://schema.org', '@type': 'Dataset', name: `${META[r.cc].bank} ${META[r.cc].inst.toLowerCase()} history`, description, url,
@@ -65,6 +66,7 @@ async function render(shell: string, r: Route, state: string): Promise<string> {
   if (r.page === 'country') country.renderCountry();
   else if (r.page === 'world') (await import('../src/app/world.ts')).renderWorld(false);
   else if (r.page === 'privacy') (await import('../src/app/privacy.ts')).renderPrivacy();
+  else if (r.page === 'design') (await import('../src/app/design.ts')).renderDesign();
   else (await import('../src/app/notfound.ts')).renderNotFound();
   shellMod.setRail();
   makeIcons(document);
@@ -130,6 +132,7 @@ async function main() {
     { path: '/world/', page: 'world', cc: null, file: 'world/index.html' },
     ...CODES.map(cc => ({ path: `/${cc.toLowerCase()}/`, page: 'country' as const, cc, file: `${cc.toLowerCase()}/index.html` })),
     { path: '/privacy/', page: 'privacy', cc: null, file: 'privacy/index.html' },
+    { path: '/design/', page: 'design', cc: null, file: 'design/index.html' },
     { path: '/404', page: 'notfound', cc: null, file: '404.html' },
   ];
   const inline = new Set<string>();

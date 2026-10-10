@@ -1,7 +1,7 @@
 /* The analytics contract shared by the client (src/analytics/track.ts) and the collector (worker/site/events.ts).
    Every event and every property value is allowlisted; anything else is rejected by the collector. */
 export const CODES = ['IN', 'US', 'EA', 'GB', 'CA', 'AU', 'BR'] as const;
-export const ROUTES = ['world', 'country', 'privacy', 'notfound'] as const;
+export const ROUTES = ['world', 'country', 'privacy', 'design', 'notfound'] as const;
 export const VIA = ['palette', 'ladder', 'latest', 'league', 'dock', 'link', 'history', 'prompt'] as const;
 
 export type CodeValue = (typeof CODES)[number];

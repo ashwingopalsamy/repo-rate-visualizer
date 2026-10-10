@@ -11,11 +11,12 @@ import { jump, navigate, onRailChange, onRoute, roll } from './nav.ts';
 import { commitCountry, countryHTML, leaveCountry, redrawCountry, renderChip, renderCountry, setCountry } from './country.ts';
 import { renderPulse, renderWorld, worldHTML } from './world.ts';
 import { privacyHTML, renderPrivacy } from './privacy.ts';
+import { designHTML, renderDesign } from './design.ts';
 import { notFoundHTML, renderNotFound } from './notfound.ts';
 import { closePrompt, schedulePrompt } from './prompt.ts';
 
 type Via = (typeof VIA)[number];
-type Page = 'country' | 'world' | 'privacy' | 'notfound';
+type Page = 'country' | 'world' | 'privacy' | 'design' | 'notfound';
 export type Route = { page: Page; cc: Code | null };
 
 /** The country / opens on until a visitor picks their own (src/app/prompt.ts). */
@@ -27,18 +28,20 @@ export function parsePath(path: string): Route {
   if (seg === '') return MODEL[DEFAULT_CC] ? { page: 'country', cc: DEFAULT_CC } : { page: 'world', cc: null };
   if (seg === 'world') return { page: 'world', cc: null };
   if (seg === 'privacy') return { page: 'privacy', cc: null };
+  if (seg === 'design') return { page: 'design', cc: null };
   const cc = seg.toUpperCase();
   if (isCode(cc) && MODEL[cc]) return { page: 'country', cc };
   return { page: 'notfound', cc: null };
 }
 export const routeKey = (r: Route) => (r.page === 'country' ? `country:${r.cc}` : r.page);
-export const pageHTML = (p: Page) => (p === 'world' ? worldHTML() : p === 'privacy' ? privacyHTML() : p === 'notfound' ? notFoundHTML() : countryHTML());
+export const pageHTML = (p: Page) => (p === 'world' ? worldHTML() : p === 'privacy' ? privacyHTML() : p === 'design' ? designHTML() : p === 'notfound' ? notFoundHTML() : countryHTML());
 
 /* ---------- rail and crumb ---------- */
 const RAIL: Record<Page, [string, string, string][]> = {
   country: [['decision', 'landmark', 'The decision'], ['loan', 'wallet', 'Your loan'], ['cycle', 'repeat', 'The cycle'], ['gap', 'arrow-left-right', 'Against the Fed'], ['record', 'chart-line', 'The record'], ['/world/', 'globe', 'World view']],
   world: [['pulse', 'activity', 'The pulse'], ['board', 'table-2', 'Every bank'], ['upcoming', 'calendar-clock', 'Upcoming'], ['/country', 'landmark', 'Country view']],
   privacy: [['counted', 'activity', 'What is counted'], ['kept', 'history', 'How long'], ['off', 'shield-check', 'Switching it off'], ['/world/', 'globe', 'World view']],
+  design: [['colour', 'palette', 'Colour'], ['type', 'type', 'Type'], ['shape', 'square', 'Shape'], ['motion', 'activity', 'Motion'], ['marks', 'arrow-down-up', 'Direction'], ['controls', 'gauge', 'Controls'], ['chart', 'chart-line', 'Chart'], ['rules', 'list-ordered', 'Rules'], ['/world/', 'globe', 'World view']],
   notfound: [['banks', 'globe', 'Every central bank'], ['/world/', 'globe', 'World view']],
 };
 export function setRail(): void {
@@ -117,6 +120,7 @@ function route() {
   if (r.page === 'country') { renderCountry(); if (!firstRoute) { store.set('atlas-country', state.code); if (from !== state.code) track('country_switch', { from, to: state.code, via }); } }
   else if (r.page === 'world') renderWorld(firstRoute && !hydrate);
   else if (r.page === 'privacy') renderPrivacy();
+  else if (r.page === 'design') renderDesign();
   else renderNotFound();
   setRail();
   if (!hydrate) { $('canvas').scrollTop = 0; if (mobile()) scrollTo(0, 0); }

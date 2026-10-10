@@ -629,3 +629,45 @@ a.item, a.rung, a.who { color: inherit; text-decoration: none; }
 @media (max-width: 720px) {
   .cprompt { left: var(--gutter); right: var(--gutter); width: auto; max-width: none; bottom: calc(var(--m-dock-bottom) + var(--m-tabbar-h) + 12px); z-index: 45; border-radius: 22px; box-shadow: var(--m-float-elev); }
 }
+
+/* /design: specimens built from the production classes; only the layout of the specimens lives here. */
+.ds-groups { display: grid; gap: 24px; }
+.ds-h { margin: 0 0 10px; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--ink-3); }
+.ds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.ds-sw { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; align-items: center; padding: 10px; border: 0; border-radius: 14px; background: var(--wash); color: var(--ink); text-align: left; cursor: pointer; min-width: 0; transition: background-color .15s, transform .1s; }
+.ds-sw:hover { background: var(--wash-2); } .ds-sw:active { transform: scale(.98); }
+.ds-chip { grid-row: span 2; width: 40px; height: 40px; border-radius: 12px; box-shadow: inset 0 0 0 1px rgba(16, 24, 40, .1); }
+.ds-sw b { font-size: 13px; line-height: 18px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ds-sw .hex { font: 500 12px/16px var(--font-data); color: var(--ink-3); white-space: nowrap; }
+.ds-use { grid-column: 1 / -1; margin-top: 6px; font-size: 12px; line-height: 17px; color: var(--ink-3); }
+.ds-spec { margin: 0; display: grid; }
+.ds-spec > div { display: grid; grid-template-columns: minmax(160px, 240px) minmax(0, 1fr); gap: 8px 24px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--hair); }
+.ds-spec > div:first-child { border-top: 0; padding-top: 0; }
+.ds-spec dt { font-size: 12px; line-height: 16px; color: var(--ink-3); }
+.ds-spec dt b { display: block; margin-bottom: 2px; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--ink); }
+.ds-spec dd { margin: 0; min-width: 0; }
+.ds-spec dd > * { margin: 0; }
+.ds-shapes { display: flex; flex-wrap: wrap; gap: 20px 24px; }
+.ds-shape { display: grid; gap: 4px; justify-items: start; min-width: 0; font-size: 12px; line-height: 17px; color: var(--ink-3); }
+.ds-shape i { display: block; width: 104px; height: 64px; margin-bottom: 4px; background: var(--wash-2); }
+.ds-shape i.ds-elev { background: var(--surface); border-radius: 16px; }
+.ds-shape b { font-size: 13px; line-height: 18px; font-weight: 600; color: var(--ink); }
+.ds-lanes { display: grid; gap: 18px; }
+.ds-lane { display: grid; grid-template-columns: minmax(180px, 320px) minmax(0, 1fr); gap: 8px 24px; align-items: center; }
+.ds-lane > span:first-child { display: grid; gap: 2px; font-size: 12px; line-height: 17px; color: var(--ink-3); }
+.ds-lane b { font-size: 13px; line-height: 18px; font-weight: 600; color: var(--ink); }
+.ds-lane .tr { position: relative; height: 10px; border-radius: 5px; background: var(--wash-2); }
+.ds-lane .dot { position: absolute; left: 0; top: -4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); }
+.ds-demo { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.ds-key { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; line-height: 18px; color: var(--ink-2); }
+.ds-input { width: 240px; max-width: 100%; }
+.ds-demo .presets { margin: 0; }
+.ds-chart { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; }
+.ds-tip { position: static; max-width: 260px; }
+.ds-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 720px) {
+  .ds-wide { display: none; }
+  .ds-chart, .ds-cols, .ds-lane, .ds-spec > div { grid-template-columns: minmax(0, 1fr); }
+  .ds-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-use { display: none; }
+}

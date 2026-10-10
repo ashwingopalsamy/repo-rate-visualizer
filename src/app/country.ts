@@ -175,9 +175,9 @@ export function renderChip(dir = 0) {
   $('openPal').dataset.c = c; $('mFlag').setAttribute('aria-label', `Switch country. Showing ${m.name}`);
   swap($('chName'), esc(m.name), dir, !animate); swap($('chVal'), vShort(md.last), dir, !animate);
   const world = state.page === 'world';
-  setPhoneTitle(world ? 'World' : state.page === 'privacy' ? 'Privacy' : state.page === 'notfound' ? 'Not found' : m.name);
+  setPhoneTitle(world ? 'World' : state.page === 'privacy' ? 'Privacy' : state.page === 'design' ? 'Design' : state.page === 'notfound' ? 'Not found' : m.name);
   if (state.page === 'country') document.title = countryTitle(c);
-  swap($('crumbMeta'), esc(world ? `${CODES.length} central banks · as of ${fmtD(TODAY, 'GB')}` : state.page === 'privacy' ? 'How this site measures traffic' : state.page === 'notfound' ? 'Nothing at this address' : `${m.name} · ${m.bank}`), 0, !animate);
+  swap($('crumbMeta'), esc(world ? `${CODES.length} central banks · as of ${fmtD(TODAY, 'GB')}` : state.page === 'privacy' ? 'How this site measures traffic' : state.page === 'design' ? 'Tokens, components and rules' : state.page === 'notfound' ? 'Nothing at this address' : `${m.name} · ${m.bank}`), 0, !animate);
 }
 
 /* ---------- insight tiles: four fixed tiles; their words swap and their visuals morph or crossfade ---------- */
